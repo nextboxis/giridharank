@@ -2358,3 +2358,14 @@ body.dark-mode .thm-badge-icon {
     background: rgba(224,83,0,0.1);
 }
 
+/* TryHackMe hero button accent */
+.thm-hero-btn {
+    color: var(--cyber-orange) !important;
+    border-color: var(--cyber-orange) !important;
+}
+
+.thm-hero-btn:hover {
+    background: rgba(224,83,0,0.1) !important;
+    box-shadow: 0 0 12px rgba(224,83,0,0.35) !important;
+}
+
