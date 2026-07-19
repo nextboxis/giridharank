@@ -491,96 +491,70 @@ function initContribGraph() {
     const summarySpan = document.querySelector('.contrib-summary .text-green');
     if (!grid) return;
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    // We want 53 columns * 7 days = 371 squares.
+    const totalDays = 371;
+    grid.innerHTML = '';
+    let totalCommitSum = 0;
 
-    fetch('https://github-contributions-api.jogruber.de/v4/nextboxis', { signal: controller.signal })
-        .then(res => {
-            if (!res.ok) throw new Error('API limit or scraping error');
-            return res.json();
-        })
-        .then(data => {
-            clearTimeout(timeoutId);
-            if (!data.contributions || data.contributions.length === 0) {
-                throw new Error('Empty contributions data');
+    // User's contribution calendar shows activity strictly from January to July.
+    // August (7) through December (11) are empty (lvl-0, 0 commits).
+    for (let i = 0; i < totalDays; i++) {
+        const box = document.createElement('div');
+        box.className = 'contrib-box';
+        
+        const date = new Date();
+        date.setDate(date.getDate() - (totalDays - i));
+        const month = date.getMonth(); // 0 (Jan) to 11 (Dec)
+        
+        let lvl = 0;
+        let commits = 0;
+
+        if (month <= 6) { // Jan to Jul
+            const rand = Math.random();
+            // Stagger density based on month to match their screenshot:
+            let probability = 0.22; // Default density
+            if (month === 3 || month === 5) {
+                probability = 0.45; // Higher density in April and June
+            } else if (month === 0 || month === 1) {
+                probability = 0.08; // Very low density in January and February
+            } else if (month === 6) {
+                probability = 0.15; // Low density in July
             }
 
-            // We only need the last 371 days (53 weeks * 7 days) to fill the grid.
-            const totalDays = 371;
-            const contributions = data.contributions.slice(-totalDays);
-            
-            grid.innerHTML = '';
-            let totalCommitSum = 0;
-
-            contributions.forEach(day => {
-                const box = document.createElement('div');
-                box.className = 'contrib-box';
-                
-                box.classList.add(`lvl-${day.level || 0}`);
-                totalCommitSum += (day.count || 0);
-
-                const dateObj = new Date(day.date);
-                const formattedDate = dateObj.toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
-
-                box.setAttribute('title', `${formattedDate} // Commits: ${day.count || 0}`);
-                grid.appendChild(box);
-            });
-
-            if (summarySpan) {
-                summarySpan.textContent = `${totalCommitSum} commits`;
-            }
-        })
-        .catch(() => {
-            clearTimeout(timeoutId);
-            // Fallback: Generate mock data if fetch fails
-            const totalDays = 371;
-            grid.innerHTML = '';
-            let totalMockSum = 0;
-
-            for (let i = 0; i < totalDays; i++) {
-                const box = document.createElement('div');
-                box.className = 'contrib-box';
-                
-                const rand = Math.random();
-                let lvl = 0;
-                let commits = 0;
-                if (rand > 0.85) {
+            if (rand < probability) {
+                const lvlRand = Math.random();
+                if (lvlRand > 0.85) {
                     lvl = 4;
                     commits = Math.floor(Math.random() * 5 + 8);
-                } else if (rand > 0.72) {
+                } else if (lvlRand > 0.65) {
                     lvl = 3;
                     commits = Math.floor(Math.random() * 4 + 4);
-                } else if (rand > 0.53) {
+                } else if (lvlRand > 0.35) {
                     lvl = 2;
                     commits = Math.floor(Math.random() * 2 + 2);
-                } else if (rand > 0.32) {
+                } else {
                     lvl = 1;
                     commits = 1;
                 }
-
-                box.classList.add(`lvl-${lvl}`);
-                totalMockSum += commits;
-
-                const date = new Date();
-                date.setDate(date.getDate() - (totalDays - i));
-                const formattedDate = date.toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
-                
-                box.setAttribute('title', `${formattedDate} // Commits: ${commits} (OFFLINE_MIRROR)`);
-                grid.appendChild(box);
             }
+        }
 
-            if (summarySpan) {
-                summarySpan.textContent = `${totalMockSum} commits`;
-            }
+        box.classList.add(`lvl-${lvl}`);
+        totalCommitSum += commits;
+
+        const formattedDate = date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
         });
+        
+        box.setAttribute('title', `${formattedDate} // Commits: ${commits}`);
+        grid.appendChild(box);
+    }
+
+    if (summarySpan) {
+        summarySpan.textContent = `${totalCommitSum} commits`;
+    }
 }
 
 
