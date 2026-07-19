@@ -27,9 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 11. Contact Message Live Encryption preview
     initPayloadEncryption();
-
-    // 12. GitHub Contributions Calendar Matrix
-    initContribGraph();
 });
 
 // --- Matrix Code Rain Effect --- //
@@ -484,77 +481,4 @@ function initPayloadEncryption() {
         preview.classList.add('encrypted-state');
     });
 }
-
-// --- GitHub Contributions Grid Generator --- //
-function initContribGraph() {
-    const grid = document.getElementById('contrib-grid-element');
-    const summarySpan = document.querySelector('.contrib-summary .text-green');
-    if (!grid) return;
-
-    // We want 53 columns * 7 days = 371 squares.
-    const totalDays = 371;
-    grid.innerHTML = '';
-    let totalCommitSum = 0;
-
-    // User's contribution calendar shows activity strictly from January to July.
-    // August (7) through December (11) are empty (lvl-0, 0 commits).
-    for (let i = 0; i < totalDays; i++) {
-        const box = document.createElement('div');
-        box.className = 'contrib-box';
-        
-        const date = new Date();
-        date.setDate(date.getDate() - (totalDays - i));
-        const month = date.getMonth(); // 0 (Jan) to 11 (Dec)
-        
-        let lvl = 0;
-        let commits = 0;
-
-        if (month <= 6) { // Jan to Jul
-            const rand = Math.random();
-            // Stagger density based on month to match their screenshot:
-            let probability = 0.22; // Default density
-            if (month === 3 || month === 5) {
-                probability = 0.45; // Higher density in April and June
-            } else if (month === 0 || month === 1) {
-                probability = 0.08; // Very low density in January and February
-            } else if (month === 6) {
-                probability = 0.15; // Low density in July
-            }
-
-            if (rand < probability) {
-                const lvlRand = Math.random();
-                if (lvlRand > 0.85) {
-                    lvl = 4;
-                    commits = Math.floor(Math.random() * 5 + 8);
-                } else if (lvlRand > 0.65) {
-                    lvl = 3;
-                    commits = Math.floor(Math.random() * 4 + 4);
-                } else if (lvlRand > 0.35) {
-                    lvl = 2;
-                    commits = Math.floor(Math.random() * 2 + 2);
-                } else {
-                    lvl = 1;
-                    commits = 1;
-                }
-            }
-        }
-
-        box.classList.add(`lvl-${lvl}`);
-        totalCommitSum += commits;
-
-        const formattedDate = date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        });
-        
-        box.setAttribute('title', `${formattedDate} // Commits: ${commits}`);
-        grid.appendChild(box);
-    }
-
-    if (summarySpan) {
-        summarySpan.textContent = `${totalCommitSum} commits`;
-    }
-}
-
 
