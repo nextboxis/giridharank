@@ -28,10 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 11. Contact Message Live Encryption preview
     initPayloadEncryption();
 
-    // 12. Realtime Live Commit Feed
-    initLiveCommit();
-
-    // 13. GitHub Contributions Calendar Matrix
+    // 12. GitHub Contributions Calendar Matrix
     initContribGraph();
 });
 
@@ -586,60 +583,4 @@ function initContribGraph() {
         });
 }
 
-// --- Live Single GitHub Commit Loader --- //
-function initLiveCommit() {
-    const container = document.getElementById('live-git-commit-container');
-    if (!container) return;
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
-
-    // Fetch repositories sorted by recently updated
-    fetch('https://api.github.com/users/nextboxis/repos?sort=updated&per_page=1', { signal: controller.signal })
-        .then(res => {
-            if (!res.ok) throw new Error('API Rate Limit or user not found');
-            return res.json();
-        })
-        .then(repos => {
-            if (repos.length === 0) throw new Error('No repos found');
-            const latestRepo = repos[0].name;
-
-            // Fetch commits from this most active repository
-            return fetch(`https://api.github.com/repos/nextboxis/${latestRepo}/commits?per_page=1`, { signal: controller.signal })
-                .then(res => {
-                    clearTimeout(timeoutId);
-                    if (!res.ok) throw new Error('API Rate Limit or commits restricted');
-                    return res.json();
-                })
-                .then(commits => {
-                    if (commits.length === 0) throw new Error('No commits found in repo');
-                    const commit = commits[0];
-                    const hash = commit.sha.substring(0, 7);
-                    const msg = commit.commit.message;
-
-                    container.innerHTML = `
-                        <span class="pulse-indicator"></span>
-                        <span>
-                            <span style="color: var(--cyber-orange); font-weight: bold;">[LATEST_TRANSMISSION]</span> 
-                            <span style="color: var(--cyber-cyan); font-weight: 600;">${latestRepo}</span>: 
-                            <span style="opacity: 0.95; font-weight: 500;">${msg}</span> 
-                            <span style="color: var(--cyber-orange); opacity: 0.8;">(${hash})</span>
-                        </span>
-                    `;
-                });
-        })
-        .catch(() => {
-            clearTimeout(timeoutId);
-            // Offline mirror fallback
-            container.innerHTML = `
-                <span class="pulse-indicator" style="background-color: var(--cyber-orange); box-shadow: 0 0 8px var(--cyber-orange);"></span>
-                <span>
-                    <span style="color: var(--cyber-orange); font-weight: bold;">[SIMULATOR_TELEMETRY]</span> 
-                    <span style="color: var(--cyber-cyan); font-weight: 600;">xPing</span>: 
-                    <span style="opacity: 0.95; font-weight: 500;">Refactored socket auditor CLI commands and logic</span> 
-                    <span style="color: var(--cyber-orange); opacity: 0.8;">(a3b4c5d)</span>
-                </span>
-            `;
-        });
-}
 
