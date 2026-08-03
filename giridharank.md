@@ -48,17 +48,21 @@ root@giri:~$ git stats --user giridharank790-eng
 *   **MongoDB** — 70%
 *   **Linux CLI / Bash** — 80%
 
-### Cybersecurity Tools
+### Cybersecurity Tools & OSINT
 *   **Burp Suite** — 75%
-*   **Nmap** — 85%
+*   **Nmap / Masscan** — 88%
 *   **Wireshark & PCAPs** — 80%
 *   **Kali Linux** — 85%
+*   **Metasploit & OWASP ZAP** — 80%
 
-### Security Concepts
+### Security Concepts & Exploitation
+*   **SQLi & Web Exploitation** — 80%
+*   **Active Directory Security** — 72%
+*   **Buffer Overflow Principles** — 75%
 *   **OWASP Top 10** — 80%
 *   **MITRE ATT&CK** — 75%
 *   **IAM & RBAC** — 80%
-*   **Incident Response** — 75%
+*   **Incident Response & SET** — 76%
 
 ### Machine Learning
 *   **scikit-learn** — 70%
@@ -121,11 +125,13 @@ root@giri:~$ git stats --user giridharank790-eng
 
 ### 🛡️ **Cyber Security Simulation (Incident Response)**
 *   **Company:** Telstra
-*   **Status:** Active (In Progress)
+*   **Status:** Completed
+*   **Verification:** [Verify Completion PDF](./certificate/cyber_security_1.pdf)
 
 ### 🔑 **Cybersecurity Simulation (IAM & SOC)**
 *   **Company:** Tata (TCS)
-*   **Status:** Active (In Progress)
+*   **Status:** Completed
+*   **Verification:** [Verify Completion PDF](./certificate/cyber_security_2.pdf)
 
 ---
 

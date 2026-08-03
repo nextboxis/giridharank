@@ -27,70 +27,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 11. Contact Message Live Encryption preview
     initPayloadEncryption();
+
+    // 12. Copy Toast Notification System
+    initCopyToast();
+
+    // 13. Interactive Project Modal Engine
+    initProjectModal();
+
+    // 14. Tactical Audio Synth SFX Engine
+    initAudioSynth();
+
+    // 15. Dynamic Stat Count-Up Engine
+    initStatCounters();
+
+    // 16. Dynamic Background Image Rotation Engine (5s interval)
+    initBackgroundRotation();
+
+    // 17. Real-Time FPS Diagnostics
+    initFpsCounter();
+
+    // 18. Operations Search & Category Filter Engine
+    initOpsFilter();
+
+    // 19. Certificate & Visual Feed Lightbox Engine
+    initCertificateLightbox();
+
+    // 20. Direct Certificate PDF Link Handler
+    initPdfViewerModal();
+
+    // 21. Futuristic Staggered Cascade Scroll-Reveals
+    initStaggeredCascadeReveals();
+
+    // 22. Top Neon Scroll Progress Bar Engine
+    initScrollProgressBar();
+
+    // 23. 3D Interactive Card Tilt & Cursor Spotlight Engine
+    init3DCardTilt();
+
+    // 24. Click-Triggered Liquid Ripple Waves Engine
+    initLiquidRippleEffect();
+
+    // 25. Hero CV Download Toast & Chime Handler
+    const heroCvBtn = document.getElementById('hero-cv-btn');
+    if (heroCvBtn) {
+        heroCvBtn.addEventListener('click', () => {
+            if (typeof window.playAudioSuccess === 'function') window.playAudioSuccess();
+            if (typeof window.showToast === 'function') window.showToast('[RESUME] Downloading Giridharan K verified CV (PDF)...');
+        });
+    }
 });
 
-// --- Matrix Code Rain Effect --- //
+// --- Performance Utilities --- //
+function debounce(func, delay = 100) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// --- Matrix Code Rain Effect (Optimized requestAnimationFrame Loop) --- //
 function initMatrixRain() {
     const canvas = document.getElementById('cyberCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // Resize canvas
-    function resizeCanvas() {
+    const fontSize = 14;
+    let columns = 0;
+    let drops = [];
+
+    // Resize & layout initialization
+    function setupCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        columns = Math.floor(canvas.width / fontSize);
+        drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = Math.floor(Math.random() * -15);
+        }
     }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
 
-    // Matrix characters (Binary & hex characters for cybersecurity theme)
+    setupCanvas();
+    window.addEventListener('resize', debounce(setupCanvas, 150));
+
     const chars = '0123456789ABCDEF<>[]{}$%@#&*_+-=';
     const charArr = chars.split('');
     
-    const fontSize = 14;
-    let columns = canvas.width / fontSize;
-    
-    // Drops - y coordinate for each column
-    let drops = [];
-    for (let x = 0; x < columns; x++) {
-        drops[x] = 1;
-    }
+    let lastFrameTime = 0;
+    const targetFps = 30;
+    const frameInterval = 1000 / targetFps;
 
-    // Window resize rebuilds column array
-    window.addEventListener('resize', () => {
-        columns = canvas.width / fontSize;
-        drops = [];
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
-    });
-
-    // Draw function
+    // High performance draw cycle
     function draw() {
         const isDarkMode = document.body.classList.contains('dark-mode');
         
-        // Background clear-wash based on active theme
-        ctx.fillStyle = isDarkMode ? 'rgba(10, 15, 10, 0.15)' : 'rgba(244, 247, 250, 0.15)';
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = 'source-over';
 
         ctx.font = fontSize + 'px "Fira Code", monospace';
 
-        // Loop over drops
         for (let i = 0; i < drops.length; i++) {
+            if (drops[i] < 0) {
+                drops[i]++;
+                continue;
+            }
+
             const text = charArr[Math.floor(Math.random() * charArr.length)];
             
-            // Text color based on active theme
             if (isDarkMode) {
-                // Neon green code rain in dark mode
                 ctx.fillStyle = Math.random() > 0.85 ? '#80ffb0' : '#00ff41';
             } else {
-                // Cobalt blue and emerald green code rain in light mode
                 ctx.fillStyle = Math.random() > 0.85 ? '#005ecb' : '#0d8a43';
             }
             
             ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-            // Sending drop back to top randomly after it has crossed screen
             if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
             }
@@ -99,7 +152,21 @@ function initMatrixRain() {
         }
     }
 
-    setInterval(draw, 33);
+    // Animation frame loop throttled to ~30 FPS with tab pause guard
+    function renderLoop(currentTime) {
+        requestAnimationFrame(renderLoop);
+
+        // Pause rendering when browser tab is inactive to conserve GPU/battery
+        if (document.hidden) return;
+
+        const delta = currentTime - lastFrameTime;
+        if (delta >= frameInterval) {
+            draw();
+            lastFrameTime = currentTime - (delta % frameInterval);
+        }
+    }
+
+    requestAnimationFrame(renderLoop);
 }
 
 // --- Navigation Engine --- //
@@ -116,15 +183,21 @@ function initNavigation() {
             navItems.forEach(nav => nav.classList.remove('active'));
             item.classList.add('active');
 
-            // Switch sections with smooth fade
+            // Switch sections with smooth fade & entrance animation
             sections.forEach(section => {
                 section.classList.remove('active-section');
                 if (section.id === targetId) {
                     section.classList.add('active-section');
                 }
             });
-            
 
+            // Smooth scroll reset to top of container
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Trigger staggered cascade reveal wave for newly activated section
+            setTimeout(() => {
+                if (window.refreshCascadeReveals) window.refreshCascadeReveals();
+            }, 60);
         });
     });
 }
@@ -152,54 +225,7 @@ function initOperationsTabs() {
     });
 }
 
-// --- Certificate Database Search & Filter --- //
-function initCertFilters() {
-    const searchInput = document.getElementById('cert-search');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('#certs-grid .cert-card');
-
-    if (!searchInput) return;
-
-    let activeFilter = 'all';
-    let searchQuery = '';
-
-    // Search Query Listener
-    searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value.toLowerCase().trim();
-        applyFilters();
-    });
-
-    // Tag Filter Toggles
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            filterButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeFilter = btn.getAttribute('data-filter') || 'all';
-            applyFilters();
-        });
-    });
-
-    function applyFilters() {
-        cards.forEach(card => {
-            const cardTags = card.getAttribute('data-tags') || '';
-            const h4El = card.querySelector('h4');
-            const descEl = card.querySelector('.cert-desc');
-            
-            const cardTitle = h4El ? h4El.textContent.toLowerCase() : '';
-            const cardDesc = descEl ? descEl.textContent.toLowerCase() : '';
-            
-            const matchFilter = (activeFilter === 'all' || cardTags.includes(activeFilter));
-            const matchSearch = (cardTitle.includes(searchQuery) || cardDesc.includes(searchQuery));
-
-            if (matchFilter && matchSearch) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-}
+function initCertFilters() {}
 
 // --- Local HUD Variables (Clock, IP Mock) --- //
 function initHudData() {
@@ -479,6 +505,671 @@ function initPayloadEncryption() {
         
         preview.textContent = `[CIPHERTEXT]: ${hash.trim()}`;
         preview.classList.add('encrypted-state');
+    });
+}
+
+// --- 12. Toast & Interactive Copy Listener --- //
+function initCopyToast() {
+    const toast = document.getElementById('cyber-toast');
+    const toastMsg = document.getElementById('toast-msg');
+    let toastTimeout;
+
+    window.showToast = function(msg) {
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = msg;
+        toast.classList.remove('hidden');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3200);
+    };
+
+    // Attach copy event to emails & phone links
+    const copyableLinks = document.querySelectorAll('a[href^="mailto:"], a[href^="tel:"], .contact-val');
+    copyableLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const rawText = link.textContent.trim();
+            if (rawText) {
+                navigator.clipboard.writeText(rawText).then(() => {
+                    showToast(`[COPIED] ${rawText} saved to clipboard!`);
+                }).catch(() => {});
+            }
+        });
+    });
+}
+
+// --- 13. Interactive Project Modal Engine --- //
+function initProjectModal() {
+    const modal = document.getElementById('cyber-modal');
+    const closeBtn = document.getElementById('modal-close-btn');
+    const heading = document.getElementById('modal-heading');
+    const desc = document.getElementById('modal-desc');
+    const tagsWrapper = document.getElementById('modal-tags');
+
+    if (!modal) return;
+
+    // Attach click listeners to project cards
+    const projectCards = document.querySelectorAll('.project-card, .sim-row');
+    projectCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // Ignore click if clicking direct link button inside card
+            if (e.target.closest('a') || e.target.closest('button')) return;
+
+            const cardTitle = card.querySelector('h3, h4')?.textContent || 'TACTICAL_MODULE';
+            const cardDesc = card.querySelector('p')?.textContent || 'Detailed system specification and architectural documentation module.';
+            
+            if (heading) heading.textContent = cardTitle;
+            if (desc) desc.textContent = cardDesc;
+            
+            if (tagsWrapper) {
+                tagsWrapper.innerHTML = `
+                    <span class="cyber-badge font-mono" style="font-size: 0.7rem;">FEATURED_MODULE</span>
+                    <span class="cyber-badge font-mono" style="font-size: 0.7rem; border-color: var(--cyber-cyan); color: var(--cyber-cyan);">OWASP_AUDITED</span>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+        });
+    });
+
+    // Close listeners
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.add('hidden');
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            modal.classList.add('hidden');
+        }
+    });
+}
+
+// --- 14. Tactical Audio Synth SFX Engine (Multi-Pitch Profiles & LocalStorage) --- //
+function initAudioSynth() {
+    let audioCtx = null;
+    let isSfxMuted = localStorage.getItem('cyber_sfx_muted') === 'true';
+
+    const sfxBtn = document.getElementById('sfx-toggle-btn');
+    const sfxIcon = document.getElementById('sfx-btn-icon');
+    const sfxText = document.getElementById('sfx-btn-text');
+
+    function updateSfxButtonUI() {
+        if (!sfxBtn) return;
+        if (isSfxMuted) {
+            sfxBtn.classList.add('sfx-muted');
+            if (sfxIcon) sfxIcon.className = 'fa-solid fa-volume-xmark';
+            if (sfxText) sfxText.textContent = 'SFX_MUTED';
+        } else {
+            sfxBtn.classList.remove('sfx-muted');
+            if (sfxIcon) sfxIcon.className = 'fa-solid fa-volume-high';
+            if (sfxText) sfxText.textContent = 'SFX_ON';
+        }
+    }
+
+    updateSfxButtonUI();
+
+    function getAudioCtx() {
+        if (!audioCtx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        return audioCtx;
+    }
+
+    // Sound Profile 1: Standard Crisp Click Blip
+    window.playAudioBlip = function (freq = 850, duration = 0.035) {
+        if (isSfxMuted) return;
+        try {
+            const ctx = getAudioCtx();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            gain.gain.setValueAtTime(0.04, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + duration);
+        } catch (e) {}
+    };
+
+    // Sound Profile 2: High-Pitch Dual Tone Section Navigation Chime
+    window.playAudioChime = function () {
+        if (isSfxMuted) return;
+        try {
+            const ctx = getAudioCtx();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(1200, now);
+            osc.frequency.exponentialRampToValueAtTime(1600, now + 0.08);
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(now + 0.08);
+        } catch (e) {}
+    };
+
+    // Sound Profile 3: Upward Frequency Slide Success Chime
+    window.playAudioSuccess = function () {
+        if (isSfxMuted) return;
+        try {
+            const ctx = getAudioCtx();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(900, now);
+            osc.frequency.exponentialRampToValueAtTime(1800, now + 0.1);
+            gain.gain.setValueAtTime(0.06, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(now + 0.1);
+        } catch (e) {}
+    };
+
+    // Sound Profile 4: Descending Close/Warning Tone
+    window.playAudioWarning = function () {
+        if (isSfxMuted) return;
+        try {
+            const ctx = getAudioCtx();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(550, now);
+            osc.frequency.exponentialRampToValueAtTime(350, now + 0.09);
+            gain.gain.setValueAtTime(0.03, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(now + 0.09);
+        } catch (e) {}
+    };
+
+    if (sfxBtn) {
+        sfxBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!isSfxMuted) {
+                window.playAudioWarning();
+            }
+            isSfxMuted = !isSfxMuted;
+            localStorage.setItem('cyber_sfx_muted', isSfxMuted);
+            updateSfxButtonUI();
+
+            if (window.showToast) {
+                window.showToast(isSfxMuted ? '[AUDIO] Tactile SFX muted' : '[AUDIO] Tactile SFX enabled');
+            }
+            if (!isSfxMuted) {
+                window.playAudioSuccess();
+            }
+        });
+    }
+
+    // Contextual Event Handler Bindings
+    document.querySelectorAll('.dock-item').forEach(el => {
+        el.addEventListener('click', () => window.playAudioChime());
+    });
+
+    document.querySelectorAll('.copy-badge, .contact-method-item').forEach(el => {
+        el.addEventListener('click', () => window.playAudioSuccess());
+    });
+
+    document.querySelectorAll('.modal-close-btn, .hud-lightbox-close, #modal-close-btn, #lightbox-close-btn').forEach(el => {
+        el.addEventListener('click', () => window.playAudioWarning());
+    });
+
+    document.querySelectorAll('.btn:not(.dock-item), .hud-tab-btn, .tab-btn, .ops-tag-btn, .cert-card, .thm-badge-pill').forEach(el => {
+        el.addEventListener('click', () => window.playAudioBlip(850, 0.035));
+    });
+}
+
+// --- 15. Dynamic Stat Count-Up Engine --- //
+function initStatCounters() {
+    const statVals = document.querySelectorAll('.thm-stat-val, .hud-stat-box .stat-val');
+    let animated = false;
+
+    function animateCounters() {
+        if (animated) return;
+        animated = true;
+
+        statVals.forEach(el => {
+            const text = el.textContent.trim();
+            const match = text.match(/^(\d+)(.*)$/);
+            if (match) {
+                const target = parseInt(match[1], 10);
+                const suffix = match[2] || '';
+                let current = 0;
+                const increment = Math.max(1, Math.floor(target / 30));
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = current + suffix;
+                }, 35);
+            }
+        });
+    }
+
+    const thmSection = document.getElementById('tryhackme');
+    if (thmSection) {
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) animateCounters();
+        }, { threshold: 0.2 });
+        observer.observe(thmSection);
+    }
+}
+
+// --- 16. Dynamic Background Image Rotation & Cinematic Crossfade Engine --- //
+function initBackgroundRotation() {
+    const bgImages = [
+        './bg images/ascii-magic-5.webp',
+        './bg images/ascii-magic-7.webp',
+        './bg images/ascii-magic-8.webp',
+        './bg images/ascii-magic-9.webp',
+        './bg images/ascii-magic-10.webp',
+        './bg images/ascii-magic-11.webp',
+        './bg images/ascii-magic-12.webp',
+        './bg images/ascii-magic-13.webp',
+        './bg images/ascii-magic-15.webp',
+        './bg images/ascii-magic-16.webp',
+        './bg images/ChatGPT Image Jun 30, 2026, 10_04_35 PM.webp'
+    ];
+
+    const layer1 = document.getElementById('bg-layer-1');
+    const layer2 = document.getElementById('bg-layer-2');
+
+    let currentIdx = 0;
+    let activeLayer = 1;
+    let isPaused = false;
+    let intervalTimer = null;
+
+    if (layer1) layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[0]}")`;
+    if (layer2) layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[1]}")`;
+
+    // Preload only the initial 2 background images into memory
+    [bgImages[0], bgImages[1]].forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    function transitionToNext() {
+        if (isPaused || !layer1 || !layer2) return;
+        
+        currentIdx = (currentIdx + 1) % bgImages.length;
+        const nextUpcomingIdx = (currentIdx + 1) % bgImages.length;
+
+        // Preload next upcoming image right before layer update
+        const preloadImg = new Image();
+        preloadImg.src = bgImages[nextUpcomingIdx];
+
+        if (activeLayer === 1) {
+            layer2.classList.add('active-bg');
+            layer1.classList.remove('active-bg');
+            activeLayer = 2;
+
+            // Pre-load the NEXT upcoming image into hidden layer 1
+            setTimeout(() => {
+                layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[nextUpcomingIdx]}")`;
+            }, 2300);
+        } else {
+            layer1.classList.add('active-bg');
+            layer2.classList.remove('active-bg');
+            activeLayer = 1;
+
+            // Pre-load the NEXT upcoming image into hidden layer 2
+            setTimeout(() => {
+                layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[nextUpcomingIdx]}")`;
+            }, 2300);
+        }
+    }
+
+    function startRotation() {
+        if (intervalTimer) clearInterval(intervalTimer);
+        intervalTimer = setInterval(transitionToNext, 5000);
+    }
+
+    function stopRotation() {
+        if (intervalTimer) {
+            clearInterval(intervalTimer);
+            intervalTimer = null;
+        }
+    }
+
+    // Automatically pause timer when browser tab is inactive
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopRotation();
+        } else if (!isPaused) {
+            startRotation();
+        }
+    });
+
+    const toggleBtn = document.getElementById('bg-toggle-btn');
+    const btnIcon = document.getElementById('bg-btn-icon');
+    const btnText = document.getElementById('bg-btn-text');
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            if (isPaused) {
+                stopRotation();
+                toggleBtn.classList.add('paused');
+                if (btnIcon) btnIcon.className = 'fa-solid fa-play';
+                if (btnText) btnText.textContent = 'PAUSED';
+                if (window.showToast) window.showToast('[SLIDESHOW] Background rotation paused');
+            } else {
+                startRotation();
+                toggleBtn.classList.remove('paused');
+                if (btnIcon) btnIcon.className = 'fa-solid fa-pause';
+                if (btnText) btnText.textContent = 'BG_ROTATE';
+                if (window.showToast) window.showToast('[SLIDESHOW] Background rotation resumed');
+            }
+        });
+    }
+
+    startRotation();
+}
+
+// --- 17. Real-Time FPS Counter Diagnostics --- //
+function initFpsCounter() {
+    const fpsEl = document.getElementById('fps-counter');
+    if (!fpsEl) return;
+
+    let frameCount = 0;
+    let lastTime = performance.now();
+
+    function calcFps(now) {
+        frameCount++;
+        if (now - lastTime >= 1000) {
+            const fps = Math.round((frameCount * 1000) / (now - lastTime));
+            fpsEl.innerHTML = `<i class="fa-solid fa-bolt text-orange"></i> ${fps} FPS`;
+            frameCount = 0;
+            lastTime = now;
+        }
+        requestAnimationFrame(calcFps);
+    }
+    requestAnimationFrame(calcFps);
+}
+
+// --- 18. Operations Search & Category Filter Engine --- //
+function initOpsFilter() {
+    const searchInput = document.getElementById('ops-search-input');
+    const tagBtns = document.querySelectorAll('.ops-tag-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    const simRows = document.querySelectorAll('.sim-row');
+
+    let currentFilter = 'all';
+
+    function filterCards() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        // Filter Project Cards
+        projectCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            const category = card.dataset.category || 'all';
+
+            const matchesQuery = !query || text.includes(query);
+            const matchesCategory = currentFilter === 'all' || category === currentFilter;
+
+            if (matchesQuery && matchesCategory) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Filter Simulation Rows
+        simRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            const matchesQuery = !query || text.includes(query);
+            if (matchesQuery) {
+                row.style.display = 'grid';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', debounce(filterCards, 80));
+    }
+
+    tagBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tagBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter || 'all';
+            filterCards();
+        });
+    });
+}
+
+// --- Certificate & Visual Feed Lightbox Engine --- //
+function initCertificateLightbox() {
+    const modal = document.getElementById('cert-lightbox-modal');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxMeta = document.getElementById('lightbox-meta');
+
+    if (!modal || !closeBtn) return;
+
+    // Attach click listeners to visual feed images and ascii images
+    const previewableImgs = document.querySelectorAll('.visual-feed-body img, .cyber-img');
+    previewableImgs.forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => {
+            const title = img.alt || 'Tactical Visual Feed';
+            openLightbox(img.src, `[FEED_NODE] ${title}`, 'SCANLINE_ANALYSIS // RESOLUTION: HIGH');
+        });
+    });
+
+    function openLightbox(src, titleText, metaText) {
+        if (lightboxImg) lightboxImg.src = src;
+        if (lightboxTitle) lightboxTitle.innerHTML = `<i class="fa-solid fa-expand text-cyan"></i> ${titleText}`;
+        if (lightboxMeta) lightboxMeta.textContent = metaText || 'INTEGRITY_VERIFIED // SECURE_NODE';
+        modal.classList.add('active');
+    }
+
+    function closeLightbox() {
+        modal.classList.remove('active');
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+}
+
+// --- 20. Direct Certificate PDF Link Handler --- //
+function initPdfViewerModal() {
+    // Enable full card clickability opening raw PDF directly in a new browser tab
+    const certCards = document.querySelectorAll('.cert-card, .sim-row, .academic-timeline .timeline-item');
+
+    certCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Allow natural browser navigation if the user clicked directly on an <a> element
+            if (e.target.closest('a')) return;
+
+            const link = card.querySelector('a[href$=".pdf"], a[href$=".png"], a.cert-link, .sim-action a');
+            if (link) {
+                const href = link.getAttribute('href');
+                if (href) {
+                    window.open(href, '_blank');
+                    if (window.playAudioBlip) window.playAudioBlip();
+                }
+            }
+        });
+    });
+}
+
+// --- 21. Futuristic Staggered Cascade Scroll-Reveals Engine --- //
+function initStaggeredCascadeReveals() {
+    const containers = document.querySelectorAll('.skills-grid, .projects-grid, .sim-grid, .thm-grid, .academic-timeline, .contact-container');
+
+    function applyCascadeIndices() {
+        containers.forEach(container => {
+            const children = Array.from(container.children).filter(child => !child.classList.contains('hidden'));
+            children.forEach((child, idx) => {
+                child.classList.add('hud-cascade-item');
+                child.style.setProperty('--cascade-index', idx % 8);
+            });
+        });
+    }
+
+    applyCascadeIndices();
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -30px 0px'
+    });
+
+    document.querySelectorAll('.hud-cascade-item').forEach(item => {
+        observer.observe(item);
+    });
+
+    // Expose refresh function to re-calculate indices when filters or sections change
+    window.refreshCascadeReveals = function () {
+        applyCascadeIndices();
+        document.querySelectorAll('.hud-cascade-item').forEach(item => {
+            observer.observe(item);
+            const rect = item.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                item.classList.add('revealed');
+            }
+        });
+    };
+}
+
+// --- 22. Top Neon Scroll Progress Bar Engine --- //
+function initScrollProgressBar() {
+    const progressBar = document.getElementById('hud-scroll-progress');
+    if (!progressBar) return;
+
+    let ticking = false;
+
+    function updateProgress() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateProgress);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateProgress();
+}
+
+// --- 23. 3D Interactive Card Tilt & Cursor Spotlight Engine (60fps Optimized) --- //
+function init3DCardTilt() {
+    // Disable heavy 3D calculations on touch/mobile devices to avoid lag
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+
+    const cards = document.querySelectorAll('.cyber-card, .cert-card, .thm-badge-pill');
+
+    cards.forEach(card => {
+        let ticking = false;
+        let mouseX = 0, mouseY = 0;
+
+        card.addEventListener('mouseenter', () => {
+            card.classList.add('is-tilting');
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    card.style.setProperty('--mouse-x', `${mouseX}px`);
+                    card.style.setProperty('--mouse-y', `${mouseY}px`);
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = -((mouseY - centerY) / centerY) * 6;
+                    const rotateY = ((mouseX - centerX) / centerX) * 6;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.classList.remove('is-tilting');
+            card.style.transform = 'none';
+        });
+    });
+}
+
+// --- 24. Click-Triggered Liquid Ripple Waves Engine --- //
+function initLiquidRippleEffect() {
+    const clickableTargets = document.querySelectorAll('.cyber-card, .btn, .dock-item, .cert-card, .thm-badge-pill, .hud-bg-btn');
+
+    clickableTargets.forEach(target => {
+        target.classList.add('cyber-ripple-container');
+
+        target.addEventListener('click', (e) => {
+            const rect = target.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const diameter = Math.max(rect.width, rect.height) * 1.5;
+
+            const ripple = document.createElement('span');
+            ripple.className = 'cyber-ripple';
+            ripple.style.width = `${diameter}px`;
+            ripple.style.height = `${diameter}px`;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+
+            target.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 650);
+        });
     });
 }
 

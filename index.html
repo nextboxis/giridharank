@@ -11,13 +11,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Preload Critical Above-the-Fold Images for Fast LCP -->
+    <link rel="preload" as="image" href="./hero photo/ascii-magic-4.webp" type="image/webp">
+    <link rel="preload" as="image" href="./bg images/ascii-magic-5.webp" type="image/webp">
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Top Neon Scroll Progress Bar -->
+    <div id="hud-scroll-progress" class="hud-scroll-progress"></div>
+
+    <!-- Dual-Layer Cinematic Background Crossfader -->
+    <div id="bg-layer-1" class="bg-crossfade-layer active-bg"></div>
+    <div id="bg-layer-2" class="bg-crossfade-layer"></div>
+
     <!-- Matrix Particle Background -->
     <canvas id="cyberCanvas"></canvas>
 
+
+    <!-- HUD System Header -->
+    <header class="hud-top-bar font-mono">
+        <div class="hud-bar-left">
+            <span class="status-indicator online"></span>
+            <span class="hud-bar-title text-cyan">CYBER_SENTINEL // NODE_01</span>
+        </div>
+        <div class="hud-bar-right">
+            <span id="fps-counter" class="hud-diag-pill"><i class="fa-solid fa-bolt text-orange"></i> 60 FPS</span>
+            <span class="hud-diag-pill"><i class="fa-solid fa-shield-halved text-green"></i> AES-256</span>
+            <button id="sfx-toggle-btn" class="hud-bg-btn" title="Toggle Tactile Audio SFX">
+                <i class="fa-solid fa-volume-high" id="sfx-btn-icon"></i> <span id="sfx-btn-text">SFX_ON</span>
+            </button>
+            <button id="bg-toggle-btn" class="hud-bg-btn" title="Pause/Play Background Rotation">
+                <i class="fa-solid fa-pause" id="bg-btn-icon"></i> <span id="bg-btn-text">BG_ROTATE</span>
+            </button>
+        </div>
+    </header>
 
     <!-- Main Content Container -->
     <main class="container">
@@ -46,21 +74,26 @@
                         </p>
 
                         <div class="hero-actions">
-                            <a href="./giridharan.pdf" download class="btn cyber-btn secondary font-mono">
-                                <i class="fa-solid fa-download"></i> DOWNLOAD_RESUME.EXE
-                            </a>
-                            <a href="#contact" class="btn cyber-btn primary font-mono">
-                                <i class="fa-solid fa-network-wired"></i> ESTABLISH_LINK
-                            </a>
-                            <a href="https://github.com/nextboxis" target="_blank" rel="noopener noreferrer" class="btn cyber-btn icon-btn font-mono" title="GitHub Node Profile">
-                                <i class="fa-brands fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/giridharan-k1315" target="_blank" rel="noopener noreferrer" class="btn cyber-btn icon-btn font-mono" title="LinkedIn Connection Node">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="btn cyber-btn icon-btn font-mono thm-hero-btn" title="TryHackMe Profile">
-                                <i class="fa-solid fa-skull"></i>
-                            </a>
+                            <div class="cv-btn-wrapper">
+                                <a href="./giridharan.pdf" download="GIRIDHARAN_K_Resume.pdf" id="hero-cv-btn" class="btn cyber-btn cv-btn primary font-mono">
+                                    <i class="fa-solid fa-file-pdf"></i> DOWNLOAD_CV.PDF
+                                </a>
+                                <span class="cv-verify-tag font-mono text-green"><i class="fa-solid fa-shield-halved"></i> VERIFIED_RESUME</span>
+                            </div>
+                            <div class="hero-social-row">
+                                <a href="https://github.com/nextboxis" target="_blank" rel="noopener noreferrer" class="btn cyber-btn icon-btn font-mono" title="GitHub Node Profile">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/giridharan-k1315" target="_blank" rel="noopener noreferrer" class="btn cyber-btn icon-btn font-mono" title="LinkedIn Connection Node">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </a>
+                                <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="btn cyber-btn icon-btn font-mono thm-hero-btn" title="TryHackMe Profile">
+                                    <i class="fa-solid fa-skull"></i>
+                                </a>
+                                <a href="https://www.instagram.com/encrypted_peace?utm_source=qr&igsh=MTlqb3ZqcWpsY3BiZA==" target="_blank" rel="noopener noreferrer" class="btn cyber-btn icon-btn font-mono ig-hero-btn" title="Instagram Profile">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Mini stats banner -->
@@ -83,13 +116,9 @@
 
                 <!-- Tactical Visual Feed Panel -->
                 <div class="cyber-card glassmorphic visual-feed-card">
-                    <div class="card-header ctrl-tabs-header">
-                        <div class="hud-tabs font-mono">
-                            <button class="hud-tab-btn active" data-tab="live-feed"><i class="fa-solid fa-satellite"></i> LIVE_FEED</button>
-                            <button class="hud-tab-btn" data-tab="port-scanner"><i class="fa-solid fa-network-wired"></i> PORT_SCANNER</button>
-                            <button class="hud-tab-btn" data-tab="terminal-cli"><i class="fa-solid fa-terminal"></i> TERMINAL_CLI</button>
-                        </div>
-                        <div class="card-controls hide-mobile">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-satellite text-cyan"></i> [LIVE_FEED]</span>
+                        <div class="card-controls">
                             <span class="ctrl-dot red"></span>
                             <span class="ctrl-dot yellow"></span>
                             <span class="ctrl-dot green"></span>
@@ -100,36 +129,10 @@
                         <div id="tab-live-feed" class="hud-tab-content active-tab-content">
                             <div class="feed-container">
                                 <div class="feed-item">
-                                    <div class="feed-label font-mono"><span class="scanner-text">SYS_SCAN_01:</span> ASCII_TACTICAL</div>
                                     <div class="feed-img-wrapper">
                                         <div class="scanline"></div>
-                                        <img src="./ascii-magic-4.png" alt="Tactical ASCII Art" class="cyber-img">
+                                        <img src="./hero photo/ascii-magic-4.webp" alt="Tactical ASCII Art" class="cyber-img" fetchpriority="high" decoding="async" loading="eager" width="600" height="600">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tab Content 2: Port Scanner simulation -->
-                        <div id="tab-port-scanner" class="hud-tab-content">
-                            <div class="scanner-screen font-mono">
-                                <div class="scanner-header">[NET_AUDITING_INITIATED...]</div>
-                                <div class="scanner-logs" id="scanner-logs-area">
-                                    <!-- Dynamic logs will be appended here -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tab Content 3: Terminal CLI interactive -->
-                        <div id="tab-terminal-cli" class="hud-tab-content">
-                            <div class="cli-screen font-mono">
-                                <div class="cli-output" id="cli-output-area">
-                                    <div>[CYBER_SENTINEL_HUD_V2.0.26_ACTIVE]</div>
-                                    <div>Type 'help' to see active command protocols.</div>
-                                    <br>
-                                </div>
-                                <div class="cli-input-line">
-                                    <span class="cli-prompt">guest@cyber-hud:~$</span>
-                                    <input type="text" id="cli-input" autocomplete="off" placeholder="Type command here...">
                                 </div>
                             </div>
                         </div>
@@ -245,6 +248,8 @@
                                 <img src="https://tryhackme-badges.s3.amazonaws.com/giridharank790.png" 
                                      alt="TryHackMe Badge for giridharank790" 
                                      class="thm-official-badge"
+                                     loading="lazy"
+                                     decoding="async"
                                      onerror="this.style.display='none'">
                             </a>
                         </div>
@@ -266,52 +271,84 @@
                             <a href="https://tryhackme.com/giridharank790/badges/terminaled" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Terminaled — CLI Mastery Achievement">
                                 <span class="thm-badge-icon"><i class="fa-solid fa-terminal text-green"></i></span>
                                 <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">TERMINALED</span>
-                                    <span class="thm-badge-desc">CLI Mastery Achievement</span>
+                                    <span class="thm-badge-name font-mono">TERMINALED <span class="thm-tag font-mono text-green">CLI_VERIFIED</span></span>
+                                    <span class="thm-badge-desc">Linux CLI Mastery Achievement</span>
                                 </div>
                             </a>
                             <a href="https://tryhackme.com/giridharank790/badges/mr-robot" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Mr. Robot CTF Completion">
                                 <span class="thm-badge-icon"><i class="fa-solid fa-robot text-orange"></i></span>
                                 <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">MR_ROBOT_CTF</span>
-                                    <span class="thm-badge-desc">CTF Challenge Completed</span>
+                                    <span class="thm-badge-name font-mono">MR_ROBOT_CTF <span class="thm-tag font-mono text-orange">CTF_SOLVED</span></span>
+                                    <span class="thm-badge-desc">Exploitation &amp; Privilege Escalation</span>
                                 </div>
                             </a>
                             <a href="https://tryhackme.com/giridharank790/badges/defrostedfive" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Defrosted Five — Winter Security Challenge">
                                 <span class="thm-badge-icon"><i class="fa-solid fa-snowflake text-cyan"></i></span>
                                 <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">DEFROSTED_FIVE</span>
-                                    <span class="thm-badge-desc">Winter Security Challenge</span>
+                                    <span class="thm-badge-name font-mono">DEFROSTED_FIVE <span class="thm-tag font-mono text-cyan">CHALLENGE</span></span>
+                                    <span class="thm-badge-desc">Winter Cyber Event Completed</span>
                                 </div>
                             </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/intro-to-security-engineering" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Security Engineering — Intro to Security Principles">
+                            <a href="https://tryhackme.com/giridharank790/badges/intro-to-security-engineering" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Security Engineering — Principles">
                                 <span class="thm-badge-icon"><i class="fa-solid fa-key text-orange"></i></span>
                                 <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">SECURITY_ENG</span>
-                                    <span class="thm-badge-desc">Intro to Security Principles</span>
+                                    <span class="thm-badge-name font-mono">SECURITY_ENG <span class="thm-tag font-mono text-orange">DEFENSIVE</span></span>
+                                    <span class="thm-badge-desc">Security Engineering Principles</span>
                                 </div>
                             </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/web-fund" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Web Fundamentals — Web Hacking Principles">
+                            <a href="https://tryhackme.com/giridharank790/badges/web-fund" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Web Fundamentals — Web Hacking">
                                 <span class="thm-badge-icon"><i class="fa-solid fa-globe text-cyan"></i></span>
                                 <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">WEB_FUNDAMENTALS</span>
-                                    <span class="thm-badge-desc">Web Hacking Principles</span>
+                                    <span class="thm-badge-name font-mono">WEB_FUNDAMENTALS <span class="thm-tag font-mono text-cyan">WEB_SEC</span></span>
+                                    <span class="thm-badge-desc">Web Application Security &amp; OWASP</span>
                                 </div>
                             </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/bronze-league" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Bronze League — Top 20% Rank">
+                            <a href="https://tryhackme.com/giridharank790/badges/bronze-league" target="_blank" rel="noopener noreferrer" class="thm-badge-pill highlight-pill" title="Bronze League — Top 20% Rank">
                                 <span class="thm-badge-icon"><i class="fa-solid fa-medal text-orange"></i></span>
                                 <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">BRONZE_LEAGUE</span>
-                                    <span class="thm-badge-desc">Top 20% Global Rank</span>
+                                    <span class="thm-badge-name font-mono">BRONZE_LEAGUE <span class="thm-tag font-mono text-orange">TOP_20%</span></span>
+                                    <span class="thm-badge-desc">Global Operator League Standing</span>
                                 </div>
                             </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/world-wide-web" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="World Wide Web — Web Security Achievement">
+                            <a href="https://tryhackme.com/giridharank790/badges/world-wide-web" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="World Wide Web — Security Achievement">
                                 <span class="thm-badge-icon"><i class="fa-solid fa-spider text-green"></i></span>
                                 <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">WORLD_WIDE_WEB</span>
-                                    <span class="thm-badge-desc">Web Hacking Security Achievement</span>
+                                    <span class="thm-badge-name font-mono">WORLD_WIDE_WEB <span class="thm-tag font-mono text-green">AUDITED</span></span>
+                                    <span class="thm-badge-desc">Web Threat Surface Assessment</span>
                                 </div>
                             </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Live Telemetry Bar -->
+            <div class="cyber-card glassmorphic github-telemetry-card">
+                <div class="card-header">
+                    <span class="card-title font-mono"><i class="fa-brands fa-github text-cyan"></i> GITHUB_DEVELOPER_TELEMETRY</span>
+                    <div class="card-controls">
+                        <span class="ctrl-dot red"></span>
+                        <span class="ctrl-dot yellow"></span>
+                        <span class="ctrl-dot green"></span>
+                    </div>
+                </div>
+                <div class="card-body font-mono">
+                    <div class="github-telemetry-grid">
+                        <div class="telemetry-box">
+                            <span class="lbl text-dim">HANDLE:</span>
+                            <span class="val text-cyan">@nextboxis</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="lbl text-dim">ACTIVE_REPOS:</span>
+                            <span class="val text-green">15+ Repos</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="lbl text-dim">PRIMARY_STACK:</span>
+                            <span class="val text-orange">React / Python</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="lbl text-dim">SECURITY_AUDITS:</span>
+                            <span class="val text-green">PASSED</span>
                         </div>
                     </div>
                 </div>
@@ -331,12 +368,12 @@
                         <span class="card-title font-mono"><i class="fa-brands fa-react text-cyan"></i> FRONTEND_ENGINEERING</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-react"></i></span><span class="skill-pill-name font-mono">React.js <span class="skill-pct text-cyan">85%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-js"></i></span><span class="skill-pill-name font-mono">JavaScript <span class="skill-pct text-cyan">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-html5"></i></span><span class="skill-pill-name font-mono">HTML5 &amp; CSS3 <span class="skill-pct text-cyan">90%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-mobile-screen-button"></i></span><span class="skill-pill-name font-mono">Responsive <span class="skill-pct text-cyan">85%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-layer-group"></i></span><span class="skill-pill-name font-mono">Redux <span class="skill-pct text-cyan">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-code-branch"></i></span><span class="skill-pill-name font-mono">Next.js <span class="skill-pct text-cyan">80%</span></span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-react"></i></span><span class="skill-pill-name font-mono">React.js</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-js"></i></span><span class="skill-pill-name font-mono">JavaScript</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-html5"></i></span><span class="skill-pill-name font-mono">HTML5 &amp; CSS3</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-mobile-screen-button"></i></span><span class="skill-pill-name font-mono">Responsive</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-layer-group"></i></span><span class="skill-pill-name font-mono">Redux</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-code-branch"></i></span><span class="skill-pill-name font-mono">Next.js</span></div>
                     </div>
                 </div>
 
@@ -346,12 +383,12 @@
                         <span class="card-title font-mono"><i class="fa-brands fa-python text-green"></i> BACKEND_&amp;_DEV</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-python"></i></span><span class="skill-pill-name font-mono">Python <span class="skill-pct text-green">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-server"></i></span><span class="skill-pill-name font-mono">Flask &amp; APIs <span class="skill-pct text-green">75%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">MongoDB <span class="skill-pct text-green">70%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-linux"></i></span><span class="skill-pill-name font-mono">Linux / Bash <span class="skill-pct text-green">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-docker"></i></span><span class="skill-pill-name font-mono">Docker <span class="skill-pct text-green">70%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-git-alt"></i></span><span class="skill-pill-name font-mono">Git &amp; VCS <span class="skill-pct text-green">80%</span></span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-python"></i></span><span class="skill-pill-name font-mono">Python</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-server"></i></span><span class="skill-pill-name font-mono">Flask &amp; APIs</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">MongoDB</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-linux"></i></span><span class="skill-pill-name font-mono">Linux / Bash</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-docker"></i></span><span class="skill-pill-name font-mono">Docker</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-git-alt"></i></span><span class="skill-pill-name font-mono">Git &amp; VCS</span></div>
                     </div>
                 </div>
 
@@ -361,12 +398,12 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-screwdriver-wrench text-orange"></i> SECURITY_AUDIT_TOOLS</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-user-secret"></i></span><span class="skill-pill-name font-mono">Burp Suite <span class="skill-pct text-orange">75%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-binoculars"></i></span><span class="skill-pill-name font-mono">Wireshark <span class="skill-pct text-orange">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-skull"></i></span><span class="skill-pill-name font-mono">Kali Linux <span class="skill-pct text-orange">85%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bug"></i></span><span class="skill-pill-name font-mono">Ghidra <span class="skill-pct text-orange">70%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Bash Script <span class="skill-pct text-orange">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-shield-halved"></i></span><span class="skill-pill-name font-mono">Audit Log <span class="skill-pct text-orange">75%</span></span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-user-secret"></i></span><span class="skill-pill-name font-mono">Burp Suite</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-binoculars"></i></span><span class="skill-pill-name font-mono">Wireshark</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-skull"></i></span><span class="skill-pill-name font-mono">Kali Linux</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bug"></i></span><span class="skill-pill-name font-mono">Ghidra</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bolt"></i></span><span class="skill-pill-name font-mono">Metasploit</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-shield-cat"></i></span><span class="skill-pill-name font-mono">OWASP ZAP</span></div>
                     </div>
                 </div>
 
@@ -376,12 +413,12 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-brain text-purple"></i> THREAT_THEORY_&amp;_ML</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-shield-halved"></i></span><span class="skill-pill-name font-mono">OWASP Top 10 <span class="skill-pct text-purple">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-diagram-project"></i></span><span class="skill-pill-name font-mono">MITRE ATT&amp;CK <span class="skill-pct text-purple">75%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-chart-simple"></i></span><span class="skill-pill-name font-mono">Entropy <span class="skill-pct text-purple">85%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-brain"></i></span><span class="skill-pill-name font-mono">scikit-learn <span class="skill-pct text-purple">70%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-mask"></i></span><span class="skill-pill-name font-mono">Threat Model <span class="skill-pct text-purple">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-magnifying-glass-chart"></i></span><span class="skill-pill-name font-mono">Forensics <span class="skill-pct text-purple">75%</span></span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-shield-halved"></i></span><span class="skill-pill-name font-mono">OWASP Top 10</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-diagram-project"></i></span><span class="skill-pill-name font-mono">MITRE ATT&amp;CK</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-chart-simple"></i></span><span class="skill-pill-name font-mono">Entropy</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-brain"></i></span><span class="skill-pill-name font-mono">scikit-learn</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-mask"></i></span><span class="skill-pill-name font-mono">Threat Model</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-magnifying-glass-chart"></i></span><span class="skill-pill-name font-mono">Forensics</span></div>
                     </div>
                 </div>
 
@@ -391,12 +428,12 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-network-wired text-cyan"></i> ACTIVE_RECONNAISSANCE</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-globe"></i></span><span class="skill-pill-name font-mono">DNS Auditing <span class="skill-pct text-cyan">82%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-search"></i></span><span class="skill-pill-name font-mono">Shodan OSINT <span class="skill-pct text-cyan">78%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-radar"></i></span><span class="skill-pill-name font-mono">Nmap Scan <span class="skill-pct text-cyan">85%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-folder-open"></i></span><span class="skill-pill-name font-mono">Directory Fuzz <span class="skill-pct text-cyan">84%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Port Mapping <span class="skill-pct text-cyan">88%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-diagram-nested"></i></span><span class="skill-pill-name font-mono">Subdomains <span class="skill-pct text-cyan">80%</span></span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-globe"></i></span><span class="skill-pill-name font-mono">DNS Auditing</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-magnifying-glass"></i></span><span class="skill-pill-name font-mono">Shodan OSINT</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-tower-broadcast"></i></span><span class="skill-pill-name font-mono">Nmap Scan</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-folder-open"></i></span><span class="skill-pill-name font-mono">Gobuster / Ferox</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Port Mapping</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-sitemap"></i></span><span class="skill-pill-name font-mono">Subfinder</span></div>
                     </div>
                 </div>
 
@@ -406,12 +443,42 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-skull text-red"></i> EXPLOITATION_&amp;_ATTACK</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">SQL Injection <span class="skill-pct text-red">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-unlock-keyhole"></i></span><span class="skill-pill-name font-mono">Brute Force <span class="skill-pct text-red">82%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-key"></i></span><span class="skill-pill-name font-mono">Hash Crack <span class="skill-pct text-red">78%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Reverse Shell <span class="skill-pct text-red">80%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-arrow-up-right-dots"></i></span><span class="skill-pill-name font-mono">Priv Esc <span class="skill-pct text-red">75%</span></span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-bug"></i></span><span class="skill-pill-name font-mono">Exploit Craft <span class="skill-pct text-red">78%</span></span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">SQLmap / SQLi</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-fire"></i></span><span class="skill-pill-name font-mono">Hashcat</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-key"></i></span><span class="skill-pill-name font-mono">John the Ripper</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Reverse Shell</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-arrow-up-right-dots"></i></span><span class="skill-pill-name font-mono">Priv Esc</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-dragon"></i></span><span class="skill-pill-name font-mono">Hydra Brute</span></div>
+                    </div>
+                </div>
+
+                <!-- Skill Category: SOC & Incident Response -->
+                <div class="cyber-card glassmorphic skill-card">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-shield-heart text-green"></i> SOC_&amp;_INCIDENT_RESPONSE</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-chart-area"></i></span><span class="skill-pill-name font-mono">Splunk SIEM</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-eye"></i></span><span class="skill-pill-name font-mono">Wazuh EDR</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Snort / IDS</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-file-code"></i></span><span class="skill-pill-name font-mono">YARA Rules</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-share-nodes"></i></span><span class="skill-pill-name font-mono">TheHive / MISP</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-magnifying-glass"></i></span><span class="skill-pill-name font-mono">Autopsy</span></div>
+                    </div>
+                </div>
+
+                <!-- Skill Category: Identity & Red Teaming -->
+                <div class="cyber-card glassmorphic skill-card">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-user-shield text-cyan"></i> IDENTITY_&amp;_RED_TEAMING</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-sitemap"></i></span><span class="skill-pill-name font-mono">Active Directory</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-flask"></i></span><span class="skill-pill-name font-mono">CyberChef</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-fish"></i></span><span class="skill-pill-name font-mono">SET Phishing</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-passport"></i></span><span class="skill-pill-name font-mono">JWT &amp; OAuth</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-dog"></i></span><span class="skill-pill-name font-mono">BloodHound</span></div>
+                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-user-ninja"></i></span><span class="skill-pill-name font-mono">Mimikatz</span></div>
                     </div>
                 </div>
             </div>
@@ -422,6 +489,16 @@
             <h2 class="section-title font-mono"><i class="fa-solid fa-microchip"></i> ACTIVE_OPERATIONS</h2>
             <p class="section-subtitle font-mono">> Deployed repositories, tools, and professional simulated environments.</p>
 
+            <!-- Filter Controls -->
+            <div class="ops-filter-container font-mono">
+                <div class="ops-filter-tags">
+                    <button class="ops-tag-btn active" data-filter="all">ALL</button>
+                    <button class="ops-tag-btn" data-filter="security">SECURITY</button>
+                    <button class="ops-tag-btn" data-filter="web">WEB_DEV</button>
+                    <button class="ops-tag-btn" data-filter="ml">AI_&_ML</button>
+                </div>
+            </div>
+
             <div class="ops-tabs font-mono">
                 <button class="tab-btn active" data-target="projects-grid">PROJECT_REPOS</button>
                 <button class="tab-btn" data-target="simulations-grid">SIMULATIONS_&_WORK</button>
@@ -431,7 +508,7 @@
             <div id="projects-grid" class="ops-content active-content">
                 <div class="projects-container">
                     <!-- Project Card: xPing -->
-                    <div class="project-card glassmorphic">
+                    <div class="project-card glassmorphic" data-category="security">
                         <div class="project-hud-header">
                             <span class="project-tag text-orange font-mono">SEC_TOOL // STABLE</span>
                             <span class="project-id font-mono">0x01</span>
@@ -453,7 +530,7 @@
                     </div>
 
                     <!-- Project Card: NexShield -->
-                    <div class="project-card glassmorphic">
+                    <div class="project-card glassmorphic" data-category="ml">
                         <div class="project-hud-header">
                             <span class="project-tag text-purple font-mono">SEC_LVL: 04 // PLATFORM</span>
                             <span class="project-id font-mono">0x02</span>
@@ -475,7 +552,7 @@
                     </div>
 
                     <!-- Project Card: DNS Sinkhole -->
-                    <div class="project-card glassmorphic">
+                    <div class="project-card glassmorphic" data-category="security">
                         <div class="project-hud-header">
                             <span class="project-tag text-cyan font-mono">NET_SEC // SURVEILLANCE</span>
                             <span class="project-id font-mono">0x03</span>
@@ -497,7 +574,7 @@
                     </div>
 
                     <!-- Project Card: BlackArch -->
-                    <div class="project-card glassmorphic">
+                    <div class="project-card glassmorphic" data-category="security">
                         <div class="project-hud-header">
                             <span class="project-tag text-green font-mono">SEC_OS // CONFIG</span>
                             <span class="project-id font-mono">0x04</span>
@@ -519,7 +596,7 @@
                     </div>
 
                     <!-- Project Card: Crypto & E-Hacker -->
-                    <div class="project-card glassmorphic">
+                    <div class="project-card glassmorphic" data-category="web">
                         <div class="project-hud-header">
                             <span class="project-tag text-orange font-mono">SEC_TOOL // WEB</span>
                             <span class="project-id font-mono">0x05</span>
@@ -620,34 +697,34 @@
                     <!-- Sim 5: Telstra -->
                     <div class="sim-row">
                         <div class="sim-meta">
-                            <span class="sim-badge text-orange">SIMULATION</span>
-                            <span class="sim-date text-orange">IN_PROGRESS</span>
+                            <span class="sim-badge text-green">SIMULATION</span>
+                            <span class="sim-date">COMPLETED</span>
                         </div>
                         <div class="sim-details">
                             <h4>Cyber Security (Incident Response) — Telstra</h4>
-                            <p>Actively running modules covering network breach containment protocols and log analysis triage.</p>
+                            <p>Completed modules covering network breach containment protocols, incident response, and log analysis triage.</p>
                         </div>
                         <div class="sim-action">
-                            <button class="btn cyber-btn small" disabled>
-                                <i class="fa-solid fa-spinner fa-spin"></i> RUNNING...
-                            </button>
+                            <a href="./certificate/cyber_security_1.pdf" target="_blank" class="btn cyber-btn small">
+                                <i class="fa-solid fa-file-shield"></i> VERIFY.PDF
+                            </a>
                         </div>
                     </div>
 
                     <!-- Sim 6: Tata TCS -->
                     <div class="sim-row">
                         <div class="sim-meta">
-                            <span class="sim-badge text-orange">SIMULATION</span>
-                            <span class="sim-date text-orange">IN_PROGRESS</span>
+                            <span class="sim-badge text-green">SIMULATION</span>
+                            <span class="sim-date">COMPLETED</span>
                         </div>
                         <div class="sim-details">
-                            <h4>Cybersecurity (IAM & SOC) — Tata Consultancy Services</h4>
-                            <p>Simulating Security Operations Center triage dashboards, user role IAM policies, and credential vault protocols.</p>
+                            <h4>Cybersecurity (IAM &amp; SOC) — Tata Consultancy Services</h4>
+                            <p>Completed Security Operations Center triage dashboards, user role IAM policies, and credential vault protocols.</p>
                         </div>
                         <div class="sim-action">
-                            <button class="btn cyber-btn small" disabled>
-                                <i class="fa-solid fa-spinner fa-spin"></i> RUNNING...
-                            </button>
+                            <a href="./certificate/cyber_security_2.pdf" target="_blank" class="btn cyber-btn small">
+                                <i class="fa-solid fa-file-shield"></i> VERIFY.PDF
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -659,20 +736,7 @@
             <h2 class="section-title font-mono"><i class="fa-solid fa-certificate"></i> GLOBAL_CERTIFICATIONS_REGISTRY</h2>
             <p class="section-subtitle font-mono">> Verified repository of digital credentials and specialization courses.</p>
 
-            <!-- Search and Filter Panel -->
-            <div class="registry-controls glassmorphic font-mono">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="cert-search" placeholder="QUERY DATABASE (e.g. security, cloud, python)...">
-                </div>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">ALL</button>
-                    <button class="filter-btn" data-filter="security">SECURITY_&_OS</button>
-                    <button class="filter-btn" data-filter="cloud">CLOUD_&_DATA</button>
-                    <button class="filter-btn" data-filter="ai">AI</button>
-                    <button class="filter-btn" data-filter="microsoft">MICROSOFT</button>
-                </div>
-            </div>
+
 
             <!-- Certs Grid -->
             <div class="certs-grid" id="certs-grid">
@@ -995,99 +1059,71 @@
             </div>
         </section>
 
-        <!-- Section: Secure Connection Bridge (Contact) -->
+        <!-- Section: Contact Bridge -->
         <section id="contact" class="hud-section">
             <h2 class="section-title font-mono"><i class="fa-solid fa-satellite-dish"></i> SECURE_CONNECTION_BRIDGE</h2>
-            <p class="section-subtitle font-mono">> Initiate encrypted communication link. Inputs are hashed and dispatched.</p>
+            <p class="section-subtitle font-mono">> Initiate encrypted communication link. Verified direct communication channels.</p>
 
             <div class="contact-grid">
                 <!-- Contact info panel -->
                 <div class="cyber-card glassmorphic contact-info-card">
                     <div class="card-header">
-                        <span class="card-title font-mono">[COMMS_CHANNELS]</span>
+                        <span class="card-title font-mono"><i class="fa-solid fa-satellite-dish text-cyan"></i> [COMMS_CHANNELS]</span>
+                        <div class="card-controls">
+                            <span class="ctrl-dot red"></span>
+                            <span class="ctrl-dot yellow"></span>
+                            <span class="ctrl-dot green"></span>
+                        </div>
                     </div>
                     <div class="card-body font-mono">
-                        <div class="contact-method">
-                            <span class="text-cyan"><i class="fa-solid fa-envelope"></i> SECURE_MAIL:</span>
-                            <a href="mailto:giridharank790@gmail.com" class="contact-val">giridharank790@gmail.com</a>
-                        </div>
-                        <div class="contact-method">
-                            <span class="text-cyan"><i class="fa-solid fa-phone"></i> VOIP_LINK:</span>
-                            <a href="tel:+917904239322" class="contact-val">+91 790 423 9322</a>
-                        </div>
-                        <div class="contact-method">
-                            <span class="text-cyan"><i class="fa-solid fa-location-dot"></i> GEOLOCATION:</span>
-                            <a href="https://www.google.com/maps?q=11.340891581138985,77.71727908101471" target="_blank" rel="noopener noreferrer" class="contact-val">Erode, Tamil Nadu, India</a>
+                        <div class="contact-methods-wrapper">
+                            <div class="contact-method-item">
+                                <div class="method-meta">
+                                    <span class="text-cyan method-lbl"><i class="fa-solid fa-envelope"></i> SECURE_MAIL:</span>
+                                    <a href="mailto:giridharank790@gmail.com" class="contact-val">giridharank790@gmail.com</a>
+                                </div>
+                                <span class="copy-badge font-mono"><i class="fa-solid fa-copy"></i> COPY</span>
+                            </div>
+
+                            <div class="contact-method-item">
+                                <div class="method-meta">
+                                    <span class="text-cyan method-lbl"><i class="fa-solid fa-phone"></i> VOIP_LINK:</span>
+                                    <a href="tel:+917904239322" class="contact-val">+91 790 423 9322</a>
+                                </div>
+                                <span class="copy-badge font-mono"><i class="fa-solid fa-copy"></i> COPY</span>
+                            </div>
+
+                            <div class="contact-method-item">
+                                <div class="method-meta">
+                                    <span class="text-cyan method-lbl"><i class="fa-solid fa-location-dot"></i> GEOLOCATION:</span>
+                                    <a href="https://www.google.com/maps?q=11.340891581138985,77.71727908101471" target="_blank" rel="noopener noreferrer" class="contact-val">Erode, Tamil Nadu, India</a>
+                                </div>
+                                <span class="copy-badge font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> MAP</span>
+                            </div>
                         </div>
                         
                         <div class="comms-divider"></div>
 
-                        <div class="contact-socials">
-                            <a href="https://github.com/nextboxis" target="_blank" rel="noopener noreferrer" title="GitHub Source Profile"><i class="fa-brands fa-github"></i> GITHUB</a>
-                            <a href="https://linkedin.com/in/giridharan-k1315" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i> LINKEDIN</a>
-                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" title="TryHackMe Stats Profile"><i class="fa-solid fa-skull"></i> TRYHACKME</a>
+                        <div class="contact-socials-grid">
+                            <a href="https://github.com/nextboxis" target="_blank" rel="noopener noreferrer" class="contact-social-pill" title="GitHub Source Profile">
+                                <i class="fa-brands fa-github text-cyan"></i> GITHUB
+                            </a>
+                            <a href="https://linkedin.com/in/giridharan-k1315" target="_blank" rel="noopener noreferrer" class="contact-social-pill" title="LinkedIn Profile">
+                                <i class="fa-brands fa-linkedin text-cyan"></i> LINKEDIN
+                            </a>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="contact-social-pill thm-pill" title="TryHackMe Stats Profile">
+                                <i class="fa-solid fa-skull text-orange"></i> TRYHACKME
+                            </a>
+                            <a href="https://www.instagram.com/encrypted_peace?utm_source=qr&igsh=MTlqb3ZqcWpsY3BiZA==" target="_blank" rel="noopener noreferrer" class="contact-social-pill ig-pill" title="Instagram Profile">
+                                <i class="fa-brands fa-instagram text-pink"></i> INSTAGRAM
+                            </a>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Contact form -->
-                <div class="cyber-card glassmorphic contact-form-card">
-                    <div class="card-header">
-                        <span class="card-title font-mono"><i class="fa-solid fa-key"></i> TRANSMIT_PACKET_FORM</span>
-                    </div>
-                    <div class="card-body">
-                        <form id="contact-form" class="font-mono">
-                            <div class="form-group">
-                                <label for="form-sender">SENDER_IDENTITY:</label>
-                                <div class="input-wrapper">
-                                    <input type="text" id="form-sender" placeholder="e.g. root@guest-node" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="form-email">RESPONSE_ROUTE (EMAIL):</label>
-                                <div class="input-wrapper">
-                                    <input type="email" id="form-email" placeholder="e.g. mailto:name@domain.com" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="form-body">PAYLOAD_BODY (MESSAGE):</label>
-                                <div class="input-wrapper">
-                                    <textarea id="form-body" rows="5" placeholder="Encrypt message payload here..." required></textarea>
-                                </div>
-                            </div>
-                            <!-- Live Hashed Encryption Preview -->
-                            <div class="form-group">
-                                <label>ENCRYPTED_MESSAGE_PAYLOAD (LIVE_TRANSLATION):</label>
-                                <div class="payload-preview-container">
-                                    <div class="payload-preview font-mono" id="payload-preview">
-                                        [WAITING_FOR_SENDER_PAYLOAD...]
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <button type="submit" class="btn cyber-btn primary block font-mono" id="form-submit-btn">
-                                    <i class="fa-solid fa-paper-plane"></i> TRANSMIT_DATA_PACKET.SH
-                                </button>
-                            </div>
-                            <div id="form-response" class="form-status-msg text-green hidden">
-                                [SUCCESS] Data packet dispatched. Integrity verified.
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Tactical Footer -->
-    <footer class="hud-footer font-mono">
-        <div class="footer-left">
-            <span>PING: 24ms</span> | <span>ENCRYPTION: AES-256</span>
-        </div>
-        <div class="footer-right">
-            <span>© 2026 GIRIDHARAN K. All node interactions logged.</span>
-        </div>
-    </footer>
 
     <!-- macOS Bottom Floating App Dock -->
     <div class="mac-dock-container">
@@ -1099,6 +1135,56 @@
             <a href="#tryhackme" class="dock-item" data-tooltip="THM Logs" title="TryHackMe Logs" aria-label="TryHackMe Logs"><i class="fa-solid fa-skull"></i></a>
             <a href="#contact" class="dock-item" data-tooltip="Connect" title="Connect" aria-label="Connect"><i class="fa-solid fa-satellite-dish"></i></a>
         </nav>
+    </div>
+
+    <!-- Cyber Toast Container -->
+    <div id="cyber-toast" class="cyber-toast font-mono hidden">
+        <i class="fa-solid fa-circle-check text-green"></i>
+        <span id="toast-msg">[SUCCESS] Item copied to clipboard!</span>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="cyber-modal" class="cyber-modal-overlay hidden">
+        <div class="cyber-modal-content cyber-card glassmorphic">
+            <div class="card-header">
+                <span class="card-title font-mono" id="modal-title">[PROJECT_SPECIFICATION]</span>
+                <button id="modal-close-btn" class="modal-close-btn font-mono">&times;</button>
+            </div>
+            <div class="card-body font-mono">
+                <div class="modal-badge-wrapper" id="modal-tags"></div>
+                <h3 id="modal-heading" class="text-cyan">Project Title</h3>
+                <p id="modal-desc" class="modal-description"></p>
+                <div class="modal-details-grid">
+                    <div class="modal-detail-box">
+                        <span class="lbl">ROLE:</span>
+                        <span class="val text-green" id="modal-role">Lead Developer & Security Analyst</span>
+                    </div>
+                    <div class="modal-detail-box">
+                        <span class="lbl">AUDIT_STATUS:</span>
+                        <span class="val text-orange" id="modal-security">AUDITED // SECURE</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a href="#" target="_blank" rel="noopener noreferrer" id="modal-demo-btn" class="btn cyber-btn primary font-mono">
+                        <i class="fa-solid fa-up-right-from-square"></i> EXPLORE_NODE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Lightbox Preview Modal -->
+    <div id="cert-lightbox-modal" class="hud-lightbox-modal">
+        <div class="hud-lightbox-content">
+            <div class="hud-lightbox-header font-mono">
+                <span class="card-title text-cyan" id="lightbox-title"><i class="fa-solid fa-certificate"></i> [VERIFICATION_NODE]</span>
+                <button id="lightbox-close-btn" class="hud-lightbox-close" title="Close Preview"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="hud-lightbox-body font-mono">
+                <img id="lightbox-img" src="" alt="High Resolution Preview" class="hud-lightbox-img">
+                <div class="hud-lightbox-meta text-dim" id="lightbox-meta">INTEGRITY_VERIFIED // SECURE_NODE</div>
+            </div>
+        </div>
     </div>
 
     <!-- JS Scripts -->
