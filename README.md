@@ -1,7 +1,7 @@
 # 🛡️ CYBER SENTINEL // Portfolio Web Application
 
 [![Portfolio Status](https://img.shields.io/badge/STATUS-ONLINE%20%2F%2F%20VERIFIED-005ecb?style=for-the-badge&logo=shield)](file:///j:/PROGRAM/protflio/index.html)
-[![WebP Optimized](https://img.shields.io/badge/ASSETS-WEBP%20OPTIMIZED-0d8a43?style=for-the-badge&logo=googlechrome)](file:///j:/PROGRAM/protflio/hero%20photo)
+[![WebP Optimized](https://img.shields.io/badge/ASSETS-WEBP%20OPTIMIZED-0d8a43?style=for-the-badge&logo=googlechrome)](file:///j:/PROGRAM/protflio/bg%20images)
 [![Theme](https://img.shields.io/badge/THEME-CYBER%20HUD-e05300?style=for-the-badge)](file:///j:/PROGRAM/protflio/style.css)
 
 > **Portfolio of GIRIDHARAN K** — Front-End Developer & Web Security Specialist. Bridging the gap between interactive high-performance web experiences and robust cyber security research.
@@ -16,7 +16,8 @@ This repository contains the source code for **Giridharan K's** interactive Cybe
 
 ## 🔥 Key Features
 
-- **🚀 Ultra-Fast WebP Asset Engine**: Hero feeds and visual assets are optimized WebP format for sub-second load times.
+- **🚀 Ultra-Fast WebP Asset Engine**: All background graphics and hero feeds are converted to WebP format, achieving a **92%+ reduction in payload size (~4.6 MB total)** for sub-second load times.
+- **🎬 Cinematic Background Crossfader**: JavaScript rotation engine featuring smart **1-step-ahead lazy preloading** to transition between background visuals without network choking.
 - **📜 Global Certifications Registry**: Clean, high-performance display of verified digital credentials and specialization certificates.
 - **🎯 TryHackMe Achievement Dashboard**: Integrates official TryHackMe badge and interactive room counters with scroll-triggered animation.
 - **🔊 Tactile Audio SFX Engine**: Synthesizes futuristic UI interaction sounds on button clicks, toggles, and filters using the browser's native Web Audio API.
@@ -31,7 +32,8 @@ This repository contains the source code for **Giridharan K's** interactive Cybe
 protflio/
 ├── index.html         # Main HUD single-page application markup
 ├── style.css          # Modern Cyber design system, CSS tokens & responsive layout
-├── script.js         # Audio SFX engine, cert filter, FPS counter & SPA routing
+├── script.js         # Audio SFX engine, cert filter, FPS counter & bg crossfader
+├── bg images/         # Optimized WebP background texture assets
 ├── hero photo/        # High-definition WebP visual feed image
 ├── certificate/       # Digital credential PDFs and verification media
 ├── giridharan.pdf     # Downloadable resume document

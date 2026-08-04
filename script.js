@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 15. Dynamic Stat Count-Up Engine
     initStatCounters();
 
+    // 16. Dynamic Background Image Rotation Engine (5s interval)
+    initBackgroundRotation();
+
     // 17. Real-Time FPS Diagnostics
     initFpsCounter();
 
@@ -776,6 +779,117 @@ function initStatCounters() {
         }, { threshold: 0.2 });
         observer.observe(thmSection);
     }
+}
+
+// --- 16. Dynamic Background Image Rotation & Cinematic Crossfade Engine --- //
+function initBackgroundRotation() {
+    const bgImages = [
+        './bg images/ascii-magic-5.webp',
+        './bg images/ascii-magic-7.webp',
+        './bg images/ascii-magic-8.webp',
+        './bg images/ascii-magic-9.webp',
+        './bg images/ascii-magic-10.webp',
+        './bg images/ascii-magic-11.webp',
+        './bg images/ascii-magic-12.webp',
+        './bg images/ascii-magic-13.webp',
+        './bg images/ascii-magic-15.webp',
+        './bg images/ascii-magic-16.webp',
+        './bg images/ChatGPT Image Jun 30, 2026, 10_04_35 PM.webp'
+    ];
+
+    const layer1 = document.getElementById('bg-layer-1');
+    const layer2 = document.getElementById('bg-layer-2');
+
+    let currentIdx = 0;
+    let activeLayer = 1;
+    let isPaused = false;
+    let intervalTimer = null;
+
+    if (layer1) layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[0]}")`;
+    if (layer2) layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[1]}")`;
+
+    // Preload only the initial 2 background images into memory
+    [bgImages[0], bgImages[1]].forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    function transitionToNext() {
+        if (isPaused || !layer1 || !layer2) return;
+        
+        currentIdx = (currentIdx + 1) % bgImages.length;
+        const nextUpcomingIdx = (currentIdx + 1) % bgImages.length;
+
+        // Preload next upcoming image right before layer update
+        const preloadImg = new Image();
+        preloadImg.src = bgImages[nextUpcomingIdx];
+
+        if (activeLayer === 1) {
+            layer2.classList.add('active-bg');
+            layer1.classList.remove('active-bg');
+            activeLayer = 2;
+
+            // Pre-load the NEXT upcoming image into hidden layer 1
+            setTimeout(() => {
+                layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[nextUpcomingIdx]}")`;
+            }, 2300);
+        } else {
+            layer1.classList.add('active-bg');
+            layer2.classList.remove('active-bg');
+            activeLayer = 1;
+
+            // Pre-load the NEXT upcoming image into hidden layer 2
+            setTimeout(() => {
+                layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[nextUpcomingIdx]}")`;
+            }, 2300);
+        }
+    }
+
+    function startRotation() {
+        if (intervalTimer) clearInterval(intervalTimer);
+        intervalTimer = setInterval(transitionToNext, 5000);
+    }
+
+    function stopRotation() {
+        if (intervalTimer) {
+            clearInterval(intervalTimer);
+            intervalTimer = null;
+        }
+    }
+
+    // Automatically pause timer when browser tab is inactive
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopRotation();
+        } else if (!isPaused) {
+            startRotation();
+        }
+    });
+
+    const toggleBtn = document.getElementById('bg-toggle-btn');
+    const btnIcon = document.getElementById('bg-btn-icon');
+    const btnText = document.getElementById('bg-btn-text');
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            if (isPaused) {
+                stopRotation();
+                toggleBtn.classList.add('paused');
+                if (btnIcon) btnIcon.className = 'fa-solid fa-play';
+                if (btnText) btnText.textContent = 'PAUSED';
+                if (window.showToast) window.showToast('[SLIDESHOW] Background rotation paused');
+            } else {
+                startRotation();
+                toggleBtn.classList.remove('paused');
+                if (btnIcon) btnIcon.className = 'fa-solid fa-pause';
+                if (btnText) btnText.textContent = 'BG_ROTATE';
+                if (window.showToast) window.showToast('[SLIDESHOW] Background rotation resumed');
+            }
+        });
+    }
+
+    startRotation();
 }
 
 // --- 17. Real-Time FPS Counter Diagnostics --- //
