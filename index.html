@@ -13,17 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Preload Critical Above-the-Fold Images for Fast LCP -->
     <link rel="preload" as="image" href="./hero photo/ascii-magic-4.webp" type="image/webp">
-    <link rel="preload" as="image" href="./bg images/ascii-magic-5.webp" type="image/webp">
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Top Neon Scroll Progress Bar -->
     <div id="hud-scroll-progress" class="hud-scroll-progress"></div>
-
-    <!-- Dual-Layer Cinematic Background Crossfader -->
-    <div id="bg-layer-1" class="bg-crossfade-layer active-bg"></div>
-    <div id="bg-layer-2" class="bg-crossfade-layer"></div>
 
     <!-- Matrix Particle Background -->
     <canvas id="cyberCanvas"></canvas>
@@ -40,9 +35,6 @@
             <span class="hud-diag-pill"><i class="fa-solid fa-shield-halved text-green"></i> AES-256</span>
             <button id="sfx-toggle-btn" class="hud-bg-btn" title="Toggle Tactile Audio SFX">
                 <i class="fa-solid fa-volume-high" id="sfx-btn-icon"></i> <span id="sfx-btn-text">SFX_ON</span>
-            </button>
-            <button id="bg-toggle-btn" class="hud-bg-btn" title="Pause/Play Background Rotation">
-                <i class="fa-solid fa-pause" id="bg-btn-icon"></i> <span id="bg-btn-text">BG_ROTATE</span>
             </button>
         </div>
     </header>
