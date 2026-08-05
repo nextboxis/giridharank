@@ -227,7 +227,7 @@ function initOperationsTabs() {
 
 function initCertFilters() {}
 
-// --- Local HUD Variables (Clock, IP Mock) --- //
+// --- Local HUD Variables (Clock, IP, Live Security Ping) --- //
 function initHudData() {
     // Local ticking clock
     const clockEl = document.getElementById('local-time');
@@ -821,74 +821,44 @@ function initBackgroundRotation() {
         preloadImg.src = bgImages[nextUpcomingIdx];
 
         if (activeLayer === 1) {
+            layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[currentIdx]}")`;
             layer2.classList.add('active-bg');
             layer1.classList.remove('active-bg');
             activeLayer = 2;
-
-            // Pre-load the NEXT upcoming image into hidden layer 1
-            setTimeout(() => {
-                layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[nextUpcomingIdx]}")`;
-            }, 2300);
         } else {
+            layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[currentIdx]}")`;
             layer1.classList.add('active-bg');
             layer2.classList.remove('active-bg');
             activeLayer = 1;
-
-            // Pre-load the NEXT upcoming image into hidden layer 2
-            setTimeout(() => {
-                layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[nextUpcomingIdx]}")`;
-            }, 2300);
         }
     }
 
-    function startRotation() {
-        if (intervalTimer) clearInterval(intervalTimer);
-        intervalTimer = setInterval(transitionToNext, 5000);
-    }
+    intervalTimer = setInterval(transitionToNext, 6000);
 
-    function stopRotation() {
-        if (intervalTimer) {
-            clearInterval(intervalTimer);
-            intervalTimer = null;
-        }
-    }
+    const bgBtn = document.getElementById('bg-toggle-btn');
+    const bgIcon = document.getElementById('bg-btn-icon');
+    const bgText = document.getElementById('bg-btn-text');
 
-    // Automatically pause timer when browser tab is inactive
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            stopRotation();
-        } else if (!isPaused) {
-            startRotation();
-        }
-    });
-
-    const toggleBtn = document.getElementById('bg-toggle-btn');
-    const btnIcon = document.getElementById('bg-btn-icon');
-    const btnText = document.getElementById('bg-btn-text');
-
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
+    if (bgBtn) {
+        bgBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             isPaused = !isPaused;
             if (isPaused) {
-                stopRotation();
-                toggleBtn.classList.add('paused');
-                if (btnIcon) btnIcon.className = 'fa-solid fa-play';
-                if (btnText) btnText.textContent = 'PAUSED';
-                if (window.showToast) window.showToast('[SLIDESHOW] Background rotation paused');
+                bgBtn.classList.add('bg-paused');
+                if (bgIcon) bgIcon.className = 'fa-solid fa-play';
+                if (bgText) bgText.textContent = 'BG_PAUSED';
+                if (window.showToast) window.showToast('[BACKGROUND] Rotation paused');
             } else {
-                startRotation();
-                toggleBtn.classList.remove('paused');
-                if (btnIcon) btnIcon.className = 'fa-solid fa-pause';
-                if (btnText) btnText.textContent = 'BG_ROTATE';
-                if (window.showToast) window.showToast('[SLIDESHOW] Background rotation resumed');
+                bgBtn.classList.remove('bg-paused');
+                if (bgIcon) bgIcon.className = 'fa-solid fa-pause';
+                if (bgText) bgText.textContent = 'BG_ROTATE';
+                if (window.showToast) window.showToast('[BACKGROUND] Rotation active');
             }
         });
     }
-
-    startRotation();
 }
 
-// --- 17. Real-Time FPS Counter Diagnostics --- //
+// --- 17. Real-Time FPS Diagnostics --- //
 function initFpsCounter() {
     const fpsEl = document.getElementById('fps-counter');
     if (!fpsEl) return;
@@ -896,104 +866,121 @@ function initFpsCounter() {
     let frameCount = 0;
     let lastTime = performance.now();
 
-    function calcFps(now) {
+    function fpsLoop(now) {
         frameCount++;
         if (now - lastTime >= 1000) {
-            const fps = Math.round((frameCount * 1000) / (now - lastTime));
-            fpsEl.innerHTML = `<i class="fa-solid fa-bolt text-orange"></i> ${fps} FPS`;
+            const currentFps = Math.round((frameCount * 1000) / (now - lastTime));
+            fpsEl.innerHTML = `<i class="fa-solid fa-bolt text-orange"></i> ${currentFps} FPS`;
             frameCount = 0;
             lastTime = now;
         }
-        requestAnimationFrame(calcFps);
+        requestAnimationFrame(fpsLoop);
     }
-    requestAnimationFrame(calcFps);
+
+    requestAnimationFrame(fpsLoop);
 }
 
 // --- 18. Operations Search & Category Filter Engine --- //
 function initOpsFilter() {
+    const filterBtns = document.querySelectorAll('.ops-tag-btn');
     const searchInput = document.getElementById('ops-search-input');
-    const tagBtns = document.querySelectorAll('.ops-tag-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    const simRows = document.querySelectorAll('.sim-row');
 
     let currentFilter = 'all';
+    let currentSearch = '';
 
-    function filterCards() {
-        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.getAttribute('data-filter') || 'all';
+            applyOpsFiltering();
+        });
+    });
 
-        // Filter Project Cards
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase().trim();
+            applyOpsFiltering();
+        });
+    }
+
+    function applyOpsFiltering() {
         projectCards.forEach(card => {
-            const text = card.textContent.toLowerCase();
-            const category = card.dataset.category || 'all';
+            const category = card.getAttribute('data-category') || 'all';
+            const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+            const tech = card.querySelector('.project-tech')?.textContent.toLowerCase() || '';
 
-            const matchesQuery = !query || text.includes(query);
-            const matchesCategory = currentFilter === 'all' || category === currentFilter;
+            const matchesCategory = (currentFilter === 'all' || category === currentFilter);
+            const matchesSearch = !currentSearch || (title.includes(currentSearch) || desc.includes(currentSearch) || tech.includes(currentSearch));
 
-            if (matchesQuery && matchesCategory) {
+            if (matchesCategory && matchesSearch) {
+                card.classList.remove('hidden');
                 card.style.display = 'flex';
             } else {
+                card.classList.add('hidden');
                 card.style.display = 'none';
             }
         });
 
-        // Filter Simulation Rows
-        simRows.forEach(row => {
-            const text = row.textContent.toLowerCase();
-            const matchesQuery = !query || text.includes(query);
-            if (matchesQuery) {
-                row.style.display = 'grid';
-            } else {
-                row.style.display = 'none';
-            }
-        });
+        // Trigger cascade reveal re-indexing for filtered visible items
+        if (window.refreshCascadeReveals) {
+            window.refreshCascadeReveals();
+        }
     }
-
-    if (searchInput) {
-        searchInput.addEventListener('input', debounce(filterCards, 80));
-    }
-
-    tagBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            tagBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentFilter = btn.dataset.filter || 'all';
-            filterCards();
-        });
-    });
 }
 
-// --- Certificate & Visual Feed Lightbox Engine --- //
+// --- 19. Certificate & Visual Feed Lightbox Engine --- //
 function initCertificateLightbox() {
     const modal = document.getElementById('cert-lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img');
+    const modalTitle = document.getElementById('lightbox-title');
     const closeBtn = document.getElementById('lightbox-close-btn');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxTitle = document.getElementById('lightbox-title');
-    const lightboxMeta = document.getElementById('lightbox-meta');
 
-    if (!modal || !closeBtn) return;
+    if (!modal || !modalImg) return;
 
-    // Attach click listeners to visual feed images and ascii images
-    const previewableImgs = document.querySelectorAll('.visual-feed-body img, .cyber-img');
-    previewableImgs.forEach(img => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => {
-            const title = img.alt || 'Tactical Visual Feed';
-            openLightbox(img.src, `[FEED_NODE] ${title}`, 'SCANLINE_ANALYSIS // RESOLUTION: HIGH');
-        });
+    // Attach click listeners to certification cards
+    const certCards = document.querySelectorAll('.cert-card');
+    certCards.forEach(card => {
+        const link = card.querySelector('a');
+        if (link) {
+            const href = link.getAttribute('href');
+            if (href && (href.endsWith('.png') || href.endsWith('.jpg') || href.endsWith('.webp'))) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const titleText = card.querySelector('h4')?.textContent || 'CREDENTIAL_NODE';
+                    openLightbox(href, titleText);
+                });
+            }
+        }
     });
 
-    function openLightbox(src, titleText, metaText) {
-        if (lightboxImg) lightboxImg.src = src;
-        if (lightboxTitle) lightboxTitle.innerHTML = `<i class="fa-solid fa-expand text-cyan"></i> ${titleText}`;
-        if (lightboxMeta) lightboxMeta.textContent = metaText || 'INTEGRITY_VERIFIED // SECURE_NODE';
+    // Also attach to visual feed avatar image
+    const cyberImg = document.querySelector('.visual-feed-card .cyber-img');
+    if (cyberImg) {
+        cyberImg.style.cursor = 'pointer';
+        cyberImg.addEventListener('click', () => {
+            openLightbox(cyberImg.getAttribute('src'), 'TACTICAL_VISUAL_FEED // GIRIDHARAN K');
+        });
+    }
+
+    function openLightbox(src, title) {
+        modalImg.src = src;
+        if (modalTitle) modalTitle.innerHTML = `<i class="fa-solid fa-certificate"></i> [${title.toUpperCase()}]`;
         modal.classList.add('active');
     }
 
     function closeLightbox() {
         modal.classList.remove('active');
+        setTimeout(() => {
+            modalImg.src = '';
+        }, 300);
     }
 
-    closeBtn.addEventListener('click', closeLightbox);
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeLightbox();
     });
@@ -1168,4 +1155,3 @@ function initLiquidRippleEffect() {
         });
     });
 }
-
