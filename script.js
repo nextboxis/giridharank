@@ -788,7 +788,6 @@ function initBackgroundRotation() {
         './bg images/ascii-magic-7.webp',
         './bg images/ascii-magic-8.webp',
         './bg images/ascii-magic-12.webp',
-        './bg images/ascii-magic-13.webp',
         './bg images/ascii-magic-15.webp',
         './bg images/ascii-magic-16.webp',
         './bg images/ChatGPT Image Jun 30, 2026, 10_04_35 PM.webp'
