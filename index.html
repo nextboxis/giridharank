@@ -29,23 +29,7 @@
     <canvas id="cyberCanvas"></canvas>
 
 
-    <!-- HUD System Header -->
-    <header class="hud-top-bar font-mono">
-        <div class="hud-bar-left">
-            <span class="status-indicator online"></span>
-            <span class="hud-bar-title text-cyan">CYBER_SENTINEL // NODE_01</span>
-        </div>
-        <div class="hud-bar-right">
-            <span id="fps-counter" class="hud-diag-pill"><i class="fa-solid fa-bolt text-orange"></i> 60 FPS</span>
-            <span class="hud-diag-pill"><i class="fa-solid fa-shield-halved text-green"></i> AES-256</span>
-            <button id="sfx-toggle-btn" class="hud-bg-btn" title="Toggle Tactile Audio SFX">
-                <i class="fa-solid fa-volume-high" id="sfx-btn-icon"></i> <span id="sfx-btn-text">SFX_ON</span>
-            </button>
-            <button id="bg-toggle-btn" class="hud-bg-btn" title="Pause/Play Background Rotation">
-                <i class="fa-solid fa-pause" id="bg-btn-icon"></i> <span id="bg-btn-text">BG_ROTATE</span>
-            </button>
-        </div>
-    </header>
+
 
     <!-- Main Content Container -->
     <main class="container">
@@ -368,12 +352,15 @@
                         <span class="card-title font-mono"><i class="fa-brands fa-react text-cyan"></i> FRONTEND_ENGINEERING</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-react"></i></span><span class="skill-pill-name font-mono">React.js</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-js"></i></span><span class="skill-pill-name font-mono">JavaScript</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-html5"></i></span><span class="skill-pill-name font-mono">HTML5 &amp; CSS3</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-mobile-screen-button"></i></span><span class="skill-pill-name font-mono">Responsive</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-layer-group"></i></span><span class="skill-pill-name font-mono">Redux</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-code-branch"></i></span><span class="skill-pill-name font-mono">Next.js</span></div>
+                        <div class="skill-pill-card" title="React.js"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-react"></i></span><span class="skill-pill-name font-mono">React.js</span></div>
+                        <div class="skill-pill-card" title="JavaScript"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-js"></i></span><span class="skill-pill-name font-mono">JavaScript</span></div>
+                        <div class="skill-pill-card" title="HTML5 &amp; CSS3"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-html5"></i></span><span class="skill-pill-name font-mono">HTML5 &amp; CSS3</span></div>
+                        <div class="skill-pill-card" title="Responsive Design"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-mobile-screen-button"></i></span><span class="skill-pill-name font-mono">Responsive</span></div>
+                        <div class="skill-pill-card" title="Redux State Management"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-layer-group"></i></span><span class="skill-pill-name font-mono">Redux</span></div>
+                        <div class="skill-pill-card" title="Next.js Framework"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-code-branch"></i></span><span class="skill-pill-name font-mono">Next.js</span></div>
+                        <div class="skill-pill-card" title="TypeScript"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-js"></i></span><span class="skill-pill-name font-mono">TypeScript</span></div>
+                        <div class="skill-pill-card" title="TailwindCSS"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-wind"></i></span><span class="skill-pill-name font-mono">Tailwind</span></div>
+                        <div class="skill-pill-card" title="Vite Build Tool"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-bolt-lightning"></i></span><span class="skill-pill-name font-mono">Vite</span></div>
                     </div>
                 </div>
 
@@ -383,12 +370,15 @@
                         <span class="card-title font-mono"><i class="fa-brands fa-python text-green"></i> BACKEND_&amp;_DEV</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-python"></i></span><span class="skill-pill-name font-mono">Python</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-server"></i></span><span class="skill-pill-name font-mono">Flask &amp; APIs</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">MongoDB</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-linux"></i></span><span class="skill-pill-name font-mono">Linux / Bash</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-docker"></i></span><span class="skill-pill-name font-mono">Docker</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-brands fa-git-alt"></i></span><span class="skill-pill-name font-mono">Git &amp; VCS</span></div>
+                        <div class="skill-pill-card" title="Python Development"><span class="skill-pill-icon text-green"><i class="fa-brands fa-python"></i></span><span class="skill-pill-name font-mono">Python</span></div>
+                        <div class="skill-pill-card" title="Flask &amp; REST APIs"><span class="skill-pill-icon text-green"><i class="fa-solid fa-server"></i></span><span class="skill-pill-name font-mono">Flask &amp; APIs</span></div>
+                        <div class="skill-pill-card" title="MongoDB NoSQL"><span class="skill-pill-icon text-green"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">MongoDB</span></div>
+                        <div class="skill-pill-card" title="Linux / Bash Shell"><span class="skill-pill-icon text-green"><i class="fa-brands fa-linux"></i></span><span class="skill-pill-name font-mono">Linux / Bash</span></div>
+                        <div class="skill-pill-card" title="Docker Containerization"><span class="skill-pill-icon text-green"><i class="fa-brands fa-docker"></i></span><span class="skill-pill-name font-mono">Docker</span></div>
+                        <div class="skill-pill-card" title="Git &amp; Version Control"><span class="skill-pill-icon text-green"><i class="fa-brands fa-git-alt"></i></span><span class="skill-pill-name font-mono">Git &amp; VCS</span></div>
+                        <div class="skill-pill-card" title="Node.js Runtime"><span class="skill-pill-icon text-green"><i class="fa-brands fa-node-js"></i></span><span class="skill-pill-name font-mono">Node.js</span></div>
+                        <div class="skill-pill-card" title="PostgreSQL Database"><span class="skill-pill-icon text-green"><i class="fa-solid fa-floppy-disk"></i></span><span class="skill-pill-name font-mono">PostgreSQL</span></div>
+                        <div class="skill-pill-card" title="Nginx Web Server"><span class="skill-pill-icon text-green"><i class="fa-solid fa-cubes"></i></span><span class="skill-pill-name font-mono">Nginx</span></div>
                     </div>
                 </div>
 
@@ -398,12 +388,15 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-screwdriver-wrench text-orange"></i> SECURITY_AUDIT_TOOLS</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-user-secret"></i></span><span class="skill-pill-name font-mono">Burp Suite</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-binoculars"></i></span><span class="skill-pill-name font-mono">Wireshark</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-skull"></i></span><span class="skill-pill-name font-mono">Kali Linux</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bug"></i></span><span class="skill-pill-name font-mono">Ghidra</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bolt"></i></span><span class="skill-pill-name font-mono">Metasploit</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-shield-cat"></i></span><span class="skill-pill-name font-mono">OWASP ZAP</span></div>
+                        <div class="skill-pill-card" title="Burp Suite Professional"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-user-secret"></i></span><span class="skill-pill-name font-mono">Burp Suite</span></div>
+                        <div class="skill-pill-card" title="Wireshark Network Analyzer"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-binoculars"></i></span><span class="skill-pill-name font-mono">Wireshark</span></div>
+                        <div class="skill-pill-card" title="Kali Linux Distribution"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-skull"></i></span><span class="skill-pill-name font-mono">Kali Linux</span></div>
+                        <div class="skill-pill-card" title="Ghidra Reverse Engineering"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bug"></i></span><span class="skill-pill-name font-mono">Ghidra</span></div>
+                        <div class="skill-pill-card" title="Metasploit Framework"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bolt"></i></span><span class="skill-pill-name font-mono">Metasploit</span></div>
+                        <div class="skill-pill-card" title="OWASP ZAP Scanner"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-shield-cat"></i></span><span class="skill-pill-name font-mono">OWASP ZAP</span></div>
+                        <div class="skill-pill-card" title="Nikto Web Scanner"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-spider"></i></span><span class="skill-pill-name font-mono">Nikto</span></div>
+                        <div class="skill-pill-card" title="Nessus Vulnerability Scanner"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-crosshairs"></i></span><span class="skill-pill-name font-mono">Nessus</span></div>
+                        <div class="skill-pill-card" title="OpenVAS Security Scanner"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-virus-slash"></i></span><span class="skill-pill-name font-mono">OpenVAS</span></div>
                     </div>
                 </div>
 
@@ -413,12 +406,15 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-brain text-purple"></i> THREAT_THEORY_&amp;_ML</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-shield-halved"></i></span><span class="skill-pill-name font-mono">OWASP Top 10</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-diagram-project"></i></span><span class="skill-pill-name font-mono">MITRE ATT&amp;CK</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-chart-simple"></i></span><span class="skill-pill-name font-mono">Entropy</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-brain"></i></span><span class="skill-pill-name font-mono">scikit-learn</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-mask"></i></span><span class="skill-pill-name font-mono">Threat Model</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-magnifying-glass-chart"></i></span><span class="skill-pill-name font-mono">Forensics</span></div>
+                        <div class="skill-pill-card" title="OWASP Top 10 Vulnerabilities"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-shield-halved"></i></span><span class="skill-pill-name font-mono">OWASP Top 10</span></div>
+                        <div class="skill-pill-card" title="MITRE ATT&amp;CK Framework"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-diagram-project"></i></span><span class="skill-pill-name font-mono">MITRE ATT&amp;CK</span></div>
+                        <div class="skill-pill-card" title="Shannon Entropy Analysis"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-chart-simple"></i></span><span class="skill-pill-name font-mono">Entropy</span></div>
+                        <div class="skill-pill-card" title="scikit-learn ML Library"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-brain"></i></span><span class="skill-pill-name font-mono">scikit-learn</span></div>
+                        <div class="skill-pill-card" title="Threat Modeling Architecture"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-mask"></i></span><span class="skill-pill-name font-mono">Threat Model</span></div>
+                        <div class="skill-pill-card" title="Digital Forensics &amp; Artifacts"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-magnifying-glass-chart"></i></span><span class="skill-pill-name font-mono">Forensics</span></div>
+                        <div class="skill-pill-card" title="TensorFlow Deep Learning"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-microchip"></i></span><span class="skill-pill-name font-mono">TensorFlow</span></div>
+                        <div class="skill-pill-card" title="Cyber Kill Chain Model"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-link"></i></span><span class="skill-pill-name font-mono">Kill Chain</span></div>
+                        <div class="skill-pill-card" title="Pandas Data Analysis"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-table"></i></span><span class="skill-pill-name font-mono">Pandas</span></div>
                     </div>
                 </div>
 
@@ -428,12 +424,15 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-network-wired text-cyan"></i> ACTIVE_RECONNAISSANCE</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-globe"></i></span><span class="skill-pill-name font-mono">DNS Auditing</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-magnifying-glass"></i></span><span class="skill-pill-name font-mono">Shodan OSINT</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-tower-broadcast"></i></span><span class="skill-pill-name font-mono">Nmap Scan</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-folder-open"></i></span><span class="skill-pill-name font-mono">Gobuster / Ferox</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Port Mapping</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-sitemap"></i></span><span class="skill-pill-name font-mono">Subfinder</span></div>
+                        <div class="skill-pill-card" title="DNS Auditing &amp; Zone Transfer"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-globe"></i></span><span class="skill-pill-name font-mono">DNS Auditing</span></div>
+                        <div class="skill-pill-card" title="Shodan OSINT Reconnaissance"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-magnifying-glass"></i></span><span class="skill-pill-name font-mono">Shodan OSINT</span></div>
+                        <div class="skill-pill-card" title="Nmap Port &amp; Service Scanner"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-tower-broadcast"></i></span><span class="skill-pill-name font-mono">Nmap Scan</span></div>
+                        <div class="skill-pill-card" title="Gobuster / Feroxbuster Fuzzing"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-folder-open"></i></span><span class="skill-pill-name font-mono">Gobuster / Ferox</span></div>
+                        <div class="skill-pill-card" title="Port &amp; Service Topology Mapping"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Port Mapping</span></div>
+                        <div class="skill-pill-card" title="Subfinder Subdomain Enumeration"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-sitemap"></i></span><span class="skill-pill-name font-mono">Subfinder</span></div>
+                        <div class="skill-pill-card" title="Amass Attack Surface Mapping"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-earth-americas"></i></span><span class="skill-pill-name font-mono">Amass</span></div>
+                        <div class="skill-pill-card" title="theHarvester Email OSINT"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-envelope-open-text"></i></span><span class="skill-pill-name font-mono">theHarvester</span></div>
+                        <div class="skill-pill-card" title="Masscan Fast Port Scanner"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-gauge-high"></i></span><span class="skill-pill-name font-mono">Masscan</span></div>
                     </div>
                 </div>
 
@@ -443,12 +442,15 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-skull text-red"></i> EXPLOITATION_&amp;_ATTACK</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">SQLmap / SQLi</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-fire"></i></span><span class="skill-pill-name font-mono">Hashcat</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-key"></i></span><span class="skill-pill-name font-mono">John the Ripper</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Reverse Shell</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-arrow-up-right-dots"></i></span><span class="skill-pill-name font-mono">Priv Esc</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-red"><i class="fa-solid fa-dragon"></i></span><span class="skill-pill-name font-mono">Hydra Brute</span></div>
+                        <div class="skill-pill-card" title="SQLmap Automatic SQL Injection"><span class="skill-pill-icon text-red"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">SQLmap / SQLi</span></div>
+                        <div class="skill-pill-card" title="Hashcat GPU Password Cracker"><span class="skill-pill-icon text-red"><i class="fa-solid fa-fire"></i></span><span class="skill-pill-name font-mono">Hashcat</span></div>
+                        <div class="skill-pill-card" title="John the Ripper Hash Cracker"><span class="skill-pill-icon text-red"><i class="fa-solid fa-key"></i></span><span class="skill-pill-name font-mono">John the Ripper</span></div>
+                        <div class="skill-pill-card" title="Reverse Shell Payload Execution"><span class="skill-pill-icon text-red"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Reverse Shell</span></div>
+                        <div class="skill-pill-card" title="Privilege Escalation Techniques"><span class="skill-pill-icon text-red"><i class="fa-solid fa-arrow-up-right-dots"></i></span><span class="skill-pill-name font-mono">Priv Esc</span></div>
+                        <div class="skill-pill-card" title="Hydra Network Brute-forcer"><span class="skill-pill-icon text-red"><i class="fa-solid fa-dragon"></i></span><span class="skill-pill-name font-mono">Hydra Brute</span></div>
+                        <div class="skill-pill-card" title="XSS Cross-Site Scripting"><span class="skill-pill-icon text-red"><i class="fa-solid fa-code"></i></span><span class="skill-pill-name font-mono">XSS Payloads</span></div>
+                        <div class="skill-pill-card" title="Responder LLMNR/NBT-NS Poisoner"><span class="skill-pill-icon text-red"><i class="fa-solid fa-satellite-dish"></i></span><span class="skill-pill-name font-mono">Responder</span></div>
+                        <div class="skill-pill-card" title="CrackMapExec Network Attack"><span class="skill-pill-icon text-red"><i class="fa-solid fa-explosion"></i></span><span class="skill-pill-name font-mono">CrackMapExec</span></div>
                     </div>
                 </div>
 
@@ -458,12 +460,15 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-shield-heart text-green"></i> SOC_&amp;_INCIDENT_RESPONSE</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-chart-area"></i></span><span class="skill-pill-name font-mono">Splunk SIEM</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-eye"></i></span><span class="skill-pill-name font-mono">Wazuh EDR</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Snort / IDS</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-file-code"></i></span><span class="skill-pill-name font-mono">YARA Rules</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-share-nodes"></i></span><span class="skill-pill-name font-mono">TheHive / MISP</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-green"><i class="fa-solid fa-magnifying-glass"></i></span><span class="skill-pill-name font-mono">Autopsy</span></div>
+                        <div class="skill-pill-card" title="Splunk SIEM Log Monitoring"><span class="skill-pill-icon text-green"><i class="fa-solid fa-chart-area"></i></span><span class="skill-pill-name font-mono">Splunk SIEM</span></div>
+                        <div class="skill-pill-card" title="Wazuh EDR Agent Security"><span class="skill-pill-icon text-green"><i class="fa-solid fa-eye"></i></span><span class="skill-pill-name font-mono">Wazuh EDR</span></div>
+                        <div class="skill-pill-card" title="Snort Network Intrusion Detection"><span class="skill-pill-icon text-green"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Snort / IDS</span></div>
+                        <div class="skill-pill-card" title="YARA Malware Pattern Matching"><span class="skill-pill-icon text-green"><i class="fa-solid fa-file-code"></i></span><span class="skill-pill-name font-mono">YARA Rules</span></div>
+                        <div class="skill-pill-card" title="TheHive &amp; MISP Threat Intel"><span class="skill-pill-icon text-green"><i class="fa-solid fa-share-nodes"></i></span><span class="skill-pill-name font-mono">TheHive / MISP</span></div>
+                        <div class="skill-pill-card" title="Autopsy Forensic Browser"><span class="skill-pill-icon text-green"><i class="fa-solid fa-magnifying-glass"></i></span><span class="skill-pill-name font-mono">Autopsy</span></div>
+                        <div class="skill-pill-card" title="Volatility Memory Forensics"><span class="skill-pill-icon text-green"><i class="fa-solid fa-memory"></i></span><span class="skill-pill-name font-mono">Volatility</span></div>
+                        <div class="skill-pill-card" title="ELK Stack Log Analysis"><span class="skill-pill-icon text-green"><i class="fa-solid fa-chart-line"></i></span><span class="skill-pill-name font-mono">ELK Stack</span></div>
+                        <div class="skill-pill-card" title="Sysmon Event Logging"><span class="skill-pill-icon text-green"><i class="fa-solid fa-list-check"></i></span><span class="skill-pill-name font-mono">Sysmon</span></div>
                     </div>
                 </div>
 
@@ -473,12 +478,33 @@
                         <span class="card-title font-mono"><i class="fa-solid fa-user-shield text-cyan"></i> IDENTITY_&amp;_RED_TEAMING</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-sitemap"></i></span><span class="skill-pill-name font-mono">Active Directory</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-flask"></i></span><span class="skill-pill-name font-mono">CyberChef</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-fish"></i></span><span class="skill-pill-name font-mono">SET Phishing</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-passport"></i></span><span class="skill-pill-name font-mono">JWT &amp; OAuth</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-dog"></i></span><span class="skill-pill-name font-mono">BloodHound</span></div>
-                        <div class="skill-pill-card"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-user-ninja"></i></span><span class="skill-pill-name font-mono">Mimikatz</span></div>
+                        <div class="skill-pill-card" title="Active Directory Domain Security"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-sitemap"></i></span><span class="skill-pill-name font-mono">Active Directory</span></div>
+                        <div class="skill-pill-card" title="CyberChef Cyber Swiss Army Knife"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-flask"></i></span><span class="skill-pill-name font-mono">CyberChef</span></div>
+                        <div class="skill-pill-card" title="Social-Engineer Toolkit (SET)"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-fish"></i></span><span class="skill-pill-name font-mono">SET Phishing</span></div>
+                        <div class="skill-pill-card" title="JWT &amp; OAuth Token Security"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-passport"></i></span><span class="skill-pill-name font-mono">JWT &amp; OAuth</span></div>
+                        <div class="skill-pill-card" title="BloodHound Active Directory Mapping"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-dog"></i></span><span class="skill-pill-name font-mono">BloodHound</span></div>
+                        <div class="skill-pill-card" title="Mimikatz Credential Extraction"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-user-ninja"></i></span><span class="skill-pill-name font-mono">Mimikatz</span></div>
+                        <div class="skill-pill-card" title="Cobalt Strike C2 Framework"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-tower-observation"></i></span><span class="skill-pill-name font-mono">Cobalt Strike</span></div>
+                        <div class="skill-pill-card" title="Empire PowerShell Post-Exploitation"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-crown"></i></span><span class="skill-pill-name font-mono">Empire</span></div>
+                        <div class="skill-pill-card" title="Rubeus Kerberos Attack"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-ticket"></i></span><span class="skill-pill-name font-mono">Rubeus</span></div>
+                    </div>
+                </div>
+
+                <!-- Skill Category: Cloud & Infra Security -->
+                <div class="cyber-card glassmorphic skill-card">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-cloud-bolt text-yellow"></i> CLOUD_&amp;_INFRA_SEC</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card" title="AWS Security &amp; IAM"><span class="skill-pill-icon text-yellow"><i class="fa-brands fa-aws"></i></span><span class="skill-pill-name font-mono">AWS Security</span></div>
+                        <div class="skill-pill-card" title="Terraform Infrastructure as Code"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-cubes-stacked"></i></span><span class="skill-pill-name font-mono">Terraform</span></div>
+                        <div class="skill-pill-card" title="Kubernetes Container Orchestration"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-dharmachakra"></i></span><span class="skill-pill-name font-mono">Kubernetes</span></div>
+                        <div class="skill-pill-card" title="Prowler Cloud Security Audit"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-paw"></i></span><span class="skill-pill-name font-mono">Prowler</span></div>
+                        <div class="skill-pill-card" title="ScoutSuite Multi-Cloud Audit"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-binoculars"></i></span><span class="skill-pill-name font-mono">ScoutSuite</span></div>
+                        <div class="skill-pill-card" title="Trivy Container Vulnerability Scanner"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-shield-virus"></i></span><span class="skill-pill-name font-mono">Trivy</span></div>
+                        <div class="skill-pill-card" title="Ansible Automation"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-gears"></i></span><span class="skill-pill-name font-mono">Ansible</span></div>
+                        <div class="skill-pill-card" title="Azure AD &amp; Entra ID"><span class="skill-pill-icon text-yellow"><i class="fa-brands fa-microsoft"></i></span><span class="skill-pill-name font-mono">Azure AD</span></div>
+                        <div class="skill-pill-card" title="HashiCorp Vault Secrets Management"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-vault"></i></span><span class="skill-pill-name font-mono">Vault</span></div>
                     </div>
                 </div>
             </div>
@@ -1125,15 +1151,27 @@
     </main>
 
 
-    <!-- macOS Bottom Floating App Dock -->
+    <!-- macOS Liquid Metallic Glass App Dock -->
     <div class="mac-dock-container">
-        <nav class="mac-dock" aria-label="macOS App Dock">
-            <a href="#about" class="dock-item active" data-tooltip="Monitor" title="Monitor" aria-label="Monitor"><i class="fa-solid fa-gauge-high"></i></a>
-            <a href="#arsenal" class="dock-item" data-tooltip="Arsenal" title="Arsenal" aria-label="Arsenal"><i class="fa-solid fa-shield-halved"></i></a>
-            <a href="#ops" class="dock-item" data-tooltip="Operations" title="Operations" aria-label="Operations"><i class="fa-solid fa-microchip"></i></a>
-            <a href="#registry" class="dock-item" data-tooltip="Registry" title="Registry" aria-label="Registry"><i class="fa-solid fa-certificate"></i></a>
-            <a href="#tryhackme" class="dock-item" data-tooltip="THM Logs" title="TryHackMe Logs" aria-label="TryHackMe Logs"><i class="fa-solid fa-skull"></i></a>
-            <a href="#contact" class="dock-item" data-tooltip="Connect" title="Connect" aria-label="Connect"><i class="fa-solid fa-satellite-dish"></i></a>
+        <nav class="mac-dock liquid-metal-dock" aria-label="macOS App Dock">
+            <a href="#about" class="dock-item squircle active" data-tooltip="Monitor" title="Monitor" aria-label="Monitor">
+                <span class="dock-icon-bg bg-dock-hero"><i class="fa-solid fa-laptop-code"></i></span>
+            </a>
+            <a href="#arsenal" class="dock-item squircle" data-tooltip="Arsenal" title="Arsenal" aria-label="Arsenal">
+                <span class="dock-icon-bg bg-dock-arsenal"><i class="fa-solid fa-shield-halved"></i></span>
+            </a>
+            <a href="#ops" class="dock-item squircle" data-tooltip="Operations" title="Operations" aria-label="Operations">
+                <span class="dock-icon-bg bg-dock-ops"><i class="fa-solid fa-microchip"></i></span>
+            </a>
+            <a href="#registry" class="dock-item squircle" data-tooltip="Registry" title="Registry" aria-label="Registry">
+                <span class="dock-icon-bg bg-dock-registry"><i class="fa-solid fa-certificate"></i></span>
+            </a>
+            <a href="#tryhackme" class="dock-item squircle" data-tooltip="THM Logs" title="TryHackMe Logs" aria-label="TryHackMe Logs">
+                <span class="dock-icon-bg bg-dock-thm"><i class="fa-solid fa-skull"></i></span>
+            </a>
+            <a href="#contact" class="dock-item squircle" data-tooltip="Connect" title="Connect" aria-label="Connect">
+                <span class="dock-icon-bg bg-dock-contact"><i class="fa-solid fa-satellite-dish"></i></span>
+            </a>
         </nav>
     </div>
 

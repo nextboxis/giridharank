@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 24. Click-Triggered Liquid Ripple Waves Engine
     initLiquidRippleEffect();
 
+    // 25. macOS Fluid Magnetic Dock Proximity Magnification
+    initFluidDockMagnification();
+
     // 25. Hero CV Download Toast & Chime Handler
     const heroCvBtn = document.getElementById('hero-cv-btn');
     if (heroCvBtn) {
@@ -176,30 +179,61 @@ function initNavigation() {
 
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = item.getAttribute('href').substring(1);
+            const href = item.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
             
+            const targetId = href.substring(1);
+            const targetSection = document.getElementById(targetId);
+
             // Update active state in nav
             navItems.forEach(nav => nav.classList.remove('active'));
             item.classList.add('active');
 
-            // Switch sections with smooth fade & entrance animation
-            sections.forEach(section => {
-                section.classList.remove('active-section');
-                if (section.id === targetId) {
-                    section.classList.add('active-section');
-                }
-            });
+            if (targetSection) {
+                sections.forEach(section => {
+                    if (section !== targetSection) {
+                        section.classList.remove('active-section');
+                        section.querySelectorAll('.cyber-card, .cert-card, .project-card, .sim-row, .hud-cascade-item').forEach(el => {
+                            el.classList.remove('revealed');
+                        });
+                    }
+                });
 
-            // Smooth scroll reset to top of container
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                targetSection.classList.add('active-section');
 
-            // Trigger staggered cascade reveal wave for newly activated section
+                // Trigger staggered cascade reveal wave for newly activated section
+                requestAnimationFrame(() => {
+                    targetSection.querySelectorAll('.hud-cascade-item, .cyber-card, .skill-card, .cert-card, .project-card, .sim-row, .thm-stat-box').forEach((el, idx) => {
+                        el.style.setProperty('--cascade-index', idx % 10);
+                        el.classList.add('revealed');
+                    });
+                });
+
+                // Smooth scroll into view
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
             setTimeout(() => {
                 if (window.refreshCascadeReveals) window.refreshCascadeReveals();
             }, 60);
         });
     });
+
+    // Dynamic Dock Highlight on Scroll
+    if ('IntersectionObserver' in window && sections.length) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        item.classList.toggle('active', item.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { threshold: 0.25 });
+
+        sections.forEach(section => observer.observe(section));
+    }
 }
 
 
@@ -216,16 +250,61 @@ function initOperationsTabs() {
             btn.classList.add('active');
 
             contents.forEach(content => {
-                content.classList.remove('active-content');
+                content.classList.remove('active-content', 'active-section');
                 if (content.id === targetId) {
-                    content.classList.add('active-section', 'active-content'); // force show
+                    content.classList.add('active-section', 'active-content');
+                    requestAnimationFrame(() => {
+                        content.querySelectorAll('.project-card, .sim-row, .hud-cascade-item').forEach((el, idx) => {
+                            el.style.setProperty('--cascade-index', idx % 8);
+                            el.classList.add('revealed');
+                        });
+                    });
                 }
             });
+
+            if (window.refreshCascadeReveals) window.refreshCascadeReveals();
         });
     });
 }
 
-function initCertFilters() {}
+function initCertFilters() {
+    const btns = document.querySelectorAll('.cert-filter-btn');
+    const cards = document.querySelectorAll('.certs-grid .cert-card');
+    if (!btns.length || !cards.length) return;
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
+
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags') || '';
+                const matches = filter === 'all' || tags.includes(filter);
+
+                if (matches) {
+                    card.classList.remove('is-leaving', 'hidden');
+                    card.style.display = '';
+                    requestAnimationFrame(() => {
+                        card.classList.add('revealed');
+                    });
+                } else {
+                    card.classList.add('is-leaving');
+                    setTimeout(() => {
+                        if (card.classList.contains('is-leaving')) {
+                            card.style.display = 'none';
+                            card.classList.add('hidden');
+                            card.classList.remove('revealed', 'is-leaving');
+                        }
+                    }, 220);
+                }
+            });
+
+            if (window.refreshCascadeReveals) window.refreshCascadeReveals();
+        });
+    });
+}
 
 // --- Local HUD Variables (Clock, IP Mock) --- //
 function initHudData() {
@@ -930,9 +1009,20 @@ function initOpsFilter() {
             const matchesCategory = currentFilter === 'all' || category === currentFilter;
 
             if (matchesQuery && matchesCategory) {
-                card.style.display = 'flex';
+                card.classList.remove('is-leaving', 'hidden');
+                card.style.display = '';
+                requestAnimationFrame(() => {
+                    card.classList.add('revealed');
+                });
             } else {
-                card.style.display = 'none';
+                card.classList.add('is-leaving');
+                setTimeout(() => {
+                    if (card.classList.contains('is-leaving')) {
+                        card.style.display = 'none';
+                        card.classList.add('hidden');
+                        card.classList.remove('revealed', 'is-leaving');
+                    }
+                }, 220);
             }
         });
 
@@ -941,9 +1031,20 @@ function initOpsFilter() {
             const text = row.textContent.toLowerCase();
             const matchesQuery = !query || text.includes(query);
             if (matchesQuery) {
-                row.style.display = 'grid';
+                row.classList.remove('is-leaving', 'hidden');
+                row.style.display = '';
+                requestAnimationFrame(() => {
+                    row.classList.add('revealed');
+                });
             } else {
-                row.style.display = 'none';
+                row.classList.add('is-leaving');
+                setTimeout(() => {
+                    if (row.classList.contains('is-leaving')) {
+                        row.style.display = 'none';
+                        row.classList.add('hidden');
+                        row.classList.remove('revealed', 'is-leaving');
+                    }
+                }, 220);
             }
         });
     }
@@ -1029,7 +1130,7 @@ function initPdfViewerModal() {
 
 // --- 21. Futuristic Staggered Cascade Scroll-Reveals Engine --- //
 function initStaggeredCascadeReveals() {
-    const containers = document.querySelectorAll('.skills-grid, .projects-grid, .sim-grid, .thm-grid, .academic-timeline, .contact-container');
+    const containers = document.querySelectorAll('.arsenal-grid, .certs-grid, .skills-grid, .projects-grid, .sim-grid, .thm-grid, .academic-timeline, .contact-container');
 
     function applyCascadeIndices() {
         containers.forEach(container => {
@@ -1050,8 +1151,8 @@ function initStaggeredCascadeReveals() {
             }
         });
     }, {
-        threshold: 0.08,
-        rootMargin: '0px 0px -30px 0px'
+        threshold: 0.02,
+        rootMargin: '100px 0px 100px 0px'
     });
 
     document.querySelectorAll('.hud-cascade-item').forEach(item => {
@@ -1061,10 +1162,10 @@ function initStaggeredCascadeReveals() {
     // Expose refresh function to re-calculate indices when filters or sections change
     window.refreshCascadeReveals = function () {
         applyCascadeIndices();
-        document.querySelectorAll('.hud-cascade-item').forEach(item => {
+        document.querySelectorAll('.active-section .hud-cascade-item, .hud-cascade-item').forEach(item => {
             observer.observe(item);
             const rect = item.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
+            if (rect.top < window.innerHeight + 300 && rect.bottom > -300) {
                 item.classList.add('revealed');
             }
         });
@@ -1140,6 +1241,8 @@ function init3DCardTilt() {
     });
 }
 
+
+
 // --- 24. Click-Triggered Liquid Ripple Waves Engine --- //
 function initLiquidRippleEffect() {
     const clickableTargets = document.querySelectorAll('.cyber-card, .btn, .dock-item, .cert-card, .thm-badge-pill, .hud-bg-btn');
@@ -1167,5 +1270,39 @@ function initLiquidRippleEffect() {
             }, 650);
         });
     });
+}
+
+// --- 25. macOS Fluid Magnetic Dock Proximity Magnification --- //
+function initFluidDockMagnification() {
+    const dock = document.querySelector('.mac-dock');
+    if (!dock) return;
+
+    const items = dock.querySelectorAll('.dock-item');
+
+    dock.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+
+        items.forEach(item => {
+            const itemRect = item.getBoundingClientRect();
+            const itemCenterX = itemRect.left + itemRect.width / 2;
+            const distance = Math.abs(mouseX - itemCenterX);
+            const maxDistance = 140;
+
+            if (distance < maxDistance) {
+                const power = Math.cos((distance / maxDistance) * (Math.PI / 2));
+                const scale = 1 + power * 0.35;
+                const translateY = -power * 10;
+                item.style.transform = `scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(1)}px)`;
+            } else {
+                item.style.transform = 'scale(1) translateY(0px)';
+            }
+        });
+    }, { passive: true });
+
+    dock.addEventListener('mouseleave', () => {
+        items.forEach(item => {
+            item.style.transform = 'scale(1) translateY(0px)';
+        });
+    }, { passive: true });
 }
 
