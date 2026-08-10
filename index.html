@@ -710,237 +710,588 @@
 
         <!-- Section: Verified Credentials & Certifications -->
         <section id="registry" class="hud-section">
-            <h2 class="section-title font-mono"><i class="fa-solid fa-certificate"></i> VERIFIED_CREDENTIALS_REGISTRY</h2>
-            <p class="section-subtitle font-mono">&gt; Encrypted certification audit log. Click card to inspect verified certificate PDF.</p>
+            <div class="registry-header-block">
+                <div class="registry-title-wrapper">
+                    <h2 class="section-title font-mono"><i class="fa-solid fa-certificate text-cyan"></i> VERIFIED_CREDENTIALS_REGISTRY</h2>
+                    <p class="section-subtitle font-mono">&gt; Cryptographically verified audit log of industry certifications and technical accreditations.</p>
+                </div>
 
-            <div class="cert-grid">
+                <!-- Telemetry Metrics Strip -->
+                <div class="cert-telemetry-bar font-mono">
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">TOTAL_CREDENTIALS:</span>
+                        <span class="telemetry-val text-cyan">23 VERIFIED</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">SECURITY_ACCREDITATIONS:</span>
+                        <span class="telemetry-val text-orange">6 NODES</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">CLOUD_&amp;_AI_SUITES:</span>
+                        <span class="telemetry-val text-purple">11 NODES</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">AUDIT_INTEGRITY:</span>
+                        <span class="telemetry-val text-green"><i class="fa-solid fa-shield-halved"></i> 100% AUTHENTICATED</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HUD Filter & Real-Time Search Control Bar -->
+            <div class="cert-filter-bar glassmorphic font-mono">
+                <div class="cert-filter-buttons">
+                    <button class="cert-filter-btn active" data-filter="all">
+                        <i class="fa-solid fa-layer-group"></i> ALL_NODES <span class="filter-count">23</span>
+                    </button>
+                    <button class="cert-filter-btn" data-filter="security">
+                        <i class="fa-solid fa-user-secret text-orange"></i> CYBER_SECURITY <span class="filter-count">6</span>
+                    </button>
+                    <button class="cert-filter-btn" data-filter="cloud">
+                        <i class="fa-solid fa-cloud-bolt text-cyan"></i> CLOUD_&amp;_INFRA <span class="filter-count">6</span>
+                    </button>
+                    <button class="cert-filter-btn" data-filter="ai">
+                        <i class="fa-solid fa-brain text-purple"></i> AI_&amp;_LLM_SUITE <span class="filter-count">5</span>
+                    </button>
+                    <button class="cert-filter-btn" data-filter="microsoft">
+                        <i class="fa-brands fa-microsoft text-blue"></i> ENTERPRISE_&amp;_MS <span class="filter-count">6</span>
+                    </button>
+                </div>
+                
+                <div class="cert-search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon text-cyan"></i>
+                    <input type="text" id="cert-search-input" placeholder="SEARCH_CREDENTIALS..." aria-label="Search Credentials Registry" class="font-mono">
+                </div>
+            </div>
+
+            <!-- Certificates Grid -->
+            <div class="certs-grid cert-grid">
                 <!-- Cert 1: Google Cybersecurity -->
                 <div class="cert-card glassmorphic" data-tags="security">
-                    <div class="cert-icon text-cyan"><i class="fa-brands fa-google"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Google Cybersecurity Professional</h4>
-                        <p class="cert-desc">Network defense, SIEM logging, Python automation, and incident response.</p>
-                        <a href="./certificate/google_cybersecurity.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-cyan">GOOGLE // SEC-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-cyan"><i class="fa-brands fa-google"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Google Cybersecurity Professional</h4>
+                            <p class="cert-desc">Network defense, SIEM logging, Python automation, and incident response.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>SIEM</span>
+                                <span>Python</span>
+                                <span>Linux</span>
+                                <span>Network Defense</span>
+                            </div>
+                            <a href="./certificate/google_cybersecurity.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Cert 2: Cisco Cybersecurity -->
                 <div class="cert-card glassmorphic" data-tags="security">
-                    <div class="cert-icon text-green"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Cisco Cybersecurity Essentials</h4>
-                        <p class="cert-desc">Infrastructure routing security, threat vectors, firewalls, and encryption protocols.</p>
-                        <a href="./certificate/cisco_cybersecurity.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-green">CISCO // SEC-02</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-green"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Cisco Cybersecurity Essentials</h4>
+                            <p class="cert-desc">Infrastructure routing security, threat vectors, firewalls, and encryption protocols.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Firewalls</span>
+                                <span>Routing Sec</span>
+                                <span>Crypto</span>
+                            </div>
+                            <a href="./certificate/cisco_cybersecurity.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Cert 3: Cisco Ethical Hacker -->
                 <div class="cert-card glassmorphic" data-tags="security">
-                    <div class="cert-icon text-red"><i class="fa-solid fa-user-secret"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Cisco Ethical Hacker</h4>
-                        <p class="cert-desc">Penetration testing methodologies, vulnerability scanning, and exploitation tactics.</p>
-                        <a href="./certificate/cisco_ethical_hacker.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-red">CISCO // SEC-03</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-red"><i class="fa-solid fa-user-secret"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Cisco Ethical Hacker</h4>
+                            <p class="cert-desc">Penetration testing methodologies, vulnerability scanning, and exploitation tactics.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Pentesting</span>
+                                <span>Exploitation</span>
+                                <span>Recon</span>
+                            </div>
+                            <a href="./certificate/cisco_ethical_hacker.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Cert 4: Fortinet Network Security -->
                 <div class="cert-card glassmorphic" data-tags="security">
-                    <div class="cert-icon text-orange"><i class="fa-solid fa-lock"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Fortinet Network Security Associate</h4>
-                        <p class="cert-desc">Enterprise firewall architectures, threat intelligence telemetry, and access policies.</p>
-                        <a href="./certificate/fortinet_nse.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-orange">FORTINET // SEC-04</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-orange"><i class="fa-solid fa-lock"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Fortinet Network Security Associate</h4>
+                            <p class="cert-desc">Enterprise firewall architectures, threat intelligence telemetry, and access policies.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>FortiGate</span>
+                                <span>Threat Intel</span>
+                                <span>NGFW</span>
+                            </div>
+                            <a href="./certificate/fortinet_nse.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Linux Administration -->
+                <!-- Cert 5: Linux Administration -->
                 <div class="cert-card glassmorphic" data-tags="security">
-                    <div class="cert-icon text-orange"><i class="fa-brands fa-linux"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Linux Administration</h4>
-                        <p class="cert-desc">Enterprise Linux architecture, orchestration CLI, and administration processes.</p>
-                        <a href="./certificate/linux_administration.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-orange">LINUX // SEC-05</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-orange"><i class="fa-brands fa-linux"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Linux Administration</h4>
+                            <p class="cert-desc">Enterprise Linux architecture, orchestration CLI, and administration processes.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Bash Shell</span>
+                                <span>SysAdmin</span>
+                                <span>Hardening</span>
+                            </div>
+                            <a href="./certificate/linux_administration.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Future Interns -->
+                <!-- Cert 6: Future Interns -->
                 <div class="cert-card glassmorphic" data-tags="security">
-                    <div class="cert-icon text-orange"><i class="fa-solid fa-user-shield"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Future Interns Cyber Security</h4>
-                        <p class="cert-desc">API risk checks, payload analysis, and threat analysis tracking simulation.</p>
-                        <a href="./certificate/GIRIDHARAN_K_Certificate.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-cyan">FUTURE_INTERNS // SEC-06</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-cyan"><i class="fa-solid fa-user-shield"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Future Interns Cyber Security</h4>
+                            <p class="cert-desc">API risk checks, payload analysis, and threat analysis tracking simulation.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>API Risk</span>
+                                <span>Payload Audit</span>
+                                <span>Web Sec</span>
+                            </div>
+                            <a href="./certificate/GIRIDHARAN_K_Certificate.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- AWS Solutions Architecture -->
+                <!-- Cert 7: AWS Solutions Architecture -->
                 <div class="cert-card glassmorphic" data-tags="cloud">
-                    <div class="cert-icon text-cyan"><i class="fa-brands fa-aws"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">AWS Solutions Architecture</h4>
-                        <p class="cert-desc">Validating secure cloud setups, data pipelines, and infrastructure routing.</p>
-                        <a href="./certificate/aws_certified.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-cyan">AWS // CLOUD-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-cyan"><i class="fa-brands fa-aws"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">AWS Solutions Architecture</h4>
+                            <p class="cert-desc">Validating secure cloud setups, data pipelines, and infrastructure routing.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>AWS IAM</span>
+                                <span>EC2 / S3</span>
+                                <span>CloudSec</span>
+                            </div>
+                            <a href="./certificate/aws_certified.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Azure Tools Solution -->
+                <!-- Cert 8: Azure Tools Solution -->
                 <div class="cert-card glassmorphic" data-tags="cloud">
-                    <div class="cert-icon text-cyan"><i class="fa-solid fa-cloud"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Azure Tools Solution</h4>
-                        <p class="cert-desc">Core cloud principles, identity access controls, and Azure service schemas.</p>
-                        <a href="./certificate/azure_tools.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-cyan">AZURE // CLOUD-02</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-cyan"><i class="fa-solid fa-cloud"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Azure Tools Solution</h4>
+                            <p class="cert-desc">Core cloud principles, identity access controls, and Azure service schemas.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Entra ID</span>
+                                <span>Azure Cloud</span>
+                                <span>RBAC</span>
+                            </div>
+                            <a href="./certificate/azure_tools.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- MongoDB Developer -->
+                <!-- Cert 9: MongoDB Developer -->
                 <div class="cert-card glassmorphic" data-tags="cloud">
-                    <div class="cert-icon text-cyan"><i class="fa-solid fa-database"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">MongoDB Developer</h4>
-                        <p class="cert-desc">Database schema design, query aggregation pipelines, and sharding concepts.</p>
-                        <a href="./certificate/mongodb.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-green">MONGODB // DATA-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-green"><i class="fa-solid fa-database"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">MongoDB Developer</h4>
+                            <p class="cert-desc">Database schema design, query aggregation pipelines, and sharding concepts.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>NoSQL</span>
+                                <span>Aggregation</span>
+                                <span>Index Opt</span>
+                            </div>
+                            <a href="./certificate/mongodb.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Big Data & Analytics -->
+                <!-- Cert 10: Big Data & Analytics -->
                 <div class="cert-card glassmorphic" data-tags="cloud">
-                    <div class="cert-icon text-cyan"><i class="fa-solid fa-chart-line"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Big Data & Analytics</h4>
-                        <p class="cert-desc">Data modeling, statistical pipelines, and big data lifecycle structures.</p>
-                        <a href="./certificate/big_data.png" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-purple">BIG_DATA // DATA-02</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-purple"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Big Data &amp; Analytics</h4>
+                            <p class="cert-desc">Data modeling, statistical pipelines, and big data lifecycle structures.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Data Pipelines</span>
+                                <span>Analytics</span>
+                                <span>ETL</span>
+                            </div>
+                            <a href="./certificate/big_data.png" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- BCG IT Architecture -->
+                <!-- Cert 11: BCG IT Architecture -->
                 <div class="cert-card glassmorphic" data-tags="cloud">
-                    <div class="cert-icon text-cyan"><i class="fa-solid fa-sitemap"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">BCG IT Architecture</h4>
-                        <p class="cert-desc">Corporate system architecture consulting, technology mapping, and systems design.</p>
-                        <a href="./certificate/bcg_strategy.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-cyan">BCG // ARCH-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-cyan"><i class="fa-solid fa-sitemap"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">BCG IT Architecture</h4>
+                            <p class="cert-desc">Corporate system architecture consulting, technology mapping, and systems design.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>IT Strategy</span>
+                                <span>Sys Design</span>
+                                <span>Enterprise</span>
+                            </div>
+                            <a href="./certificate/bcg_strategy.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Python Programming -->
+                <!-- Cert 12: Python Programming -->
                 <div class="cert-card glassmorphic" data-tags="cloud">
-                    <div class="cert-icon text-cyan"><i class="fa-brands fa-python"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Python Programming</h4>
-                        <p class="cert-desc">Object-oriented paradigms, scripting automation, and package structures.</p>
-                        <a href="./certificate/python.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-yellow">PYTHON // DEV-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-yellow"><i class="fa-brands fa-python"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Python Programming</h4>
+                            <p class="cert-desc">Object-oriented paradigms, scripting automation, and package structures.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Python 3</span>
+                                <span>OOP</span>
+                                <span>Automation</span>
+                            </div>
+                            <a href="./certificate/python.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- AI ChatGPT -->
+                <!-- Cert 13: AI ChatGPT -->
                 <div class="cert-card glassmorphic" data-tags="ai">
-                    <div class="cert-icon text-purple"><i class="fa-solid fa-robot"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">AI & ChatGPT Prompt Engineering</h4>
-                        <p class="cert-desc">Prompt optimization, system parameters structuring, and agent workflows.</p>
-                        <a href="./certificate/ai_chatgpt.png" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-purple">OPENAI // AI-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-purple"><i class="fa-solid fa-robot"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">AI &amp; ChatGPT Prompt Engineering</h4>
+                            <p class="cert-desc">Prompt optimization, system parameters structuring, and agent workflows.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>GPT-4</span>
+                                <span>Prompt Eng</span>
+                                <span>Agent Flow</span>
+                            </div>
+                            <a href="./certificate/ai_chatgpt.png" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Claude AI 1 -->
+                <!-- Cert 14: Claude AI 1 -->
                 <div class="cert-card glassmorphic" data-tags="ai">
-                    <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Claude AI Credential Suite: Essentials</h4>
-                        <p class="cert-desc">Anthropic prompt optimization, tokens management, and agent pipelines.</p>
-                        <a href="./certificate/claude_ai_1.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-purple">ANTHROPIC // AI-02</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Claude AI Suite: Essentials</h4>
+                            <p class="cert-desc">Anthropic prompt optimization, tokens management, and agent pipelines.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Claude 3.5</span>
+                                <span>Tokens Opt</span>
+                                <span>System Prompts</span>
+                            </div>
+                            <a href="./certificate/claude_ai_1.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Claude AI 2 -->
+                <!-- Cert 15: Claude AI 2 -->
                 <div class="cert-card glassmorphic" data-tags="ai">
-                    <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Claude AI Credential Suite: API Workflows</h4>
-                        <p class="cert-desc">Designing scalable prompts and integration structures for large-scale production APIs.</p>
-                        <a href="./certificate/claude_ai_2.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-purple">ANTHROPIC // AI-03</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Claude AI Suite: API Workflows</h4>
+                            <p class="cert-desc">Designing scalable prompts and integration structures for production APIs.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>API Pipeline</span>
+                                <span>JSON Schemas</span>
+                                <span>Tool Use</span>
+                            </div>
+                            <a href="./certificate/claude_ai_2.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Claude AI 3 -->
+                <!-- Cert 16: Claude AI 3 -->
                 <div class="cert-card glassmorphic" data-tags="ai">
-                    <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Claude AI Credential Suite: Security Eng</h4>
-                        <p class="cert-desc">Securing model pipelines, filtering injections, and threat modeling agent interfaces.</p>
-                        <a href="./certificate/claude_ai_3.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-purple">ANTHROPIC // AI-04</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Claude AI Suite: Security Eng</h4>
+                            <p class="cert-desc">Securing model pipelines, filtering injections, and threat modeling agent interfaces.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Prompt Injection</span>
+                                <span>AI Safety</span>
+                                <span>Guardrails</span>
+                            </div>
+                            <a href="./certificate/claude_ai_3.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Claude AI 4 -->
+                <!-- Cert 17: Claude AI 4 -->
                 <div class="cert-card glassmorphic" data-tags="ai">
-                    <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Claude AI Credential Suite: Optimization</h4>
-                        <p class="cert-desc">Parameter fine-tuning, latency optimization, and custom output schema alignments.</p>
-                        <a href="./certificate/claude_ai_4.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-purple">ANTHROPIC // AI-05</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-purple"><i class="fa-solid fa-brain"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Claude AI Suite: Optimization</h4>
+                            <p class="cert-desc">Parameter fine-tuning, latency optimization, and custom output schema alignments.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Latency Opt</span>
+                                <span>Fine-Tuning</span>
+                                <span>Structured Data</span>
+                            </div>
+                            <a href="./certificate/claude_ai_4.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Microsoft Training -->
+                <!-- Cert 18: Microsoft Training -->
                 <div class="cert-card glassmorphic" data-tags="microsoft">
-                    <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Microsoft Training — Technical</h4>
-                        <p class="cert-desc">Validating corporate infrastructure administration, identity, and tooling.</p>
-                        <a href="./certificate/microsoft_training.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-blue">MICROSOFT // ENT-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Microsoft Training — Technical</h4>
+                            <p class="cert-desc">Validating corporate infrastructure administration, identity, and tooling.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Infra Admin</span>
+                                <span>Identity</span>
+                                <span>Sys Tooling</span>
+                            </div>
+                            <a href="./certificate/microsoft_training.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Microsoft Learn -->
+                <!-- Cert 19: Microsoft Learn -->
                 <div class="cert-card glassmorphic" data-tags="microsoft">
-                    <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Microsoft Learn Professional</h4>
-                        <p class="cert-desc">Continuous professional training covering enterprise technology stacks.</p>
-                        <a href="./certificate/microsoft_learn.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-blue">MICROSOFT // ENT-02</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Microsoft Learn Professional</h4>
+                            <p class="cert-desc">Continuous professional training covering enterprise technology stacks.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Cloud Tech</span>
+                                <span>Azure Stack</span>
+                                <span>Security</span>
+                            </div>
+                            <a href="./certificate/microsoft_learn.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Teams for Ed -->
+                <!-- Cert 20: Teams for Ed -->
                 <div class="cert-card glassmorphic" data-tags="microsoft">
-                    <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Teams for Education Completion</h4>
-                        <p class="cert-desc">Integrating collaborative platforms, remote workspaces governance, and user schemes.</p>
-                        <a href="./certificate/microsoft_teams.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-blue">MICROSOFT // ENT-03</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Teams for Education Completion</h4>
+                            <p class="cert-desc">Integrating collaborative platforms, remote workspaces governance, and user schemes.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Teams Admin</span>
+                                <span>Collaboration</span>
+                                <span>Governance</span>
+                            </div>
+                            <a href="./certificate/microsoft_teams.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Microsoft 365 Ed -->
+                <!-- Cert 21: Microsoft 365 Ed -->
                 <div class="cert-card glassmorphic" data-tags="microsoft">
-                    <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Microsoft 365 Education Credentials</h4>
-                        <p class="cert-desc">Configuring cloud directory, tenant policies, and security baselines in learning environments.</p>
-                        <a href="./certificate/microsoft_365.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-blue">MICROSOFT // ENT-04</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-blue"><i class="fa-brands fa-microsoft"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Microsoft 365 Education Credentials</h4>
+                            <p class="cert-desc">Configuring cloud directory, tenant policies, and security baselines in learning environments.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>M365 Sec</span>
+                                <span>Tenant Admin</span>
+                                <span>Policies</span>
+                            </div>
+                            <a href="./certificate/microsoft_365.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- JPMorgan Complection -->
+                <!-- Cert 22: JPMorgan Completion -->
                 <div class="cert-card glassmorphic" data-tags="microsoft">
-                    <div class="cert-icon text-blue"><i class="fa-solid fa-briefcase"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">JPMorgan Software Engineering Completion</h4>
-                        <p class="cert-desc">Visualizing financial dashboards, stock feed parsing, and unit tests execution.</p>
-                        <a href="./certificate/jpmorgan_swe.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-cyan">JPMORGAN // FIN-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-cyan"><i class="fa-solid fa-briefcase"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">JPMorgan Software Engineering Completion</h4>
+                            <p class="cert-desc">Visualizing financial dashboards, stock feed parsing, and unit tests execution.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>FinTech</span>
+                                <span>React</span>
+                                <span>Data Feeds</span>
+                            </div>
+                            <a href="./certificate/jpmorgan_swe.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Deloitte Tech Consulting -->
+                <!-- Cert 23: Deloitte Tech Consulting -->
                 <div class="cert-card glassmorphic" data-tags="microsoft">
-                    <div class="cert-icon text-blue"><i class="fa-solid fa-briefcase"></i></div>
-                    <div class="cert-info">
-                        <h4 class="font-mono">Deloitte Technology Consulting Credential</h4>
-                        <p class="cert-desc">Architecting cloud migration timelines, corporate strategy models, and security checkpoints.</p>
-                        <a href="./certificate/deloitte_tech.pdf" target="_blank" class="cert-link font-mono"><i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_CREDENTIAL</a>
+                    <div class="cert-header-row">
+                        <span class="cert-vendor-tag font-mono text-cyan">DELOITTE // CONSULT-01</span>
+                        <span class="cert-status-badge font-mono text-green"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                    </div>
+                    <div class="cert-body-content">
+                        <div class="cert-icon text-cyan"><i class="fa-solid fa-briefcase"></i></div>
+                        <div class="cert-info">
+                            <h4 class="font-mono">Deloitte Technology Consulting Credential</h4>
+                            <p class="cert-desc">Architecting cloud migration timelines, corporate strategy models, and security checkpoints.</p>
+                            <div class="cert-tech-pills font-mono">
+                                <span>Cloud Migration</span>
+                                <span>Consulting</span>
+                                <span>Strategy</span>
+                            </div>
+                            <a href="./certificate/deloitte_tech.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

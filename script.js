@@ -269,41 +269,60 @@ function initOperationsTabs() {
 
 function initCertFilters() {
     const btns = document.querySelectorAll('.cert-filter-btn');
-    const cards = document.querySelectorAll('.certs-grid .cert-card');
-    if (!btns.length || !cards.length) return;
+    const cards = document.querySelectorAll('.certs-grid .cert-card, .cert-grid .cert-card');
+    const searchInput = document.getElementById('cert-search-input');
+    if (!cards.length) return;
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function applyCertFiltering() {
+        cards.forEach(card => {
+            const tags = card.getAttribute('data-tags') || '';
+            const title = card.querySelector('h4')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('.cert-desc')?.textContent.toLowerCase() || '';
+            const vendor = card.querySelector('.cert-vendor-tag')?.textContent.toLowerCase() || '';
+            const pills = card.querySelector('.cert-tech-pills')?.textContent.toLowerCase() || '';
+
+            const matchesCategory = (activeFilter === 'all' || tags.includes(activeFilter));
+            const matchesSearch = !searchQuery || (title.includes(searchQuery) || desc.includes(searchQuery) || vendor.includes(searchQuery) || pills.includes(searchQuery));
+
+            if (matchesCategory && matchesSearch) {
+                card.classList.remove('is-leaving', 'hidden');
+                card.style.display = '';
+                requestAnimationFrame(() => {
+                    card.classList.add('revealed');
+                });
+            } else {
+                card.classList.add('is-leaving');
+                setTimeout(() => {
+                    if (card.classList.contains('is-leaving')) {
+                        card.style.display = 'none';
+                        card.classList.add('hidden');
+                        card.classList.remove('revealed', 'is-leaving');
+                    }
+                }, 220);
+            }
+        });
+
+        if (window.refreshCascadeReveals) window.refreshCascadeReveals();
+    }
 
     btns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-
+            activeFilter = btn.getAttribute('data-filter') || 'all';
             btns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            cards.forEach(card => {
-                const tags = card.getAttribute('data-tags') || '';
-                const matches = filter === 'all' || tags.includes(filter);
-
-                if (matches) {
-                    card.classList.remove('is-leaving', 'hidden');
-                    card.style.display = '';
-                    requestAnimationFrame(() => {
-                        card.classList.add('revealed');
-                    });
-                } else {
-                    card.classList.add('is-leaving');
-                    setTimeout(() => {
-                        if (card.classList.contains('is-leaving')) {
-                            card.style.display = 'none';
-                            card.classList.add('hidden');
-                            card.classList.remove('revealed', 'is-leaving');
-                        }
-                    }, 220);
-                }
-            });
-
-            if (window.refreshCascadeReveals) window.refreshCascadeReveals();
+            applyCertFiltering();
         });
     });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            applyCertFiltering();
+        });
+    }
 }
 
 // --- Local HUD Variables (Clock, IP, Live Security Ping) --- //
