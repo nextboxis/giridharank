@@ -1141,14 +1141,14 @@ function initPdfViewerModal() {
 
 // --- 21. Futuristic Staggered Cascade Scroll-Reveals Engine --- //
 function initStaggeredCascadeReveals() {
-    const containers = document.querySelectorAll('.arsenal-grid, .certs-grid, .skills-grid, .projects-grid, .sim-grid, .thm-grid, .academic-timeline, .contact-container');
+    const containers = document.querySelectorAll('.arsenal-grid, .certs-grid, .cert-grid, .skills-grid, .projects-grid, .sim-grid, .thm-grid, .academic-timeline, .contact-container');
 
     function applyCascadeIndices() {
         containers.forEach(container => {
             const children = Array.from(container.children).filter(child => !child.classList.contains('hidden'));
             children.forEach((child, idx) => {
                 child.classList.add('hud-cascade-item');
-                child.style.setProperty('--cascade-index', idx % 8);
+                child.style.setProperty('--cascade-index', idx % 10);
             });
         });
     }
@@ -1158,12 +1158,14 @@ function initStaggeredCascadeReveals() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
+                requestAnimationFrame(() => {
+                    entry.target.classList.add('revealed');
+                });
             }
         });
     }, {
         threshold: 0.02,
-        rootMargin: '100px 0px 100px 0px'
+        rootMargin: '80px 0px 80px 0px'
     });
 
     document.querySelectorAll('.hud-cascade-item').forEach(item => {
@@ -1176,8 +1178,10 @@ function initStaggeredCascadeReveals() {
         document.querySelectorAll('.active-section .hud-cascade-item, .hud-cascade-item').forEach(item => {
             observer.observe(item);
             const rect = item.getBoundingClientRect();
-            if (rect.top < window.innerHeight + 300 && rect.bottom > -300) {
-                item.classList.add('revealed');
+            if (rect.top < window.innerHeight + 250 && rect.bottom > -250) {
+                requestAnimationFrame(() => {
+                    item.classList.add('revealed');
+                });
             }
         });
     };
@@ -1282,31 +1286,39 @@ function initLiquidRippleEffect() {
         });
     });
 }
-// --- 25. macOS Fluid Magnetic Dock Proximity Magnification --- //
+// --- 25. macOS Fluid Magnetic Dock Proximity Magnification (60fps Throttled) --- //
 function initFluidDockMagnification() {
     const dock = document.querySelector('.mac-dock');
     if (!dock) return;
 
     const items = dock.querySelectorAll('.dock-item');
+    let ticking = false;
+    let mouseX = 0;
 
     dock.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX;
+        mouseX = e.clientX;
 
-        items.forEach(item => {
-            const itemRect = item.getBoundingClientRect();
-            const itemCenterX = itemRect.left + itemRect.width / 2;
-            const distance = Math.abs(mouseX - itemCenterX);
-            const maxDistance = 140;
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                items.forEach(item => {
+                    const itemRect = item.getBoundingClientRect();
+                    const itemCenterX = itemRect.left + itemRect.width / 2;
+                    const distance = Math.abs(mouseX - itemCenterX);
+                    const maxDistance = 140;
 
-            if (distance < maxDistance) {
-                const power = Math.cos((distance / maxDistance) * (Math.PI / 2));
-                const scale = 1 + power * 0.35;
-                const translateY = -power * 10;
-                item.style.transform = `scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(1)}px)`;
-            } else {
-                item.style.transform = 'scale(1) translateY(0px)';
-            }
-        });
+                    if (distance < maxDistance) {
+                        const power = Math.cos((distance / maxDistance) * (Math.PI / 2));
+                        const scale = 1 + power * 0.35;
+                        const translateY = -power * 10;
+                        item.style.transform = `scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(1)}px)`;
+                    } else {
+                        item.style.transform = 'scale(1) translateY(0px)';
+                    }
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
     }, { passive: true });
 
     dock.addEventListener('mouseleave', () => {

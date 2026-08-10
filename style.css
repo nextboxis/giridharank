@@ -40,8 +40,10 @@
     --btn-small-hover-bg: rgba(0, 102, 255, 0.08);
 
     /* Transitions */
-    --transition-speed: 0.3s;
-    --transition-curve: cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Ultra-Smooth Transitions & Hardware Curves */
+    --transition-speed: 0.35s;
+    --transition-curve: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
     --cyber-accent-glow: rgba(0, 102, 255, 0.35);
     --scrollbar-thumb: rgba(0, 102, 255, 0.25);
@@ -554,10 +556,14 @@ body.light-mode .hud-bg-btn:hover {
         inset 0 1.5px 2.5px rgba(255, 255, 255, 0.7),
         inset 0 0 25px rgba(255, 255, 255, 0.08),
         0 24px 56px rgba(0, 20, 60, 0.16) !important;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
                 border-color 0.35s ease,
-                box-shadow 0.35s ease,
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
                 background 0.35s ease !important;
+    will-change: transform, opacity, box-shadow;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
 }
 
 body.dark-mode .cyber-card,
@@ -2527,6 +2533,8 @@ body.dark-mode .dock-icon-bg.bg-dock-contact {
     letter-spacing: -0.01em;
     text-shadow: 0 1px 4px rgba(0, 30, 60, 0.4);
 }
+
+.dock-item.active {
     background: rgba(0, 255, 65, 0.08);
     border-color: rgba(0, 255, 65, 0.2);
     color: var(--cyber-green);
@@ -4710,5 +4718,33 @@ body.dark-mode .thm-badge-icon {
     transform: scale(1.25) !important;
     color: #00ff41 !important;
     filter: drop-shadow(0 0 8px #00ff41) !important;
+}
+
+/* --- High-Performance GPU Acceleration & Ultra-Smooth Staggered Cascade Framework --- */
+.is-tilting {
+    transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+}
+
+.hud-cascade-item {
+    opacity: 0;
+    transform: translateY(22px) scale(0.975);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease !important;
+    transition-delay: calc(var(--cascade-index, 0) * 35ms) !important;
+    will-change: transform, opacity;
+}
+
+.hud-cascade-item.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.hud-cascade-item.is-leaving {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    transition: opacity 0.22s ease-out, transform 0.22s ease-out !important;
+    transition-delay: 0ms !important;
 }
 
