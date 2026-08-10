@@ -1356,6 +1356,7 @@ function initCustomCursor() {
     let ringY = mouseY;
     let isVisible = false;
     let animId = null;
+    let magneticTarget = null;
 
     function renderCursorLoop() {
         if (!isVisible) {
@@ -1363,9 +1364,20 @@ function initCustomCursor() {
             return;
         }
 
-        // 120Hz ProMotion Frame-rate independent liquid LERP physics (0.18 smoothing factor)
-        ringX += (mouseX - ringX) * 0.18;
-        ringY += (mouseY - ringY) * 0.18;
+        let targetX = mouseX;
+        let targetY = mouseY;
+
+        if (magneticTarget) {
+            const rect = magneticTarget.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            targetX = mouseX + (centerX - mouseX) * 0.42;
+            targetY = mouseY + (centerY - mouseY) * 0.42;
+        }
+
+        // 120Hz ProMotion Frame-rate independent liquid LERP physics (0.16 smoothing factor)
+        ringX += (targetX - ringX) * 0.16;
+        ringY += (targetY - ringY) * 0.16;
 
         dot.style.transform = `translate3d(${mouseX.toFixed(1)}px, ${mouseY.toFixed(1)}px, 0)`;
         ring.style.transform = `translate3d(${ringX.toFixed(1)}px, ${ringY.toFixed(1)}px, 0)`;
@@ -1410,15 +1422,19 @@ function initCustomCursor() {
         const cardTarget = e.target.closest(cardSelector);
 
         if (actionTarget) {
+            magneticTarget = actionTarget;
             dot.classList.add('is-hovering');
             ring.classList.add('is-hovering');
             dot.classList.remove('is-card-hover');
             ring.classList.remove('is-card-hover');
         } else if (cardTarget) {
+            magneticTarget = null;
             dot.classList.add('is-card-hover');
             ring.classList.add('is-card-hover');
             dot.classList.remove('is-hovering');
             ring.classList.remove('is-hovering');
+        } else {
+            magneticTarget = null;
         }
     }, { passive: true });
 
@@ -1427,10 +1443,12 @@ function initCustomCursor() {
         const cardTarget = e.target.closest(cardSelector);
 
         if (actionTarget) {
+            magneticTarget = null;
             dot.classList.remove('is-hovering');
             ring.classList.remove('is-hovering');
         }
         if (cardTarget) {
+            magneticTarget = null;
             dot.classList.remove('is-card-hover');
             ring.classList.remove('is-card-hover');
         }

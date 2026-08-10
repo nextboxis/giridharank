@@ -372,6 +372,36 @@ body.dark-mode .cyber-cursor-ring {
     opacity: 1;
 }
 
+/* Card Parallax Child Element Depth Staggering */
+.cyber-card .card-title,
+.cyber-card .glitch-title,
+.cyber-card .sub-headline,
+.cyber-card .cyber-badge,
+.cert-card .cert-title,
+.project-card .project-title,
+.thm-stat-box .stat-val,
+.thm-badge-pill .pill-val,
+.skill-card .skill-title,
+.skill-pill-card .skill-pill-name,
+.terminal-card .terminal-header {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateZ(0);
+}
+
+.cyber-card:hover .card-title,
+.cyber-card:hover .glitch-title,
+.cyber-card:hover .sub-headline,
+.cyber-card:hover .cyber-badge,
+.cert-card:hover .cert-title,
+.project-card:hover .project-title,
+.thm-stat-box:hover .stat-val,
+.thm-badge-pill:hover .pill-val,
+.skill-card:hover .skill-title,
+.skill-pill-card:hover .skill-pill-name,
+.terminal-card:hover .terminal-header {
+    transform: translateZ(14px);
+}
+
 img, video, canvas, svg, iframe {
     max-width: 100%;
 }
