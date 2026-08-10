@@ -70,6 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 25. macOS Fluid Magnetic Dock Proximity Magnification
     initFluidDockMagnification();
 
+    // 26. 120Hz Liquid-LERP Custom Cyber Cursor Engine
+    initCustomCursor();
+
     // 25. Hero CV Download Toast & Chime Handler
     const heroCvBtn = document.getElementById('hero-cv-btn');
     if (heroCvBtn) {
@@ -894,44 +897,50 @@ function initBackgroundRotation() {
     const layer1 = document.getElementById('bg-layer-1');
     const layer2 = document.getElementById('bg-layer-2');
 
+    if (!layer1 || !layer2) return;
+
     let currentIdx = 0;
     let activeLayer = 1;
     let isPaused = false;
-    let intervalTimer = null;
 
-    if (layer1) layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[0]}")`;
-    if (layer2) layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[1]}")`;
+    // Set initial background images and active layer state
+    layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${encodeURI(bgImages[0])}")`;
+    layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${encodeURI(bgImages[1])}")`;
+    layer1.classList.add('active-bg');
+    layer2.classList.remove('active-bg');
 
-    // Preload only the initial 2 background images into memory
+    // Preload initial 2 images
     [bgImages[0], bgImages[1]].forEach(src => {
         const img = new Image();
         img.src = src;
     });
 
     function transitionToNext() {
-        if (isPaused || !layer1 || !layer2) return;
+        if (isPaused) return;
         
         currentIdx = (currentIdx + 1) % bgImages.length;
         const nextUpcomingIdx = (currentIdx + 1) % bgImages.length;
 
-        // Preload next upcoming image right before layer update
+        // Preload next upcoming image
         const preloadImg = new Image();
         preloadImg.src = bgImages[nextUpcomingIdx];
 
+        const targetUrl = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${encodeURI(bgImages[currentIdx])}")`;
+
         if (activeLayer === 1) {
-            layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[currentIdx]}")`;
+            layer2.style.backgroundImage = targetUrl;
             layer2.classList.add('active-bg');
             layer1.classList.remove('active-bg');
             activeLayer = 2;
         } else {
-            layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${bgImages[currentIdx]}")`;
+            layer1.style.backgroundImage = targetUrl;
             layer1.classList.add('active-bg');
             layer2.classList.remove('active-bg');
             activeLayer = 1;
         }
     }
 
-    intervalTimer = setInterval(transitionToNext, 6000);
+    setInterval(transitionToNext, 6000);
 
     const bgBtn = document.getElementById('bg-toggle-btn');
     const bgIcon = document.getElementById('bg-btn-icon');
@@ -1065,6 +1074,19 @@ function initCertificateLightbox() {
 
     if (!modal || !modalImg) return;
 
+    function openLightbox(src, title) {
+        modalImg.src = src;
+        if (modalTitle) modalTitle.innerHTML = `<i class="fa-solid fa-certificate"></i> [${title.toUpperCase()}]`;
+        modal.classList.add('active');
+    }
+
+    function closeLightbox() {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modalImg.src = '';
+        }, 300);
+    }
+
     // Attach click listeners to certification cards
     const certCards = document.querySelectorAll('.cert-card');
     certCards.forEach(card => {
@@ -1089,19 +1111,6 @@ function initCertificateLightbox() {
         cyberImg.addEventListener('click', () => {
             openLightbox(cyberImg.getAttribute('src'), 'TACTICAL_VISUAL_FEED // GIRIDHARAN K');
         });
-    }
-
-    function openLightbox(src, title) {
-        modalImg.src = src;
-        if (modalTitle) modalTitle.innerHTML = `<i class="fa-solid fa-certificate"></i> [${title.toUpperCase()}]`;
-        modal.classList.add('active');
-    }
-
-    function closeLightbox() {
-        modal.classList.remove('active');
-        setTimeout(() => {
-            modalImg.src = '';
-        }, 300);
     }
 
     if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
@@ -1139,54 +1148,6 @@ function initPdfViewerModal() {
     });
 }
 
-// --- 21. Futuristic Staggered Cascade Scroll-Reveals Engine --- //
-function initStaggeredCascadeReveals() {
-    const containers = document.querySelectorAll('.arsenal-grid, .certs-grid, .cert-grid, .skills-grid, .projects-grid, .sim-grid, .thm-grid, .academic-timeline, .contact-container');
-
-    function applyCascadeIndices() {
-        containers.forEach(container => {
-            const children = Array.from(container.children).filter(child => !child.classList.contains('hidden'));
-            children.forEach((child, idx) => {
-                child.classList.add('hud-cascade-item');
-                child.style.setProperty('--cascade-index', idx % 10);
-            });
-        });
-    }
-
-    applyCascadeIndices();
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                requestAnimationFrame(() => {
-                    entry.target.classList.add('revealed');
-                });
-            }
-        });
-    }, {
-        threshold: 0.02,
-        rootMargin: '80px 0px 80px 0px'
-    });
-
-    document.querySelectorAll('.hud-cascade-item').forEach(item => {
-        observer.observe(item);
-    });
-
-    // Expose refresh function to re-calculate indices when filters or sections change
-    window.refreshCascadeReveals = function () {
-        applyCascadeIndices();
-        document.querySelectorAll('.active-section .hud-cascade-item, .hud-cascade-item').forEach(item => {
-            observer.observe(item);
-            const rect = item.getBoundingClientRect();
-            if (rect.top < window.innerHeight + 250 && rect.bottom > -250) {
-                requestAnimationFrame(() => {
-                    item.classList.add('revealed');
-                });
-            }
-        });
-    };
-}
-
 // --- 22. Top Neon Scroll Progress Bar Engine --- //
 function initScrollProgressBar() {
     const progressBar = document.getElementById('hud-scroll-progress');
@@ -1212,51 +1173,63 @@ function initScrollProgressBar() {
     updateProgress();
 }
 
-// --- 23. 3D Interactive Card Tilt & Cursor Spotlight Engine (60fps Optimized) --- //
+  // --- 23. 3D Interactive Card Tilt & Cursor Spotlight Engine (Liquid LERP Physics x2 Smooth) --- //
 function init3DCardTilt() {
-    // Disable heavy 3D calculations on touch/mobile devices to avoid lag
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
-    const cards = document.querySelectorAll('.cyber-card, .cert-card, .thm-badge-pill');
+    const cards = document.querySelectorAll('.cyber-card, .cert-card, .project-card, .sim-row, .thm-stat-box, .thm-badge-pill, .skill-pill-card, .skill-card, .terminal-card, .visual-feed-card, .hero-card, .timeline-item, .contact-method-item, .hud-stat-box, .hud-telemetry-item, .ops-card, .threat-item');
 
     cards.forEach(card => {
-        let ticking = false;
+        let isHovered = false;
         let mouseX = 0, mouseY = 0;
+        let currentX = 0, currentY = 0;
+        let targetX = 0, targetY = 0;
+        let animId = null;
+
+        function updatePhysics() {
+            if (!isHovered && Math.abs(currentX) < 0.05 && Math.abs(currentY) < 0.05) {
+                card.style.transform = 'none';
+                card.classList.remove('is-tilting');
+                animId = null;
+                return;
+            }
+
+            // Smooth 120Hz Liquid LERP Interpolation
+            currentX += (targetX - currentX) * 0.14;
+            currentY += (targetY - currentY) * 0.14;
+
+            card.style.setProperty('--mouse-x', `${mouseX}px`);
+            card.style.setProperty('--mouse-y', `${mouseY}px`);
+            card.style.transform = `perspective(1000px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(6px) translateY(-4px)`;
+
+            animId = requestAnimationFrame(updatePhysics);
+        }
 
         card.addEventListener('mouseenter', () => {
+            isHovered = true;
             card.classList.add('is-tilting');
+            if (!animId) animId = requestAnimationFrame(updatePhysics);
         });
 
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             mouseX = e.clientX - rect.left;
             mouseY = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            targetX = -((mouseY - centerY) / centerY) * 6.5;
+            targetY = ((mouseX - centerX) / centerX) * 6.5;
 
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    card.style.setProperty('--mouse-x', `${mouseX}px`);
-                    card.style.setProperty('--mouse-y', `${mouseY}px`);
-
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = -((mouseY - centerY) / centerY) * 6;
-                    const rotateY = ((mouseX - centerX) / centerX) * 6;
-
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
+            if (!animId) animId = requestAnimationFrame(updatePhysics);
+        }, { passive: true });
 
         card.addEventListener('mouseleave', () => {
-            card.classList.remove('is-tilting');
-            card.style.transform = 'none';
+            isHovered = false;
+            targetX = 0;
+            targetY = 0;
         });
     });
 }
-
-
 
 // --- 24. Click-Triggered Liquid Ripple Waves Engine --- //
 function initLiquidRippleEffect() {
@@ -1286,44 +1259,177 @@ function initLiquidRippleEffect() {
         });
     });
 }
-// --- 25. macOS Fluid Magnetic Dock Proximity Magnification (60fps Throttled) --- //
+
+// --- 25. macOS Fluid Magnetic Dock Proximity Magnification (Liquid LERP Physics x2 Smooth) --- //
 function initFluidDockMagnification() {
     const dock = document.querySelector('.mac-dock');
     if (!dock) return;
 
-    const items = dock.querySelectorAll('.dock-item');
-    let ticking = false;
-    let mouseX = 0;
+    const items = Array.from(dock.querySelectorAll('.dock-item'));
+    let mouseX = null;
+    let animId = null;
+
+    const itemStates = items.map(item => ({
+        el: item,
+        currentScale: 1,
+        targetScale: 1,
+        currentY: 0,
+        targetY: 0
+    }));
+
+    function updateDockPhysics() {
+        let active = false;
+
+        itemStates.forEach(state => {
+            if (mouseX !== null) {
+                const itemRect = state.el.getBoundingClientRect();
+                const itemCenterX = itemRect.left + itemRect.width / 2;
+                const distance = Math.abs(mouseX - itemCenterX);
+                const maxDistance = 150;
+
+                if (distance < maxDistance) {
+                    const power = Math.cos((distance / maxDistance) * (Math.PI / 2));
+                    state.targetScale = 1 + power * 0.38;
+                    state.targetY = -power * 12;
+                } else {
+                    state.targetScale = 1;
+                    state.targetY = 0;
+                }
+            } else {
+                state.targetScale = 1;
+                state.targetY = 0;
+            }
+
+            // High-precision LERP interpolation
+            state.currentScale += (state.targetScale - state.currentScale) * 0.18;
+            state.currentY += (state.targetY - state.currentY) * 0.18;
+
+            if (Math.abs(state.currentScale - state.targetScale) > 0.001 || Math.abs(state.currentY - state.targetY) > 0.01) {
+                active = true;
+            }
+
+            state.el.style.transform = `scale(${state.currentScale.toFixed(3)}) translateY(${state.currentY.toFixed(1)}px) translateZ(0)`;
+        });
+
+        if (active || mouseX !== null) {
+            animId = requestAnimationFrame(updateDockPhysics);
+        } else {
+            animId = null;
+        }
+    }
 
     dock.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
-
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                items.forEach(item => {
-                    const itemRect = item.getBoundingClientRect();
-                    const itemCenterX = itemRect.left + itemRect.width / 2;
-                    const distance = Math.abs(mouseX - itemCenterX);
-                    const maxDistance = 140;
-
-                    if (distance < maxDistance) {
-                        const power = Math.cos((distance / maxDistance) * (Math.PI / 2));
-                        const scale = 1 + power * 0.35;
-                        const translateY = -power * 10;
-                        item.style.transform = `scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(1)}px)`;
-                    } else {
-                        item.style.transform = 'scale(1) translateY(0px)';
-                    }
-                });
-                ticking = false;
-            });
-            ticking = true;
-        }
+        if (!animId) animId = requestAnimationFrame(updateDockPhysics);
     }, { passive: true });
 
     dock.addEventListener('mouseleave', () => {
-        items.forEach(item => {
-            item.style.transform = 'scale(1) translateY(0px)';
-        });
+        mouseX = null;
+    }, { passive: true });
+}
+
+// --- 26. 120Hz Liquid-LERP Cyber HUD Custom Cursor Engine --- //
+function initCustomCursor() {
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+
+    const dot = document.getElementById('cyber-cursor-dot');
+    const ring = document.getElementById('cyber-cursor-ring');
+    if (!dot || !ring) return;
+
+    document.body.classList.add('has-custom-cursor');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    let isVisible = false;
+    let animId = null;
+
+    function renderCursorLoop() {
+        if (!isVisible) {
+            animId = null;
+            return;
+        }
+
+        // 120Hz ProMotion Frame-rate independent liquid LERP physics (0.18 smoothing factor)
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+
+        dot.style.transform = `translate3d(${mouseX.toFixed(1)}px, ${mouseY.toFixed(1)}px, 0)`;
+        ring.style.transform = `translate3d(${ringX.toFixed(1)}px, ${ringY.toFixed(1)}px, 0)`;
+
+        animId = requestAnimationFrame(renderCursorLoop);
+    }
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        if (!isVisible) {
+            isVisible = true;
+            dot.classList.add('is-active');
+            ring.classList.add('is-active');
+        }
+
+        if (!animId) {
+            animId = requestAnimationFrame(renderCursorLoop);
+        }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+        isVisible = false;
+        dot.classList.remove('is-active');
+        ring.classList.remove('is-active');
+    });
+
+    document.addEventListener('mouseenter', () => {
+        isVisible = true;
+        dot.classList.add('is-active');
+        ring.classList.add('is-active');
+        if (!animId) animId = requestAnimationFrame(renderCursorLoop);
+    });
+
+    // Interactive Target & Card Hover Custom Cursor Feedback Engine
+    const cardSelector = '.cyber-card, .cert-card, .project-card, .sim-row, .thm-stat-box, .thm-badge-pill, .skill-pill-card, .skill-card, .terminal-card, .visual-feed-card, .hero-card, .timeline-item, .contact-method-item, .hud-stat-box, .hud-telemetry-item, .ops-card, .threat-item';
+    const actionSelector = 'a, button, input, textarea, select, .btn, .dock-item, .ops-tag-btn, .copy-badge, .hud-tab-btn, .tab-btn';
+
+    document.addEventListener('mouseover', (e) => {
+        const actionTarget = e.target.closest(actionSelector);
+        const cardTarget = e.target.closest(cardSelector);
+
+        if (actionTarget) {
+            dot.classList.add('is-hovering');
+            ring.classList.add('is-hovering');
+            dot.classList.remove('is-card-hover');
+            ring.classList.remove('is-card-hover');
+        } else if (cardTarget) {
+            dot.classList.add('is-card-hover');
+            ring.classList.add('is-card-hover');
+            dot.classList.remove('is-hovering');
+            ring.classList.remove('is-hovering');
+        }
+    }, { passive: true });
+
+    document.addEventListener('mouseout', (e) => {
+        const actionTarget = e.target.closest(actionSelector);
+        const cardTarget = e.target.closest(cardSelector);
+
+        if (actionTarget) {
+            dot.classList.remove('is-hovering');
+            ring.classList.remove('is-hovering');
+        }
+        if (cardTarget) {
+            dot.classList.remove('is-card-hover');
+            ring.classList.remove('is-card-hover');
+        }
+    }, { passive: true });
+
+    // Tactile Click Feedback
+    document.addEventListener('mousedown', () => {
+        ring.classList.add('is-clicking');
+    }, { passive: true });
+
+    document.addEventListener('mouseup', () => {
+        ring.classList.remove('is-clicking');
     }, { passive: true });
 }

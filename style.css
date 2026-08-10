@@ -39,11 +39,11 @@
     --btn-small-hover-color: var(--cyber-cyan);
     --btn-small-hover-bg: rgba(0, 102, 255, 0.08);
 
-    /* Transitions */
-    /* Ultra-Smooth Transitions & Hardware Curves */
-    --transition-speed: 0.35s;
-    --transition-curve: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Transitions (2x ProMotion Liquid Physics Engine) */
+    --transition-speed: 0.4s;
+    --transition-curve: cubic-bezier(0.12, 1, 0.22, 1);
     --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-smooth: cubic-bezier(0.2, 0.9, 0.3, 1);
 
     --cyber-accent-glow: rgba(0, 102, 255, 0.35);
     --scrollbar-thumb: rgba(0, 102, 255, 0.25);
@@ -181,6 +181,7 @@ body {
     height: 100vh;
     min-width: 100%;
     min-height: 100%;
+    max-width: none !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -206,9 +207,168 @@ body {
     height: 100vh;
     min-width: 100%;
     min-height: 100%;
+    max-width: none !important;
     z-index: -1;
     pointer-events: none;
     opacity: var(--canvas-opacity);
+}
+
+/* --- Cyber HUD Precision Liquid-LERP Custom Cursor --- */
+@media (hover: hover) and (pointer: fine) {
+    body.has-custom-cursor,
+    body.has-custom-cursor a,
+    body.has-custom-cursor button,
+    body.has-custom-cursor input,
+    body.has-custom-cursor textarea,
+    body.has-custom-cursor select,
+    body.has-custom-cursor .btn,
+    body.has-custom-cursor .cyber-card,
+    body.has-custom-cursor .dock-item,
+    body.has-custom-cursor .cert-card,
+    body.has-custom-cursor .project-card,
+    body.has-custom-cursor .ops-tag-btn,
+    body.has-custom-cursor .thm-badge-pill {
+        cursor: none !important;
+    }
+}
+
+.cyber-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--cyber-cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999999;
+    box-shadow: 0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-cyan);
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0);
+    transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease, background-color 0.3s ease;
+    will-change: transform;
+}
+
+.cyber-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--border-glow);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999998;
+    background: rgba(0, 102, 255, 0.03);
+    box-shadow: 0 0 15px rgba(0, 102, 255, 0.15), inset 0 0 10px rgba(0, 102, 255, 0.05);
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0);
+    transition: opacity 0.3s ease, width 0.25s var(--transition-curve), height 0.25s var(--transition-curve), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+body.dark-mode .cyber-cursor-ring {
+    border-color: rgba(0, 229, 255, 0.45);
+    background: rgba(0, 229, 255, 0.04);
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.25), inset 0 0 12px rgba(0, 229, 255, 0.08);
+}
+
+/* Custom Cursor Active Hover States */
+.cyber-cursor-ring.is-hovering {
+    width: 52px;
+    height: 52px;
+    border-color: var(--cyber-cyan);
+    background: rgba(0, 229, 255, 0.08);
+    box-shadow: 0 0 25px var(--cyber-cyan), inset 0 0 15px var(--cyber-cyan);
+}
+
+.cyber-cursor-dot.is-hovering {
+    width: 4px;
+    height: 4px;
+    background-color: var(--cyber-green);
+    box-shadow: 0 0 12px var(--cyber-green);
+}
+
+/* Card Hover Custom Cursor HUD Scanner Mode */
+.cyber-cursor-ring.is-card-hover {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+    border: 1.5px dashed var(--cyber-cyan);
+    background: rgba(0, 229, 255, 0.06);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.3), inset 0 0 15px rgba(0, 229, 255, 0.12);
+}
+
+.cyber-cursor-dot.is-card-hover {
+    width: 8px;
+    height: 8px;
+    background-color: var(--cyber-green);
+    box-shadow: 0 0 15px var(--cyber-green), 0 0 25px var(--cyber-green);
+}
+
+.cyber-cursor-ring.is-clicking {
+    width: 24px;
+    height: 24px;
+    border-color: var(--cyber-green);
+    background: rgba(13, 138, 67, 0.2);
+    box-shadow: 0 0 20px var(--cyber-green);
+}
+
+.cyber-cursor-ring.is-active,
+.cyber-cursor-dot.is-active {
+    opacity: 1;
+}
+
+/* 3D Interactive Card Spotlight Highlight Effects */
+.cyber-card,
+.cert-card,
+.project-card,
+.sim-row,
+.thm-stat-box,
+.thm-badge-pill,
+.skill-card,
+.skill-pill-card,
+.terminal-card,
+.visual-feed-card,
+.timeline-item,
+.contact-method-item,
+.hud-stat-box,
+.hud-telemetry-item {
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+.cyber-card::before,
+.cert-card::before,
+.project-card::before,
+.skill-card::before,
+.terminal-card::before,
+.visual-feed-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 229, 255, 0.12), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cyber-card:hover::before,
+.cert-card:hover::before,
+.project-card:hover::before,
+.skill-card:hover::before,
+.terminal-card:hover::before,
+.visual-feed-card:hover::before {
+    opacity: 1;
 }
 
 img, video, canvas, svg, iframe {
@@ -4720,31 +4880,32 @@ body.dark-mode .thm-badge-icon {
     filter: drop-shadow(0 0 8px #00ff41) !important;
 }
 
-/* --- High-Performance GPU Acceleration & Ultra-Smooth Staggered Cascade Framework --- */
+/* --- High-Performance GPU Acceleration & Ultra-Smooth Staggered Cascade Framework (Smoothness x2) --- */
 .is-tilting {
-    transition: transform 0.08s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+    transition: transform 0.06s cubic-bezier(0.12, 1, 0.22, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
 }
 
 .hud-cascade-item {
     opacity: 0;
-    transform: translateY(22px) scale(0.975);
-    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform: translateY(24px) scale(0.97) translateZ(0);
+    transition: opacity 0.5s cubic-bezier(0.12, 1, 0.22, 1),
+                transform 0.5s cubic-bezier(0.12, 1, 0.22, 1),
                 box-shadow 0.35s ease,
                 border-color 0.35s ease !important;
-    transition-delay: calc(var(--cascade-index, 0) * 35ms) !important;
+    transition-delay: calc(var(--cascade-index, 0) * 28ms) !important;
     will-change: transform, opacity;
+    contain: layout style paint;
 }
 
 .hud-cascade-item.revealed {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1) translateZ(0);
 }
 
 .hud-cascade-item.is-leaving {
     opacity: 0;
-    transform: translateY(16px) scale(0.96);
-    transition: opacity 0.22s ease-out, transform 0.22s ease-out !important;
+    transform: translateY(14px) scale(0.96) translateZ(0);
+    transition: opacity 0.2s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
     transition-delay: 0ms !important;
 }
 
