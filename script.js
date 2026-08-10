@@ -1182,32 +1182,44 @@ function init3DCardTilt() {
     cards.forEach(card => {
         let isHovered = false;
         let mouseX = 0, mouseY = 0;
+        let currentMouseX = 0, currentMouseY = 0;
         let currentX = 0, currentY = 0;
         let targetX = 0, targetY = 0;
         let animId = null;
 
         function updatePhysics() {
-            if (!isHovered && Math.abs(currentX) < 0.05 && Math.abs(currentY) < 0.05) {
-                card.style.transform = 'none';
+            if (!isHovered && Math.abs(currentX) < 0.02 && Math.abs(currentY) < 0.02) {
+                card.style.transform = '';
                 card.classList.remove('is-tilting');
                 animId = null;
                 return;
             }
 
-            // Smooth 120Hz Liquid LERP Interpolation
-            currentX += (targetX - currentX) * 0.14;
-            currentY += (targetY - currentY) * 0.14;
+            // ProMotion 120Hz Ultra-Smooth Liquid LERP Physics
+            currentX += (targetX - currentX) * 0.12;
+            currentY += (targetY - currentY) * 0.12;
 
-            card.style.setProperty('--mouse-x', `${mouseX}px`);
-            card.style.setProperty('--mouse-y', `${mouseY}px`);
-            card.style.transform = `perspective(1000px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(6px) translateY(-4px)`;
+            currentMouseX += (mouseX - currentMouseX) * 0.16;
+            currentMouseY += (mouseY - currentMouseY) * 0.16;
+
+            card.style.setProperty('--mouse-x', `${currentMouseX.toFixed(1)}px`);
+            card.style.setProperty('--mouse-y', `${currentMouseY.toFixed(1)}px`);
+
+            if (isHovered || Math.abs(currentX) >= 0.02 || Math.abs(currentY) >= 0.02) {
+                card.style.transform = `perspective(1000px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg) translateZ(8px) translateY(-5px)`;
+            }
 
             animId = requestAnimationFrame(updatePhysics);
         }
 
-        card.addEventListener('mouseenter', () => {
+        card.addEventListener('mouseenter', (e) => {
             isHovered = true;
             card.classList.add('is-tilting');
+            const rect = card.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+            currentMouseX = mouseX;
+            currentMouseY = mouseY;
             if (!animId) animId = requestAnimationFrame(updatePhysics);
         });
 

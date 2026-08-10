@@ -337,9 +337,10 @@ body.dark-mode .cyber-cursor-ring {
 .hud-stat-box,
 .hud-telemetry-item {
     position: relative;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
     will-change: transform;
     transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 
 .cyber-card::before,
@@ -355,9 +356,9 @@ body.dark-mode .cyber-cursor-ring {
     right: 0;
     bottom: 0;
     border-radius: inherit;
-    background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 229, 255, 0.12), transparent 70%);
+    background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 229, 255, 0.14), transparent 70%);
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
     z-index: 1;
 }
