@@ -1458,6 +1458,51 @@ body.dark-mode .cyber-btn.cv-btn {
    SILICON VALLEY CYBER BADGE MATRIX (TECHNICAL ARSENAL)
    ========================================================================= */
 
+/* Technical Arsenal Filter Bar */
+.arsenal-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.arsenal-filter-btn {
+    padding: 9px 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 12px;
+    background: var(--neu-surface);
+    border: var(--neu-border);
+    box-shadow: var(--neu-raised);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.03em;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        color 0.25s ease !important;
+}
+
+.arsenal-filter-btn:hover {
+    color: var(--cyber-cyan) !important;
+    border-color: var(--cyber-cyan) !important;
+    box-shadow: var(--neu-raised-hover) !important;
+    transform: translateY(-2px) !important;
+}
+
+.arsenal-filter-btn.active {
+    color: var(--cyber-cyan) !important;
+    border-color: var(--cyber-cyan) !important;
+    box-shadow: var(--neu-inset) !important;
+    transform: translateY(0) !important;
+}
+
 .arsenal-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1628,38 +1673,57 @@ body:not(.dark-mode) .skill-pill-card:hover {
 /* Verified Evidence Link Footers - Pinned to bottom */
 .card-footer-evidence {
     margin-top: auto !important;
-    padding: 12px 18px !important;
-    background: rgba(0, 0, 0, 0.25) !important;
+    padding: 10px 14px !important;
+    background: rgba(0, 0, 0, 0.32) !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
     display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    font-size: 0.72rem !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    font-size: 0.73rem !important;
     font-family: var(--font-mono) !important;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
 }
 
 body:not(.dark-mode) .card-footer-evidence {
-    background: rgba(0, 102, 255, 0.03) !important;
-    border-top: 1px solid rgba(0, 102, 255, 0.08) !important;
+    background: rgba(0, 102, 255, 0.04) !important;
+    border-top: 1px solid rgba(0, 102, 255, 0.1) !important;
+}
+
+.evidence-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
 }
 
 .card-footer-evidence .evidence-lbl {
     color: var(--text-muted);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 .card-footer-evidence .evidence-link {
     color: var(--cyber-cyan);
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     transition: all 0.2s ease;
+    font-size: 0.72rem;
 }
 
 .card-footer-evidence .evidence-link:hover {
     color: var(--cyber-green);
     text-decoration: underline;
+    transform: translateX(2px);
 }
 
 /* =========================================================================
@@ -5569,3 +5633,105 @@ body:not(.dark-mode) .thm-stat-box {
         transition: opacity 0.2s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
         transition-delay: 0ms !important;
     }
+
+/* =========================================================================
+   GLOBAL TACTILE PHYSICS & CYBERPUNK POLISH (FRONTEND-DESIGN SKILL)
+   ========================================================================= */
+
+/* Tactile Spring Compression on all interactive controls */
+.btn:active,
+.cyber-btn:active,
+.arsenal-filter-btn:active,
+.cert-filter-btn:active,
+.tab-btn:active,
+.dock-item:active,
+.skill-pill-card:active {
+    transform: scale(0.96) translateY(1px) !important;
+    transition: transform 0.08s ease-out !important;
+}
+
+/* Cyber Laser Hover Glint on Glassmorphic Cards */
+.cyber-card,
+.project-card,
+.cert-card,
+.tactical-stat-box,
+.hud-terminal-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-card::after,
+.project-card::after,
+.cert-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 229, 255, 0.04) 40%,
+        rgba(0, 229, 255, 0.12) 50%,
+        rgba(0, 229, 255, 0.04) 60%,
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+}
+
+.cyber-card:hover::after,
+.project-card:hover::after,
+.cert-card:hover::after {
+    left: 150%;
+}
+
+/* Neumorphic Inset Wells for Interactive Inputs */
+.cert-search-input,
+.contact-input,
+.contact-textarea,
+.payload-preview-box {
+    background: var(--neu-surface-inset) !important;
+    box-shadow: var(--neu-inset) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    color: var(--text-primary) !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.cert-search-input:focus,
+.contact-input:focus,
+.contact-textarea:focus {
+    border-color: var(--cyber-cyan) !important;
+    box-shadow: var(--neu-inset), 0 0 12px rgba(0, 229, 255, 0.2) !important;
+    outline: none !important;
+}
+
+/* High-Contrast Evidence Badge Rows */
+.evidence-row .evidence-lbl {
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.evidence-row .evidence-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Subtle Glowing Ring for Hero Status Indicator */
+.live-status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00ff41;
+    box-shadow: 0 0 8px #00ff41;
+    animation: statusPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.75; }
+}

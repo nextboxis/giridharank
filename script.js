@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Operations Tab Switching
     initOperationsTabs();
 
+    // 4.5. Technical Arsenal Interactive Filters
+    initArsenalFilter();
+
     // 5. Certification Database Filters
     initCertFilters();
 
@@ -192,6 +195,23 @@ function initNavigation() {
             navItems.forEach(nav => nav.classList.remove('active'));
             item.classList.add('active');
 
+            if (targetId === 'tryhackme') {
+                const opsSection = document.getElementById('ops');
+                const thmTabBtn = document.querySelector('.tab-btn[data-target="thm-operator-grid"]');
+                if (opsSection) {
+                    sections.forEach(s => {
+                        if (s !== opsSection) {
+                            s.classList.remove('active-section');
+                            s.querySelectorAll('.cyber-card, .cert-card, .project-card, .sim-row, .hud-cascade-item').forEach(el => el.classList.remove('revealed'));
+                        }
+                    });
+                    opsSection.classList.add('active-section');
+                    if (thmTabBtn) thmTabBtn.click();
+                    opsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+                return;
+            }
+
             if (targetSection) {
                 sections.forEach(section => {
                     if (section !== targetSection) {
@@ -265,6 +285,34 @@ function initOperationsTabs() {
                 }
             });
 
+            if (window.refreshCascadeReveals) window.refreshCascadeReveals();
+        });
+    });
+}
+
+// --- 4.5. Technical Arsenal Interactive Filters --- //
+function initArsenalFilter() {
+    const filterBtns = document.querySelectorAll('.arsenal-filter-btn');
+    const skillCards = document.querySelectorAll('.arsenal-grid .skill-card');
+    if (!filterBtns.length || !skillCards.length) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterVal = btn.getAttribute('data-filter') || 'all';
+
+            skillCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category') || '';
+                if (filterVal === 'all' || cardCategory.includes(filterVal)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (typeof window.playAudioBlip === 'function') window.playAudioBlip(750, 0.03);
             if (window.refreshCascadeReveals) window.refreshCascadeReveals();
         });
     });
@@ -538,12 +586,16 @@ function startTerminalShell() {
         switch (cmd) {
             case 'help':
                 printLine("Active Command Protocols:");
-                printLine("  <span style='color: var(--cyber-cyan);'>whoami</span>   - Prints bio and sentinel profile trace.");
-                printLine("  <span style='color: var(--cyber-cyan);'>skills</span>   - Prints visual ASCII stack chart.");
-                printLine("  <span style='color: var(--cyber-cyan);'>contact</span>  - Establishes connection bridge comms.");
-                printLine("  <span style='color: var(--cyber-cyan);'>ip</span>       - Queries client node public IP.");
-                printLine("  <span style='color: var(--cyber-cyan);'>clear</span>    - Clears CLI terminal output.");
-                printLine("  <span style='color: var(--cyber-cyan);'>help</span>     - Prints this assistance matrix.");
+                printLine("  <span style='color: var(--cyber-cyan);'>whoami</span>    - Prints bio and sentinel profile trace.");
+                printLine("  <span style='color: var(--cyber-cyan);'>skills</span>    - Prints visual ASCII stack chart (72 skills).");
+                printLine("  <span style='color: var(--cyber-cyan);'>hack</span>      - Simulates automated adversary attack sequence.");
+                printLine("  <span style='color: var(--cyber-cyan);'>redteam</span>   - Lists offensive toolchains & C2 capabilities.");
+                printLine("  <span style='color: var(--cyber-cyan);'>thm</span>       - Displays TryHackMe operator telemetry.");
+                printLine("  <span style='color: var(--cyber-cyan);'>certs</span>     - Displays cryptographically verified certs.");
+                printLine("  <span style='color: var(--cyber-cyan);'>contact</span>   - Establishes connection bridge comms.");
+                printLine("  <span style='color: var(--cyber-cyan);'>ip</span>        - Queries client node public IP.");
+                printLine("  <span style='color: var(--cyber-cyan);'>clear</span>     - Clears CLI terminal output.");
+                printLine("  <span style='color: var(--cyber-cyan);'>help</span>      - Prints this assistance matrix.");
                 break;
             case 'clear':
                 cliOutput.innerHTML = '';
@@ -551,17 +603,50 @@ function startTerminalShell() {
             case 'whoami':
                 printLine("IDENTITY TRACE //");
                 printLine("  Name: GIRIDHARAN K");
-                printLine("  Title: Front-End Developer & Web Security Specialist");
-                printLine("  Specialization: React.js, Web Application Security, Threat Hunting");
-                printLine("  Node Status: VERIFIED_SECURE");
+                printLine("  Title: Cyber Security Engineer &amp; Full-Stack Specialist");
+                printLine("  Focus: Offensive Red Teaming, Web AppSec, Threat Intel AI");
+                printLine("  Node Status: VERIFIED_SECURE [TOP 11% TRYHACKME]");
                 break;
             case 'skills':
-                printLine("CAPABILITY METRICS [ASCII_RENDER] //");
-                printLine("  React.js   [████████████████░░] 85%");
-                printLine("  JavaScript [████████████████░░] 80%");
-                printLine("  HTML/CSS   [██████████████████] 90%");
-                printLine("  Python     [████████████████░░] 80%");
-                printLine("  Security   [████████████████░░] 82%");
+                printLine("CAPABILITY METRICS (72 SKILLS LOGGED) //");
+                printLine("  Offensive Hacking [████████████████░░] 85% (Burp, Mimikatz, Metasploit, Nmap)");
+                printLine("  Binary &amp; RE       [██████████████░░░░] 78% (Ghidra, ROP Chains, GDB/PEDA)");
+                printLine("  Web AppSec        [█████████████████░] 88% (OWASP Top 10, JWT, SQLi, SSRF)");
+                printLine("  Network Attacks   [████████████████░░] 82% (Bettercap, Scapy, Aircrack-ng)");
+                printLine("  Full-Stack Dev    [████████████████░░] 85% (React, Python 3.12, FastAPI, Node)");
+                printLine("  Security AI       [████████████████░░] 80% (Shannon Entropy, XGBoost, CNN)");
+                break;
+            case 'hack':
+            case 'exploit':
+                printLine("<span style='color: var(--cyber-orange);'>[!] INITIATING ADVERSARY EMULATION SEQUENCE...</span>");
+                setTimeout(() => printLine("  [1/4] Scanning target perimeter... 443/TCP [OPEN] | 88/TCP [KERBEROS]"), 300);
+                setTimeout(() => printLine("  [2/4] Executing AS-REP Roasting on KRB5 SPN... <span style='color: var(--cyber-green);'>[TICKET_ACQUIRED]</span>"), 700);
+                setTimeout(() => printLine("  [3/4] Cracking RC4-HMAC cipher with Hashcat mode 18200... <span style='color: var(--cyber-green);'>[CRACKED]</span>"), 1100);
+                setTimeout(() => printLine("  [4/4] Elevating privileges via SeImpersonatePrivilege... <span style='color: #00ff41;'>[ROOT_SHELL_GRANTED]</span>"), 1500);
+                break;
+            case 'redteam':
+                printLine("OFFENSIVE RED TEAM TOOLCHAINS //");
+                printLine("  Active Directory: BloodHound, Mimikatz, Impacket, Certipy, CrackMapExec");
+                printLine("  Exploit Tooling: Burp Suite Pro, Metasploit, SQLmap, OWASP ZAP");
+                printLine("  Binary / RE: Ghidra, GDB-PEDA, Radare2, ROPgadget, x64dbg");
+                printLine("  Network &amp; Wireless: Scapy, Bettercap, Aircrack-ng, Wireshark, Nmap");
+                break;
+            case 'thm':
+            case 'tryhackme':
+                printLine("TRYHACKME TELEMETRY //");
+                printLine("  User: giridharank790 | Rank: TOP 11% GLOBAL");
+                printLine("  Rooms Completed: 40+ Nodes Cleared");
+                printLine("  Profile Link: <a href='https://tryhackme.com/p/giridharank790' target='_blank' style='color: var(--cyber-cyan); text-decoration: underline;'>tryhackme.com/p/giridharank790</a>");
+                break;
+            case 'certs':
+            case 'credentials':
+                printLine("VERIFIED CREDENTIAL NODES (23 VERIFIED) //");
+                printLine("  • Google Cybersecurity Professional Certificate");
+                printLine("  • Cisco Certified Ethical Hacker &amp; Cybersecurity Essentials");
+                printLine("  • Fortinet Network Security Associate (NSE)");
+                printLine("  • AWS Solutions Architecture &amp; Azure Tools");
+                printLine("  • Future Interns Cyber Security Internship");
+                printLine("  • JPMorgan &amp; Deloitte Technical Simulations");
                 break;
             case 'ip':
                 const ipVal = document.getElementById('user-ip') ? document.getElementById('user-ip').textContent : '127.0.0.1';

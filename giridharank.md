@@ -48,26 +48,35 @@ root@giri:~$ git stats --user nextboxis
 ### 🌐 Frontend Development
 * **React.js** — `85%` (Component Architecture, Hooks, Virtual DOM, State Management)
 * **JavaScript (ES6+)** — `80%` (Async/Await, Promises, Event Loop, DOM Manipulation)
+* **TypeScript** — `78%` (Type Safety, Interfaces, Generics, Modern Frontend)
 * **HTML5 & CSS3** — `90%` (Semantic Markup, Flexbox, CSS Grid, Glassmorphism, Animations)
 * **Responsive Design** — `85%` (Mobile-First Layouts, Media Queries, Fluid UI)
 * **Bootstrap 5** — `80%` (Utility Classes, Responsive Breakpoints, UI Dashboards)
-* **UI State & DOM** — `82%` (Reactive UI States, Event Delegation, DOM Optimization)
+* **Evidence:**
+  * **Repo:** [DNS Sinkhole HUD UI](https://github.com/nextboxis/DNS-Sinkhole)
+  * **Cert:** [JPMorgan Chase & Co. Software Engineering](file:///j:/PROGRAM/protflio/certificate/jpmorgan_swe.pdf)
 
 ### ⚙️ Backend & Systems
-* **Python** — `80%` (Scripting, Automation, OOP, Data Structures)
+* **Python 3.12** — `85%` (Scripting, Automation, OOP, Data Structures)
 * **FastAPI** — `80%` (Async Microservices, Pydantic, OpenAPI Specs)
 * **Flask & REST APIs** — `75%` (Endpoint Architecture, JSON Serialization, API Gateways)
 * **MongoDB** — `70%` (NoSQL Schema Design, Query Aggregation, Indexing)
 * **Linux CLI / Bash** — `80%` (Shell Scripting, System Hardening, Process Management)
 * **Git & Version Control** — `85%` (Branching Strategies, CI/CD Workflows, Collaborative Git)
+* **Evidence:**
+  * **Repo:** [Pishentry // FastAPI APIs](https://github.com/nextboxis/Pishentry)
+  * **Cert:** [MongoDB Developer](file:///j:/PROGRAM/protflio/certificate/mongodb.pdf)
 
 ### 🛡️ Cybersecurity Tools & OSINT
-* **Burp Suite** — `75%` (Proxy Interception, Repeater, Intruder, Vulnerability Assessment)
+* **Burp Suite Pro** — `75%` (Proxy Interception, Repeater, Intruder, Vulnerability Assessment)
 * **Nmap / Masscan** — `88%` (Network Reconnaissance, Port Scanning, NSE Scripting)
 * **Wireshark & PCAPs** — `80%` (Packet Analysis, Protocol Decoding, Traffic Signatures)
-* **Kali Linux** — `85%` (Penetration Testing Distributions, Security Toolchains)
+* **Kali & BlackArch** — `85%` (Penetration Testing Distributions, Security Toolchains)
 * **Metasploit** — `80%` (Exploit Framework, Payload Delivery, Meterpreter)
 * **OWASP ZAP** — `80%` (Dynamic Web App Security Scanner, Automated Crawling)
+* **Evidence:**
+  * **Repo:** [BlackArch OSINT Toolchains](https://github.com/nextboxis/blackarch)
+  * **Cert:** [Cisco Ethical Hacker](file:///j:/PROGRAM/protflio/certificate/cisco_ethical_hacker.pdf)
 
 ### 🔒 Security Concepts & Exploitation
 * **SQL Injection & Web Exploitation** — `80%` (Payload Crafting, Data Extraction, Auth Bypass)
@@ -76,6 +85,9 @@ root@giri:~$ git stats --user nextboxis
 * **OWASP Top 10** — `80%` (XSS, CSRF, IDOR, SSRF, Broken Access Control)
 * **MITRE ATT&CK Framework** — `75%` (Adversary Tactic & Technique Mapping)
 * **IAM & RBAC** — `80%` (Identity Access Management, Role-Based Access Control)
+* **Evidence:**
+  * **Repo:** [NexShield Threat Platform](https://github.com/nextboxis/NexShield)
+  * **Lab Solves:** [40+ TryHackMe Lab Solves](https://tryhackme.com/p/giridharank790)
 
 ### 🤖 Machine Learning & AI
 * **scikit-learn** — `70%` (Classification, Predictive Modeling, Feature Engineering)
@@ -84,6 +96,9 @@ root@giri:~$ git stats --user nextboxis
 * **NVD CVE API Integration** — `80%` (Vulnerability Database Ingestion & Threat Feeds)
 * **XGBoost + SHAP** — `75%` (Gradient Boosting & Model Explainability)
 * **ResNet-50 / CNN** — `70%` (Deep Learning Computer Vision & Visual Phishing Detection)
+* **Evidence:**
+  * **Repo:** [Pishentry AI Engine](https://github.com/nextboxis/Pishentry)
+  * **Cert:** [Python & ML Foundations](file:///j:/PROGRAM/protflio/certificate/python_basics.pdf)
 
 ### 🛡️ Systems & Security Hardening
 * **Linux Hardening** — `85%` (Kernel Parameter Tuning, PAM, SSH Hardening, File Permissions)
@@ -92,6 +107,75 @@ root@giri:~$ git stats --user nextboxis
 * **DNS Security** — `80%` (Sinkholing, Threat Intel Ingestion, Query Quarantine)
 * **IR & Threat Triage** — `76%` (Threat Triage, Containment, Incident Response Playbooks)
 * **Network Forensics** — `78%` (PCAP Deep Inspection, Signature Mapping, Beacon Hunting)
+* **Evidence:**
+  * **Repo:** [MataZero // Privacy Engine](https://github.com/nextboxis/matazero)
+  * **Cert:** [Linux Administration](file:///j:/PROGRAM/protflio/certificate/linux_administration.pdf)
+
+### ☁️ Cloud Security & DevSecOps
+* **AWS Security Posture** — `78%` (IAM Policies, S3 Hardening, CloudTrail Auditing)
+* **Azure Cloud Defense** — `75%` (Entra ID, RBAC Roles, Security Center Baselines)
+* **Docker Container Isolation** — `80%` (Container Security, Rootless Execution, Cgroup Limits)
+* **CI/CD Pipeline Security** — `75%` (Automated Vulnerability Checks, Git Hooks, SAST Scans)
+* **Zero-Trust Architecture** — `82%` (Least Privilege, Perimeter Hardening, Identity Verification)
+* **Linux PAM & SSH** — `85%` (Public Key Authentication, PAM Module Hardening, Session Limits)
+* **Evidence:**
+  * **Repo:** [xPing Linux Hardening](https://github.com/nextboxis/xping)
+  * **Cert:** [AWS Solutions Architecture](file:///j:/PROGRAM/protflio/certificate/aws_certified.pdf)
+
+### 🔐 Web Application Defense & Auth
+* **JWT & Session Security** — `82%` (Token Expiration, Signature Validation, Refresh Strategies)
+* **CORS & CSP Hardening** — `85%` (Content Security Policy Directives, Origin Whitelisting)
+* **XSS & CSRF Defenses** — `88%` (Sanitization, Output Encoding, Anti-CSRF Tokens, SameSite Cookies)
+* **IDOR & Access Control** — `85%` (Object-Level AuthZ Checks, Multi-Tenant Boundary Enforcement)
+* **Rate Limiting & WAF** — `80%` (Token Bucket Algorithms, IP Throttling, Malicious Payload Blocking)
+* **SSRF & Injection Shield** — `82%` (URL Validation, DNS Rebinding Mitigations, Input Validation)
+* **Evidence:**
+  * **Repo:** [NexShield Threat Suite](https://github.com/nextboxis/NexShield)
+  * **Cert:** [Future Interns Cyber Security](file:///j:/PROGRAM/protflio/certificate/GIRIDHARAN_K_Certificate.pdf)
+
+### 🔑 Security Automation & Cryptography
+* **Python Exploit Scripting** — `88%` (Custom Exploit PoCs, Network Socket Scripting, Threat Ingestion)
+* **Bash Shell Orchestration** — `85%` (Automated Recon Chains, System Audit Daemons, Cron Tasks)
+* **AES & RSA Encryption** — `80%` (Symmetric Block Ciphers, Asymmetric Keypairs, Hybrid Crypto)
+* **Hash Integrity & HMAC** — `85%` (SHA-256 Checksums, Message Authentication Codes, Salt Hashing)
+* **Regex Threat Patterns** — `85%` (Log Pattern Extraction, Threat Signature Matching, IOC Scraping)
+* **Automated CIS Audits** — `80%` (Automated Compliance Reporting, System Baseline Validation)
+* **Evidence:**
+  * **Repo:** [Cryptography Toolkit Utilities](https://github.com/nextboxis/Cryptography-Toolkit)
+  * **Cert:** [Fortinet Network Security](file:///j:/PROGRAM/protflio/certificate/fortinet_nse.pdf)
+
+### 💀 Red Team & Active Directory Exploitation
+* **Mimikatz & LSASS Dumping** — `85%` (Credential Extraction, LSA Secrets, SAM Hive Parsing)
+* **Kerberoasting & AS-REP Roasting** — `82%` (Service Principal Name Abuse, Offline Hashcat Cracking)
+* **Pass-the-Hash & Pass-the-Ticket** — `80%` (NTLM Hash Replay, Kerberos Ticket Injection)
+* **Token Impersonation & PrivEsc** — `82%` (SeImpersonatePrivilege, Named Pipe Potato Exploits)
+* **C2 Beaconing Infrastructure** — `78%` (Havoc & Sliver C2, Malleable Profiles, Egress Routing)
+* **BloodHound AD Reconnaissance** — `85%` (Graph Theory Pathing, Domain Admin Attack Paths)
+* **Evidence:**
+  * **Repo:** [BlackArch Red Team Tools](https://github.com/nextboxis/blackarch)
+  * **Lab Solves:** [40+ TryHackMe Lab Solves](https://tryhackme.com/p/giridharank790)
+
+### 🔬 Binary Exploitation & Reverse Engineering
+* **Ghidra Disassembly & Decompilation** — `76%` (Static Analysis, Function Graphing, Cross-References)
+* **Buffer Overflow & ROP Chains** — `80%` (Stack Overflow, Return-to-libc, Gadget Hunting)
+* **GDB & PEDA Dynamic Debugging** — `78%` (Breakpoint Triage, Register Inspection, Memory Layout)
+* **Shellcode Crafting & Injection** — `75%` (Position-Independent Code, Syscall Stagers, Memory Injection)
+* **Format String Vulnerabilities** — `74%` (Arbitrary Memory Read/Write, %n Specifier Abuse)
+* **PE & ELF Malware Triage** — `78%` (Section Headers, Import Table Analysis, Entropy Scanning)
+* **Evidence:**
+  * **Repo:** [MataZero // Binary Forensics](https://github.com/nextboxis/matazero)
+  * **Cert:** [Cisco Ethical Hacker](file:///j:/PROGRAM/protflio/certificate/cisco_ethical_hacker.pdf)
+
+### 📡 Network Attacks & Wireless Exploitation
+* **ARP Spoofing & MITM** — `85%` (Layer 2 Poisoning, SSL Stripping, Traffic Interception)
+* **Bettercap & Ettercap Frameworks** — `82%` (Packet Manipulation, HTTP Proxy Injection, DNS Spoofing)
+* **DNS Cache Poisoning** — `80%` (Kaminsky Attack Principles, Bailiwick Bypasses, Rogue Resolvers)
+* **Wi-Fi WPA2/3 Handshake Cracking** — `82%` (Aircrack-ng Suite, PMKID Capture, Dictionary Attacks)
+* **Scapy Packet Crafting & Injection** — `85%` (Raw Sockets, Custom Protocol Payloads, TCP State Hijacking)
+* **VLAN Hopping & DHCP Starvation** — `78%` (Double Tagging, Rogue Gateway Injection, DTP Exploitation)
+* **Evidence:**
+  * **Repo:** [xPing Network Audit](https://github.com/nextboxis/xping)
+  * **Cert:** [Fortinet Network Security](file:///j:/PROGRAM/protflio/certificate/fortinet_nse.pdf)
 
 ---
 

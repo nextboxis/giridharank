@@ -366,11 +366,20 @@
         <!-- Section: Technical Arsenal (Skills) -->
         <section id="arsenal" class="hud-section">
             <h2 class="section-title font-mono"><i class="fa-solid fa-shield-halved text-cyan"></i> TECHNICAL_ARSENAL</h2>
-            <p class="section-subtitle font-mono">&gt; Verified stack capability, offensive toolchains, and security engineering matrix.</p>
+            <p class="section-subtitle font-mono">&gt; Verified stack capability, offensive red-teaming toolchains, exploit engineering, and cyber-defense matrix (72 Skills Logged).</p>
+
+            <!-- Interactive Arsenal Filter Bar -->
+            <div class="arsenal-filter-bar font-mono">
+                <button class="arsenal-filter-btn active" data-filter="all"><i class="fa-solid fa-list-check"></i> ALL_ARSENAL (72)</button>
+                <button class="arsenal-filter-btn" data-filter="security"><i class="fa-solid fa-user-ninja text-red"></i> OFFENSIVE_&_HACKING</button>
+                <button class="arsenal-filter-btn" data-filter="dev"><i class="fa-solid fa-code text-cyan"></i> DEV_&_CLOUD</button>
+                <button class="arsenal-filter-btn" data-filter="ai"><i class="fa-solid fa-brain text-purple"></i> AI_&_THREAT_INTEL</button>
+                <button class="arsenal-filter-btn" data-filter="hardening"><i class="fa-solid fa-lock text-green"></i> HARDENING_&_OPS</button>
+            </div>
             
             <div class="arsenal-grid">
                 <!-- Skill Category 1: Frontend Development -->
-                <div class="cyber-card glassmorphic skill-card">
+                <div class="cyber-card glassmorphic skill-card" data-category="dev">
                     <div class="card-header">
                         <span class="card-title font-mono"><i class="fa-brands fa-react text-cyan"></i> FRONTEND_DEVELOPMENT</span>
                         <span class="card-count-badge font-mono text-cyan">6 SKILLS</span>
@@ -378,25 +387,31 @@
                     <div class="card-body skills-flex-grid">
                         <div class="skill-pill-card" title="React.js"><span class="skill-pill-icon text-cyan"><i class="fa-brands fa-react"></i></span><span class="skill-pill-name font-mono">React.js</span></div>
                         <div class="skill-pill-card" title="JavaScript (ES6+)"><span class="skill-pill-icon text-yellow"><i class="fa-brands fa-js"></i></span><span class="skill-pill-name font-mono">JavaScript</span></div>
+                        <div class="skill-pill-card" title="TypeScript"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-code"></i></span><span class="skill-pill-name font-mono">TypeScript</span></div>
                         <div class="skill-pill-card" title="HTML5 & CSS3"><span class="skill-pill-icon text-orange"><i class="fa-brands fa-html5"></i></span><span class="skill-pill-name font-mono">HTML5 & CSS3</span></div>
                         <div class="skill-pill-card" title="Responsive Design"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-mobile-screen"></i></span><span class="skill-pill-name font-mono">Responsive UI</span></div>
                         <div class="skill-pill-card" title="Bootstrap 5"><span class="skill-pill-icon text-purple"><i class="fa-brands fa-bootstrap"></i></span><span class="skill-pill-name font-mono">Bootstrap 5</span></div>
-                        <div class="skill-pill-card" title="UI State & DOM"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-layer-group"></i></span><span class="skill-pill-name font-mono">UI State / DOM</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
-                        <span class="evidence-lbl"><i class="fa-solid fa-code-commit text-cyan"></i> EVIDENCE:</span>
-                        <a href="https://github.com/nextboxis/DNS-Sinkhole" target="_blank" rel="noopener noreferrer" class="evidence-link">DNS Sinkhole HUD UI &gt;</a>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/DNS-Sinkhole" target="_blank" rel="noopener noreferrer" class="evidence-link">DNS Sinkhole HUD UI &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/jpmorgan_swe.pdf" target="_blank" class="evidence-link">JPMorgan SWE React &gt;</a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Skill Category 2: Backend & Dev -->
-                <div class="cyber-card glassmorphic skill-card">
+                <div class="cyber-card glassmorphic skill-card" data-category="dev">
                     <div class="card-header">
                         <span class="card-title font-mono"><i class="fa-solid fa-server text-green"></i> BACKEND_&_DEV</span>
                         <span class="card-count-badge font-mono text-green">6 SKILLS</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card" title="Python"><span class="skill-pill-icon text-green"><i class="fa-brands fa-python"></i></span><span class="skill-pill-name font-mono">Python</span></div>
+                        <div class="skill-pill-card" title="Python 3.12"><span class="skill-pill-icon text-green"><i class="fa-brands fa-python"></i></span><span class="skill-pill-name font-mono">Python 3.12</span></div>
                         <div class="skill-pill-card" title="FastAPI"><span class="skill-pill-icon text-green"><i class="fa-solid fa-bolt"></i></span><span class="skill-pill-name font-mono">FastAPI</span></div>
                         <div class="skill-pill-card" title="Flask & REST APIs"><span class="skill-pill-icon text-green"><i class="fa-solid fa-pepper-hot"></i></span><span class="skill-pill-name font-mono">Flask & APIs</span></div>
                         <div class="skill-pill-card" title="MongoDB"><span class="skill-pill-icon text-green"><i class="fa-solid fa-database"></i></span><span class="skill-pill-name font-mono">MongoDB</span></div>
@@ -404,33 +419,45 @@
                         <div class="skill-pill-card" title="Git & GitHub"><span class="skill-pill-icon text-green"><i class="fa-brands fa-git-alt"></i></span><span class="skill-pill-name font-mono">Git & GitHub</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
-                        <span class="evidence-lbl"><i class="fa-solid fa-code-commit text-green"></i> EVIDENCE:</span>
-                        <a href="https://github.com/nextboxis/Pishentry" target="_blank" rel="noopener noreferrer" class="evidence-link">Pishentry // FastAPI Microservices &gt;</a>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/Pishentry" target="_blank" rel="noopener noreferrer" class="evidence-link">Pishentry // FastAPI APIs &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/mongodb.pdf" target="_blank" class="evidence-link">MongoDB Developer &gt;</a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Skill Category 3: Cybersecurity Tools & OSINT -->
-                <div class="cyber-card glassmorphic skill-card">
+                <div class="cyber-card glassmorphic skill-card" data-category="security">
                     <div class="card-header">
                         <span class="card-title font-mono"><i class="fa-solid fa-user-ninja text-red"></i> CYBER_TOOLS_&_OSINT</span>
                         <span class="card-count-badge font-mono text-red">6 TOOLS</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card" title="Burp Suite"><span class="skill-pill-icon text-red"><i class="fa-solid fa-bug"></i></span><span class="skill-pill-name font-mono">Burp Suite</span></div>
+                        <div class="skill-pill-card" title="Burp Suite Pro"><span class="skill-pill-icon text-red"><i class="fa-solid fa-bug"></i></span><span class="skill-pill-name font-mono">Burp Suite</span></div>
                         <div class="skill-pill-card" title="Nmap / Masscan"><span class="skill-pill-icon text-red"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">Nmap / Masscan</span></div>
                         <div class="skill-pill-card" title="Wireshark & PCAPs"><span class="skill-pill-icon text-red"><i class="fa-solid fa-magnifying-glass-chart"></i></span><span class="skill-pill-name font-mono">Wireshark</span></div>
-                        <div class="skill-pill-card" title="Kali Linux"><span class="skill-pill-icon text-red"><i class="fa-brands fa-linux"></i></span><span class="skill-pill-name font-mono">Kali Linux</span></div>
+                        <div class="skill-pill-card" title="Kali & BlackArch"><span class="skill-pill-icon text-red"><i class="fa-brands fa-linux"></i></span><span class="skill-pill-name font-mono">Kali / BlackArch</span></div>
                         <div class="skill-pill-card" title="Metasploit"><span class="skill-pill-icon text-red"><i class="fa-solid fa-biohazard"></i></span><span class="skill-pill-name font-mono">Metasploit</span></div>
                         <div class="skill-pill-card" title="OWASP ZAP"><span class="skill-pill-icon text-red"><i class="fa-solid fa-shield-virus"></i></span><span class="skill-pill-name font-mono">OWASP ZAP</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
-                        <span class="evidence-lbl"><i class="fa-solid fa-code-commit text-red"></i> EVIDENCE:</span>
-                        <a href="https://github.com/nextboxis/blackarch" target="_blank" rel="noopener noreferrer" class="evidence-link">BlackArch OSINT Toolchains &gt;</a>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/blackarch" target="_blank" rel="noopener noreferrer" class="evidence-link">BlackArch OSINT Toolchains &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/cisco_ethical_hacker.pdf" target="_blank" class="evidence-link">Cisco Ethical Hacker &gt;</a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Skill Category 4: Security Concepts & Exploitation -->
-                <div class="cyber-card glassmorphic skill-card">
+                <div class="cyber-card glassmorphic skill-card" data-category="security">
                     <div class="card-header">
                         <span class="card-title font-mono"><i class="fa-solid fa-shield-halved text-orange"></i> SEC_CONCEPTS_&_EXPLOITS</span>
                         <span class="card-count-badge font-mono text-orange">6 CONCEPTS</span>
@@ -444,13 +471,19 @@
                         <div class="skill-pill-card" title="IAM & RBAC"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-id-card"></i></span><span class="skill-pill-name font-mono">IAM & RBAC</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
-                        <span class="evidence-lbl"><i class="fa-solid fa-code-commit text-orange"></i> EVIDENCE:</span>
-                        <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="evidence-link">40+ TryHackMe Lab Solves &gt;</a>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/NexShield" target="_blank" rel="noopener noreferrer" class="evidence-link">NexShield Threat Platform &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-skull"></i> THM:</span>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="evidence-link">40+ THM Lab Solves &gt;</a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Skill Category 5: Machine Learning & AI -->
-                <div class="cyber-card glassmorphic skill-card">
+                <div class="cyber-card glassmorphic skill-card" data-category="ai">
                     <div class="card-header">
                         <span class="card-title font-mono"><i class="fa-solid fa-brain text-purple"></i> MACHINE_LEARNING_&_AI</span>
                         <span class="card-count-badge font-mono text-purple">6 MODULES</span>
@@ -464,13 +497,19 @@
                         <div class="skill-pill-card" title="ResNet-50 / CNN"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-brain"></i></span><span class="skill-pill-name font-mono">ResNet-50 / CNN</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
-                        <span class="evidence-lbl"><i class="fa-solid fa-code-commit text-purple"></i> EVIDENCE:</span>
-                        <a href="https://github.com/nextboxis/Pishentry" target="_blank" rel="noopener noreferrer" class="evidence-link">Pishentry // Zero-Hour AI Engine &gt;</a>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/Pishentry" target="_blank" rel="noopener noreferrer" class="evidence-link">Pishentry AI Engine &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/python_basics.pdf" target="_blank" class="evidence-link">Python &amp; ML Foundations &gt;</a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Skill Category 6: Systems & Security Hardening -->
-                <div class="cyber-card glassmorphic skill-card">
+                <div class="cyber-card glassmorphic skill-card" data-category="hardening">
                     <div class="card-header">
                         <span class="card-title font-mono"><i class="fa-solid fa-shield-cat text-cyan"></i> SYSTEMS_&_HARDENING</span>
                         <span class="card-count-badge font-mono text-cyan">6 MODULES</span>
@@ -484,8 +523,170 @@
                         <div class="skill-pill-card" title="Network Forensics"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-magnifying-glass"></i></span><span class="skill-pill-name font-mono">Net Forensics</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
-                        <span class="evidence-lbl"><i class="fa-solid fa-code-commit text-cyan"></i> EVIDENCE:</span>
-                        <a href="https://github.com/nextboxis/matazero" target="_blank" rel="noopener noreferrer" class="evidence-link">MataZero // Zero-Trust Privacy &gt;</a>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/matazero" target="_blank" rel="noopener noreferrer" class="evidence-link">MataZero // Privacy Engine &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/linux_administration.pdf" target="_blank" class="evidence-link">Linux Administration &gt;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 7: Cloud Security & DevSecOps -->
+                <div class="cyber-card glassmorphic skill-card" data-category="dev">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-cloud text-green"></i> CLOUD_SEC_&_DEVOPS</span>
+                        <span class="card-count-badge font-mono text-green">6 MODULES</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card" title="AWS Security Posture"><span class="skill-pill-icon text-green"><i class="fa-brands fa-aws"></i></span><span class="skill-pill-name font-mono">AWS Security</span></div>
+                        <div class="skill-pill-card" title="Azure Cloud Defense"><span class="skill-pill-icon text-green"><i class="fa-brands fa-microsoft"></i></span><span class="skill-pill-name font-mono">Azure Defense</span></div>
+                        <div class="skill-pill-card" title="Docker Container Isolation"><span class="skill-pill-icon text-green"><i class="fa-brands fa-docker"></i></span><span class="skill-pill-name font-mono">Docker Security</span></div>
+                        <div class="skill-pill-card" title="CI/CD Pipeline Security"><span class="skill-pill-icon text-green"><i class="fa-solid fa-arrows-split-up-and-left"></i></span><span class="skill-pill-name font-mono">CI/CD Auditing</span></div>
+                        <div class="skill-pill-card" title="Zero-Trust Architecture"><span class="skill-pill-icon text-green"><i class="fa-solid fa-shield"></i></span><span class="skill-pill-name font-mono">Zero-Trust</span></div>
+                        <div class="skill-pill-card" title="Linux PAM & SSH"><span class="skill-pill-icon text-green"><i class="fa-solid fa-key"></i></span><span class="skill-pill-name font-mono">PAM & SSH</span></div>
+                    </div>
+                    <div class="card-footer-evidence font-mono">
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/xping" target="_blank" rel="noopener noreferrer" class="evidence-link">xPing Linux Hardening &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/aws_certified.pdf" target="_blank" class="evidence-link">AWS Solutions Arch &gt;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 8: Web Application Defense -->
+                <div class="cyber-card glassmorphic skill-card" data-category="security">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-lock text-orange"></i> WEB_APPSEC_&_AUTH</span>
+                        <span class="card-count-badge font-mono text-orange">6 CONCEPTS</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card" title="JWT & Session Security"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-ticket"></i></span><span class="skill-pill-name font-mono">JWT & Auth</span></div>
+                        <div class="skill-pill-card" title="CORS & CSP Hardening"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-globe"></i></span><span class="skill-pill-name font-mono">CORS & CSP</span></div>
+                        <div class="skill-pill-card" title="XSS & CSRF Defenses"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-shield-virus"></i></span><span class="skill-pill-name font-mono">XSS/CSRF Def</span></div>
+                        <div class="skill-pill-card" title="IDOR & Broken Access"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-user-lock"></i></span><span class="skill-pill-name font-mono">IDOR / AuthZ</span></div>
+                        <div class="skill-pill-card" title="Rate Limiting & WAF"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-gauge-high"></i></span><span class="skill-pill-name font-mono">Rate Limiting</span></div>
+                        <div class="skill-pill-card" title="SSRF & Injection Shield"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-file-shield"></i></span><span class="skill-pill-name font-mono">SSRF Shield</span></div>
+                    </div>
+                    <div class="card-footer-evidence font-mono">
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/NexShield" target="_blank" rel="noopener noreferrer" class="evidence-link">NexShield Threat Suite &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/GIRIDHARAN_K_Certificate.pdf" target="_blank" class="evidence-link">Future Interns AppSec &gt;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 9: Automation & Cryptography -->
+                <div class="cyber-card glassmorphic skill-card" data-category="hardening ai">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-key text-purple"></i> AUTOMATION_&_CRYPTO</span>
+                        <span class="card-count-badge font-mono text-purple">6 MODULES</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card" title="Python PoC Scripting"><span class="skill-pill-icon text-purple"><i class="fa-brands fa-python"></i></span><span class="skill-pill-name font-mono">Py Scripting</span></div>
+                        <div class="skill-pill-card" title="Bash Shell Orchestration"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Bash Script</span></div>
+                        <div class="skill-pill-card" title="AES & RSA Encryption"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-lock"></i></span><span class="skill-pill-name font-mono">AES/RSA Crypto</span></div>
+                        <div class="skill-pill-card" title="Hash Integrity & HMAC"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-hashtag"></i></span><span class="skill-pill-name font-mono">Hash Integrity</span></div>
+                        <div class="skill-pill-card" title="Regex Threat Patterns"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-asterisk"></i></span><span class="skill-pill-name font-mono">Regex Threat</span></div>
+                        <div class="skill-pill-card" title="Automated CIS Audits"><span class="skill-pill-icon text-purple"><i class="fa-solid fa-list-check"></i></span><span class="skill-pill-name font-mono">CIS Automation</span></div>
+                    </div>
+                    <div class="card-footer-evidence font-mono">
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/Cryptography-Toolkit" target="_blank" rel="noopener noreferrer" class="evidence-link">Crypto Toolkit Utilities &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/fortinet_nse.pdf" target="_blank" class="evidence-link">Fortinet Network Sec &gt;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 10: Red Team & Active Directory Exploitation -->
+                <div class="cyber-card glassmorphic skill-card" data-category="security">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-skull-crossbones text-red"></i> RED_TEAM_&_AD</span>
+                        <span class="card-count-badge font-mono text-red">6 EXPLOITS</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card" title="Mimikatz / LSASS Dump"><span class="skill-pill-icon text-red"><i class="fa-solid fa-key"></i></span><span class="skill-pill-name font-mono">Mimikatz/LSASS</span></div>
+                        <div class="skill-pill-card" title="Kerberoasting & AS-REP"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-ticket"></i></span><span class="skill-pill-name font-mono">Kerberoasting</span></div>
+                        <div class="skill-pill-card" title="Pass-the-Hash / Ticket"><span class="skill-pill-icon text-red"><i class="fa-solid fa-id-badge"></i></span><span class="skill-pill-name font-mono">Pass-the-Hash</span></div>
+                        <div class="skill-pill-card" title="Token Impersonation"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-fingerprint"></i></span><span class="skill-pill-name font-mono">Token Impersonate</span></div>
+                        <div class="skill-pill-card" title="C2 Beaconing Infrastructure"><span class="skill-pill-icon text-red"><i class="fa-solid fa-tower-broadcast"></i></span><span class="skill-pill-name font-mono">C2 Beaconing</span></div>
+                        <div class="skill-pill-card" title="BloodHound AD Recon"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-diagram-project"></i></span><span class="skill-pill-name font-mono">BloodHound Recon</span></div>
+                    </div>
+                    <div class="card-footer-evidence font-mono">
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/blackarch" target="_blank" rel="noopener noreferrer" class="evidence-link">BlackArch Red Team Tools &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-skull"></i> THM:</span>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="evidence-link">40+ TryHackMe Lab Solves &gt;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 11: Binary Exploitation & Reverse Engineering -->
+                <div class="cyber-card glassmorphic skill-card" data-category="security">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-microchip text-orange"></i> BINARY_EXPLOIT_&_RE</span>
+                        <span class="card-count-badge font-mono text-orange">6 MODULES</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card" title="Ghidra Disassembly & Decompilation"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-code-compare"></i></span><span class="skill-pill-name font-mono">Ghidra Decompile</span></div>
+                        <div class="skill-pill-card" title="Buffer Overflow & ROP Chains"><span class="skill-pill-icon text-red"><i class="fa-solid fa-memory"></i></span><span class="skill-pill-name font-mono">BOF / ROP Chains</span></div>
+                        <div class="skill-pill-card" title="GDB & PEDA Debugging"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bug-slash"></i></span><span class="skill-pill-name font-mono">GDB &amp; PEDA</span></div>
+                        <div class="skill-pill-card" title="Shellcode Crafting & Injection"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Shellcode Inject</span></div>
+                        <div class="skill-pill-card" title="Format String Exploits"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-align-left"></i></span><span class="skill-pill-name font-mono">Format Strings</span></div>
+                        <div class="skill-pill-card" title="PE / ELF Malware Analysis"><span class="skill-pill-icon text-red"><i class="fa-solid fa-file-code"></i></span><span class="skill-pill-name font-mono">Malware Triage</span></div>
+                    </div>
+                    <div class="card-footer-evidence font-mono">
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/matazero" target="_blank" rel="noopener noreferrer" class="evidence-link">MataZero // Binary Forensics &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/cisco_ethical_hacker.pdf" target="_blank" class="evidence-link">Cisco Ethical Hacker &gt;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 12: Network Attacks & Wireless Exploitation -->
+                <div class="cyber-card glassmorphic skill-card" data-category="security">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-wifi text-red"></i> NET_ATTACK_&_WIRELESS</span>
+                        <span class="card-count-badge font-mono text-red">6 VECTORS</span>
+                    </div>
+                    <div class="card-body skills-flex-grid">
+                        <div class="skill-pill-card" title="ARP Spoofing & MITM"><span class="skill-pill-icon text-red"><i class="fa-solid fa-arrows-split-up-and-left"></i></span><span class="skill-pill-name font-mono">ARP Spoofing</span></div>
+                        <div class="skill-pill-card" title="Bettercap & Ettercap MITM"><span class="skill-pill-icon text-red"><i class="fa-solid fa-mask"></i></span><span class="skill-pill-name font-mono">Bettercap / MITM</span></div>
+                        <div class="skill-pill-card" title="DNS Cache Poisoning"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">DNS Poisoning</span></div>
+                        <div class="skill-pill-card" title="Wi-Fi WPA2/3 Handshake Cracking"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-wifi"></i></span><span class="skill-pill-name font-mono">Wi-Fi Cracking</span></div>
+                        <div class="skill-pill-card" title="Scapy Packet Crafting & Injection"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-envelope-open-text"></i></span><span class="skill-pill-name font-mono">Scapy Injection</span></div>
+                        <div class="skill-pill-card" title="VLAN Hopping & DHCP Starvation"><span class="skill-pill-icon text-red"><i class="fa-solid fa-route"></i></span><span class="skill-pill-name font-mono">VLAN Hopping</span></div>
+                    </div>
+                    <div class="card-footer-evidence font-mono">
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-cyan"><i class="fa-brands fa-github"></i> REPO:</span>
+                            <a href="https://github.com/nextboxis/xping" target="_blank" rel="noopener noreferrer" class="evidence-link">xPing Network Audit &gt;</a>
+                        </div>
+                        <div class="evidence-row">
+                            <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
+                            <a href="./certificate/fortinet_nse.pdf" target="_blank" class="evidence-link">Fortinet Network Sec &gt;</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -497,8 +698,10 @@
             <p class="section-subtitle font-mono">&gt; Deployed production repositories, open-source security toolkits, and simulated enterprise environments.</p>
 
             <div class="ops-tabs font-mono">
-                <button class="tab-btn active" data-target="projects-grid">PROJECT_REPOS</button>
-                <button class="tab-btn" data-target="simulations-grid">SIMULATIONS_&_WORK</button>
+                <button class="tab-btn active" data-target="projects-grid"><i class="fa-brands fa-github"></i> REPOSITORIES (7)</button>
+                <button class="tab-btn" data-target="simulations-grid"><i class="fa-solid fa-briefcase"></i> SIMULATIONS_&_WORK (6)</button>
+                <button class="tab-btn" data-target="thm-operator-grid"><i class="fa-solid fa-skull text-red"></i> THM_OPERATOR_INTEL</button>
+                <button class="tab-btn" data-target="academic-grid"><i class="fa-solid fa-graduation-cap text-cyan"></i> ACADEMIC_NODE_LOG</button>
             </div>
 
             <!-- Tab Content 1: Projects -->
@@ -756,6 +959,118 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Tab Content 3: TryHackMe Operator -->
+            <div id="thm-operator-grid" class="ops-content">
+                <div class="thm-stats-card cyber-card glassmorphic">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-skull text-red"></i> TRYHACKME // OPERATOR_PROFILE</span>
+                        <span class="card-count-badge font-mono text-orange">TOP 11% GLOBAL</span>
+                    </div>
+                    <div class="card-body font-mono">
+                        <div class="thm-profile-block">
+                            <div class="thm-avatar-wrapper">
+                                <div class="thm-avatar-ring">
+                                    <i class="fa-solid fa-user-secret thm-avatar-icon"></i>
+                                </div>
+                                <span class="thm-status-dot"></span>
+                            </div>
+                            <div class="thm-info">
+                                <h3 class="thm-handle font-heading text-orange">giridharank790</h3>
+                                <div class="thm-rank text-cyan font-mono"><i class="fa-solid fa-trophy"></i> GLOBAL RANK: TOP 260K+ (TOP 11%)</div>
+                                <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="btn cyber-btn small thm-profile-btn font-mono">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_THM_PROFILE
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="thm-stat-row">
+                            <div class="thm-stat-box">
+                                <div class="thm-stat-val text-orange">40+</div>
+                                <div class="thm-stat-lbl">ROOMS_COMPLETED</div>
+                            </div>
+                            <div class="thm-stat-box">
+                                <div class="thm-stat-val text-cyan">TOP 11%</div>
+                                <div class="thm-stat-lbl">GLOBAL_PERCENTILE</div>
+                            </div>
+                            <div class="thm-stat-box">
+                                <div class="thm-stat-val text-green">7 BADGES</div>
+                                <div class="thm-stat-lbl">ACHIEVEMENTS</div>
+                            </div>
+                        </div>
+
+                        <!-- Verified Badges Showcase -->
+                        <div class="thm-badges-showcase">
+                            <h4 class="font-mono text-dim" style="font-size: 0.8rem; margin: 16px 0 10px 0;"><i class="fa-solid fa-medal text-orange"></i> VERIFIED_ACHIEVEMENT_BADGES:</h4>
+                            <div class="project-tech font-mono">
+                                <span><i class="fa-solid fa-terminal text-cyan"></i> Terminaled (Linux CLI)</span>
+                                <span><i class="fa-solid fa-robot text-red"></i> Mr. Robot CTF</span>
+                                <span><i class="fa-solid fa-snowflake text-cyan"></i> Defrosted Five</span>
+                                <span><i class="fa-solid fa-shield-halved text-green"></i> Security Engineering</span>
+                                <span><i class="fa-solid fa-globe text-orange"></i> Web Fundamentals</span>
+                                <span><i class="fa-solid fa-award text-yellow"></i> Bronze League (Top 20%)</span>
+                                <span><i class="fa-solid fa-spider text-purple"></i> World Wide Web</span>
+                            </div>
+                        </div>
+
+                        <!-- Official THM Dynamic Badge Embed -->
+                        <div class="thm-badge-embed">
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer">
+                                <img src="https://tryhackme-badges.s3.amazonaws.com/giridharank790.png" alt="TryHackMe Profile Badge" class="thm-official-badge" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content 4: Academic Matrix & Background -->
+            <div id="academic-grid" class="ops-content">
+                <div class="simulations-container font-mono">
+                    <!-- Academic Node 1 -->
+                    <div class="sim-row">
+                        <div class="sim-meta">
+                            <span class="sim-badge text-cyan">POSTGRADUATE</span>
+                            <span class="sim-date">2026 – 2027</span>
+                        </div>
+                        <div class="sim-details">
+                            <h4>M.Sc. Computer Technology (CT)</h4>
+                            <p>Sri Kirana Art and Science College — Advanced Systems Architecture, Distributed Networks & Computing.</p>
+                        </div>
+                        <div class="sim-action">
+                            <span class="btn cyber-btn small font-mono" style="cursor: default; opacity: 0.9;"><i class="fa-solid fa-circle-dot text-green"></i> ACTIVE_NODE</span>
+                        </div>
+                    </div>
+
+                    <!-- Academic Node 2 -->
+                    <div class="sim-row">
+                        <div class="sim-meta">
+                            <span class="sim-badge text-green">UNDERGRADUATE</span>
+                            <span class="sim-date">2023 – 2026</span>
+                        </div>
+                        <div class="sim-details">
+                            <h4>B.Sc. Computer Science &amp; Applications</h4>
+                            <p>Kongu Arts &amp; Science College, Bharathiar University — Core CS, Data Structures, Web Technologies, Database Systems.</p>
+                        </div>
+                        <div class="sim-action">
+                            <span class="btn cyber-btn small font-mono" style="cursor: default;"><i class="fa-solid fa-certificate text-cyan"></i> 70% SCORE</span>
+                        </div>
+                    </div>
+
+                    <!-- Academic Node 3 -->
+                    <div class="sim-row">
+                        <div class="sim-meta">
+                            <span class="sim-badge text-purple">HIGHER_SECONDARY</span>
+                            <span class="sim-date">2021 – 2023</span>
+                        </div>
+                        <div class="sim-details">
+                            <h4>Higher Secondary Certificate (HSC)</h4>
+                            <p>Vidya Saggar School — Mathematics, Computer Science, and Physics Foundation.</p>
+                        </div>
+                        <div class="sim-action">
+                            <span class="btn cyber-btn small font-mono" style="cursor: default;"><i class="fa-solid fa-check text-green"></i> 60% SCORE</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
