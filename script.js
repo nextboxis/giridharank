@@ -73,6 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 25. macOS Fluid Magnetic Dock Proximity Magnification
     initFluidDockMagnification();
 
+    // 26. Random Cyber Threat Intercept Events Engine
+    initRandomCyberEvents();
+
+    // 27. Konami Code Secret Red Team Override
+    initKonamiCode();
+
     // 26. 120Hz Liquid-LERP Custom Cyber Cursor Engine
     initCustomCursor();
 
@@ -97,6 +103,10 @@ function debounce(func, delay = 100) {
 
 // --- Matrix Code Rain Effect (Optimized requestAnimationFrame Loop) --- //
 function initMatrixRain() {
+    window.accelerateMatrixRain = function(durationMs = 5000) {
+        window._matrixSpeedBoost = true;
+        setTimeout(() => { window._matrixSpeedBoost = false; }, durationMs);
+    };
     const canvas = document.getElementById('cyberCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -145,7 +155,9 @@ function initMatrixRain() {
 
             const text = charArr[Math.floor(Math.random() * charArr.length)];
             
-            if (isDarkMode) {
+            if (document.body.classList.contains('redteam-override')) {
+                ctx.fillStyle = Math.random() > 0.85 ? '#ff8099' : '#ff003c';
+            } else if (isDarkMode) {
                 ctx.fillStyle = Math.random() > 0.85 ? '#80ffb0' : '#00ff41';
             } else {
                 ctx.fillStyle = Math.random() > 0.85 ? '#005ecb' : '#0d8a43';
@@ -157,7 +169,7 @@ function initMatrixRain() {
                 drops[i] = 0;
             }
 
-            drops[i]++;
+            drops[i] += (window._matrixSpeedBoost ? 2 : 1);
         }
     }
 
@@ -194,29 +206,11 @@ function initNavigation() {
             // Update active state in nav
             navItems.forEach(nav => nav.classList.remove('active'));
             item.classList.add('active');
-
-            if (targetId === 'tryhackme') {
-                const opsSection = document.getElementById('ops');
-                const thmTabBtn = document.querySelector('.tab-btn[data-target="thm-operator-grid"]');
-                if (opsSection) {
-                    sections.forEach(s => {
-                        if (s !== opsSection) {
-                            s.classList.remove('active-section');
-                            s.querySelectorAll('.cyber-card, .cert-card, .project-card, .sim-row, .hud-cascade-item').forEach(el => el.classList.remove('revealed'));
-                        }
-                    });
-                    opsSection.classList.add('active-section');
-                    if (thmTabBtn) thmTabBtn.click();
-                    opsSection.scrollIntoView({ behavior: 'smooth' });
-                }
-                return;
-            }
-
             if (targetSection) {
                 sections.forEach(section => {
                     if (section !== targetSection) {
                         section.classList.remove('active-section');
-                        section.querySelectorAll('.cyber-card, .cert-card, .project-card, .sim-row, .hud-cascade-item').forEach(el => {
+                        section.querySelectorAll('.cyber-card, .cert-card, .project-card, .sim-row, .hud-cascade-item, .thm-badge-pill, .thm-stat-box').forEach(el => {
                             el.classList.remove('revealed');
                         });
                     }
@@ -226,13 +220,14 @@ function initNavigation() {
 
                 // Trigger staggered cascade reveal wave for newly activated section
                 requestAnimationFrame(() => {
-                    targetSection.querySelectorAll('.hud-cascade-item, .cyber-card, .skill-card, .cert-card, .project-card, .sim-row, .thm-stat-box').forEach((el, idx) => {
+                    targetSection.querySelectorAll('.hud-cascade-item, .cyber-card, .skill-card, .cert-card, .project-card, .sim-row, .thm-stat-box, .thm-badge-pill').forEach((el, idx) => {
                         el.style.setProperty('--cascade-index', idx % 10);
                         el.classList.add('revealed');
                     });
                 });
 
                 // Smooth scroll into view
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 targetSection.scrollIntoView({ behavior: 'smooth' });
             }
 
@@ -589,6 +584,12 @@ function startTerminalShell() {
                 printLine("  <span style='color: var(--cyber-cyan);'>whoami</span>    - Prints bio and sentinel profile trace.");
                 printLine("  <span style='color: var(--cyber-cyan);'>skills</span>    - Prints visual ASCII stack chart (72 skills).");
                 printLine("  <span style='color: var(--cyber-cyan);'>hack</span>      - Simulates automated adversary attack sequence.");
+                printLine("  <span style='color: var(--cyber-cyan);'>scan</span>      - Executes simulated network port & defense audit.");
+                printLine("  <span style='color: var(--cyber-cyan);'>matrix</span>    - Accelerates background Matrix rain stream.");
+                printLine("  <span style='color: var(--cyber-cyan);'>ctf</span>       - Decodes encrypted token capture-the-flag payload.");
+                printLine("  <span style='color: var(--cyber-cyan);'>shield</span>    - Deploys WAF defense rules & packet scrubber.");
+                printLine("  <span style='color: var(--cyber-cyan);'>override</span>  - Toggles secret Red Team Exploit Mode.");
+                printLine("  <span style='color: var(--cyber-cyan);'>events</span>    - Generates live random threat telemetry event.");
                 printLine("  <span style='color: var(--cyber-cyan);'>redteam</span>   - Lists offensive toolchains & C2 capabilities.");
                 printLine("  <span style='color: var(--cyber-cyan);'>thm</span>       - Displays TryHackMe operator telemetry.");
                 printLine("  <span style='color: var(--cyber-cyan);'>certs</span>     - Displays cryptographically verified certs.");
@@ -651,6 +652,48 @@ function startTerminalShell() {
             case 'ip':
                 const ipVal = document.getElementById('user-ip') ? document.getElementById('user-ip').textContent : '127.0.0.1';
                 printLine(`CLIENT_NODE_IP: <span style='color: var(--cyber-orange);'>${ipVal}</span>`);
+                break;
+            case 'matrix':
+                printLine("<span style='color: #00ff41;'>[STREAM] Accelerating Matrix Code Rain stream for 6 seconds...</span>");
+                if (window.accelerateMatrixRain) window.accelerateMatrixRain(6000);
+                if (window.playAudioBlip) window.playAudioBlip(1200, 0.08);
+                break;
+            case 'ctf':
+                printLine("<span style='color: var(--cyber-cyan);'>[CTF_CHALLENGE] Base64 Token Decoded:</span>");
+                printLine("  Encrypted: <span style='color: var(--cyber-orange);'>ZmxhZ3tnMXJpX2N5YjNyX3MzbnQxbjNsXzIwMjZ9</span>");
+                printLine("  Decoded Flag: <span style='color: #00ff41; font-weight: bold;'>flag{g1ri_cyb3r_s3nt1n3l_2026}</span>");
+                printLine("  Status: 🏅 CTF_NODE_AUTHENTICATED (+100 PTS)");
+                if (window.playAudioSuccess) window.playAudioSuccess();
+                break;
+            case 'scan':
+            case 'nmap':
+                printLine("<span style='color: var(--cyber-cyan);'>[NMAP] Initializing stealth SYN scan on portfolio perimeter...</span>");
+                setTimeout(() => printLine("  PORT 80/TCP   OPEN   HTTP (Cloudflare WAF Proxied)"), 250);
+                setTimeout(() => printLine("  PORT 443/TCP  OPEN   HTTPS (TLS 1.3 // AES-256-GCM)"), 500);
+                setTimeout(() => printLine("  PORT 22/TCP   FILTERED SSH (mTLS Identity Verification)"), 750);
+                setTimeout(() => printLine("  <span style='color: #00ff41;'>[AUDIT_PASS] 1 host up, 0 vulnerabilities detected. High security posture.</span>"), 1050);
+                if (window.playAudioBlip) window.playAudioBlip(950, 0.05);
+                break;
+            case 'shield':
+            case 'defend':
+                printLine("<span style='color: #00ff41;'>[DEFENSE_GRID] Automated WAF rules synchronized. Packet scrubber active.</span>");
+                if (window.triggerRandomCyberEvent) window.triggerRandomCyberEvent();
+                break;
+            case 'override':
+            case 'redteam-mode':
+                printLine("<span style='color: #ff003c; font-weight: bold;'>[OVERRIDE] Toggling Red Team / Exploit Mode...</span>");
+                if (window.toggleRedTeamMode) window.toggleRedTeamMode();
+                break;
+            case 'events':
+            case 'threat':
+            case 'event':
+                printLine("<span style='color: var(--cyber-cyan);'>[SIMULATION] Generating live threat telemetry broadcast...</span>");
+                if (window.triggerRandomCyberEvent) window.triggerRandomCyberEvent();
+                break;
+            case 'sudo':
+            case 'root':
+                printLine("<span style='color: var(--cyber-orange);'>[ACCESS_DENIED] giridharank is not in the sudoers file. This incident has been logged.</span>");
+                if (window.playAudioWarning) window.playAudioWarning();
                 break;
             case 'contact':
                 printLine("Establishing link... Redirecting to comms bridge.");
@@ -1547,4 +1590,206 @@ function initCustomCursor() {
     document.addEventListener('mouseup', () => {
         ring.classList.remove('is-clicking');
     }, { passive: true });
+}
+
+
+// =========================================================================
+// 26. Random Cyber Threat Intercept Events Engine
+// =========================================================================
+function initRandomCyberEvents() {
+    const cyberEventsPool = [
+        {
+            tag: 'WAF_INTERCEPT',
+            icon: 'fa-shield-halved',
+            title: 'SQL Injection Deflected',
+            body: 'Automated WAF neutralized malicious SQL payload on port 443.'
+        },
+        {
+            tag: 'HONEYPOT_HIT',
+            icon: 'fa-spider',
+            title: 'Decoy Node Triggered',
+            body: 'Unauthorized SSH probe isolated in Cowrie honeypot sandbox.'
+        },
+        {
+            tag: 'ZERO_TRUST',
+            icon: 'fa-key',
+            title: 'Session Verified',
+            body: 'mTLS certificate verified and ephemeral session keys rotated.'
+        },
+        {
+            tag: 'THM_TELEMETRY',
+            icon: 'fa-skull',
+            title: 'Operator Stats Sync',
+            body: 'TryHackMe live rank synchronized: Top 11% Global Standing.'
+        },
+        {
+            tag: 'DNS_SINKHOLE',
+            icon: 'fa-network-wired',
+            title: 'C2 Domain Deflected',
+            body: 'Malicious beaconing attempt routed to null address (0.0.0.0).'
+        },
+        {
+            tag: 'MEMORY_GUARD',
+            icon: 'fa-microchip',
+            title: 'Buffer Audit Clean',
+            body: 'Scanned 128 virtual memory pages: 0 ROP chains or heap sprays found.'
+        },
+        {
+            tag: 'SOC_TRIAGE',
+            icon: 'fa-truck-fast',
+            title: 'Incident Auto-Resolved',
+            body: 'Playbook neutralized simulated credential stuffing attack.'
+        },
+        {
+            tag: 'CRYPTO_AUDIT',
+            icon: 'fa-lock',
+            title: 'Cipher Suite Verification',
+            body: 'Quantum-resistant cryptographic integrity check: 100% Passed.'
+        },
+        {
+            tag: 'PORT_SCANNER',
+            icon: 'fa-crosshairs',
+            title: 'SYN Flood Filtered',
+            body: 'Rate-limiting threshold triggered. Source IP blacklisted.'
+        },
+        {
+            tag: 'METADATA_SCRUB',
+            icon: 'fa-file-shield',
+            title: 'MataZero Sanitizer',
+            body: 'Zero-trust metadata scrubber sanitized 14 image EXIF profiles.'
+        }
+    ];
+
+    let toastEl = document.querySelector('.cyber-event-toast');
+    if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.className = 'cyber-event-toast font-mono';
+        toastEl.setAttribute('role', 'alert');
+        toastEl.setAttribute('title', 'Click to acknowledge threat');
+        document.body.appendChild(toastEl);
+    }
+
+    let eventTimeout = null;
+
+    window.triggerRandomCyberEvent = function(customEvent = null) {
+        const ev = customEvent || cyberEventsPool[Math.floor(Math.random() * cyberEventsPool.length)];
+        const now = new Date();
+        const timeStr = now.toTimeString().split(' ')[0];
+
+        toastEl.innerHTML = `
+            <div class="cyber-event-icon-wrapper">
+                <i class="fa-solid ${ev.icon}"></i>
+            </div>
+            <div class="cyber-event-content">
+                <div class="cyber-event-header">
+                    <span class="cyber-event-tag">[${ev.tag}]</span>
+                    <span class="cyber-event-time">${timeStr}</span>
+                </div>
+                <div class="cyber-event-body">${ev.body}</div>
+                <div class="cyber-event-ack"><i class="fa-solid fa-check-double text-green"></i> CLICK_TO_ACKNOWLEDGE</div>
+            </div>
+        `;
+
+        toastEl.classList.add('show');
+
+        // Play subtle tactical audio
+        if (typeof window.playAudioBlip === 'function') {
+            window.playAudioBlip(980, 0.04);
+        }
+
+        clearTimeout(eventTimeout);
+        eventTimeout = setTimeout(() => {
+            toastEl.classList.remove('show');
+        }, 5500);
+    };
+
+    // Clicking toast acknowledges and closes it with audio feedback
+    toastEl.addEventListener('click', () => {
+        toastEl.classList.remove('show');
+        if (typeof window.playAudioSuccess === 'function') {
+            window.playAudioSuccess();
+        }
+        if (typeof window.showToast === 'function') {
+            window.showToast('[ACKNOWLEDGED] Cyber threat telemetry archived.');
+        }
+    });
+
+    // Schedule random periodic events every 38 to 68 seconds
+    function scheduleNextEvent() {
+        const delay = Math.floor(Math.random() * 30000) + 38000;
+        setTimeout(() => {
+            if (!document.hidden) {
+                window.triggerRandomCyberEvent();
+            }
+            scheduleNextEvent();
+        }, delay);
+    }
+
+    // Start schedule after initial 8s
+    setTimeout(scheduleNextEvent, 8000);
+
+    // Clicking hero live status dot triggers immediate event
+    const statusDots = document.querySelectorAll('.live-status-dot, .cyber-badge, #user-ip');
+    statusDots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.triggerRandomCyberEvent();
+        });
+    });
+}
+
+// =========================================================================
+// 27. Konami Code ("Red Team Exploit Mode" Secret Override)
+// =========================================================================
+function initKonamiCode() {
+    const konamiSequence = [
+        'ArrowUp', 'ArrowUp',
+        'ArrowDown', 'ArrowDown',
+        'ArrowLeft', 'ArrowRight',
+        'ArrowLeft', 'ArrowRight',
+        'b', 'a'
+    ];
+    let currentIndex = 0;
+
+    window.toggleRedTeamMode = function() {
+        const isRed = document.body.classList.toggle('redteam-override');
+        
+        // Trigger visual screen glitch pulse
+        document.body.classList.add('cyber-glitch-pulse');
+        setTimeout(() => document.body.classList.remove('cyber-glitch-pulse'), 250);
+
+        if (isRed) {
+            if (typeof window.playAudioWarning === 'function') window.playAudioWarning();
+            if (typeof window.triggerRandomCyberEvent === 'function') {
+                window.triggerRandomCyberEvent({
+                    tag: 'RED_TEAM_OVERRIDE',
+                    icon: 'fa-skull-crossbones',
+                    title: 'Root Access Granted',
+                    body: '⚔️ EXPLOIT OVERRIDE ACTIVE: Offensive toolchains & crimson radar engaged!'
+                });
+            }
+            if (window.accelerateMatrixRain) window.accelerateMatrixRain(4000);
+        } else {
+            if (typeof window.playAudioSuccess === 'function') window.playAudioSuccess();
+            if (typeof window.showToast === 'function') {
+                window.showToast('🛡️ [BLUE TEAM RESTORED] Defensive sentinel protocol online.');
+            }
+        }
+    };
+
+    document.addEventListener('keydown', (e) => {
+        // Ignore key inputs when typing in form inputs or terminal
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        const expectedKey = konamiSequence[currentIndex];
+        if (e.key.toLowerCase() === expectedKey.toLowerCase()) {
+            currentIndex++;
+            if (currentIndex === konamiSequence.length) {
+                currentIndex = 0;
+                window.toggleRedTeamMode();
+            }
+        } else {
+            currentIndex = 0;
+        }
+    });
 }

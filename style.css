@@ -320,8 +320,8 @@ body {
     transform: translate3d(-50%, -50%, 0);
     transition: opacity 0.3s ease, width 0.25s var(--transition-curve), height 0.25s var(--transition-curve), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     will-change: transform;
-    backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
 }
 
 body.dark-mode .cyber-cursor-ring {
@@ -567,6 +567,7 @@ body.light-mode .hud-bar-title {
     align-items: center;
     gap: 8px;
     color: #ffffff;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     transition: all 0.25s ease;
 }
@@ -591,6 +592,7 @@ body.light-mode .hud-diag-pill {
     align-items: center;
     gap: 8px;
     transition: all 0.25s ease;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -810,8 +812,8 @@ body.light-mode .hud-bg-btn:hover {
 .glassmorphic {
     position: relative;
     background: var(--neu-surface) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
     border: var(--neu-border) !important;
     box-shadow: var(--neu-card) !important;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -1082,8 +1084,8 @@ body.dark-mode .glassmorphic {
     font-weight: 700;
     letter-spacing: 0.05em;
     border-radius: 12px !important;
-    backdrop-filter: blur(18px) saturate(190%) !important;
     -webkit-backdrop-filter: blur(18px) saturate(190%) !important;
+    backdrop-filter: blur(18px) saturate(190%) !important;
     box-shadow:
         inset 0 1.5px 2px rgba(255, 255, 255, 0.8),
         0 8px 25px rgba(0, 102, 255, 0.4),
@@ -1131,8 +1133,8 @@ body.dark-mode .cyber-btn.cv-btn {
     border: var(--neu-border) !important;
     border-radius: 12px !important;
     color: var(--cyber-green) !important;
-    backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
+    backdrop-filter: blur(14px) !important;
     box-shadow: var(--neu-pill) !important;
     display: inline-flex;
     align-items: center;
@@ -1185,6 +1187,7 @@ body.dark-mode .cyber-btn.cv-btn {
     box-shadow: var(--neu-raised);
     color: var(--text-primary);
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -1481,8 +1484,8 @@ body.dark-mode .cyber-btn.cv-btn {
     align-items: center;
     gap: 8px;
     letter-spacing: 0.03em;
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
         border-color 0.25s ease,
         box-shadow 0.25s ease,
@@ -1531,8 +1534,8 @@ body.dark-mode .cyber-btn.cv-btn {
     background: rgba(12, 16, 28, 0.84) !important;
     border: 1px solid rgba(0, 229, 255, 0.22) !important;
     border-radius: 16px !important;
-    backdrop-filter: blur(24px) saturate(1.8) !important;
     -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
+    backdrop-filter: blur(24px) saturate(1.8) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
         border-color 0.35s ease,
@@ -1613,11 +1616,12 @@ body:not(.dark-mode) .arsenal-grid .card-header {
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 8px !important;
-    backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(12px) !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
     box-sizing: border-box !important;
 }
@@ -1826,8 +1830,8 @@ body:not(.dark-mode) .card-footer-evidence {
     border-radius: 12px !important;
     padding: 14px 10px !important;
     text-align: center !important;
-    backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
+    backdrop-filter: blur(14px) !important;
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
 }
 
@@ -2026,8 +2030,8 @@ body:not(.dark-mode) .thm-stat-box {
         font-size: 0.8rem;
         font-weight: 700;
         cursor: pointer;
-        backdrop-filter: blur(14px) !important;
         -webkit-backdrop-filter: blur(14px) !important;
+        backdrop-filter: blur(14px) !important;
         box-shadow: var(--neu-pill) !important;
         transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
             border-color 0.25s ease,
@@ -2066,8 +2070,8 @@ body:not(.dark-mode) .thm-stat-box {
         font-size: 0.85rem;
         font-weight: 700;
         cursor: pointer;
-        backdrop-filter: blur(16px) !important;
         -webkit-backdrop-filter: blur(16px) !important;
+        backdrop-filter: blur(16px) !important;
         box-shadow: var(--neu-raised) !important;
         transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
             border-color 0.25s ease,
@@ -2990,8 +2994,8 @@ body:not(.dark-mode) .thm-stat-box {
         align-items: center;
         gap: 16px;
         background: var(--neu-surface) !important;
-        backdrop-filter: blur(32px) saturate(2.0) brightness(1.2) !important;
         -webkit-backdrop-filter: blur(32px) saturate(2.0) brightness(1.2) !important;
+        backdrop-filter: blur(32px) saturate(2.0) brightness(1.2) !important;
         border: var(--neu-border) !important;
         padding: 12px 24px !important;
         border-radius: 9999px !important;
@@ -3061,8 +3065,8 @@ body:not(.dark-mode) .thm-stat-box {
         align-items: center;
         font-size: 1.5rem;
         background: var(--neu-surface) !important;
-        backdrop-filter: blur(12px) !important;
         -webkit-backdrop-filter: blur(12px) !important;
+        backdrop-filter: blur(12px) !important;
         border: var(--neu-border) !important;
         box-shadow: var(--neu-raised) !important;
         color: var(--cyber-cyan) !important;
@@ -3116,8 +3120,8 @@ body:not(.dark-mode) .thm-stat-box {
                 rgba(255, 255, 255, 0.42) 0%,
                 rgba(210, 238, 248, 0.32) 50%,
                 rgba(255, 255, 255, 0.38) 100%);
-        backdrop-filter: blur(24px) saturate(2.2) brightness(1.25);
         -webkit-backdrop-filter: blur(24px) saturate(2.2) brightness(1.25);
+        backdrop-filter: blur(24px) saturate(2.2) brightness(1.25);
         border: 1px solid rgba(255, 255, 255, 0.65);
         box-shadow:
             0 0 2px 1px rgba(255, 255, 255, 0.8) inset,
@@ -3873,8 +3877,8 @@ body:not(.dark-mode) .thm-stat-box {
         background: var(--neu-surface) !important;
         border: var(--neu-border) !important;
         color: var(--text-primary) !important;
-        backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
+        backdrop-filter: blur(20px) !important;
         box-shadow: var(--neu-raised) !important;
         flex-shrink: 0;
         transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -4376,12 +4380,40 @@ body:not(.dark-mode) .thm-stat-box {
 
     /* Tablets & Mobile (< 768px) */
     @media (max-width: 768px) {
+        .container {
+            margin-bottom: 100px;
+        }
+
         .hud-top-bar {
             padding: 8px 12px;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 8px;
+        }
+
+        .mac-dock-container {
+            bottom: 0;
+            max-width: 100vw;
+            width: 100%;
+        }
+
+        .mac-dock {
+            padding: 10px 15px !important;
+            gap: 10px;
+            max-width: 100%;
+            width: 100%;
+            justify-content: space-evenly;
+            border-radius: 16px 16px 0 0 !important;
+            border-bottom: none !important;
+            background: var(--neu-surface) !important;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .dock-item {
+            width: 44px;
+            height: 44px;
+            font-size: 1.15rem;
         }
 
         .hud-bar-left {
@@ -4632,20 +4664,27 @@ body:not(.dark-mode) .thm-stat-box {
         }
 
         .mac-dock-container {
-            max-width: 96vw;
-            width: auto;
+            bottom: 0;
+            max-width: 100vw;
+            width: 100%;
         }
 
         .mac-dock {
-            padding: 6px 8px;
-            gap: 6px;
+            padding: 10px 15px !important;
+            gap: 8px;
             max-width: 100%;
+            width: 100%;
+            justify-content: space-evenly;
+            border-radius: 16px 16px 0 0 !important;
+            border-bottom: none !important;
+            background: var(--neu-surface) !important;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
         }
 
         .dock-item {
-            width: 38px;
-            height: 38px;
-            font-size: 1.05rem;
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
         }
 
         .cyber-toast {
@@ -5242,6 +5281,7 @@ body:not(.dark-mode) .thm-stat-box {
         background: rgba(0, 243, 255, 0.05);
         border: 1px solid rgba(0, 243, 255, 0.2);
         border-radius: 12px;
+        -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.08);
     }
@@ -5729,9 +5769,206 @@ body:not(.dark-mode) .thm-stat-box {
     background: #00ff41;
     box-shadow: 0 0 8px #00ff41;
     animation: statusPulse 2s infinite ease-in-out;
+    cursor: pointer;
 }
 
 @keyframes statusPulse {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.3); opacity: 0.75; }
+}
+
+/* =========================================================================
+   RANDOM CYBER EVENTS & RED TEAM OVERRIDE SUITE
+   ========================================================================= */
+
+/* Red Team Override Mode */
+body.redteam-override {
+    --cyber-cyan: #ff003c !important;
+    --neon-cyan: #ff0055 !important;
+    --cyber-purple: #ff007f !important;
+    --cyber-orange: #ff3b00 !important;
+    --neon-purple: #ff003c !important;
+    --border-glow: 0 0 18px rgba(255, 0, 60, 0.45) !important;
+}
+
+body.redteam-override .cyber-cursor-dot,
+body.redteam-override .cyber-cursor-ring {
+    background-color: #ff003c !important;
+    border-color: #ff003c !important;
+    box-shadow: 0 0 15px #ff003c, 0 0 30px #ff003c !important;
+}
+
+body.redteam-override .dock-item:hover .dock-icon-bg,
+body.redteam-override .dock-item.active .dock-icon-bg {
+    border-color: #ff003c !important;
+    color: #ff003c !important;
+}
+
+body.redteam-override .glitch-title {
+    color: #ff003c !important;
+    text-shadow: 0 0 20px rgba(255, 0, 60, 0.8) !important;
+}
+
+/* Floating Cyber Event Toast Widget */
+.cyber-event-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 100000;
+    max-width: 420px;
+    background: var(--neu-surface) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    border: 1px solid rgba(0, 243, 255, 0.4) !important;
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: var(--neu-card), 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 243, 255, 0.25) !important;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+    cursor: pointer;
+    font-family: var(--font-mono);
+}
+
+.cyber-event-toast.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.cyber-event-toast:hover {
+    transform: translateY(-2px) scale(1.02);
+    border-color: var(--cyber-cyan) !important;
+    box-shadow: var(--neu-card), 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 243, 255, 0.4) !important;
+}
+
+.cyber-event-icon-wrapper {
+    font-size: 1.4rem;
+    color: var(--cyber-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.cyber-event-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.cyber-event-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.cyber-event-tag {
+    color: var(--cyber-cyan);
+    letter-spacing: 0.05em;
+}
+
+.cyber-event-time {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+}
+
+.cyber-event-body {
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.cyber-event-ack {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+}
+
+body.redteam-override .cyber-event-toast {
+    border-color: rgba(255, 0, 60, 0.5) !important;
+    box-shadow: var(--neu-card), 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 60, 0.35) !important;
+}
+
+body.redteam-override .cyber-event-icon-wrapper {
+    color: #ff003c;
+    background: rgba(255, 0, 60, 0.15);
+    border-color: rgba(255, 0, 60, 0.3);
+}
+
+body.redteam-override .cyber-event-tag {
+    color: #ff003c;
+}
+
+/* Screen Glitch Pulse on Critical Events */
+.cyber-glitch-pulse {
+    animation: screenGlitch 0.22s ease-in-out;
+}
+
+@keyframes screenGlitch {
+    0% { filter: none; }
+    20% { filter: hue-rotate(90deg) contrast(1.5) brightness(1.2); transform: translate(-2px, 1px); }
+    40% { filter: invert(0.2) hue-rotate(-90deg) contrast(2); transform: translate(2px, -1px); }
+    60% { filter: hue-rotate(180deg) saturate(2); transform: translate(-1px, 2px); }
+    80% { filter: contrast(1.3); transform: translate(1px, -1px); }
+    100% { filter: none; transform: none; }
+}
+
+@media (max-width: 600px) {
+    .cyber-event-toast {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: calc(100vw - 32px);
+    }
+}
+
+/* Accessibility Skip Link */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 12px;
+    background: #0a0a0f;
+    color: var(--cyber-cyan);
+    border: 1px solid var(--cyber-cyan);
+    padding: 8px 14px;
+    border-radius: 6px;
+    z-index: 100000;
+    transition: top 0.25s ease;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    top: 12px;
+    outline: 2px solid var(--cyber-cyan);
+}
+
+/* Noscript Fallback Warning */
+.noscript-banner {
+    background: rgba(255, 0, 60, 0.9);
+    color: #ffffff;
+    padding: 14px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 20px rgba(255, 0, 60, 0.4);
 }

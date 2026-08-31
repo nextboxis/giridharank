@@ -11,7 +11,9 @@
     <meta property="og:url" content="https://nextboxis.github.io/protflio/">
     <meta property="og:title" content="GIRIDHARAN K | Cyber Sentinel & Front-End Developer">
     <meta property="og:description" content="Portfolio of Giridharan K - Front-End Developer & Web Security Specialist specializing in React.js, Cyber Security Research, and Full-Stack Development.">
-    <meta name="theme-color" content="#00ffff">
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#00ffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#050811" media="(prefers-color-scheme: dark)">
 
     <!-- Google Fonts: Futuristic Display + Cyber Mono + Clean Interface Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,11 +29,11 @@
 </head>
 <body>
     <!-- Accessibility Skip Link -->
-    <a href="#about" class="skip-link font-mono" style="position:absolute; top:-40px; left:0; background:#000; color:#0ff; padding:8px; z-index:10000; transition:top 0.3s; text-decoration:none;" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
+    <a href="#about" class="skip-link font-mono">Skip to main content</a>
 
     <!-- Noscript Warning -->
     <noscript>
-        <div style="background: rgba(255, 0, 0, 0.8); color: white; padding: 15px; text-align: center; position: fixed; top: 0; width: 100%; z-index: 9999; font-family: monospace;">
+        <div class="noscript-banner">
             [SYSTEM WARNING] JavaScript is disabled. Please enable JS for the full Cyber Sentinel experience.
         </div>
     </noscript>
@@ -77,7 +79,7 @@
                         
                         <p class="bio-text">
                             Engineering hardened web architectures, automated threat detection pipelines, and defensive countermeasures. 
-                            Ranked in the <strong>Top 1% on TryHackMe</strong>, specializing in <strong>Application Security (OWASP Top 10)</strong>, 
+                            Ranked in the <strong>Top 11% on TryHackMe</strong>, specializing in <strong>Application Security (OWASP Top 10)</strong>, 
                             <strong>Cloud Security Posture (AWS/Azure)</strong>, and <strong>Python Threat Intelligence Tooling</strong>.
                         </p>
 
@@ -139,7 +141,7 @@
                                 <div class="feed-item">
                                     <div class="feed-img-wrapper">
                                         <div class="scanline"></div>
-                                        <img src="./hero photo/ascii-magic-4.webp" alt="Tactical ASCII Art" class="cyber-img" fetchpriority="high" decoding="async" loading="eager" width="600" height="600">
+                                        <img src="./hero photo/ascii-magic-4.webp" alt="Tactical ASCII Art" class="cyber-img" decoding="async" loading="eager" width="600" height="600">
                                     </div>
                                 </div>
                             </div>
@@ -198,138 +200,7 @@
             </div>
         </section>
 
-        <!-- Section: TryHackMe Profile & Telemetry -->
-        <section id="tryhackme" class="hud-section">
-            <h2 class="section-title font-mono"><i class="fa-solid fa-skull-crossbones text-orange"></i> TRYHACKME_TELEMETRY</h2>
-            <p class="section-subtitle font-mono">&gt; Live offensive security labs, CTF challenges &amp; operator ranking // tryhackme.com/p/giridharank790</p>
-
-            <div class="thm-grid">
-                <!-- THM Stats Card -->
-                <div class="cyber-card glassmorphic thm-stats-card">
-                    <div class="card-header">
-                        <span class="card-title font-mono"><i class="fa-solid fa-crosshairs text-orange"></i> THM_OPERATOR_PROFILE</span>
-                        <div class="card-controls">
-                            <span class="ctrl-dot red"></span>
-                            <span class="ctrl-dot yellow"></span>
-                            <span class="ctrl-dot green"></span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="thm-profile-block">
-                            <div class="thm-avatar-wrapper">
-                                <div class="thm-avatar-ring">
-                                    <i class="fa-solid fa-user-secret thm-avatar-icon"></i>
-                                </div>
-                                <div class="thm-status-dot"></div>
-                            </div>
-                            <div class="thm-info">
-                                <div class="thm-handle font-mono text-orange">giridharank790</div>
-                                <div class="thm-rank font-mono text-cyan">// CYBER_OPERATOR_CLASS</div>
-                                <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="btn cyber-btn primary font-mono thm-profile-btn">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_PROFILE
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="comms-divider"></div>
-
-                        <div class="thm-stat-row font-mono">
-                            <div class="thm-stat-box">
-                                <div class="thm-stat-val text-orange">40+</div>
-                                <div class="thm-stat-lbl">LABS_SOLVED</div>
-                            </div>
-                            <div class="thm-stat-box">
-                                <div class="thm-stat-val text-cyan">260K+</div>
-                                <div class="thm-stat-lbl">GLOBAL_RANK</div>
-                            </div>
-                            <div class="thm-stat-box">
-                                <div class="thm-stat-val text-green">7</div>
-                                <div class="thm-stat-lbl">BADGES_EARNED</div>
-                            </div>
-                        </div>
-
-                        <div class="comms-divider"></div>
-
-                        <!-- Official THM badge image -->
-                        <div class="thm-badge-embed">
-                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer">
-                                <img src="https://tryhackme-badges.s3.amazonaws.com/giridharank790.png" 
-                                     alt="TryHackMe Badge for giridharank790" 
-                                     class="thm-official-badge"
-                                     loading="lazy"
-                                     decoding="async"
-                                     onerror="this.style.display='none'">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- THM Badges Grid Card -->
-                <div class="cyber-card glassmorphic thm-badges-card">
-                    <div class="card-header">
-                        <span class="card-title font-mono"><i class="fa-solid fa-trophy text-orange"></i> ACHIEVEMENT_REGISTRY</span>
-                        <div class="card-controls">
-                            <span class="ctrl-dot red"></span>
-                            <span class="ctrl-dot yellow"></span>
-                            <span class="ctrl-dot green"></span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="thm-badges-grid">
-                            <a href="https://tryhackme.com/giridharank790/badges/terminaled" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Terminaled — CLI Mastery Achievement">
-                                <span class="thm-badge-icon"><i class="fa-solid fa-terminal text-green"></i></span>
-                                <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">TERMINALED <span class="thm-tag font-mono text-green">CLI_VERIFIED</span></span>
-                                    <span class="thm-badge-desc">Linux CLI Mastery Achievement</span>
-                                </div>
-                            </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/mr-robot" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Mr. Robot CTF Completion">
-                                <span class="thm-badge-icon"><i class="fa-solid fa-robot text-orange"></i></span>
-                                <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">MR_ROBOT_CTF <span class="thm-tag font-mono text-orange">CTF_SOLVED</span></span>
-                                    <span class="thm-badge-desc">Exploitation &amp; Privilege Escalation</span>
-                                </div>
-                            </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/defrostedfive" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Defrosted Five — Winter Security Challenge">
-                                <span class="thm-badge-icon"><i class="fa-solid fa-snowflake text-cyan"></i></span>
-                                <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">DEFROSTED_FIVE <span class="thm-tag font-mono text-cyan">CHALLENGE</span></span>
-                                    <span class="thm-badge-desc">Winter Cyber Event Completed</span>
-                                </div>
-                            </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/intro-to-security-engineering" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Security Engineering — Principles">
-                                <span class="thm-badge-icon"><i class="fa-solid fa-key text-orange"></i></span>
-                                <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">SECURITY_ENG <span class="thm-tag font-mono text-orange">DEFENSIVE</span></span>
-                                    <span class="thm-badge-desc">Security Engineering Principles</span>
-                                </div>
-                            </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/web-fund" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Web Fundamentals — Web Hacking">
-                                <span class="thm-badge-icon"><i class="fa-solid fa-globe text-cyan"></i></span>
-                                <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">WEB_FUNDAMENTALS <span class="thm-tag font-mono text-cyan">WEB_SEC</span></span>
-                                    <span class="thm-badge-desc">Web Application Security &amp; OWASP</span>
-                                </div>
-                            </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/bronze-league" target="_blank" rel="noopener noreferrer" class="thm-badge-pill highlight-pill" title="Bronze League — Top 20% Rank">
-                                <span class="thm-badge-icon"><i class="fa-solid fa-medal text-orange"></i></span>
-                                <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">BRONZE_LEAGUE <span class="thm-tag font-mono text-orange">TOP_20%</span></span>
-                                    <span class="thm-badge-desc">Global Operator League Standing</span>
-                                </div>
-                            </a>
-                            <a href="https://tryhackme.com/giridharank790/badges/world-wide-web" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="World Wide Web — Security Achievement">
-                                <span class="thm-badge-icon"><i class="fa-solid fa-spider text-green"></i></span>
-                                <div class="thm-badge-info">
-                                    <span class="thm-badge-name font-mono">WORLD_WIDE_WEB <span class="thm-tag font-mono text-green">AUDITED</span></span>
-                                    <span class="thm-badge-desc">Web Threat Surface Assessment</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+<section id="telemetry" class="hud-section">
             <!-- GitHub Live Telemetry Bar -->
             <div class="cyber-card glassmorphic github-telemetry-card">
                 <div class="card-header">
@@ -451,7 +322,7 @@
                         </div>
                         <div class="evidence-row">
                             <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
-                            <a href="./certificate/cisco_ethical_hacker.pdf" target="_blank" class="evidence-link">Cisco Ethical Hacker &gt;</a>
+                            <a href="./certificate/cyber_security_3.pdf" target="_blank" class="evidence-link">Cisco Ethical Hacker &gt;</a>
                         </div>
                     </div>
                 </div>
@@ -503,7 +374,7 @@
                         </div>
                         <div class="evidence-row">
                             <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
-                            <a href="./certificate/python_basics.pdf" target="_blank" class="evidence-link">Python &amp; ML Foundations &gt;</a>
+                            <a href="./certificate/python.pdf" target="_blank" class="evidence-link">Python &amp; ML Foundations &gt;</a>
                         </div>
                     </div>
                 </div>
@@ -607,7 +478,7 @@
                         </div>
                         <div class="evidence-row">
                             <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
-                            <a href="./certificate/fortinet_nse.pdf" target="_blank" class="evidence-link">Fortinet Network Sec &gt;</a>
+                            <a href="./certificate/cyber_security_4.pdf" target="_blank" class="evidence-link">Fortinet Network Sec &gt;</a>
                         </div>
                     </div>
                 </div>
@@ -659,7 +530,7 @@
                         </div>
                         <div class="evidence-row">
                             <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
-                            <a href="./certificate/cisco_ethical_hacker.pdf" target="_blank" class="evidence-link">Cisco Ethical Hacker &gt;</a>
+                            <a href="./certificate/cyber_security_3.pdf" target="_blank" class="evidence-link">Cisco Ethical Hacker &gt;</a>
                         </div>
                     </div>
                 </div>
@@ -685,7 +556,7 @@
                         </div>
                         <div class="evidence-row">
                             <span class="evidence-lbl text-green"><i class="fa-solid fa-certificate"></i> CERT:</span>
-                            <a href="./certificate/fortinet_nse.pdf" target="_blank" class="evidence-link">Fortinet Network Sec &gt;</a>
+                            <a href="./certificate/cyber_security_4.pdf" target="_blank" class="evidence-link">Fortinet Network Sec &gt;</a>
                         </div>
                     </div>
                 </div>
@@ -700,8 +571,6 @@
             <div class="ops-tabs font-mono">
                 <button class="tab-btn active" data-target="projects-grid"><i class="fa-brands fa-github"></i> REPOSITORIES (7)</button>
                 <button class="tab-btn" data-target="simulations-grid"><i class="fa-solid fa-briefcase"></i> SIMULATIONS_&_WORK (6)</button>
-                <button class="tab-btn" data-target="thm-operator-grid"><i class="fa-solid fa-skull text-red"></i> THM_OPERATOR_INTEL</button>
-                <button class="tab-btn" data-target="academic-grid"><i class="fa-solid fa-graduation-cap text-cyan"></i> ACADEMIC_NODE_LOG</button>
             </div>
 
             <!-- Tab Content 1: Projects -->
@@ -961,114 +830,157 @@
                 </div>
             </div>
 
-            <!-- Tab Content 3: TryHackMe Operator -->
-            <div id="thm-operator-grid" class="ops-content">
-                <div class="thm-stats-card cyber-card glassmorphic">
-                    <div class="card-header">
-                        <span class="card-title font-mono"><i class="fa-solid fa-skull text-red"></i> TRYHACKME // OPERATOR_PROFILE</span>
-                        <span class="card-count-badge font-mono text-orange">TOP 11% GLOBAL</span>
+
+            
+        </section>
+
+                <!-- Section: TryHackMe Profile & Verified Telemetry -->
+        <section id="tryhackme" class="hud-section">
+            <div class="registry-header-block">
+                <div class="registry-title-wrapper">
+                    <h2 class="section-title font-mono"><i class="fa-solid fa-skull-crossbones text-orange"></i> TRYHACKME_OFFENSIVE_INTEL</h2>
+                    <p class="section-subtitle font-mono">&gt; Verified offensive security credentials, live CTF room completions, and verified operator badges // tryhackme.com/p/giridharank790</p>
+                </div>
+
+                <!-- Telemetry Metrics Strip -->
+                <div class="cert-telemetry-bar font-mono">
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">GLOBAL_RANK:</span>
+                        <span class="telemetry-val text-orange">TOP 260K+</span>
                     </div>
-                    <div class="card-body font-mono">
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">GLOBAL_PERCENTILE:</span>
+                        <span class="telemetry-val text-cyan">TOP 11%</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">ROOMS_SOLVED:</span>
+                        <span class="telemetry-val text-green">40+ LABS</span>
+                    </div>
+                    <div class="telemetry-item">
+                        <span class="telemetry-lbl text-dim">ACHIEVEMENTS:</span>
+                        <span class="telemetry-val text-purple">7 BADGES</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="thm-grid">
+                <!-- Left: THM Stats & Profile Card -->
+                <div class="cyber-card glassmorphic thm-stats-card">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-user-secret text-orange"></i> OPERATOR_PROFILE</span>
+                        <div class="card-controls">
+                            <span class="ctrl-dot red"></span>
+                            <span class="ctrl-dot yellow"></span>
+                            <span class="ctrl-dot green"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
                         <div class="thm-profile-block">
                             <div class="thm-avatar-wrapper">
                                 <div class="thm-avatar-ring">
                                     <i class="fa-solid fa-user-secret thm-avatar-icon"></i>
                                 </div>
-                                <span class="thm-status-dot"></span>
+                                <div class="thm-status-dot" title="Active Cyber Operator"></div>
                             </div>
                             <div class="thm-info">
-                                <h3 class="thm-handle font-heading text-orange">giridharank790</h3>
-                                <div class="thm-rank text-cyan font-mono"><i class="fa-solid fa-trophy"></i> GLOBAL RANK: TOP 260K+ (TOP 11%)</div>
-                                <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="btn cyber-btn small thm-profile-btn font-mono">
+                                <div class="thm-handle font-mono text-orange">giridharank790</div>
+                                <div class="thm-rank font-mono text-cyan"><i class="fa-solid fa-trophy"></i> // RED_TEAM_RESEARCHER</div>
+                                <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="btn cyber-btn primary font-mono thm-profile-btn">
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i> VIEW_THM_PROFILE
                                 </a>
                             </div>
                         </div>
 
-                        <div class="thm-stat-row">
+                        <div class="comms-divider"></div>
+
+                        <div class="thm-stat-row font-mono">
                             <div class="thm-stat-box">
                                 <div class="thm-stat-val text-orange">40+</div>
-                                <div class="thm-stat-lbl">ROOMS_COMPLETED</div>
+                                <div class="thm-stat-lbl">LABS_SOLVED</div>
                             </div>
                             <div class="thm-stat-box">
                                 <div class="thm-stat-val text-cyan">TOP 11%</div>
-                                <div class="thm-stat-lbl">GLOBAL_PERCENTILE</div>
+                                <div class="thm-stat-lbl">PERCENTILE</div>
                             </div>
                             <div class="thm-stat-box">
-                                <div class="thm-stat-val text-green">7 BADGES</div>
-                                <div class="thm-stat-lbl">ACHIEVEMENTS</div>
+                                <div class="thm-stat-val text-green">7</div>
+                                <div class="thm-stat-lbl">BADGES_EARNED</div>
                             </div>
                         </div>
 
-                        <!-- Verified Badges Showcase -->
-                        <div class="thm-badges-showcase">
-                            <h4 class="font-mono text-dim" style="font-size: 0.8rem; margin: 16px 0 10px 0;"><i class="fa-solid fa-medal text-orange"></i> VERIFIED_ACHIEVEMENT_BADGES:</h4>
-                            <div class="project-tech font-mono">
-                                <span><i class="fa-solid fa-terminal text-cyan"></i> Terminaled (Linux CLI)</span>
-                                <span><i class="fa-solid fa-robot text-red"></i> Mr. Robot CTF</span>
-                                <span><i class="fa-solid fa-snowflake text-cyan"></i> Defrosted Five</span>
-                                <span><i class="fa-solid fa-shield-halved text-green"></i> Security Engineering</span>
-                                <span><i class="fa-solid fa-globe text-orange"></i> Web Fundamentals</span>
-                                <span><i class="fa-solid fa-award text-yellow"></i> Bronze League (Top 20%)</span>
-                                <span><i class="fa-solid fa-spider text-purple"></i> World Wide Web</span>
-                            </div>
-                        </div>
+                        <div class="comms-divider"></div>
 
-                        <!-- Official THM Dynamic Badge Embed -->
+                        <!-- Official THM badge image -->
                         <div class="thm-badge-embed">
                             <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer">
-                                <img src="https://tryhackme-badges.s3.amazonaws.com/giridharank790.png" alt="TryHackMe Profile Badge" class="thm-official-badge" loading="lazy">
+                                <img src="https://tryhackme-badges.s3.amazonaws.com/giridharank790.png" 
+                                     alt="TryHackMe Profile Badge for giridharank790" 
+                                     class="thm-official-badge"
+                                     loading="lazy"
+                                     decoding="async"
+                                     onerror="this.style.display='none'">
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tab Content 4: Academic Matrix & Background -->
-            <div id="academic-grid" class="ops-content">
-                <div class="simulations-container font-mono">
-                    <!-- Academic Node 1 -->
-                    <div class="sim-row">
-                        <div class="sim-meta">
-                            <span class="sim-badge text-cyan">POSTGRADUATE</span>
-                            <span class="sim-date">2026 – 2027</span>
-                        </div>
-                        <div class="sim-details">
-                            <h4>M.Sc. Computer Technology (CT)</h4>
-                            <p>Sri Kirana Art and Science College — Advanced Systems Architecture, Distributed Networks & Computing.</p>
-                        </div>
-                        <div class="sim-action">
-                            <span class="btn cyber-btn small font-mono" style="cursor: default; opacity: 0.9;"><i class="fa-solid fa-circle-dot text-green"></i> ACTIVE_NODE</span>
-                        </div>
+                <!-- Right: THM Badges Grid Card -->
+                <div class="cyber-card glassmorphic thm-badges-card">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-medal text-orange"></i> VERIFIED_ACHIEVEMENT_BADGES</span>
+                        <span class="card-count-badge font-mono text-cyan">7 BADGES</span>
                     </div>
-
-                    <!-- Academic Node 2 -->
-                    <div class="sim-row">
-                        <div class="sim-meta">
-                            <span class="sim-badge text-green">UNDERGRADUATE</span>
-                            <span class="sim-date">2023 – 2026</span>
-                        </div>
-                        <div class="sim-details">
-                            <h4>B.Sc. Computer Science &amp; Applications</h4>
-                            <p>Kongu Arts &amp; Science College, Bharathiar University — Core CS, Data Structures, Web Technologies, Database Systems.</p>
-                        </div>
-                        <div class="sim-action">
-                            <span class="btn cyber-btn small font-mono" style="cursor: default;"><i class="fa-solid fa-certificate text-cyan"></i> 70% SCORE</span>
-                        </div>
-                    </div>
-
-                    <!-- Academic Node 3 -->
-                    <div class="sim-row">
-                        <div class="sim-meta">
-                            <span class="sim-badge text-purple">HIGHER_SECONDARY</span>
-                            <span class="sim-date">2021 – 2023</span>
-                        </div>
-                        <div class="sim-details">
-                            <h4>Higher Secondary Certificate (HSC)</h4>
-                            <p>Vidya Saggar School — Mathematics, Computer Science, and Physics Foundation.</p>
-                        </div>
-                        <div class="sim-action">
-                            <span class="btn cyber-btn small font-mono" style="cursor: default;"><i class="fa-solid fa-check text-green"></i> 60% SCORE</span>
+                    <div class="card-body">
+                        <div class="thm-badges-grid">
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Terminaled - CLI Mastery Achievement">
+                                <span class="thm-badge-icon"><i class="fa-solid fa-terminal text-cyan"></i></span>
+                                <div class="thm-badge-info">
+                                    <span class="thm-badge-name font-mono">TERMINALED <span class="thm-tag font-mono text-cyan">CLI_VERIFIED</span></span>
+                                    <span class="thm-badge-desc">Linux CLI Mastery Achievement</span>
+                                </div>
+                            </a>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Mr. Robot CTF Completion">
+                                <span class="thm-badge-icon"><i class="fa-solid fa-robot text-orange"></i></span>
+                                <div class="thm-badge-info">
+                                    <span class="thm-badge-name font-mono">MR_ROBOT_CTF <span class="thm-tag font-mono text-orange">CTF_SOLVED</span></span>
+                                    <span class="thm-badge-desc">Exploitation &amp; Privilege Escalation</span>
+                                </div>
+                            </a>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Defrosted Five - Winter Security Challenge">
+                                <span class="thm-badge-icon"><i class="fa-solid fa-snowflake text-cyan"></i></span>
+                                <div class="thm-badge-info">
+                                    <span class="thm-badge-name font-mono">DEFROSTED_FIVE <span class="thm-tag font-mono text-cyan">CHALLENGE</span></span>
+                                    <span class="thm-badge-desc">Winter Cyber Security Challenge</span>
+                                </div>
+                            </a>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Security Engineering - Principles">
+                                <span class="thm-badge-icon"><i class="fa-solid fa-shield-halved text-green"></i></span>
+                                <div class="thm-badge-info">
+                                    <span class="thm-badge-name font-mono">SECURITY_ENG <span class="thm-tag font-mono text-green">DEFENSIVE</span></span>
+                                    <span class="thm-badge-desc">Defensive Security Principles</span>
+                                </div>
+                            </a>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="Web Fundamentals - Web Hacking">
+                                <span class="thm-badge-icon"><i class="fa-solid fa-globe text-orange"></i></span>
+                                <div class="thm-badge-info">
+                                    <span class="thm-badge-name font-mono">WEB_FUNDAMENTALS <span class="thm-tag font-mono text-orange">OWASP_SEC</span></span>
+                                    <span class="thm-badge-desc">Web Hacking &amp; OWASP Security</span>
+                                </div>
+                            </a>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="thm-badge-pill highlight-pill" title="Bronze League - Top 20% Rank">
+                                <span class="thm-badge-icon"><i class="fa-solid fa-medal text-orange"></i></span>
+                                <div class="thm-badge-info">
+                                    <span class="thm-badge-name font-mono">BRONZE_LEAGUE <span class="thm-tag font-mono text-orange">TOP_20%</span></span>
+                                    <span class="thm-badge-desc">Global Top 20% Rank Standing</span>
+                                </div>
+                            </a>
+                            <a href="https://tryhackme.com/p/giridharank790" target="_blank" rel="noopener noreferrer" class="thm-badge-pill" title="World Wide Web - Security Achievement">
+                                <span class="thm-badge-icon"><i class="fa-solid fa-spider text-purple"></i></span>
+                                <div class="thm-badge-info">
+                                    <span class="thm-badge-name font-mono">WORLD_WIDE_WEB <span class="thm-tag font-mono text-purple">AUDITED</span></span>
+                                    <span class="thm-badge-desc">Web Threat Surface Assessment</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1149,7 +1061,7 @@
                                 <span>Linux</span>
                                 <span>Network Defense</span>
                             </div>
-                            <a href="./certificate/google_cybersecurity.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                            <a href="./certificate/cyber_security_1.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
                             </a>
                         </div>
@@ -1172,7 +1084,7 @@
                                 <span>Routing Sec</span>
                                 <span>Crypto</span>
                             </div>
-                            <a href="./certificate/cisco_cybersecurity.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                            <a href="./certificate/cyber_security_2.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
                             </a>
                         </div>
@@ -1195,7 +1107,7 @@
                                 <span>Exploitation</span>
                                 <span>Recon</span>
                             </div>
-                            <a href="./certificate/cisco_ethical_hacker.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                            <a href="./certificate/cyber_security_3.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
                             </a>
                         </div>
@@ -1218,7 +1130,7 @@
                                 <span>Threat Intel</span>
                                 <span>NGFW</span>
                             </div>
-                            <a href="./certificate/fortinet_nse.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
+                            <a href="./certificate/cyber_security_4.pdf" target="_blank" class="btn cyber-btn small cert-action-btn font-mono">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY_CREDENTIAL
                             </a>
                         </div>
@@ -1744,11 +1656,11 @@
             <a href="#ops" class="dock-item squircle" data-tooltip="Operations" title="Operations" aria-label="Operations">
                 <span class="dock-icon-bg bg-dock-ops"><i class="fa-solid fa-microchip"></i></span>
             </a>
+            <a href="#tryhackme" class="dock-item squircle" data-tooltip="TryHackMe" title="TryHackMe" aria-label="TryHackMe">
+                <span class="dock-icon-bg bg-dock-thm"><i class="fa-solid fa-skull"></i></span>
+            </a>
             <a href="#registry" class="dock-item squircle" data-tooltip="Registry" title="Registry" aria-label="Registry">
                 <span class="dock-icon-bg bg-dock-registry"><i class="fa-solid fa-certificate"></i></span>
-            </a>
-            <a href="#tryhackme" class="dock-item squircle" data-tooltip="THM Logs" title="TryHackMe Logs" aria-label="TryHackMe Logs">
-                <span class="dock-icon-bg bg-dock-thm"><i class="fa-solid fa-skull"></i></span>
             </a>
             <a href="#contact" class="dock-item squircle" data-tooltip="Connect" title="Connect" aria-label="Connect">
                 <span class="dock-icon-bg bg-dock-contact"><i class="fa-solid fa-satellite-dish"></i></span>
