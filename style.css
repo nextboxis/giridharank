@@ -623,22 +623,34 @@ body.light-mode .hud-bg-btn:hover {
 /* Section styling with continuous vertical scroll & cinematic IntersectionObserver entrance transitions */
 .hud-section {
     display: block;
-    margin-bottom: 5.5rem;
+    margin-bottom: 5rem;
     scroll-margin-top: 28px;
     opacity: 0;
-    transform: translate3d(0, 36px, 0);
-    filter: blur(6px);
-    transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.72s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform, filter;
+    transform: translate3d(0, 24px, 0);
+    transition: opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
 }
 
 .hud-section.section-visible,
 .hud-section.active-section {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    filter: blur(0px);
+}
+
+@keyframes cardFilterEnter {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0) scale(0.985);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+.filter-enter {
+    animation: cardFilterEnter 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .section-title {
@@ -699,11 +711,12 @@ body.light-mode .hud-bg-btn:hover {
     backdrop-filter: blur(28px) saturate(180%) !important;
     border: var(--neu-border) !important;
     box-shadow: var(--neu-card) !important;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.35s ease,
-        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        background 0.35s ease !important;
-    will-change: transform, opacity, box-shadow;
+    transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.32s ease,
+        box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.32s ease !important;
+    will-change: transform, opacity;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     transform-style: preserve-3d;
@@ -862,50 +875,55 @@ body.dark-mode .glassmorphic {
 
 .glitch-title {
     font-family: var(--font-display);
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-size: clamp(1.6rem, 4.5vw, 3.2rem);
     font-weight: 900;
     color: var(--text-primary);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     line-height: 1.15;
     margin-bottom: 8px;
     position: relative;
+    text-wrap: balance;
 }
 
 .sub-headline {
     font-family: var(--font-heading);
-    font-size: 1.2rem;
+    font-size: clamp(0.95rem, 2.2vw, 1.18rem);
     font-weight: 600;
     color: var(--cyber-cyan);
     letter-spacing: 0.02em;
-    margin-bottom: 22px;
+    line-height: 1.45;
+    margin-bottom: 20px;
 }
 
 .bio-text {
     font-family: var(--font-body);
-    font-size: 1.02rem;
-    line-height: 1.7;
+    font-size: clamp(0.9rem, 1.6vw, 1.02rem);
+    line-height: 1.68;
     color: var(--text-muted);
-    margin-bottom: 28px;
+    margin-bottom: 26px;
 }
 
 .section-title {
     font-family: var(--font-display) !important;
-    font-size: 1.75rem;
+    font-size: clamp(1.22rem, 3.2vw, 1.72rem);
     font-weight: 800;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
+    line-height: 1.25;
     color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 6px;
+    text-wrap: balance;
 }
 
 .section-subtitle {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: clamp(0.78rem, 1.5vw, 0.85rem);
+    line-height: 1.5;
     color: var(--text-muted);
     letter-spacing: 0.02em;
-    margin-bottom: 26px;
+    margin-bottom: 24px;
 }
 
 .hero-actions {
@@ -1436,7 +1454,10 @@ body:not(.dark-mode) .arsenal-grid .card-header {
 
 @media (max-width: 480px) {
     .arsenal-grid .card-body.skills-flex-grid {
-        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        grid-auto-rows: 34px !important;
+        gap: 6px 8px !important;
+        padding: 12px !important;
     }
 }
 
@@ -1574,18 +1595,32 @@ body:not(.dark-mode) .card-footer-evidence {
    TRYHACKME OPERATOR PROFILE & STATS LAYOUT
    ========================================================================= */
 
+.thm-stats-card,
+.thm-badges-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .thm-stats-card .card-body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
     padding: 22px;
+    gap: 12px;
     height: 100%;
+}
+
+.thm-stats-card .comms-divider {
+    margin: 4px 0;
 }
 
 .thm-profile-block {
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 5px 0 10px 0;
+    padding: 4px 0;
 }
 
 .thm-avatar-wrapper {
@@ -1632,6 +1667,7 @@ body:not(.dark-mode) .card-footer-evidence {
     flex-direction: column;
     gap: 4px;
     flex: 1;
+    min-width: 0;
 }
 
 .thm-handle {
@@ -1658,16 +1694,24 @@ body:not(.dark-mode) .card-footer-evidence {
 /* THM 3-Column Stats Matrix */
 .thm-stat-row {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 12px !important;
-    margin: 12px 0 !important;
+    margin: 4px 0 !important;
+    align-items: stretch !important;
+    width: 100%;
 }
 
 .thm-stat-box {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    min-height: 82px;
     background: rgba(255, 255, 255, 0.04) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 12px !important;
-    padding: 14px 10px !important;
+    padding: 14px 8px !important;
     text-align: center !important;
     -webkit-backdrop-filter: blur(14px) !important;
     backdrop-filter: blur(14px) !important;
@@ -1686,19 +1730,25 @@ body:not(.dark-mode) .thm-stat-box {
 }
 
 .thm-stat-val {
-    font-size: 1.4rem !important;
+    font-size: clamp(1.05rem, 1.35vw, 1.28rem) !important;
     font-weight: 800 !important;
     line-height: 1.2 !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 6px !important;
     font-family: var(--font-mono) !important;
+    white-space: nowrap !important;
 }
 
 .thm-stat-lbl {
-    font-size: 0.68rem !important;
+    font-size: clamp(0.58rem, 0.72vw, 0.66rem) !important;
     color: var(--text-muted) !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.03em !important;
     font-weight: 600 !important;
     font-family: var(--font-mono) !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 1.2 !important;
 }
 
 /* THM Official Badge Embed */
@@ -1706,7 +1756,7 @@ body:not(.dark-mode) .thm-stat-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 14px 0 6px 0;
+    padding: 6px 0 2px 0;
 }
 
 .thm-official-badge {
@@ -1725,12 +1775,19 @@ body:not(.dark-mode) .thm-stat-box {
 
 @media (max-width: 600px) {
     .thm-stat-row {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+    }
+
+    .thm-stat-box {
+        min-height: 70px;
+        padding: 10px 4px !important;
     }
 
     .thm-profile-block {
         flex-direction: column;
         text-align: center;
+        gap: 12px;
     }
 
     .thm-info {
@@ -3133,183 +3190,56 @@ body:not(.dark-mode) .thm-stat-box {
 
     /* --- Flowy Entry & Loading Animations --- */
 
-    /* Keyframes */
+    /* Keyframes (60fps Compositor-Only) */
     @keyframes slideUpFade {
         0% {
             opacity: 0;
-            transform: translateY(28px) scale(0.96);
-            filter: blur(8px);
-        }
-
-        60% {
-            filter: blur(0);
+            transform: translate3d(0, 20px, 0) scale(0.98);
         }
 
         100% {
             opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
+            transform: translate3d(0, 0, 0) scale(1);
         }
     }
 
     @keyframes scaleInFade {
         0% {
             opacity: 0;
-            transform: scale(0.82) translateY(12px);
-            filter: blur(5px);
+            transform: scale(0.92) translate3d(0, 10px, 0);
         }
 
         100% {
             opacity: 1;
-            transform: scale(1) translateY(0);
-            filter: blur(0);
+            transform: scale(1) translate3d(0, 0, 0);
         }
     }
 
     @keyframes fadeOutShrink {
         0% {
             opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
+            transform: translate3d(0, 0, 0) scale(1);
         }
 
         100% {
             opacity: 0;
-            transform: translateY(-16px) scale(0.94);
-            filter: blur(8px);
+            transform: translate3d(0, -12px, 0) scale(0.96);
         }
     }
 
-    @keyframes glitch {
-
-        0%,
-        14%,
-        17%,
-        100% {
-            text-shadow: 0.05em 0 0 rgba(255, 0, 85, 0.15),
-                -0.025em -0.05em 0 rgba(0, 255, 65, 0.15),
-                0.025em 0.05em 0 rgba(0, 102, 255, 0.15);
-        }
-
-        15% {
-            text-shadow: -0.05em -0.025em 0 rgba(255, 0, 85, 0.5),
-                0.025em 0.025em 0 rgba(0, 255, 65, 0.5),
-                -0.05em -0.05em 0 rgba(0, 102, 255, 0.5);
-        }
-
-        16% {
-            text-shadow: 0.05em 0.05em 0 rgba(255, 0, 85, 0.5),
-                -0.05em -0.025em 0 rgba(0, 255, 65, 0.5),
-                0.05em 0.05em 0 rgba(0, 102, 255, 0.5);
-        }
-    }
-
-    @keyframes glitch-anim {
-        0% {
-            clip: rect(15px, 9999px, 66px, 0);
-        }
-
-        10% {
-            clip: rect(30px, 9999px, 5px, 0);
-        }
-
-        20% {
-            clip: rect(92px, 9999px, 83px, 0);
-        }
-
-        30% {
-            clip: rect(12px, 9999px, 45px, 0);
-        }
-
-        40% {
-            clip: rect(76px, 9999px, 98px, 0);
-        }
-
-        50% {
-            clip: rect(43px, 9999px, 14px, 0);
-        }
-
-        60% {
-            clip: rect(88px, 9999px, 23px, 0);
-        }
-
-        70% {
-            clip: rect(5px, 9999px, 67px, 0);
-        }
-
-        80% {
-            clip: rect(54px, 9999px, 89px, 0);
-        }
-
-        90% {
-            clip: rect(31px, 9999px, 12px, 0);
-        }
-
-        100% {
-            clip: rect(72px, 9999px, 55px, 0);
-        }
-    }
-
-    @keyframes glitch-anim2 {
-        0% {
-            clip: rect(76px, 9999px, 116px, 0);
-        }
-
-        11% {
-            clip: rect(5px, 9999px, 34px, 0);
-        }
-
-        22% {
-            clip: rect(120px, 9999px, 80px, 0);
-        }
-
-        33% {
-            clip: rect(54px, 9999px, 6px, 0);
-        }
-
-        44% {
-            clip: rect(12px, 9999px, 89px, 0);
-        }
-
-        55% {
-            clip: rect(98px, 9999px, 45px, 0);
-        }
-
-        66% {
-            clip: rect(43px, 9999px, 78px, 0);
-        }
-
-        77% {
-            clip: rect(89px, 9999px, 12px, 0);
-        }
-
-        88% {
-            clip: rect(2px, 9999px, 99px, 0);
-        }
-
-        100% {
-            clip: rect(65px, 9999px, 50px, 0);
-        }
-    }
-
-    /* --- Futuristic Smooth Flow Starting & Ending Animation Engine --- */
-
-    /* Base Cascade Item State (Scroll & Entry Flow) */
+    /* Base Cascade Item State (60fps GPU Scroll & Entry Flow) */
     .hud-cascade-item {
         opacity: 0;
-        transform: translateY(26px) scale(0.96);
-        filter: blur(6px);
-        transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-            transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-            filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-        transition-delay: calc(var(--cascade-index, 0) * 0.05s);
-        will-change: opacity, transform, filter;
+        transform: translate3d(0, 20px, 0);
+        transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: calc(var(--cascade-index, 0) * 0.04s);
+        will-change: opacity, transform;
     }
 
     .hud-cascade-item.revealed {
         opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
+        transform: translate3d(0, 0, 0);
     }
 
     /* Exit / Ending Flow State for all cards */
@@ -3319,9 +3249,8 @@ body:not(.dark-mode) .thm-stat-box {
     .sim-row.is-leaving,
     .cyber-card.is-leaving {
         opacity: 0 !important;
-        transform: translateY(-16px) scale(0.94) !important;
-        filter: blur(8px) !important;
-        transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease !important;
+        transform: translate3d(0, -12px, 0) scale(0.97) !important;
+        transition: opacity 0.22s ease, transform 0.22s ease !important;
         transition-delay: 0s !important;
         pointer-events: none;
     }
@@ -3335,12 +3264,10 @@ body:not(.dark-mode) .thm-stat-box {
     .cert-filter-bar.hud-cascade-item,
     .cert-telemetry-bar.hud-cascade-item {
         opacity: 0;
-        transform: translate3d(0, 22px, 0);
-        filter: blur(6px);
-        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-            transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-            filter 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        transition-delay: calc(var(--cascade-index, 0) * 40ms) !important;
+        transform: translate3d(0, 18px, 0);
+        transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.48s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        transition-delay: calc(var(--cascade-index, 0) * 35ms) !important;
     }
 
     .section-title.hud-cascade-item.revealed,
@@ -3352,7 +3279,6 @@ body:not(.dark-mode) .thm-stat-box {
     .cert-telemetry-bar.hud-cascade-item.revealed {
         opacity: 1;
         transform: translate3d(0, 0, 0);
-        filter: blur(0px);
     }
 
     /* --- Interactive Control Panels & Tabs --- */
@@ -4034,31 +3960,225 @@ body:not(.dark-mode) .thm-stat-box {
     @media (max-width: 1024px) {
         .container {
             width: 94%;
-            margin-top: 25px;
+            margin-top: 22px;
         }
 
-        .about-grid {
-            grid-template-columns: 1fr;
+        .about-grid,
+        .thm-grid,
+        .contact-grid {
+            grid-template-columns: minmax(0, 1fr);
             gap: 20px;
         }
 
+        .arsenal-grid,
+        .projects-container,
         .certs-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .github-telemetry-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
         }
     }
 
     /* Tablets & Mobile (< 768px) */
     @media (max-width: 768px) {
         .container {
-            margin-bottom: 100px;
+            width: 94%;
+            margin: 16px auto 96px auto;
         }
 
-        .hud-top-bar {
-            padding: 8px 12px;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        .hud-section {
+            margin-bottom: 3.5rem;
+        }
+
+        .glitch-title {
+            font-size: clamp(1.5rem, 5.2vw, 1.95rem) !important;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+
+        .sub-headline {
+            font-size: 0.96rem !important;
+            line-height: 1.45;
+            margin-bottom: 14px;
+        }
+
+        .bio-text {
+            font-size: 0.9rem !important;
+            line-height: 1.62;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(1.16rem, 4.2vw, 1.38rem) !important;
             gap: 8px;
+            padding-left: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 0.78rem !important;
+            line-height: 1.48;
+            margin-bottom: 18px;
+        }
+
+        .arsenal-grid,
+        .projects-container,
+        .certs-grid,
+        .contact-grid,
+        .thm-grid {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 16px;
+        }
+
+        .card-body {
+            padding: 18px 16px;
+        }
+
+        .feed-img-wrapper {
+            height: 270px;
+        }
+
+        .scanner-screen,
+        .cli-screen {
+            height: 280px;
+            padding: 14px;
+            font-size: 0.76rem;
+        }
+
+        .ctrl-tabs-header {
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 14px;
+        }
+
+        .hud-tabs {
+            flex-wrap: wrap;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .hud-tab-btn {
+            font-size: 0.72rem;
+            padding: 6px 10px;
+            flex: 1 1 auto;
+            justify-content: center;
+        }
+
+        .arsenal-filter-bar,
+        .ops-filter-tags,
+        .cert-filter-buttons {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            gap: 8px;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .arsenal-filter-btn,
+        .ops-tag-btn,
+        .cert-filter-btn {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            font-size: 0.74rem !important;
+            padding: 7px 13px !important;
+        }
+
+        .ops-filter-container {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+
+        .ops-search-box,
+        .cert-search-wrapper {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .ops-tabs {
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .ops-tabs .tab-btn {
+            flex: 1 1 0%;
+            justify-content: center;
+            text-align: center;
+            padding: 9px 10px !important;
+            font-size: 0.74rem !important;
+            white-space: nowrap;
+        }
+
+        .project-card {
+            padding: 18px 16px;
+        }
+
+        .project-card h3 {
+            font-size: 1.06rem;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            font-size: 0.84rem;
+            line-height: 1.55;
+            margin-bottom: 14px;
+        }
+
+        .project-tech span {
+            font-size: 0.68rem !important;
+            padding: 4px 9px !important;
+        }
+
+        .sim-row {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .sim-details h4 {
+            font-size: 0.95rem;
+        }
+
+        .sim-details p {
+            font-size: 0.82rem;
+        }
+
+        .sim-action {
+            justify-content: flex-start;
+            grid-column: 1;
+        }
+
+        .thm-stat-row {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            gap: 8px !important;
+        }
+
+        .thm-stat-box {
+            min-width: 0;
+            padding: 12px 8px !important;
+        }
+
+        .thm-stat-val {
+            font-size: 1.15rem !important;
+        }
+
+        .thm-stat-lbl {
+            font-size: 0.62rem !important;
+        }
+
+        .contact-method-item {
+            padding: 12px 14px;
+            gap: 10px;
+        }
+
+        .contact-val {
+            font-size: 0.82rem;
+            word-break: break-all;
         }
 
         .mac-dock-container {
@@ -4067,165 +4187,87 @@ body:not(.dark-mode) .thm-stat-box {
             width: 100%;
         }
 
+        .liquid-metal-dock,
         .mac-dock {
-            padding: 10px 15px !important;
-            gap: 10px;
+            padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)) 12px !important;
+            gap: 8px;
             max-width: 100%;
             width: 100%;
-            justify-content: space-evenly;
-            border-radius: 16px 16px 0 0 !important;
+            justify-content: space-around;
+            border-radius: 18px 18px 0 0 !important;
             border-bottom: none !important;
             background: var(--neu-surface) !important;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
         }
 
-        .dock-item {
-            width: 44px;
-            height: 44px;
+        .dock-item,
+        .dock-item.squircle {
+            width: 44px !important;
+            height: 44px !important;
             font-size: 1.15rem;
         }
 
-        .hud-bar-left {
-            gap: 8px;
-            min-width: 0;
+        .dock-icon-bg {
+            width: 42px !important;
+            height: 42px !important;
+            font-size: 1.2rem !important;
+            border-radius: 12px !important;
         }
 
-        .hud-bar-title {
-            font-size: 0.82rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .hud-bar-right {
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .hud-diag-pill,
-        .hud-bg-btn {
-            padding: 4px 10px;
-            font-size: 0.75rem;
-        }
-
-        .hud-nav {
+        .dock-item::before {
             display: none;
-        }
-
-        .glitch-title {
-            font-size: 2.2rem !important;
-            letter-spacing: 1px;
-            line-height: 1.25;
-        }
-
-        .sub-headline {
-            font-size: 1.12rem;
-            line-height: 1.45;
-        }
-
-        .bio-text {
-            font-size: 1.05rem;
-            line-height: 1.65;
-        }
-
-        .section-title {
-            font-size: 1.55rem;
-        }
-
-        .section-subtitle {
-            font-size: 0.95rem;
-        }
-
-        .projects-container {
-            grid-template-columns: 1fr;
-        }
-
-        .sim-row {
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .sim-action {
-            justify-content: flex-start;
-        }
-
-        .thm-stat-row {
-            flex-wrap: wrap;
-        }
-
-        .thm-stat-box {
-            min-width: 45%;
         }
     }
 
     /* Small Mobile Devices (< 480px) */
     @media (max-width: 480px) {
         .container {
-            width: 95%;
-            margin: 15px auto 110px auto;
+            width: 94%;
+            margin: 12px auto 88px auto;
         }
 
-        .hud-top-bar {
-            padding: 8px 10px;
-            gap: 6px;
-        }
-
-        .hud-bar-left {
-            gap: 6px;
-            max-width: 100%;
-        }
-
-        .hud-bar-title {
-            font-size: 0.78rem;
-        }
-
-        .hud-bar-right {
-            gap: 4px;
-        }
-
-        .hud-diag-pill,
-        .hud-bg-btn {
-            padding: 3px 8px;
-            font-size: 0.7rem;
+        .hud-section {
+            margin-bottom: 2.75rem;
         }
 
         .cyber-badge {
-            font-size: 0.8rem;
-            padding: 5px 12px;
+            font-size: 0.68rem;
+            padding: 4px 10px;
+            margin-bottom: 10px;
         }
 
         .card-body {
-            padding: 20px 16px;
+            padding: 16px 14px;
         }
 
         .glitch-title {
-            font-size: 1.85rem !important;
-            line-height: 1.22;
+            font-size: clamp(1.36rem, 5.8vw, 1.62rem) !important;
+            line-height: 1.18;
+            letter-spacing: 0.01em;
             word-break: break-word;
             overflow-wrap: break-word;
         }
 
         .sub-headline {
-            font-size: 1.05rem;
-            line-height: 1.45;
+            font-size: 0.86rem !important;
+            line-height: 1.42;
             font-weight: 600;
+            margin-bottom: 12px;
         }
 
         .bio-text {
-            font-size: 0.98rem;
-            line-height: 1.6;
-        }
-
-        .certs-grid {
-            grid-template-columns: 1fr;
+            font-size: 0.84rem !important;
+            line-height: 1.58;
+            margin-bottom: 16px;
         }
 
         .hero-actions {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
+            align-items: stretch;
+            gap: 10px;
             width: 100%;
+            margin-bottom: 18px;
         }
 
         .cv-btn-wrapper {
@@ -4235,25 +4277,19 @@ body:not(.dark-mode) .thm-stat-box {
             gap: 8px;
         }
 
-        .cyber-btn.cv-btn {
+        .cyber-btn.cv-btn,
+        .hero-actions .btn.secondary {
             width: 100%;
             justify-content: center;
-            padding: 12px 18px;
-            font-size: 0.88rem;
+            text-align: center;
+            padding: 11px 16px;
+            font-size: 0.82rem;
         }
 
         .cv-verify-tag {
             align-self: center;
-            font-size: 0.78rem;
-            padding: 6px 12px;
-        }
-
-        .hero-actions .btn.secondary {
-            width: 100%;
-            text-align: center;
-            justify-content: center;
-            padding: 12px 18px;
-            font-size: 0.88rem;
+            font-size: 0.7rem;
+            padding: 5px 10px;
         }
 
         .hero-social-row {
@@ -4261,19 +4297,21 @@ body:not(.dark-mode) .thm-stat-box {
             flex-direction: row;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
             width: 100%;
         }
 
         .btn.cyber-btn {
-            padding: 11px 16px;
-            font-size: 0.85rem;
+            padding: 10px 14px;
+            font-size: 0.8rem;
         }
 
         .cyber-btn.icon-btn {
-            width: 44px;
-            height: 44px;
-            flex: 0 0 auto;
+            width: 42px;
+            height: 42px;
+            flex: 1 1 0%;
+            max-width: 54px;
             display: inline-flex !important;
             align-items: center;
             justify-content: center;
@@ -4281,24 +4319,25 @@ body:not(.dark-mode) .thm-stat-box {
         }
 
         .mini-hud-stats {
-            gap: 4px;
+            gap: 6px;
             padding: 10px 8px;
             border-radius: 12px;
+            margin-top: 14px;
         }
 
         .hud-stat-box {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             padding: 2px;
             min-width: 0;
         }
 
         .hud-stat-box .stat-lbl {
-            font-size: 0.68rem;
+            font-size: 0.62rem;
             font-weight: 700;
         }
 
         .hud-stat-box .stat-val {
-            font-size: clamp(0.72rem, 2.7vw, 0.82rem);
+            font-size: clamp(0.68rem, 2.6vw, 0.78rem);
             font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
@@ -4307,65 +4346,310 @@ body:not(.dark-mode) .thm-stat-box {
         }
 
         .section-title {
-            font-size: 1.38rem;
+            font-size: clamp(1.04rem, 4.5vw, 1.22rem) !important;
+            gap: 7px;
+            padding-left: 10px;
+            letter-spacing: 0.02em;
         }
 
         .section-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.74rem !important;
+            line-height: 1.45;
+            margin-bottom: 14px;
         }
 
-        .card-title {
-            font-size: 0.88rem;
+        .card-header,
+        .arsenal-grid .card-header {
+            padding: 10px 12px;
+            min-height: 44px;
+        }
+
+        .card-title,
+        .arsenal-grid .card-title {
+            font-size: 0.75rem;
+            gap: 6px;
+        }
+
+        .card-count-badge {
+            font-size: 0.62rem;
+            padding: 2px 6px;
+        }
+
+        /* Keep 2-column skill pills on mobile with compact typography */
+        .arsenal-grid .card-body.skills-flex-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            grid-auto-rows: 34px !important;
+            gap: 6px 8px !important;
+            padding: 12px !important;
+        }
+
+        .skill-pill-card {
+            height: 34px !important;
+            padding: 0 8px !important;
+            gap: 6px !important;
+            border-radius: 7px !important;
+        }
+
+        .skill-pill-icon {
+            font-size: 0.8rem !important;
+            width: 15px !important;
+            height: 15px !important;
+            flex: 0 0 15px !important;
+        }
+
+        .skill-pill-name {
+            font-size: 0.68rem !important;
+        }
+
+        .card-footer-evidence {
+            padding: 8px 12px !important;
+            font-size: 0.68rem !important;
+        }
+
+        .card-footer-evidence .evidence-lbl {
+            font-size: 0.63rem;
+        }
+
+        .card-footer-evidence .evidence-link {
+            font-size: 0.66rem;
+        }
+
+        .feed-img-wrapper {
+            height: 220px;
+        }
+
+        .scanner-screen,
+        .cli-screen {
+            height: 240px;
+            padding: 12px;
+            font-size: 0.72rem;
+        }
+
+        .cert-card {
+            padding: 15px;
+            gap: 10px;
+        }
+
+        .cert-icon {
+            width: 38px;
+            height: 38px;
+            font-size: 1.4rem;
         }
 
         .cert-info h4 {
-            font-size: 0.94rem;
+            font-size: 0.84rem;
         }
 
         .cert-desc {
-            font-size: 0.84rem;
-            line-height: 1.45;
+            font-size: 0.74rem;
+            line-height: 1.42;
         }
 
-        .filter-btn {
-            font-size: 0.82rem;
-            padding: 8px 12px;
+        .thm-stats-card .card-body {
+            padding: 16px 14px;
         }
 
-        .mac-dock-container {
-            bottom: 0;
-            max-width: 100vw;
-            width: 100%;
+        .thm-handle {
+            font-size: 1.05rem;
         }
 
-        .mac-dock {
-            padding: 10px 15px !important;
+        .thm-rank {
+            font-size: 0.7rem;
+        }
+
+        .thm-stat-row {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            gap: 6px !important;
+        }
+
+        .thm-stat-box {
+            padding: 10px 4px !important;
+            min-width: 0;
+        }
+
+        .thm-stat-val {
+            font-size: 0.98rem !important;
+        }
+
+        .thm-stat-lbl {
+            font-size: 0.56rem !important;
+        }
+
+        .thm-badge-pill {
+            padding: 10px 12px;
+            gap: 10px;
+        }
+
+        .thm-badge-icon {
+            width: 34px;
+            height: 34px;
+            font-size: 1.15rem;
+        }
+
+        .thm-badge-name {
+            font-size: 0.75rem;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .thm-badge-desc {
+            font-size: 0.68rem;
+        }
+
+        .github-telemetry-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 8px;
-            max-width: 100%;
-            width: 100%;
-            justify-content: space-evenly;
-            border-radius: 16px 16px 0 0 !important;
-            border-bottom: none !important;
-            background: var(--neu-surface) !important;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
         }
 
-        .dock-item {
-            width: 40px;
-            height: 40px;
-            font-size: 1.1rem;
+        .telemetry-box {
+            padding: 10px;
+        }
+
+        .telemetry-box .lbl {
+            font-size: 0.6rem;
+        }
+
+        .telemetry-box .val {
+            font-size: 0.76rem;
+        }
+
+        .timeline-item {
+            margin-left: 16px;
+            padding: 14px 16px;
+        }
+
+        .timeline-date {
+            font-size: 0.72rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 0.85rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.76rem;
+        }
+
+        .contact-method-item {
+            padding: 11px 12px;
+        }
+
+        .method-lbl {
+            font-size: 0.66rem;
+        }
+
+        .contact-val {
+            font-size: 0.76rem;
+        }
+
+        .copy-badge {
+            font-size: 0.64rem;
+            padding: 5px 9px;
+        }
+
+        .contact-social-pill {
+            padding: 10px 12px;
+            font-size: 0.75rem;
+        }
+
+        .hud-footer {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+            padding: 16px 5% 96px 5%;
+            font-size: 0.68rem;
+        }
+
+        .liquid-metal-dock,
+        .mac-dock {
+            padding: 7px 10px calc(7px + env(safe-area-inset-bottom, 0px)) 10px !important;
+            gap: 6px;
+        }
+
+        .dock-item,
+        .dock-item.squircle {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1.05rem;
+        }
+
+        .dock-icon-bg {
+            width: 38px !important;
+            height: 38px !important;
+            font-size: 1.08rem !important;
+            border-radius: 11px !important;
         }
 
         .cyber-toast {
-            bottom: 80px;
-            right: 5%;
-            left: 5%;
-            width: 90%;
+            bottom: 74px;
+            right: 4%;
+            left: 4%;
+            width: 92%;
+            font-size: 0.76rem;
+            padding: 10px 14px;
         }
 
         .cyber-modal-content {
             padding: 0;
             width: 95%;
+        }
+
+        .modal-details-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Compact Mobile Screens (< 360px) */
+    @media (max-width: 360px) {
+        .glitch-title {
+            font-size: 1.26rem !important;
+        }
+
+        .section-title {
+            font-size: 0.98rem !important;
+        }
+
+        .arsenal-grid .card-body.skills-flex-grid {
+            gap: 5px 6px !important;
+            padding: 10px !important;
+        }
+
+        .skill-pill-card {
+            padding: 0 6px !important;
+            gap: 5px !important;
+        }
+
+        .skill-pill-name {
+            font-size: 0.63rem !important;
+        }
+
+        .dock-item,
+        .dock-item.squircle {
+            width: 36px !important;
+            height: 36px !important;
+        }
+
+        .dock-icon-bg {
+            width: 34px !important;
+            height: 34px !important;
+            font-size: 0.98rem !important;
+        }
+    }
+
+    /* Touch Device Hover Optimization (60fps Scroll Without Sticky Hover Traps) */
+    @media (hover: none), (pointer: coarse) {
+        .cyber-card:hover,
+        .arsenal-grid .cyber-card.skill-card:hover,
+        .skill-pill-card:hover,
+        .cert-card:hover,
+        .project-card:hover,
+        .sim-row:hover,
+        .timeline-item:hover,
+        .contact-method-item:hover,
+        .thm-stat-box:hover,
+        .thm-badge-pill:hover {
+            transform: none !important;
         }
     }
 
@@ -5300,6 +5584,158 @@ body.redteam-override .tracker-menu-item.active {
 
     .tracker-index {
         font-size: 0.68rem;
+    }
+}
+
+/* =========================================================================
+   UNIFIED 60FPS CARD SMOOTHNESS, BIDIRECTIONAL REVEAL & SPOTLIGHT ENGINE
+   ========================================================================= */
+.card-reveal-item {
+    --card-reveal-delay: 0ms;
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.985) !important;
+    transition: opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1) var(--card-reveal-delay, 0ms),
+        transform 0.56s cubic-bezier(0.22, 1, 0.36, 1) var(--card-reveal-delay, 0ms),
+        border-color 0.32s ease,
+        box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.32s ease !important;
+    will-change: transform, opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-reveal-item.is-card-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) !important;
+}
+
+/* Tactical HUD Corner Accent Brackets for Cert & Timeline Cards */
+.cert-card::before,
+.cert-card::after,
+.timeline-item::before,
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    transition: opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0.28;
+    z-index: 5;
+}
+
+.cert-card::before,
+.timeline-item::before {
+    top: 0;
+    left: 0;
+    border-top: 2px solid var(--cyber-cyan);
+    border-left: 2px solid var(--cyber-cyan);
+    border-top-left-radius: 6px;
+}
+
+.cert-card::after,
+.timeline-item::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 2px solid var(--cyber-cyan);
+    border-right: 2px solid var(--cyber-cyan);
+    border-bottom-right-radius: 6px;
+}
+
+/* 60fps Floating Lift & Cursor-Tracked Spotlight on Fine-Pointer Devices */
+@media (hover: hover) and (pointer: fine) {
+    .card-reveal-item.is-card-visible:hover,
+    .cyber-card.is-card-visible:hover,
+    .project-card.is-card-visible:hover,
+    .cert-card.is-card-visible:hover,
+    .timeline-item.is-card-visible:hover,
+    .thm-stat-box.is-card-visible:hover,
+    .telemetry-box.is-card-visible:hover {
+        --card-reveal-delay: 0ms !important;
+        transition-delay: 0ms !important;
+        transform: translate3d(0, -5px, 0) scale(1.008) !important;
+        border-color: var(--cyber-cyan) !important;
+        box-shadow: var(--neu-raised-hover) !important;
+        background-image: radial-gradient(
+            380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 102, 255, 0.075),
+            transparent 70%
+        ) !important;
+    }
+
+    body.dark-mode .card-reveal-item.is-card-visible:hover,
+    body.dark-mode .cyber-card.is-card-visible:hover,
+    body.dark-mode .project-card.is-card-visible:hover,
+    body.dark-mode .cert-card.is-card-visible:hover,
+    body.dark-mode .timeline-item.is-card-visible:hover,
+    body.dark-mode .thm-stat-box.is-card-visible:hover,
+    body.dark-mode .telemetry-box.is-card-visible:hover {
+        background-image: radial-gradient(
+            380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 229, 255, 0.11),
+            transparent 70%
+        ) !important;
+    }
+
+    /* Compact Horizontal Cards & Badge Pills Subtle Lift */
+    .sim-row.is-card-visible:hover,
+    .thm-badge-pill.is-card-visible:hover,
+    .contact-method-item.is-card-visible:hover {
+        --card-reveal-delay: 0ms !important;
+        transition-delay: 0ms !important;
+        transform: translate3d(0, -3px, 0) scale(1.006) !important;
+        border-color: var(--cyber-cyan) !important;
+        box-shadow: var(--neu-raised-hover) !important;
+    }
+
+    /* Skill Pill Inner Micro-Cards Smooth Lift */
+    .skill-pill-card:hover {
+        transform: translate3d(0, -2px, 0) scale(1.015) !important;
+        border-color: var(--cyber-cyan) !important;
+        box-shadow: var(--neu-pill-hover) !important;
+        background-image: radial-gradient(
+            180px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 229, 255, 0.1),
+            transparent 75%
+        ) !important;
+    }
+
+    .cert-card:hover::before,
+    .cert-card:hover::after,
+    .timeline-item:hover::before,
+    .timeline-item:hover::after {
+        opacity: 1;
+        border-color: var(--cyber-cyan);
+        box-shadow: 0 0 8px var(--cyber-cyan);
+    }
+
+    /* Crisp Tactile Press Feedback */
+    .cert-card.is-card-visible:active,
+    .project-card.is-card-visible:active,
+    .sim-row.is-card-visible:active,
+    .thm-badge-pill.is-card-visible:active,
+    .contact-method-item.is-card-visible:active {
+        transform: translate3d(0, -1px, 0) scale(0.996) !important;
+        transition-duration: 0.12s !important;
+    }
+
+    /* Red Team Override Card Spotlight */
+    body.redteam-override .card-reveal-item.is-card-visible:hover {
+        border-color: #ff003c !important;
+        background-image: radial-gradient(
+            380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 0, 60, 0.12),
+            transparent 70%
+        ) !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card-reveal-item,
+    .card-reveal-item.is-card-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
 }
 

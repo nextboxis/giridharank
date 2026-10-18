@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 26. 120Hz Liquid-LERP Custom Cyber Cursor Engine
     initCustomCursor();
 
+    // 28. Unified 60fps Bidirectional Card Reveal & Spotlight Engine
+    initCardSmoothAnimations();
+
     // 25. Hero CV Download Toast & Chime Handler
     const heroCvBtn = document.getElementById('hero-cv-btn');
     if (heroCvBtn) {
@@ -325,20 +328,18 @@ function initNavigation() {
         });
     }
 
-    // 5. Section-Level IntersectionObserver: Bidirectional Fade-In / Slide-Up
+    // 5. Section-Level IntersectionObserver: 60fps GPU Fade-In / Slide-Up
     if ('IntersectionObserver' in window && sections.length) {
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const section = entry.target;
                 if (entry.isIntersecting) {
                     section.classList.add('section-visible', 'active-section');
-                } else {
-                    section.classList.remove('section-visible', 'active-section');
                 }
             });
         }, {
-            threshold: 0.08,
-            rootMargin: '0px 0px -60px 0px'
+            threshold: 0.05,
+            rootMargin: '0px 0px -32px 0px'
         });
 
         sections.forEach(section => sectionObserver.observe(section));
@@ -398,6 +399,16 @@ function initOperationsTabs() {
                 content.classList.remove('active-content', 'active-section');
                 if (content.id === targetId) {
                     content.classList.add('active-section', 'active-content');
+                    const childCards = content.querySelectorAll('.card-reveal-item');
+                    childCards.forEach((card, idx) => {
+                        card.classList.remove('is-card-visible');
+                        card.style.setProperty('--card-reveal-delay', `${(idx % 3) * 55}ms`);
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                card.classList.add('is-card-visible');
+                            });
+                        });
+                    });
                 }
             });
         });
@@ -416,12 +427,19 @@ function initArsenalFilter() {
             btn.classList.add('active');
 
             const filterVal = btn.getAttribute('data-filter') || 'all';
+            let visibleIdx = 0;
 
             skillCards.forEach(card => {
                 const cardCategory = card.getAttribute('data-category') || '';
                 if (filterVal === 'all' || cardCategory.includes(filterVal)) {
                     card.style.display = 'flex';
+                    card.classList.remove('filter-enter', 'is-card-visible');
+                    card.style.setProperty('--card-reveal-delay', `${(visibleIdx % 3) * 50}ms`);
+                    visibleIdx++;
+                    void card.offsetWidth;
+                    card.classList.add('filter-enter', 'is-card-visible');
                 } else {
+                    card.classList.remove('filter-enter', 'is-card-visible');
                     card.style.display = 'none';
                 }
             });
@@ -452,9 +470,12 @@ function initCertFilters() {
             const matchesSearch = !searchQuery || (title.includes(searchQuery) || desc.includes(searchQuery) || vendor.includes(searchQuery) || pills.includes(searchQuery));
 
             if (matchesCategory && matchesSearch) {
-                card.classList.remove('hidden');
+                card.classList.remove('hidden', 'filter-enter');
                 card.style.display = '';
+                void card.offsetWidth;
+                card.classList.add('filter-enter');
             } else {
+                card.classList.remove('filter-enter');
                 card.style.display = 'none';
                 card.classList.add('hidden');
             }
@@ -1289,10 +1310,14 @@ function initOpsFilter() {
             const matchesSearch = !currentSearch || (title.includes(currentSearch) || desc.includes(currentSearch) || tech.includes(currentSearch));
 
             if (matchesCategory && matchesSearch) {
-                card.classList.remove('hidden');
+                card.classList.remove('hidden', 'filter-enter', 'is-card-visible');
                 card.style.display = '';
+                card.style.setProperty('--card-reveal-delay', `${(visibleCount % 3) * 50}ms`);
+                void card.offsetWidth;
+                card.classList.add('filter-enter', 'is-card-visible');
                 visibleCount++;
             } else {
+                card.classList.remove('filter-enter', 'is-card-visible');
                 card.style.display = 'none';
                 card.classList.add('hidden');
             }
@@ -1302,14 +1327,20 @@ function initOpsFilter() {
             countNum.textContent = String(visibleCount);
         }
 
+        let simIdx = 0;
         simRows.forEach(row => {
             const text = row.textContent.toLowerCase();
             const matchesQuery = !currentSearch || text.includes(currentSearch);
 
             if (matchesQuery) {
-                row.classList.remove('hidden');
+                row.classList.remove('hidden', 'filter-enter', 'is-card-visible');
                 row.style.display = '';
+                row.style.setProperty('--card-reveal-delay', `${(simIdx % 3) * 45}ms`);
+                simIdx++;
+                void row.offsetWidth;
+                row.classList.add('filter-enter', 'is-card-visible');
             } else {
+                row.classList.remove('filter-enter', 'is-card-visible');
                 row.style.display = 'none';
                 row.classList.add('hidden');
             }
@@ -1780,3 +1811,119 @@ function initKonamiCode() {
         }
     });
 }
+
+// =========================================================================
+// 28. Unified 60fps Bidirectional Card Reveal & Cursor-Tracked Spotlight
+// =========================================================================
+function initCardSmoothAnimations() {
+    const cardSelector = [
+        '.hero-card',
+        '.visual-feed-card',
+        '.terminal-card',
+        '.arsenal-grid .skill-card',
+        '.projects-container .project-card',
+        '.simulations-container .sim-row',
+        '.github-telemetry-card',
+        '.telemetry-box',
+        '.timeline-item',
+        '.certs-grid .cert-card',
+        '.thm-stat-box',
+        '.thm-badge-pill',
+        '.contact-info-card',
+        '.contact-form-card',
+        '.contact-method-item'
+    ].join(', ');
+
+    const allCards = Array.from(document.querySelectorAll(cardSelector));
+    if (!allCards.length) return;
+
+    // Assign column-aware stagger indices per parent container
+    const parentGroups = new Map();
+    allCards.forEach(card => {
+        card.classList.add('card-reveal-item');
+        const parent = card.parentElement;
+        if (!parentGroups.has(parent)) {
+            parentGroups.set(parent, []);
+        }
+        const siblings = parentGroups.get(parent);
+        const colCycle = parent.classList.contains('github-telemetry-grid') ? 4
+            : (parent.classList.contains('arsenal-grid') || parent.classList.contains('certs-grid')) ? 3
+            : 2;
+        const staggerIdx = siblings.length % colCycle;
+        card.dataset.staggerDelay = String(staggerIdx * 55);
+        siblings.push(card);
+    });
+
+    // 1. Bidirectional IntersectionObserver (Replays smoothly scrolling down & up)
+    if ('IntersectionObserver' in window) {
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const card = entry.target;
+                if (entry.isIntersecting) {
+                    const delayMs = card.dataset.staggerDelay || '0';
+                    card.style.setProperty('--card-reveal-delay', `${delayMs}ms`);
+                    card.classList.add('is-card-visible');
+
+                    // Clear delay after entrance finishes so hover elevation has zero lag
+                    if (card._revealTimer) clearTimeout(card._revealTimer);
+                    card._revealTimer = setTimeout(() => {
+                        card.style.setProperty('--card-reveal-delay', '0ms');
+                    }, 560 + Number(delayMs));
+                } else {
+                    if (card._revealTimer) clearTimeout(card._revealTimer);
+                    card.style.setProperty('--card-reveal-delay', '0ms');
+                    card.classList.remove('is-card-visible');
+                }
+            });
+        }, {
+            threshold: 0.06,
+            rootMargin: '20px 0px -20px 0px'
+        });
+
+        allCards.forEach(card => cardObserver.observe(card));
+    } else {
+        allCards.forEach(card => card.classList.add('is-card-visible'));
+    }
+
+    // 2. 60fps rAF-Throttled Cursor-Tracked Surface & Border Spotlight
+    const hasFinePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!hasFinePointer) return;
+
+    const spotlightSelector = `${cardSelector}, .skill-pill-card`;
+    let pendingEvent = null;
+    let rafId = null;
+
+    function updateCardSpotlight() {
+        rafId = null;
+        if (!pendingEvent) return;
+
+        const e = pendingEvent;
+        pendingEvent = null;
+
+        const targetCard = e.target.closest(spotlightSelector);
+        if (!targetCard) return;
+
+        const rect = targetCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        targetCard.style.setProperty('--mouse-x', `${x.toFixed(1)}px`);
+        targetCard.style.setProperty('--mouse-y', `${y.toFixed(1)}px`);
+
+        // If hovering a nested pill inside a parent .cyber-card, update parent spotlight too
+        const parentCard = targetCard.parentElement?.closest('.cyber-card');
+        if (parentCard && parentCard !== targetCard) {
+            const pRect = parentCard.getBoundingClientRect();
+            parentCard.style.setProperty('--mouse-x', `${(e.clientX - pRect.left).toFixed(1)}px`);
+            parentCard.style.setProperty('--mouse-y', `${(e.clientY - pRect.top).toFixed(1)}px`);
+        }
+    }
+
+    document.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return;
+        pendingEvent = e;
+        if (!rafId) {
+            rafId = requestAnimationFrame(updateCardSpotlight);
+        }
+    }, { passive: true });
+}
+
