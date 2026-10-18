@@ -1,0 +1,6 @@
+{
+  "summary": "Implementation plan to fix custom HUD pointer centering, eliminate native cursor overlap, remove magnetic off-center pulling, and upgrade cursor and card-tilt engines to zero-reflow, delta-time normalized GPU compositor physics for 120Hz+ smoothness.",
+  "updatedAt": "2026-10-18T12:52:27.144707364Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

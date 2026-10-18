@@ -52,10 +52,6 @@
     <!-- Matrix Particle Background -->
     <canvas id="cyberCanvas" aria-hidden="true"></canvas>
 
-
-
-
-
     <!-- Main Content Container -->
     <main class="container">
         
@@ -124,10 +120,17 @@
                     </div>
                 </div>
 
-                <!-- Tactical Visual Feed Panel -->
+                <!-- Tactical Visual Feed & Interactive Terminal Panel -->
                 <div class="cyber-card glassmorphic visual-feed-card">
-                    <div class="card-header">
-                        <span class="card-title font-mono"><i class="fa-solid fa-satellite text-cyan"></i> [LIVE_FEED]</span>
+                    <div class="card-header ctrl-tabs-header">
+                        <div class="hud-tabs font-mono" role="tablist" aria-label="Visual Feed and Terminal Switcher">
+                            <button type="button" class="hud-tab-btn active" data-tab="live-feed" role="tab" aria-selected="true">
+                                <i class="fa-solid fa-satellite text-cyan"></i> [LIVE_FEED]
+                            </button>
+                            <button type="button" class="hud-tab-btn" data-tab="terminal-cli" role="tab" aria-selected="false">
+                                <i class="fa-solid fa-terminal text-green"></i> [TERMINAL_CLI]
+                            </button>
+                        </div>
                         <div class="card-controls">
                             <span class="ctrl-dot red"></span>
                             <span class="ctrl-dot yellow"></span>
@@ -140,9 +143,22 @@
                             <div class="feed-container">
                                 <div class="feed-item">
                                     <div class="feed-img-wrapper">
-                                        <div class="scanline"></div>
                                         <img src="./hero photo/ascii-magic-4.webp" alt="Tactical ASCII Art" class="cyber-img" decoding="async" loading="eager" width="600" height="600">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content 2: Interactive Cyber Terminal CLI -->
+                        <div id="tab-terminal-cli" class="hud-tab-content font-mono">
+                            <div class="cli-screen">
+                                <div id="cli-output-area" class="cli-output">
+                                    <div><span class="text-cyan">[CYBER_SENTINEL_OS v4.2]</span> Interactive Operator Shell Initialized.</div>
+                                    <div>Type <span class="text-cyan">help</span> for available commands (<span class="text-green">whoami</span>, <span class="text-green">skills</span>, <span class="text-green">scan</span>, <span class="text-green">ctf</span>, <span class="text-green">override</span>).</div>
+                                </div>
+                                <div class="cli-input-line">
+                                    <span class="cli-prompt">guest@cyber-hud:~$</span>
+                                    <input type="text" id="cli-input" placeholder="Enter command (e.g. help, whoami, skills, ctf)..." aria-label="Terminal Command Input" autocomplete="off" spellcheck="false">
                                 </div>
                             </div>
                         </div>
@@ -491,11 +507,11 @@
                     </div>
                     <div class="card-body skills-flex-grid">
                         <div class="skill-pill-card" title="Mimikatz / LSASS Dump"><span class="skill-pill-icon text-red"><i class="fa-solid fa-key"></i></span><span class="skill-pill-name font-mono">Mimikatz/LSASS</span></div>
-                        <div class="skill-pill-card" title="Kerberoasting & AS-REP"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-ticket"></i></span><span class="skill-pill-name font-mono">Kerberoasting</span></div>
+                        <div class="skill-pill-card" title="Kerberoasting & AS-REP"><span class="skill-pill-icon text-red"><i class="fa-solid fa-ticket"></i></span><span class="skill-pill-name font-mono">Kerberoasting</span></div>
                         <div class="skill-pill-card" title="Pass-the-Hash / Ticket"><span class="skill-pill-icon text-red"><i class="fa-solid fa-id-badge"></i></span><span class="skill-pill-name font-mono">Pass-the-Hash</span></div>
-                        <div class="skill-pill-card" title="Token Impersonation"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-fingerprint"></i></span><span class="skill-pill-name font-mono">Token Impersonate</span></div>
+                        <div class="skill-pill-card" title="Token Impersonation"><span class="skill-pill-icon text-red"><i class="fa-solid fa-fingerprint"></i></span><span class="skill-pill-name font-mono">Token Abuse</span></div>
                         <div class="skill-pill-card" title="C2 Beaconing Infrastructure"><span class="skill-pill-icon text-red"><i class="fa-solid fa-tower-broadcast"></i></span><span class="skill-pill-name font-mono">C2 Beaconing</span></div>
-                        <div class="skill-pill-card" title="BloodHound AD Recon"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-diagram-project"></i></span><span class="skill-pill-name font-mono">BloodHound Recon</span></div>
+                        <div class="skill-pill-card" title="BloodHound AD Recon"><span class="skill-pill-icon text-red"><i class="fa-solid fa-diagram-project"></i></span><span class="skill-pill-name font-mono">BloodHound AD</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
                         <div class="evidence-row">
@@ -516,12 +532,12 @@
                         <span class="card-count-badge font-mono text-orange">6 MODULES</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card" title="Ghidra Disassembly & Decompilation"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-code-compare"></i></span><span class="skill-pill-name font-mono">Ghidra Decompile</span></div>
-                        <div class="skill-pill-card" title="Buffer Overflow & ROP Chains"><span class="skill-pill-icon text-red"><i class="fa-solid fa-memory"></i></span><span class="skill-pill-name font-mono">BOF / ROP Chains</span></div>
+                        <div class="skill-pill-card" title="Ghidra Disassembly & Decompilation"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-code-compare"></i></span><span class="skill-pill-name font-mono">Ghidra RE</span></div>
+                        <div class="skill-pill-card" title="Buffer Overflow & ROP Chains"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-memory"></i></span><span class="skill-pill-name font-mono">BOF &amp; ROP</span></div>
                         <div class="skill-pill-card" title="GDB & PEDA Debugging"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-bug-slash"></i></span><span class="skill-pill-name font-mono">GDB &amp; PEDA</span></div>
-                        <div class="skill-pill-card" title="Shellcode Crafting & Injection"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Shellcode Inject</span></div>
+                        <div class="skill-pill-card" title="Shellcode Crafting & Injection"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-terminal"></i></span><span class="skill-pill-name font-mono">Shellcode Dev</span></div>
                         <div class="skill-pill-card" title="Format String Exploits"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-align-left"></i></span><span class="skill-pill-name font-mono">Format Strings</span></div>
-                        <div class="skill-pill-card" title="PE / ELF Malware Analysis"><span class="skill-pill-icon text-red"><i class="fa-solid fa-file-code"></i></span><span class="skill-pill-name font-mono">Malware Triage</span></div>
+                        <div class="skill-pill-card" title="PE / ELF Malware Analysis"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-file-code"></i></span><span class="skill-pill-name font-mono">Malware Triage</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
                         <div class="evidence-row">
@@ -538,16 +554,16 @@
                 <!-- Skill Category 12: Network Attacks & Wireless Exploitation -->
                 <div class="cyber-card glassmorphic skill-card" data-category="security">
                     <div class="card-header">
-                        <span class="card-title font-mono"><i class="fa-solid fa-wifi text-red"></i> NET_ATTACK_&_WIRELESS</span>
-                        <span class="card-count-badge font-mono text-red">6 VECTORS</span>
+                        <span class="card-title font-mono"><i class="fa-solid fa-wifi text-cyan"></i> NET_ATTACK_&_WIRELESS</span>
+                        <span class="card-count-badge font-mono text-cyan">6 VECTORS</span>
                     </div>
                     <div class="card-body skills-flex-grid">
-                        <div class="skill-pill-card" title="ARP Spoofing & MITM"><span class="skill-pill-icon text-red"><i class="fa-solid fa-arrows-split-up-and-left"></i></span><span class="skill-pill-name font-mono">ARP Spoofing</span></div>
-                        <div class="skill-pill-card" title="Bettercap & Ettercap MITM"><span class="skill-pill-icon text-red"><i class="fa-solid fa-mask"></i></span><span class="skill-pill-name font-mono">Bettercap / MITM</span></div>
-                        <div class="skill-pill-card" title="DNS Cache Poisoning"><span class="skill-pill-icon text-yellow"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">DNS Poisoning</span></div>
-                        <div class="skill-pill-card" title="Wi-Fi WPA2/3 Handshake Cracking"><span class="skill-pill-icon text-orange"><i class="fa-solid fa-wifi"></i></span><span class="skill-pill-name font-mono">Wi-Fi Cracking</span></div>
-                        <div class="skill-pill-card" title="Scapy Packet Crafting & Injection"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-envelope-open-text"></i></span><span class="skill-pill-name font-mono">Scapy Injection</span></div>
-                        <div class="skill-pill-card" title="VLAN Hopping & DHCP Starvation"><span class="skill-pill-icon text-red"><i class="fa-solid fa-route"></i></span><span class="skill-pill-name font-mono">VLAN Hopping</span></div>
+                        <div class="skill-pill-card" title="ARP Spoofing & MITM"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-arrows-split-up-and-left"></i></span><span class="skill-pill-name font-mono">ARP Spoofing</span></div>
+                        <div class="skill-pill-card" title="Bettercap & Ettercap MITM"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-mask"></i></span><span class="skill-pill-name font-mono">Bettercap MITM</span></div>
+                        <div class="skill-pill-card" title="DNS Cache Poisoning"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-network-wired"></i></span><span class="skill-pill-name font-mono">DNS Poisoning</span></div>
+                        <div class="skill-pill-card" title="Wi-Fi WPA2/3 Handshake Cracking"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-wifi"></i></span><span class="skill-pill-name font-mono">Wi-Fi Cracking</span></div>
+                        <div class="skill-pill-card" title="Scapy Packet Crafting & Injection"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-envelope-open-text"></i></span><span class="skill-pill-name font-mono">Scapy Packets</span></div>
+                        <div class="skill-pill-card" title="VLAN Hopping & DHCP Starvation"><span class="skill-pill-icon text-cyan"><i class="fa-solid fa-route"></i></span><span class="skill-pill-name font-mono">VLAN Hopping</span></div>
                     </div>
                     <div class="card-footer-evidence font-mono">
                         <div class="evidence-row">
@@ -571,6 +587,20 @@
             <div class="ops-tabs font-mono">
                 <button class="tab-btn active" data-target="projects-grid"><i class="fa-brands fa-github"></i> REPOSITORIES (7)</button>
                 <button class="tab-btn" data-target="simulations-grid"><i class="fa-solid fa-briefcase"></i> SIMULATIONS_&_WORK (6)</button>
+            </div>
+
+            <!-- Operations Search & Category Filter Bar -->
+            <div class="ops-filter-container font-mono">
+                <div class="ops-filter-tags">
+                    <button type="button" class="ops-tag-btn active" data-filter="all">ALL_OPS (7)</button>
+                    <button type="button" class="ops-tag-btn" data-filter="security">SECURITY_TOOLS (5)</button>
+                    <button type="button" class="ops-tag-btn" data-filter="ml">AI_&_ML (1)</button>
+                    <button type="button" class="ops-tag-btn" data-filter="web">WEB_&_CRYPTO (1)</button>
+                </div>
+                <div class="ops-search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon text-cyan"></i>
+                    <input type="text" id="ops-search-input" placeholder="SEARCH_OPERATIONS_OR_SIMULATIONS..." aria-label="Search Operations and Simulations" class="font-mono">
+                </div>
             </div>
 
             <!-- Tab Content 1: Projects -->
@@ -1639,10 +1669,52 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Encrypted Packet Transmission Form Panel -->
+                <div class="cyber-card glassmorphic contact-form-card">
+                    <div class="card-header">
+                        <span class="card-title font-mono"><i class="fa-solid fa-lock text-green"></i> [ENCRYPTED_PACKET_DISPATCH]</span>
+                        <div class="card-controls">
+                            <span class="ctrl-dot red"></span>
+                            <span class="ctrl-dot yellow"></span>
+                            <span class="ctrl-dot green"></span>
+                        </div>
+                    </div>
+                    <div class="card-body font-mono">
+                        <form id="contact-form" autocomplete="off">
+                            <div class="form-group">
+                                <label for="form-sender"><i class="fa-solid fa-user-astronaut"></i> SENDER_IDENTIFIER</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="form-sender" name="sender" placeholder="Operator Name / Organization" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email"><i class="fa-solid fa-at"></i> RETURN_ENDPOINT (EMAIL)</label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="form-email" name="email" placeholder="operator@domain.sec" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-body"><i class="fa-solid fa-key"></i> TRANSMISSION_PAYLOAD</label>
+                                <div class="input-wrapper">
+                                    <textarea id="form-body" name="message" rows="3" placeholder="Enter message to encrypt and transmit..." required></textarea>
+                                </div>
+                                <div class="payload-preview-container">
+                                    <div id="payload-preview" class="payload-preview">[WAITING_FOR_SENDER_PAYLOAD...]</div>
+                                </div>
+                            </div>
+                            <button type="submit" id="form-submit-btn" class="btn cyber-btn primary block font-mono">
+                                <i class="fa-solid fa-paper-plane"></i> TRANSMIT_ENCRYPTED_PACKET
+                            </button>
+                            <div id="form-response" class="form-status-msg text-green hidden">
+                                <i class="fa-solid fa-circle-check"></i> [PACKET_DELIVERED] Transmission verified and logged.
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-
 
     <!-- macOS Liquid Metallic Glass App Dock -->
     <div class="mac-dock-container">
@@ -1704,15 +1776,21 @@
         </div>
     </div>
 
-    <!-- Certificate Lightbox Preview Modal -->
-    <div id="cert-lightbox-modal" class="hud-lightbox-modal">
+    <!-- Certificate & PDF Lightbox Preview Modal -->
+    <div id="cert-lightbox-modal" class="hud-lightbox-modal" aria-hidden="true">
         <div class="hud-lightbox-content">
             <div class="hud-lightbox-header font-mono">
                 <span class="card-title text-cyan" id="lightbox-title"><i class="fa-solid fa-certificate"></i> [VERIFICATION_NODE]</span>
-                <button id="lightbox-close-btn" class="hud-lightbox-close" title="Close Preview" aria-label="Close Preview"><i class="fa-solid fa-xmark"></i></button>
+                <div class="hud-lightbox-actions">
+                    <a id="lightbox-external-link" href="#" target="_blank" rel="noopener noreferrer" class="btn cyber-btn small font-mono">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> OPEN_RAW_FILE
+                    </a>
+                    <button id="lightbox-close-btn" class="hud-lightbox-close" title="Close Preview" aria-label="Close Preview"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
             <div class="hud-lightbox-body font-mono">
                 <img id="lightbox-img" src="" alt="High Resolution Preview" class="hud-lightbox-img">
+                <iframe id="lightbox-pdf" src="" title="Credential PDF Preview" class="hud-lightbox-pdf hidden"></iframe>
                 <div class="hud-lightbox-meta text-dim" id="lightbox-meta">INTEGRITY_VERIFIED // SECURE_NODE</div>
             </div>
         </div>

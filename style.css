@@ -240,16 +240,13 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
-    transform: scale(1.05);
-    transition: opacity 2.2s ease-in-out, transform 2.5s ease-in-out;
+    transition: opacity 0.6s ease-in-out;
     z-index: -2;
     pointer-events: none;
-    will-change: opacity, transform;
 }
 
 .bg-crossfade-layer.active-bg {
     opacity: 1;
-    transform: scale(1);
 }
 
 /* Background Canvas */
@@ -267,24 +264,12 @@ body {
     opacity: var(--canvas-opacity);
 }
 
-/* --- Cyber HUD Precision Liquid-LERP Custom Cursor --- */
-@media (hover: hover) and (pointer: fine) {
-
-    body.has-custom-cursor,
-    body.has-custom-cursor a,
-    body.has-custom-cursor button,
-    body.has-custom-cursor input,
-    body.has-custom-cursor textarea,
-    body.has-custom-cursor select,
-    body.has-custom-cursor .btn,
-    body.has-custom-cursor .cyber-card,
-    body.has-custom-cursor .dock-item,
-    body.has-custom-cursor .cert-card,
-    body.has-custom-cursor .project-card,
-    body.has-custom-cursor .ops-tag-btn,
-    body.has-custom-cursor .thm-badge-pill {
-        cursor: none !important;
-    }
+/* --- Cyber HUD Precision 120Hz+ GPU-Composited Custom Cursor --- */
+body.has-custom-cursor,
+body.has-custom-cursor *,
+body.has-custom-cursor *::before,
+body.has-custom-cursor *::after {
+    cursor: none !important;
 }
 
 .cyber-cursor-dot {
@@ -293,15 +278,18 @@ body {
     left: 0;
     width: 6px;
     height: 6px;
+    margin-top: -3px;
+    margin-left: -3px;
     background-color: var(--cyber-cyan);
     border-radius: 50%;
     pointer-events: none;
     z-index: 999999;
     box-shadow: 0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-cyan);
     opacity: 0;
-    transform: translate3d(-50%, -50%, 0);
-    transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease, background-color 0.3s ease;
-    will-change: transform;
+    transform: translate3d(-100px, -100px, 0) scale(1);
+    transform-origin: center center;
+    transition: opacity 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform, opacity;
 }
 
 .cyber-cursor-ring {
@@ -310,64 +298,55 @@ body {
     left: 0;
     width: 34px;
     height: 34px;
+    margin-top: -17px;
+    margin-left: -17px;
     border: 1.5px solid var(--border-glow);
     border-radius: 50%;
     pointer-events: none;
     z-index: 999998;
     background: rgba(0, 102, 255, 0.03);
-    box-shadow: 0 0 15px rgba(0, 102, 255, 0.15), inset 0 0 10px rgba(0, 102, 255, 0.05);
+    box-shadow: 0 0 14px rgba(0, 102, 255, 0.16), inset 0 0 8px rgba(0, 102, 255, 0.06);
     opacity: 0;
-    transform: translate3d(-50%, -50%, 0);
-    transition: opacity 0.3s ease, width 0.25s var(--transition-curve), height 0.25s var(--transition-curve), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform;
-    -webkit-backdrop-filter: blur(1px);
-    backdrop-filter: blur(1px);
+    transform: translate3d(-100px, -100px, 0) scale(1);
+    transform-origin: center center;
+    transition: opacity 0.2s ease, border-radius 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform, opacity;
 }
 
 body.dark-mode .cyber-cursor-ring {
-    border-color: rgba(0, 229, 255, 0.45);
+    border-color: rgba(0, 229, 255, 0.5);
     background: rgba(0, 229, 255, 0.04);
-    box-shadow: 0 0 18px rgba(0, 229, 255, 0.25), inset 0 0 12px rgba(0, 229, 255, 0.08);
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.25), inset 0 0 10px rgba(0, 229, 255, 0.08);
 }
 
-/* Custom Cursor Active Hover States */
+/* Custom Cursor Active Hover States (GPU-Scaled via JS, Zero Reflow) */
 .cyber-cursor-ring.is-hovering {
-    width: 52px;
-    height: 52px;
     border-color: var(--cyber-cyan);
     background: rgba(0, 229, 255, 0.08);
-    box-shadow: 0 0 25px var(--cyber-cyan), inset 0 0 15px var(--cyber-cyan);
+    box-shadow: 0 0 22px var(--cyber-cyan), inset 0 0 12px var(--cyber-cyan);
 }
 
 .cyber-cursor-dot.is-hovering {
-    width: 4px;
-    height: 4px;
     background-color: var(--cyber-green);
-    box-shadow: 0 0 12px var(--cyber-green);
+    box-shadow: 0 0 12px var(--cyber-green), 0 0 22px var(--cyber-green);
 }
 
 /* Card Hover Custom Cursor HUD Scanner Mode */
 .cyber-cursor-ring.is-card-hover {
-    width: 58px;
-    height: 58px;
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1.5px dashed var(--cyber-cyan);
     background: rgba(0, 229, 255, 0.06);
-    box-shadow: 0 0 25px rgba(0, 229, 255, 0.3), inset 0 0 15px rgba(0, 229, 255, 0.12);
+    box-shadow: 0 0 22px rgba(0, 229, 255, 0.3), inset 0 0 12px rgba(0, 229, 255, 0.12);
 }
 
 .cyber-cursor-dot.is-card-hover {
-    width: 8px;
-    height: 8px;
     background-color: var(--cyber-green);
-    box-shadow: 0 0 15px var(--cyber-green), 0 0 25px var(--cyber-green);
+    box-shadow: 0 0 14px var(--cyber-green), 0 0 24px var(--cyber-green);
 }
 
 .cyber-cursor-ring.is-clicking {
-    width: 24px;
-    height: 24px;
     border-color: var(--cyber-green);
-    background: rgba(13, 138, 67, 0.2);
+    background: rgba(13, 138, 67, 0.22);
     box-shadow: 0 0 20px var(--cyber-green);
 }
 
@@ -376,7 +355,7 @@ body.dark-mode .cyber-cursor-ring {
     opacity: 1;
 }
 
-/* 3D Interactive Card Spotlight Highlight Effects */
+/* Card Surface Transitions */
 .cyber-card,
 .cert-card,
 .project-card,
@@ -392,69 +371,7 @@ body.dark-mode .cyber-cursor-ring {
 .hud-stat-box,
 .hud-telemetry-item {
     position: relative;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
-    will-change: transform;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-}
-
-.cyber-card::before,
-.cert-card::before,
-.project-card::before,
-.skill-card::before,
-.terminal-card::before,
-.visual-feed-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: inherit;
-    background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 229, 255, 0.14), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none;
-    z-index: 1;
-}
-
-.cyber-card:hover::before,
-.cert-card:hover::before,
-.project-card:hover::before,
-.skill-card:hover::before,
-.terminal-card:hover::before,
-.visual-feed-card:hover::before {
-    opacity: 1;
-}
-
-/* Card Parallax Child Element Depth Staggering */
-.cyber-card .card-title,
-.cyber-card .glitch-title,
-.cyber-card .sub-headline,
-.cyber-card .cyber-badge,
-.cert-card .cert-title,
-.project-card .project-title,
-.thm-stat-box .stat-val,
-.thm-badge-pill .pill-val,
-.skill-card .skill-title,
-.skill-pill-card .skill-pill-name,
-.terminal-card .terminal-header {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    transform: translateZ(0);
-}
-
-.cyber-card:hover .card-title,
-.cyber-card:hover .glitch-title,
-.cyber-card:hover .sub-headline,
-.cyber-card:hover .cyber-badge,
-.cert-card:hover .cert-title,
-.project-card:hover .project-title,
-.thm-stat-box:hover .stat-val,
-.thm-badge-pill:hover .pill-val,
-.skill-card:hover .skill-title,
-.skill-pill-card:hover .skill-pill-name,
-.terminal-card:hover .terminal-header {
-    transform: translateZ(14px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 img,
@@ -642,7 +559,7 @@ body.light-mode .hud-bg-btn:hover {
 }
 
 .cyber-blink {
-    animation: blink 1.5s infinite;
+    opacity: 1;
 }
 
 .hud-nav {
@@ -688,31 +605,6 @@ body.light-mode .hud-bg-btn:hover {
     box-shadow: 0 0 8px var(--cyber-green);
 }
 
-.status-indicator.online::after {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 1.5px solid var(--cyber-green);
-    animation: radarPulse 2s infinite ease-out;
-    pointer-events: none;
-}
-
-@keyframes radarPulse {
-    0% {
-        transform: scale(0.6);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(2.2);
-        opacity: 0;
-    }
-}
-
 .status-text {
     font-size: 0.75rem;
     color: var(--text-muted);
@@ -722,39 +614,31 @@ body.light-mode .hud-bg-btn:hover {
 .container {
     max-width: 1300px;
     width: 90%;
-    margin: 20px auto 80px auto;
+    margin: 24px auto 128px auto;
     flex: 1;
     position: relative;
     z-index: 2;
 }
 
-/* Section styling with ultra-fast 60Hz/120Hz SPA entrance transitions */
+/* Section styling with continuous vertical scroll & cinematic IntersectionObserver entrance transitions */
 .hud-section {
-    display: none;
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.32s var(--transition-curve), transform 0.32s var(--transition-curve);
-    will-change: opacity, transform;
-    contain: layout style;
-}
-
-.hud-section.active-section {
     display: block;
-    opacity: 1;
-    transform: translateY(0);
-    animation: hudSectionEnter 0.32s var(--transition-curve) forwards;
+    margin-bottom: 5.5rem;
+    scroll-margin-top: 28px;
+    opacity: 0;
+    transform: translate3d(0, 36px, 0);
+    filter: blur(6px);
+    transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
 }
 
-@keyframes hudSectionEnter {
-    0% {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.hud-section.section-visible,
+.hud-section.active-section {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0px);
 }
 
 .section-title {
@@ -774,11 +658,10 @@ body.light-mode .hud-bg-btn:hover {
 
 .section-title i {
     display: inline-block;
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    transition: color 0.25s ease;
 }
 
 .section-title:hover i {
-    transform: rotate(12deg) scale(1.2);
     color: var(--cyber-cyan);
 }
 
@@ -889,13 +772,7 @@ body.dark-mode .glassmorphic {
     border-color: var(--cyber-cyan) !important;
     box-shadow: var(--neu-raised-hover) !important;
     transform: translateY(-6px) scale(1.008) !important;
-}
-
-.cyber-card:hover::before,
-.cyber-card:hover::after {
-    opacity: 1;
-    border-color: var(--cyber-cyan);
-    box-shadow: 0 0 8px var(--cyber-cyan);
+    background-image: radial-gradient(420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 229, 255, 0.1), transparent 70%) !important;
 }
 
 .cyber-card:hover::before,
@@ -992,36 +869,6 @@ body.dark-mode .glassmorphic {
     line-height: 1.15;
     margin-bottom: 8px;
     position: relative;
-    text-shadow: 0.05em 0 0 rgba(255, 0, 85, 0.15),
-        -0.025em -0.05em 0 rgba(0, 255, 65, 0.15),
-        0.025em 0.05em 0 rgba(0, 102, 255, 0.15);
-    animation: glitch 15s infinite;
-}
-
-.glitch-title::before,
-.glitch-title::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    opacity: 0.8;
-}
-
-.glitch-title::before {
-    left: 2px;
-    text-shadow: -1px 0 var(--cyber-cyan);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-}
-
-.glitch-title::after {
-    left: -2px;
-    text-shadow: -1px 0 var(--cyber-green);
-    clip: rect(85px, 450px, 140px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
 }
 
 .sub-headline {
@@ -1148,21 +995,7 @@ body.dark-mode .cyber-btn.cv-btn {
 }
 
 .cv-verify-tag i {
-    animation: shieldPulse 2.5s infinite ease-in-out;
-}
-
-@keyframes shieldPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 2px var(--cyber-green));
-    }
-
-    50% {
-        transform: scale(1.2);
-        filter: drop-shadow(0 0 8px var(--cyber-green));
-    }
+    filter: drop-shadow(0 0 2px var(--cyber-green));
 }
 
 .hero-social-row {
@@ -1430,30 +1263,7 @@ body.dark-mode .cyber-btn.cv-btn {
 }
 
 .scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(180deg, transparent 0%, var(--scanline-color) 50%, transparent 100%);
-    opacity: 0.6;
-    z-index: 2;
-    pointer-events: none;
-    animation: scan 4s linear infinite;
-}
-
-@keyframes scan {
-    0% {
-        top: 0%;
-    }
-
-    50% {
-        top: 100%;
-    }
-
-    100% {
-        top: 0%;
-    }
+    display: none;
 }
 
 
@@ -1508,21 +1318,21 @@ body.dark-mode .cyber-btn.cv-btn {
 
 .arsenal-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
     align-items: stretch;
 }
 
 @media (max-width: 1200px) {
     .arsenal-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px;
     }
 }
 
 @media (max-width: 768px) {
     .arsenal-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 16px;
     }
 }
@@ -1531,15 +1341,17 @@ body.dark-mode .cyber-btn.cv-btn {
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-width: 0;
+    width: 100%;
     background: rgba(12, 16, 28, 0.84) !important;
     border: 1px solid rgba(0, 229, 255, 0.22) !important;
     border-radius: 16px !important;
     -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
     backdrop-filter: blur(24px) saturate(1.8) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.35s ease,
-        box-shadow 0.35s ease !important;
+    transition: transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease !important;
     overflow: hidden;
 }
 
@@ -1559,9 +1371,12 @@ body:not(.dark-mode) .arsenal-grid .cyber-card.skill-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 18px;
+    gap: 10px;
+    min-height: 50px;
+    padding: 12px 16px;
     background: rgba(255, 255, 255, 0.03);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
 }
 
 body:not(.dark-mode) .arsenal-grid .card-header {
@@ -1570,12 +1385,23 @@ body:not(.dark-mode) .arsenal-grid .card-header {
 }
 
 .arsenal-grid .card-title {
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     display: flex;
     align-items: center;
     gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.arsenal-grid .card-title i {
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .card-count-badge {
@@ -1586,21 +1412,31 @@ body:not(.dark-mode) .arsenal-grid .card-header {
     background: rgba(0, 229, 255, 0.1);
     border: 1px solid rgba(0, 229, 255, 0.3);
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Skills Badge Flow Container - Symmetrical 2-Column Grid */
+/* Skills Badge Flow Container - Strictly Equal 2-Column Grid */
 .arsenal-grid .card-body.skills-flex-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-rows: 38px !important;
     gap: 8px 10px !important;
-    padding: 16px 18px !important;
+    padding: 16px !important;
     flex: 1 !important;
+    width: 100% !important;
     align-content: start !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    box-sizing: border-box !important;
 }
 
 @media (max-width: 480px) {
     .arsenal-grid .card-body.skills-flex-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: minmax(0, 1fr) !important;
     }
 }
 
@@ -1611,19 +1447,23 @@ body:not(.dark-mode) .arsenal-grid .card-header {
     justify-content: flex-start !important;
     gap: 8px !important;
     width: 100% !important;
-    height: 36px !important;
-    padding: 0 12px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 38px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 8px !important;
     -webkit-backdrop-filter: blur(12px) !important;
     backdrop-filter: blur(12px) !important;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
     box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
 body:not(.dark-mode) .skill-pill-card {
@@ -1633,7 +1473,7 @@ body:not(.dark-mode) .skill-pill-card {
 }
 
 .skill-pill-card:hover {
-    transform: translateY(-2px) scale(1.02) !important;
+    transform: translateY(-2px) !important;
     background: rgba(0, 229, 255, 0.12) !important;
     border-color: var(--cyber-cyan) !important;
     box-shadow: 0 4px 14px rgba(0, 229, 255, 0.3) !important;
@@ -1647,24 +1487,24 @@ body:not(.dark-mode) .skill-pill-card:hover {
 
 /* Icon glyph inside Badge */
 .skill-pill-icon {
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     width: 18px !important;
     height: 18px !important;
-    flex-shrink: 0 !important;
-    transition: transform 0.25s ease;
-}
-
-.skill-pill-card:hover .skill-pill-icon {
-    transform: scale(1.2);
+    flex: 0 0 18px !important;
+    text-align: center !important;
 }
 
 /* Text Label inside Badge */
 .skill-pill-name {
-    display: inline-block !important;
-    font-size: 0.76rem !important;
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    display: block !important;
+    text-align: left !important;
+    font-size: 0.74rem !important;
+    line-height: 1.2 !important;
     font-weight: 600 !important;
     font-family: var(--font-mono) !important;
     color: var(--text-primary) !important;
@@ -1767,8 +1607,7 @@ body:not(.dark-mode) .card-footer-evidence {
 }
 
 .thm-avatar-ring:hover {
-    transform: scale(1.08) rotate(5deg);
-    box-shadow: 0 0 30px rgba(255, 102, 0, 0.6);
+    box-shadow: 0 0 28px rgba(255, 102, 0, 0.55);
 }
 
 .thm-avatar-icon {
@@ -2252,18 +2091,10 @@ body:not(.dark-mode) .thm-stat-box {
     }
 
     .project-actions .btn:hover {
-        transform: translateY(-3px) scale(1.04) !important;
+        transform: translateY(-2px) !important;
         border-color: var(--cyber-cyan) !important;
         color: var(--cyber-cyan) !important;
         box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.95), 0 8px 24px rgba(0, 229, 255, 0.38) !important;
-    }
-
-    .project-actions .btn i {
-        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .project-actions .btn:hover i {
-        transform: rotate(360deg) scale(1.2);
     }
 
     /* Tab 2: Simulation Rows */
@@ -2579,7 +2410,6 @@ body:not(.dark-mode) .thm-stat-box {
     }
 
     .cert-card:hover .cert-icon {
-        transform: scale(1.12) rotate(4deg);
         background: rgba(0, 229, 255, 0.12);
         border-color: var(--cyber-cyan);
     }
@@ -2645,17 +2475,26 @@ body:not(.dark-mode) .thm-stat-box {
 
     /* Section: Secure Connection Bridge (Contact) */
     .contact-grid {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 26px;
+        align-items: stretch;
         width: 100%;
         margin: 20px auto 0 auto;
     }
 
-    .contact-info-card {
-        max-width: 680px;
+    @media (max-width: 992px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+
+    .contact-info-card,
+    .contact-form-card {
         width: 100%;
-        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
     }
 
     .contact-methods-wrapper {
@@ -2897,7 +2736,7 @@ body:not(.dark-mode) .thm-stat-box {
         }
 
         .arsenal-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .registry-controls {
@@ -2934,7 +2773,7 @@ body:not(.dark-mode) .thm-stat-box {
         }
 
         .arsenal-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(0, 1fr);
         }
 
         .certs-grid {
@@ -3048,12 +2887,17 @@ body:not(.dark-mode) .thm-stat-box {
         padding: 0 !important;
         background: transparent !important;
         border: none !important;
-        transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-        cursor: pointer;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+        cursor: none !important;
     }
 
-    .dock-item.squircle:hover {
-        transform: scale(1.18) translateY(-6px) !important;
+    .mac-dock.is-dock-active .dock-item.squircle {
+        transition: none !important;
+    }
+
+    .mac-dock:not(.is-dock-active) .dock-item.squircle:hover {
+        transform: scale(1.18) translateY(-6px);
     }
 
     .dock-icon-bg {
@@ -3482,195 +3326,33 @@ body:not(.dark-mode) .thm-stat-box {
         pointer-events: none;
     }
 
-    /* Staggered Section Entrance Animations */
-    .active-section .cyber-card,
-    .active-section .cert-card,
-    .active-section .project-card,
-    .active-section .sim-row,
-    .active-section .thm-stat-box,
-    .active-section .contact-info-card,
-    .active-section .contact-form-card {
-        animation: slideUpFade 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        will-change: opacity, transform, filter;
+    /* IntersectionObserver-Driven Staggered Section & Card Entrance System */
+    .section-title.hud-cascade-item,
+    .section-subtitle.hud-cascade-item,
+    .arsenal-filter-bar.hud-cascade-item,
+    .ops-filter-container.hud-cascade-item,
+    .ops-tabs.hud-cascade-item,
+    .cert-filter-bar.hud-cascade-item,
+    .cert-telemetry-bar.hud-cascade-item {
+        opacity: 0;
+        transform: translate3d(0, 22px, 0);
+        filter: blur(6px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            filter 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        transition-delay: calc(var(--cascade-index, 0) * 40ms) !important;
     }
 
-    /* Arsenal 9-Card Staggered Delays */
-    .active-section .arsenal-grid .cyber-card:nth-child(1) {
-        animation-delay: 0.04s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(2) {
-        animation-delay: 0.08s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(3) {
-        animation-delay: 0.12s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(4) {
-        animation-delay: 0.16s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(5) {
-        animation-delay: 0.20s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(6) {
-        animation-delay: 0.24s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(7) {
-        animation-delay: 0.28s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(8) {
-        animation-delay: 0.32s;
-    }
-
-    .active-section .arsenal-grid .cyber-card:nth-child(9) {
-        animation-delay: 0.36s;
-    }
-
-    /* Skill Pill Cards Spring-Pop Stagger inside Cards (1-9) */
-    .active-section .skill-pill-card {
-        animation: scaleInFade 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .active-section .skill-pill-card:nth-child(1) {
-        animation-delay: 0.12s;
-    }
-
-    .active-section .skill-pill-card:nth-child(2) {
-        animation-delay: 0.16s;
-    }
-
-    .active-section .skill-pill-card:nth-child(3) {
-        animation-delay: 0.20s;
-    }
-
-    .active-section .skill-pill-card:nth-child(4) {
-        animation-delay: 0.24s;
-    }
-
-    .active-section .skill-pill-card:nth-child(5) {
-        animation-delay: 0.28s;
-    }
-
-    .active-section .skill-pill-card:nth-child(6) {
-        animation-delay: 0.32s;
-    }
-
-    .active-section .skill-pill-card:nth-child(7) {
-        animation-delay: 0.36s;
-    }
-
-    .active-section .skill-pill-card:nth-child(8) {
-        animation-delay: 0.40s;
-    }
-
-    .active-section .skill-pill-card:nth-child(9) {
-        animation-delay: 0.44s;
-    }
-
-    /* Certifications Registry Grid Stagger */
-    .active-section .certs-grid .cert-card:nth-child(1) {
-        animation-delay: 0.05s;
-    }
-
-    .active-section .certs-grid .cert-card:nth-child(2) {
-        animation-delay: 0.10s;
-    }
-
-    .active-section .certs-grid .cert-card:nth-child(3) {
-        animation-delay: 0.15s;
-    }
-
-    .active-section .certs-grid .cert-card:nth-child(4) {
-        animation-delay: 0.20s;
-    }
-
-    .active-section .certs-grid .cert-card:nth-child(5) {
-        animation-delay: 0.25s;
-    }
-
-    .active-section .certs-grid .cert-card:nth-child(6) {
-        animation-delay: 0.30s;
-    }
-
-    .active-section .certs-grid .cert-card:nth-child(7) {
-        animation-delay: 0.35s;
-    }
-
-    .active-section .certs-grid .cert-card:nth-child(8) {
-        animation-delay: 0.40s;
-    }
-
-    /* Project Repositories Grid Stagger */
-    .active-section .projects-container .project-card:nth-child(1) {
-        animation-delay: 0.05s;
-    }
-
-    .active-section .projects-container .project-card:nth-child(2) {
-        animation-delay: 0.12s;
-    }
-
-    .active-section .projects-container .project-card:nth-child(3) {
-        animation-delay: 0.19s;
-    }
-
-    .active-section .projects-container .project-card:nth-child(4) {
-        animation-delay: 0.26s;
-    }
-
-    /* Simulations Rows Stagger */
-    .active-section .sim-row:nth-child(1) {
-        animation-delay: 0.05s;
-    }
-
-    .active-section .sim-row:nth-child(2) {
-        animation-delay: 0.11s;
-    }
-
-    .active-section .sim-row:nth-child(3) {
-        animation-delay: 0.17s;
-    }
-
-    .active-section .sim-row:nth-child(4) {
-        animation-delay: 0.23s;
-    }
-
-    .active-section .sim-row:nth-child(5) {
-        animation-delay: 0.29s;
-    }
-
-    .active-section .sim-row:nth-child(6) {
-        animation-delay: 0.35s;
-    }
-
-    /* TryHackMe Dashboard Stagger */
-    .active-section .thm-stat-box:nth-child(1) {
-        animation-delay: 0.08s;
-    }
-
-    .active-section .thm-stat-box:nth-child(2) {
-        animation-delay: 0.16s;
-    }
-
-    .active-section .thm-stat-box:nth-child(3) {
-        animation-delay: 0.24s;
-    }
-
-    .active-section .thm-stat-box:nth-child(4) {
-        animation-delay: 0.32s;
-    }
-
-    /* Contact Section Stagger */
-    .active-section .contact-info-card {
-        animation-delay: 0.06s;
-    }
-
-    .active-section .contact-form-card {
-        animation-delay: 0.14s;
+    .section-title.hud-cascade-item.revealed,
+    .section-subtitle.hud-cascade-item.revealed,
+    .arsenal-filter-bar.hud-cascade-item.revealed,
+    .ops-filter-container.hud-cascade-item.revealed,
+    .ops-tabs.hud-cascade-item.revealed,
+    .cert-filter-bar.hud-cascade-item.revealed,
+    .cert-telemetry-bar.hud-cascade-item.revealed {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0px);
     }
 
     /* --- Interactive Control Panels & Tabs --- */
@@ -3976,19 +3658,6 @@ body:not(.dark-mode) .thm-stat-box {
         align-items: stretch;
     }
 
-    /* Slide Up Fade support for secondary grid cards */
-    .active-section .academic-card {
-        animation: slideUpFade 0.5s var(--transition-curve) forwards;
-        opacity: 0;
-        animation-delay: 0.05s;
-    }
-
-    .active-section .contributions-card {
-        animation: slideUpFade 0.5s var(--transition-curve) forwards;
-        opacity: 0;
-        animation-delay: 0.25s;
-    }
-
     .contributions-card {
         margin-top: 30px;
     }
@@ -4231,9 +3900,9 @@ body:not(.dark-mode) .thm-stat-box {
         position: fixed;
         bottom: 90px;
         right: 30px;
-        z-index: 1000;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 245, 255, 0.85) 100%);
-        border: 1px solid rgba(0, 102, 255, 0.3);
+        z-index: 1005;
+        background: var(--neu-surface) !important;
+        border: 1px solid var(--cyber-cyan) !important;
         border-radius: 12px;
         padding: 12px 20px;
         display: flex;
@@ -4241,11 +3910,11 @@ body:not(.dark-mode) .thm-stat-box {
         gap: 12px;
         font-size: 0.85rem;
         font-weight: 600;
-        color: #0f172a;
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
-        box-shadow: 0 15px 35px rgba(0, 50, 150, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-        animation: toastIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        color: var(--text-primary) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        backdrop-filter: blur(24px) saturate(180%);
+        box-shadow: var(--neu-card), 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 16px var(--cyber-accent-glow);
+        animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes toastIn {
@@ -4751,9 +4420,16 @@ body:not(.dark-mode) .thm-stat-box {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 12px;
         padding: 14px 22px;
         background: var(--bg-card-header);
         border-bottom: var(--neu-border);
+    }
+
+    .hud-lightbox-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .hud-lightbox-body {
@@ -4774,6 +4450,23 @@ body:not(.dark-mode) .thm-stat-box {
         border: var(--neu-border);
         box-shadow: var(--neu-raised);
         transition: transform 0.3s ease;
+    }
+
+    .hud-lightbox-img.hidden {
+        display: none !important;
+    }
+
+    .hud-lightbox-pdf {
+        width: 100%;
+        height: 68vh;
+        border-radius: 12px;
+        border: var(--neu-border);
+        background: #ffffff;
+        box-shadow: var(--neu-raised);
+    }
+
+    .hud-lightbox-pdf.hidden {
+        display: none !important;
     }
 
     .hud-lightbox-img:hover {
@@ -5151,582 +4844,33 @@ body:not(.dark-mode) .thm-stat-box {
     }
 
     /* =============================================
-   FUTURISTIC STAGGERED CASCADE SCROLL-REVEALS
-   ============================================= */
-    .hud-cascade-item {
-        opacity: 0;
-        transform: translateY(24px) scale(0.96);
-        filter: blur(8px);
-        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-            transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-            filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        transition-delay: calc(var(--cascade-index, 0) * 55ms);
-        will-change: opacity, transform, filter;
-    }
-
-    .hud-cascade-item.revealed {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0px);
-        transition: opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    }
-
-    /* Tactile Spring Press Physics for Interactive Buttons */
-    .btn,
-    .hud-bg-btn,
-    .cert-filter-btn,
-    .ops-tag-btn,
-    .dock-item {
-        transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
-    }
-
-    .btn:active,
-    .hud-bg-btn:active,
-    .cert-filter-btn:active,
-    .ops-tag-btn:active,
-    .dock-item:active {
-        transform: scale(0.94) translateY(1px) !important;
-    }
-
-    /* =============================================
    TOP NEON SCROLL PROGRESS BAR
    ============================================= */
     .hud-scroll-progress {
-        display: none !important;
-    }
-
-    /* =============================================
-   3D INTERACTIVE CARD TILT & CURSOR SPOTLIGHT
-   ============================================= */
-    .cyber-card,
-    .cert-card,
-    .thm-badge-pill {
-        transform-style: preserve-3d;
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-
-    .is-tilting {
-        transition: transform 0.06s linear, box-shadow 0.25s ease, border-color 0.25s ease !important;
-        will-change: transform;
-    }
-
-    .cyber-card::after,
-    .cert-card::after {
-        content: '';
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(0, 229, 255, 0.12),
-                transparent 60%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-green), var(--cyber-purple));
+        box-shadow: 0 0 12px var(--cyber-cyan), 0 0 24px rgba(0, 229, 255, 0.45);
+        z-index: 999999;
         pointer-events: none;
-        z-index: 2;
+        transition: width 0.08s linear;
     }
 
-    .cyber-card:hover::after,
-    .cert-card:hover::after {
-        opacity: 1;
-    }
-
-    /* =============================================
-   CLICK-TRIGGERED LIQUID RIPPLE WAVES
-   ============================================= */
-    .cyber-ripple-container {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .cyber-ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(0, 229, 255, 0.45) 0%, rgba(0, 229, 255, 0.12) 60%, transparent 80%);
-        border: 1px solid rgba(0, 229, 255, 0.6);
-        box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
-        transform: translate(-50%, -50%) scale(0);
-        animation: liquidRipple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        pointer-events: none;
-        z-index: 10;
-    }
-
-    @keyframes liquidRipple {
-        0% {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0.85;
+    @media (prefers-reduced-motion: reduce) {
+        .hud-section {
+            opacity: 1 !important;
+            transform: none !important;
+            filter: none !important;
+            transition: none !important;
         }
-
-        100% {
-            transform: translate(-50%, -50%) scale(3.2);
-            opacity: 0;
-        }
-    }
-
-    /* =========================================================
-   CYBER OSCILLOSCOPE WAVE EFFECT ACROSS ALL PAGES
-   ========================================================= */
-
-    /* 1. Header Waveform Oscilloscope Visualizer */
-    .cyber-section-wave {
-        display: inline-flex;
-        align-items: center;
-        gap: 3px;
-        height: 18px;
-        margin-left: 12px;
-        vertical-align: middle;
-        padding: 2px 8px;
-        background: rgba(0, 243, 255, 0.05);
-        border: 1px solid rgba(0, 243, 255, 0.2);
-        border-radius: 12px;
-        -webkit-backdrop-filter: blur(4px);
-        backdrop-filter: blur(4px);
-        box-shadow: inset 0 0 8px rgba(0, 243, 255, 0.08);
-    }
-
-    .cyber-section-wave .wave-bar {
-        display: inline-block;
-        width: 3px;
-        height: 6px;
-        background: var(--cyber-cyan);
-        border-radius: 2px;
-        animation: cyberWaveformPulse 1.2s ease-in-out infinite alternate;
-        box-shadow: 0 0 6px var(--cyber-cyan);
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(1) {
-        animation-delay: 0.05s;
-        height: 8px;
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(2) {
-        animation-delay: 0.20s;
-        height: 14px;
-        background: #00ff41;
-        box-shadow: 0 0 6px #00ff41;
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(3) {
-        animation-delay: 0.35s;
-        height: 10px;
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(4) {
-        animation-delay: 0.12s;
-        height: 16px;
-        background: #a855f7;
-        box-shadow: 0 0 6px #a855f7;
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(5) {
-        animation-delay: 0.28s;
-        height: 12px;
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(6) {
-        animation-delay: 0.44s;
-        height: 7px;
-        background: #00ff41;
-        box-shadow: 0 0 6px #00ff41;
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(7) {
-        animation-delay: 0.18s;
-        height: 15px;
-    }
-
-    .cyber-section-wave .wave-bar:nth-child(8) {
-        animation-delay: 0.32s;
-        height: 9px;
-        background: #00f3ff;
-        box-shadow: 0 0 6px #00f3ff;
-    }
-
-    @keyframes cyberWaveformPulse {
-        0% {
-            transform: scaleY(0.35);
-            opacity: 0.55;
-        }
-
-        50% {
-            transform: scaleY(1.3);
-            opacity: 1;
-        }
-
-        100% {
-            transform: scaleY(0.45);
-            opacity: 0.7;
-        }
-    }
-
-    /* 2. Holographic Wave Shimmer across ALL Cards on ALL Pages */
-    .cyber-card::after,
-    .project-card::after,
-    .cert-card::after,
-    .academic-card::after,
-    .thm-badge-card::after,
-    .contact-form-container::after,
-    .terminal-container::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -100%;
-        width: 60%;
-        height: 200%;
-        background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(0, 243, 255, 0.08) 50%,
-                transparent 100%);
-        transform: rotate(25deg);
-        pointer-events: none;
-        z-index: 1;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .cyber-card:hover::after,
-    .project-card:hover::after,
-    .cert-card:hover::after,
-    .academic-card:hover::after,
-    .thm-badge-card:hover::after,
-    .contact-form-container:hover::after,
-    .terminal-container:hover::after {
-        opacity: 1;
-        animation: cyberWaveShimmerSweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes cyberWaveShimmerSweep {
-        0% {
-            left: -100%;
-        }
-
-        100% {
-            left: 200%;
-        }
-    }
-
-    /* 3. Section Ambient Flowing Sine Wave Horizon */
-    .section-wave-horizon {
-        position: relative;
-        width: 100%;
-        height: 18px;
-        overflow: hidden;
-        margin: 4px 0 14px 0;
-        pointer-events: none;
-        opacity: 0.8;
-    }
-
-    .section-wave-horizon svg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        animation: flowingWaveHorizon 14s linear infinite;
-    }
-
-    @keyframes flowingWaveHorizon {
-        0% {
-            transform: translate3d(0, 0, 0);
-        }
-
-        100% {
-            transform: translate3d(-50%, 0, 0);
-        }
-    }
-
-    /* =========================================================
-   HIGH-VISIBILITY SIGNATURE ANIMATIONS FOR ALL CARD TYPES
-   ========================================================= */
-
-    /* 1. Hero Visual Feed Card: Radar Beam & Hologram Scan */
-    .visual-feed-card,
-    .about-grid .visual-feed-card {
-        position: relative !important;
-        overflow: hidden !important;
-    }
-
-    .visual-feed-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.12) 0%, transparent 70%);
-        animation: holoPulseAura 3s ease-in-out infinite alternate;
-        pointer-events: none;
-        z-index: 3;
-    }
-
-    .visual-feed-card::after,
-    .about-grid .feed-card::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(0, 229, 255, 0.25) 45deg, transparent 90deg);
-        animation: heroRadarScan 6s linear infinite !important;
-        pointer-events: none;
-        z-index: 4;
-    }
-
-    @keyframes heroRadarScan {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes holoPulseAura {
-        0% {
-            opacity: 0.3;
-        }
-
-        100% {
-            opacity: 0.8;
-        }
-    }
-
-    /* 2. Technical Arsenal Cards: Distinct Ambient & Hover Neon Lasers */
-    /* AppSec / Security Card (1st Child) */
-    .skills-grid>.cyber-card:nth-child(1),
-    .arsenal-grid>.cyber-card:nth-child(1) {
-        border-color: rgba(0, 255, 65, 0.35) !important;
-    }
-
-    .skills-grid>.cyber-card:nth-child(1):hover,
-    .arsenal-grid>.cyber-card:nth-child(1):hover {
-        border-color: #00ff41 !important;
-        box-shadow: var(--neu-raised-hover), 0 0 25px rgba(0, 255, 65, 0.3) !important;
-        transform: translateY(-6px) scale(1.01) !important;
-    }
-
-    /* Cloud Infrastructure Card (2nd Child) */
-    .skills-grid>.cyber-card:nth-child(2),
-    .arsenal-grid>.cyber-card:nth-child(2) {
-        border-color: rgba(0, 229, 255, 0.35) !important;
-    }
-
-    .skills-grid>.cyber-card:nth-child(2):hover,
-    .arsenal-grid>.cyber-card:nth-child(2):hover {
-        border-color: #00e5ff !important;
-        box-shadow: var(--neu-raised-hover), 0 0 25px rgba(0, 229, 255, 0.3) !important;
-        transform: translateY(-6px) scale(1.01) !important;
-    }
-
-    /* AI & ML Card (3rd Child) */
-    .skills-grid>.cyber-card:nth-child(3),
-    .arsenal-grid>.cyber-card:nth-child(3) {
-        border-color: rgba(168, 85, 247, 0.35) !important;
-    }
-
-    .skills-grid>.cyber-card:nth-child(3):hover,
-    .arsenal-grid>.cyber-card:nth-child(3):hover {
-        border-color: #a855f7 !important;
-        box-shadow: var(--neu-raised-hover), 0 0 25px rgba(168, 85, 247, 0.3) !important;
-        transform: translateY(-6px) scale(1.01) !important;
-    }
-
-    /* 3. Operations Project Cards: Dynamic Iridescent Sheen & Hover Glow */
-    .project-card {
-        position: relative !important;
-        overflow: hidden !important;
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
-    }
-
-    .project-card::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -150%;
-        width: 100%;
-        height: 200%;
-        background: linear-gradient(115deg,
-                transparent 0%,
-                rgba(255, 255, 255, 0.04) 30%,
-                rgba(0, 229, 255, 0.35) 50%,
-                rgba(255, 255, 255, 0.04) 70%,
-                transparent 100%);
-        transform: rotate(25deg);
-        transition: left 0.75s cubic-bezier(0.19, 1, 0.22, 1);
-        pointer-events: none;
-        z-index: 5;
-    }
-
-    .project-card:hover::before {
-        left: 150%;
-    }
-
-    .project-card:hover {
-        transform: translateY(-7px) scale(1.015) !important;
-        border-color: var(--cyber-cyan) !important;
-        box-shadow: var(--neu-raised-hover), 0 0 30px rgba(0, 229, 255, 0.25) !important;
-    }
-
-    /* 4. Certifications Cards: Golden Amber Beam & Icon Lift */
-    .cert-card {
-        position: relative !important;
-        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
-    }
-
-    .cert-card:hover {
-        transform: translateY(-8px) scale(1.02) !important;
-        border-color: var(--cyber-cyan) !important;
-        box-shadow: var(--neu-raised-hover), 0 0 30px rgba(0, 229, 255, 0.25) !important;
-    }
-
-    .cert-card .cert-badge-pill,
-    .cert-card .cert-icon-wrapper {
-        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    }
-
-    .cert-card:hover .cert-badge-pill,
-    .cert-card:hover .cert-icon-wrapper {
-        transform: scale(1.2) rotate(6deg) !important;
-    }
-
-    /* 5. TryHackMe Badges: Glowing Crimson Flame Aura */
-    .thm-badge-pill {
-        position: relative !important;
-        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
-    }
-
-    .thm-badge-pill:hover {
-        transform: translateY(-6px) scale(1.03) !important;
-        border-color: var(--cyber-cyan) !important;
-        box-shadow: var(--neu-raised-hover), 0 0 25px rgba(0, 229, 255, 0.25) !important;
-    }
-
-    .thm-badge-pill i {
-        transition: transform 0.3s ease, filter 0.3s ease !important;
-    }
-
-    .thm-badge-pill:hover i {
-        transform: scale(1.3) !important;
-        color: var(--cyber-cyan) !important;
-        filter: drop-shadow(0 0 10px var(--cyber-cyan)) !important;
-    }
-
-    /* 6. Contact Cards: Green Electromagnetic Signal Ping */
-    .contact-info-card,
-    .contact-form-card {
-        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
-    }
-
-    .contact-info-card:hover,
-    .contact-form-card:hover {
-        transform: translateY(-5px) !important;
-        border-color: var(--cyber-cyan) !important;
-        box-shadow: var(--neu-raised-hover) !important;
-    }
-
-    .contact-method-item {
-        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
-    }
-
-    .contact-method-item:hover {
-        transform: translateX(6px) !important;
-        border-color: var(--cyber-cyan) !important;
-        box-shadow: var(--neu-raised-hover) !important;
-    }
-
-    .contact-method-item:hover .method-icon,
-    .contact-method-item:hover i {
-        transform: scale(1.25) !important;
-        color: var(--cyber-cyan) !important;
-        filter: drop-shadow(0 0 8px var(--cyber-cyan)) !important;
-    }
-
-    /* --- High-Performance GPU Acceleration & Ultra-Smooth Staggered Cascade Framework (Smoothness x2) --- */
-    .is-tilting {
-        transition: transform 0.06s cubic-bezier(0.12, 1, 0.22, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
-    }
-
-    .hud-cascade-item {
-        opacity: 0;
-        transform: translateY(24px) scale(0.97) translateZ(0);
-        transition: opacity 0.5s cubic-bezier(0.12, 1, 0.22, 1),
-            transform 0.5s cubic-bezier(0.12, 1, 0.22, 1),
-            box-shadow 0.35s ease,
-            border-color 0.35s ease !important;
-        transition-delay: calc(var(--cascade-index, 0) * 28ms) !important;
-        will-change: transform, opacity;
-        contain: layout style paint;
-    }
-
-    .hud-cascade-item.revealed {
-        opacity: 1;
-        transform: translateY(0) scale(1) translateZ(0);
-    }
-
-    .hud-cascade-item.is-leaving {
-        opacity: 0;
-        transform: translateY(14px) scale(0.96) translateZ(0);
-        transition: opacity 0.2s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
-        transition-delay: 0ms !important;
     }
 
 /* =========================================================================
-   GLOBAL TACTILE PHYSICS & CYBERPUNK POLISH (FRONTEND-DESIGN SKILL)
+   GLOBAL INTERACTIVE INPUTS & RED TEAM OVERRIDE SUITE
    ========================================================================= */
-
-/* Tactile Spring Compression on all interactive controls */
-.btn:active,
-.cyber-btn:active,
-.arsenal-filter-btn:active,
-.cert-filter-btn:active,
-.tab-btn:active,
-.dock-item:active,
-.skill-pill-card:active {
-    transform: scale(0.96) translateY(1px) !important;
-    transition: transform 0.08s ease-out !important;
-}
-
-/* Cyber Laser Hover Glint on Glassmorphic Cards */
-.cyber-card,
-.project-card,
-.cert-card,
-.tactical-stat-box,
-.hud-terminal-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.cyber-card::after,
-.project-card::after,
-.cert-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(0, 229, 255, 0.04) 40%,
-        rgba(0, 229, 255, 0.12) 50%,
-        rgba(0, 229, 255, 0.04) 60%,
-        transparent 100%
-    );
-    transform: skewX(-25deg);
-    transition: left 0.75s ease;
-    pointer-events: none;
-}
-
-.cyber-card:hover::after,
-.project-card:hover::after,
-.cert-card:hover::after {
-    left: 150%;
-}
 
 /* Neumorphic Inset Wells for Interactive Inputs */
 .cert-search-input,
@@ -5760,7 +4904,6 @@ body:not(.dark-mode) .thm-stat-box {
     gap: 4px;
 }
 
-/* Subtle Glowing Ring for Hero Status Indicator */
 .live-status-dot {
     display: inline-block;
     width: 8px;
@@ -5768,18 +4911,7 @@ body:not(.dark-mode) .thm-stat-box {
     border-radius: 50%;
     background: #00ff41;
     box-shadow: 0 0 8px #00ff41;
-    animation: statusPulse 2s infinite ease-in-out;
-    cursor: pointer;
 }
-
-@keyframes statusPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.3); opacity: 0.75; }
-}
-
-/* =========================================================================
-   RANDOM CYBER EVENTS & RED TEAM OVERRIDE SUITE
-   ========================================================================= */
 
 /* Red Team Override Mode */
 body.redteam-override {
@@ -5791,11 +4923,15 @@ body.redteam-override {
     --border-glow: 0 0 18px rgba(255, 0, 60, 0.45) !important;
 }
 
-body.redteam-override .cyber-cursor-dot,
-body.redteam-override .cyber-cursor-ring {
+body.redteam-override .cyber-cursor-dot {
     background-color: #ff003c !important;
+    box-shadow: 0 0 14px #ff003c, 0 0 28px #ff003c !important;
+}
+
+body.redteam-override .cyber-cursor-ring {
+    background-color: rgba(255, 0, 60, 0.08) !important;
     border-color: #ff003c !important;
-    box-shadow: 0 0 15px #ff003c, 0 0 30px #ff003c !important;
+    box-shadow: 0 0 18px rgba(255, 0, 60, 0.45), inset 0 0 10px rgba(255, 0, 60, 0.2) !important;
 }
 
 body.redteam-override .dock-item:hover .dock-icon-bg,
@@ -5807,133 +4943,6 @@ body.redteam-override .dock-item.active .dock-icon-bg {
 body.redteam-override .glitch-title {
     color: #ff003c !important;
     text-shadow: 0 0 20px rgba(255, 0, 60, 0.8) !important;
-}
-
-/* Floating Cyber Event Toast Widget */
-.cyber-event-toast {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 100000;
-    max-width: 420px;
-    background: var(--neu-surface) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-    backdrop-filter: blur(28px) saturate(190%) !important;
-    border: 1px solid rgba(0, 243, 255, 0.4) !important;
-    border-radius: 14px;
-    padding: 14px 18px;
-    box-shadow: var(--neu-card), 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 243, 255, 0.25) !important;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: auto;
-    cursor: pointer;
-    font-family: var(--font-mono);
-}
-
-.cyber-event-toast.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.cyber-event-toast:hover {
-    transform: translateY(-2px) scale(1.02);
-    border-color: var(--cyber-cyan) !important;
-    box-shadow: var(--neu-card), 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 243, 255, 0.4) !important;
-}
-
-.cyber-event-icon-wrapper {
-    font-size: 1.4rem;
-    color: var(--cyber-cyan);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: rgba(0, 243, 255, 0.1);
-    border: 1px solid rgba(0, 243, 255, 0.2);
-    flex-shrink: 0;
-}
-
-.cyber-event-content {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex: 1;
-}
-
-.cyber-event-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
-.cyber-event-tag {
-    color: var(--cyber-cyan);
-    letter-spacing: 0.05em;
-}
-
-.cyber-event-time {
-    color: var(--text-muted);
-    font-size: 0.68rem;
-}
-
-.cyber-event-body {
-    font-size: 0.8rem;
-    color: var(--text-primary);
-    line-height: 1.4;
-}
-
-.cyber-event-ack {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    margin-top: 4px;
-    letter-spacing: 0.04em;
-}
-
-body.redteam-override .cyber-event-toast {
-    border-color: rgba(255, 0, 60, 0.5) !important;
-    box-shadow: var(--neu-card), 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 60, 0.35) !important;
-}
-
-body.redteam-override .cyber-event-icon-wrapper {
-    color: #ff003c;
-    background: rgba(255, 0, 60, 0.15);
-    border-color: rgba(255, 0, 60, 0.3);
-}
-
-body.redteam-override .cyber-event-tag {
-    color: #ff003c;
-}
-
-/* Screen Glitch Pulse on Critical Events */
-.cyber-glitch-pulse {
-    animation: screenGlitch 0.22s ease-in-out;
-}
-
-@keyframes screenGlitch {
-    0% { filter: none; }
-    20% { filter: hue-rotate(90deg) contrast(1.5) brightness(1.2); transform: translate(-2px, 1px); }
-    40% { filter: invert(0.2) hue-rotate(-90deg) contrast(2); transform: translate(2px, -1px); }
-    60% { filter: hue-rotate(180deg) saturate(2); transform: translate(-1px, 2px); }
-    80% { filter: contrast(1.3); transform: translate(1px, -1px); }
-    100% { filter: none; transform: none; }
-}
-
-@media (max-width: 600px) {
-    .cyber-event-toast {
-        top: 16px;
-        right: 16px;
-        left: 16px;
-        max-width: calc(100vw - 32px);
-    }
 }
 
 /* Accessibility Skip Link */
@@ -5972,3 +4981,325 @@ body.redteam-override .cyber-event-tag {
     letter-spacing: 0.04em;
     box-shadow: 0 4px 20px rgba(255, 0, 60, 0.4);
 }
+
+/* =========================================================================
+   DISCREET BOTTOM-LEFT HUD SECTION-TRACKING INDICATOR
+   ========================================================================= */
+.hud-section-tracker {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.hud-tracker-bar {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    background: var(--neu-surface) !important;
+    border: var(--neu-border) !important;
+    box-shadow: var(--neu-card), 0 14px 32px rgba(0, 0, 0, 0.4) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.hud-tracker-bar:hover,
+.hud-section-tracker.is-open .hud-tracker-bar {
+    border-color: var(--cyber-cyan) !important;
+    box-shadow: var(--neu-raised-hover), 0 16px 36px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-2px);
+}
+
+.hud-tracker-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.hud-tracker-toggle:hover {
+    color: var(--cyber-cyan);
+}
+
+.tracker-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--cyber-green);
+    box-shadow: 0 0 8px var(--cyber-green);
+    flex-shrink: 0;
+}
+
+.tracker-index {
+    color: var(--cyber-cyan);
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+}
+
+.tracker-divider {
+    color: var(--text-muted);
+    opacity: 0.55;
+}
+
+.tracker-title {
+    color: var(--text-primary);
+    min-width: 92px;
+    text-align: left;
+    display: inline-block;
+    transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tracker-title.is-switching {
+    opacity: 0;
+    transform: translateY(5px);
+}
+
+.tracker-chevron {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-left: 2px;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.hud-section-tracker.is-open .tracker-chevron {
+    transform: rotate(180deg);
+    color: var(--cyber-cyan);
+}
+
+/* Interactive Mini Progress Dots Rail */
+.tracker-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding-left: 10px;
+    border-left: 1px solid rgba(140, 155, 176, 0.25);
+}
+
+.tracker-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    border: none;
+    background: rgba(140, 155, 176, 0.38);
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+}
+
+.tracker-dot:hover {
+    background: var(--cyber-cyan);
+    transform: scale(1.3);
+}
+
+.tracker-dot.active {
+    width: 18px;
+    background: var(--cyber-cyan);
+    box-shadow: 0 0 10px var(--cyber-cyan);
+}
+
+/* Hover Tooltip on Progress Dots */
+.tracker-dot::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--neu-surface);
+    color: var(--cyber-cyan);
+    border: var(--neu-border);
+    box-shadow: var(--neu-raised);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    z-index: 10;
+}
+
+.tracker-dot:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Expandable Quick-Jump Menu Popover */
+.hud-tracker-menu {
+    pointer-events: none;
+    width: 245px;
+    background: var(--neu-surface) !important;
+    border: var(--neu-border) !important;
+    box-shadow: var(--neu-card), 0 20px 45px rgba(0, 0, 0, 0.55) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+    backdrop-filter: blur(28px) saturate(190%) !important;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px) scale(0.96);
+    transform-origin: bottom left;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.25s ease;
+}
+
+.hud-section-tracker.is-open .hud-tracker-menu {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.tracker-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px 8px 8px;
+    margin-bottom: 2px;
+    border-bottom: 1px dashed rgba(140, 155, 176, 0.22);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.tracker-menu-sub {
+    color: var(--text-muted);
+    font-size: 0.62rem;
+}
+
+.tracker-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tracker-menu-item:hover {
+    background: rgba(0, 229, 255, 0.08);
+    border-color: rgba(0, 229, 255, 0.28);
+    color: var(--cyber-cyan);
+    transform: translateX(3px);
+}
+
+.tracker-menu-item.active {
+    background: rgba(0, 229, 255, 0.12);
+    border-color: var(--cyber-cyan);
+    color: var(--cyber-cyan);
+    box-shadow: var(--neu-inset);
+}
+
+.menu-item-idx {
+    font-size: 0.66rem;
+    font-weight: 800;
+    color: var(--cyber-cyan);
+    font-variant-numeric: tabular-nums;
+    opacity: 0.85;
+}
+
+.menu-item-label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-item-icon {
+    font-size: 0.75rem;
+    opacity: 0.75;
+}
+
+/* Red Team Override Support */
+body.redteam-override .tracker-index,
+body.redteam-override .menu-item-idx,
+body.redteam-override .tracker-menu-item.active,
+body.redteam-override .tracker-menu-item:hover {
+    color: #ff003c !important;
+}
+
+body.redteam-override .tracker-dot.active,
+body.redteam-override .tracker-dot:hover {
+    background: #ff003c !important;
+    box-shadow: 0 0 10px #ff003c !important;
+}
+
+body.redteam-override .tracker-menu-item.active {
+    border-color: #ff003c !important;
+    background: rgba(255, 0, 60, 0.12) !important;
+}
+
+/* Responsive Adjustments to Avoid Dock Collision */
+@media (max-width: 1180px) {
+    .hud-section-tracker {
+        bottom: 92px;
+        left: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hud-section-tracker {
+        bottom: 76px;
+        left: 12px;
+    }
+
+    .hud-tracker-bar {
+        padding: 6px 11px;
+        gap: 8px;
+    }
+
+    .tracker-title {
+        min-width: 76px;
+        font-size: 0.68rem;
+    }
+
+    .tracker-index {
+        font-size: 0.68rem;
+    }
+}
+
