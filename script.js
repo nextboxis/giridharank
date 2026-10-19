@@ -1231,42 +1231,129 @@ function initBackgroundRotation() {
 
     let currentIdx = 0;
     let activeLayer = 1;
+    let isTransitioning = false;
+    let autoRotateTimer = null;
+    let cleanupTimer = null;
 
-    // Set initial background images and active layer state
-    layer1.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${encodeURI(bgImages[0])}")`;
-    layer2.style.backgroundImage = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${encodeURI(bgImages[1])}")`;
-    layer1.classList.add('active-bg');
-    layer2.classList.remove('active-bg');
+    function buildBgValue(path) {
+        return `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${encodeURI(path)}")`;
+    }
+
+    // Preload and pre-decode all wallpapers in GPU memory so transitions never flash
+    const decodedCache = new Map();
+    function ensureDecoded(src) {
+        const encoded = encodeURI(src);
+        if (decodedCache.has(encoded)) {
+            return decodedCache.get(encoded);
+        }
+        const promise = new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                if (typeof img.decode === 'function') {
+                    img.decode().then(() => resolve(img)).catch(() => resolve(img));
+                } else {
+                    resolve(img);
+                }
+            };
+            img.onerror = () => resolve(null);
+            img.src = encoded;
+        });
+        decodedCache.set(encoded, promise);
+        return promise;
+    }
+
+    bgImages.forEach(src => ensureDecoded(src));
+
+    // Set initial background images and solid base layer state
+    layer1.style.backgroundImage = buildBgValue(bgImages[0]);
+    layer2.style.backgroundImage = buildBgValue(bgImages[1]);
+    layer1.classList.add('active-bg', 'base-layer');
+    layer2.classList.remove('active-bg', 'base-layer', 'top-layer');
 
     function transitionToNext() {
-        currentIdx = (currentIdx + 1) % bgImages.length;
-        const nextUpcomingIdx = (currentIdx + 1) % bgImages.length;
+        if (isTransitioning) return;
+        isTransitioning = true;
 
-        const preloadImg = new Image();
-        preloadImg.src = bgImages[nextUpcomingIdx];
+        const nextIdx = (currentIdx + 1) % bgImages.length;
+        const targetSrc = bgImages[nextIdx];
+        const targetCss = buildBgValue(targetSrc);
 
-        const targetUrl = `linear-gradient(var(--bg-wash), var(--bg-wash)), url("${encodeURI(bgImages[currentIdx])}")`;
+        ensureDecoded(targetSrc).then(() => {
+            currentIdx = nextIdx;
 
-        if (activeLayer === 1) {
-            layer2.style.backgroundImage = targetUrl;
-            layer2.classList.add('active-bg');
-            layer1.classList.remove('active-bg');
-            activeLayer = 2;
-        } else {
-            layer1.style.backgroundImage = targetUrl;
-            layer1.classList.add('active-bg');
-            layer2.classList.remove('active-bg');
-            activeLayer = 1;
-        }
+            const outgoingLayer = activeLayer === 1 ? layer1 : layer2;
+            const incomingLayer = activeLayer === 1 ? layer2 : layer1;
+            activeLayer = activeLayer === 1 ? 2 : 1;
+
+            if (cleanupTimer) clearTimeout(cleanupTimer);
+
+            // 1. Keep outgoing layer 100% opaque underneath (base-layer) so zero background ever bleeds through
+            outgoingLayer.classList.remove('top-layer');
+            outgoingLayer.classList.add('active-bg', 'base-layer');
+
+            // 2. Stage incoming layer at opacity 0 on top without transition while texture is committed
+            incomingLayer.classList.add('no-transition', 'top-layer');
+            incomingLayer.classList.remove('active-bg', 'base-layer');
+            incomingLayer.style.backgroundImage = targetCss;
+            void incomingLayer.offsetHeight;
+
+            // 3. Wait 2 animation frames so GPU texture is painted, then smoothly fade incoming layer 0 -> 1 over top
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    incomingLayer.classList.remove('no-transition');
+                    incomingLayer.classList.add('active-bg');
+
+                    // 4. Only after incoming layer reaches 100% opacity, promote it to base-layer and hide old layer
+                    cleanupTimer = setTimeout(() => {
+                        incomingLayer.classList.remove('top-layer');
+                        incomingLayer.classList.add('base-layer');
+
+                        outgoingLayer.classList.add('no-transition');
+                        outgoingLayer.classList.remove('active-bg', 'base-layer', 'top-layer');
+                        void outgoingLayer.offsetHeight;
+                        outgoingLayer.classList.remove('no-transition');
+
+                        isTransitioning = false;
+                    }, 920);
+                });
+            });
+        });
     }
+
+    function startAutoRotation() {
+        if (autoRotateTimer) clearInterval(autoRotateTimer);
+        autoRotateTimer = setInterval(() => {
+            if (!document.hidden) {
+                transitionToNext();
+            }
+        }, 8000);
+    }
+
+    startAutoRotation();
 
     const bgBtn = document.getElementById('bg-toggle-btn');
     if (bgBtn) {
         bgBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
+
+            if (cleanupTimer) {
+                clearTimeout(cleanupTimer);
+                cleanupTimer = null;
+            }
+            isTransitioning = false;
+
+            const nextPreviewNum = ((currentIdx + 1) % bgImages.length) + 1;
             transitionToNext();
+            startAutoRotation();
+
+            bgBtn.classList.add('is-switching-bg');
+            setTimeout(() => bgBtn.classList.remove('is-switching-bg'), 450);
+
             if (typeof window.playAudioBlip === 'function') window.playAudioBlip(880, 0.035);
-            if (window.showToast) window.showToast(`[BACKGROUND] Switched wallpaper (${currentIdx + 1}/${bgImages.length})`);
+            if (typeof window.showToast === 'function') {
+                window.showToast(`[WALLPAPER] Switched backdrop (${nextPreviewNum}/${bgImages.length})`);
+            }
         });
     }
 }

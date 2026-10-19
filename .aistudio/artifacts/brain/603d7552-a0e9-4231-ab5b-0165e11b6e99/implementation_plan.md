@@ -1,73 +1,42 @@
-# Bidirectional 60fps Staggered Card Reveal & Cursor-Tracked Spotlight Physics
+# Zero-Flash Background Wallpaper Crossfade Fix
 
-Deliver a unified, hardware-accelerated 60fps card animation engine across every card in the portfolio—featuring staggered slide-up + fade-in entrance transitions that replay smoothly when scrolling both down and up, paired with a floating hover lift and a cursor-tracked radial spotlight glow on card surfaces and borders.
+Eliminate the white flash that occurs when switching between background wallpapers by fixing the root `<html>` background bleed-through, awaiting GPU bitmap decoding (`img.decode()`), and using a true **Over-Top Crossfade** where the outgoing wallpaper remains at 100% opacity underneath until the incoming wallpaper has completely faded in on top.
 
-## User Review & Critical Decisions
+## 1. Root Cause of the White Flash
 
-> [!IMPORTANT]
-> The following card motion decisions were confirmed during clarification and govern this implementation:
-
-- **Confirmed Decision 1 (Staggered 60fps Card Entrance)**: Each card animates into view with a staggered 60fps GPU-composited slide-up and fade-in (`opacity` + `translate3d(0, 22px, 0) scale(0.985)` → `translate3d(0, 0, 0) scale(1)`), cascaded across grid columns (`--card-stagger` index).
-- **Confirmed Decision 2 (Floating Hover Lift & Cursor-Tracked Glow)**: Cards respond on hover with a smooth floating elevation (`translate3d(0, -5px, 0)`) and a real-time cursor-tracked radial spotlight (`--mouse-x`, `--mouse-y`) that illuminates the card surface and corner brackets without causing layout reflow or 3D text distortion.
-- **Confirmed Decision 3 (Bidirectional Scroll Replay)**: Card entrance animations replay smoothly when scrolling both down and back up the page via a bidirectional `IntersectionObserver`.
-
----
-
-## 1. Overview & Core Concept
-
-- **What It Does**: Brings cohesive, high-refresh-rate tactile motion to every card component across the portfolio—Hero cards, Technical Arsenal skill cards, Active Operations project cards and simulation rows, Academic Timeline cards, Verified Certification cards, TryHackMe telemetry cards, and Contact cards.
-- **Target Audience / Persona**: Visitors and engineering leads exploring the portfolio on desktop, laptop, tablet, or mobile devices.
-- **Key Value**: Makes every card feel responsive, alive, and cohesive at a locked 60fps+ without any blur-filter jank or text-warping artifacts.
+1. **`<html>` White Background Bleed-Through (`#eef2f9`)**:
+   - In `style.css`, `:root` defines `--bg-darker: #eef2f9` (white/light gray), while `.dark-mode` is applied to `<body>`, not `<html>`.
+   - When `#bg-layer-1` faded out (`1 → 0`) at the same time `#bg-layer-2` faded in (`0 → 1`), their combined opacity at the midpoint was only `75%` (`1 - 0.5 × 0.5 = 0.75`), allowing `25%` of the white `<html>` background (`#eef2f9`) to flash through on every transition.
+2. **Same-Frame `backgroundImage` Swap Before GPU Texture Paint**:
+   - Setting `style.backgroundImage` and triggering the opacity transition in the same frame caused the browser to decode the WebP image while the outgoing layer was already fading out.
 
 ---
 
-## 2. User Experience & Visual Design
+## 2. Technical Solution
 
-- **Key User Flows**:
-  1. **Bidirectional Staggered Scroll Entrance**: As the user scrolls down or back up the page, cards entering the viewport smoothly glide into place (`translate3d(0, 22px, 0) scale(0.985)` → `translate3d(0, 0, 0) scale(1)`) with a subtle per-row stagger (`55ms` per column index) using a spring-like `cubic-bezier(0.22, 1, 0.36, 1)` curve.
-  2. **Cursor-Tracked Surface & Border Spotlight**: Moving the pointer across any card updates CSS custom properties (`--mouse-x`, `--mouse-y`) inside a `requestAnimationFrame` throttle, rendering a soft cyan/accent radial spotlight across the card surface and illuminating the HUD corner brackets on hover.
-  3. **Smooth Floating Hover & Active Press**: Hovering a card lifts it cleanly by `-5px` with an expanded ambient glow; clicking/pressing a card gives crisp tactile feedback (`translate3d(0, -2px, 0) scale(0.995)`).
-- **Visual Identity & Theme**:
-  - *Surface Glow*: Radial spotlight (`radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 229, 255, 0.11), transparent 70%)`) in dark mode and soft cobalt (`rgba(0, 102, 255, 0.07)`) in light mode.
-  - *Motion Curve*: `cubic-bezier(0.22, 1, 0.36, 1)` for entrance and hover elevation; zero `filter: blur()` so mobile and laptop GPUs stay locked at 60fps.
-
----
-
-## 3. Key Product Decisions & Trade-Offs
-
-- **Decision 1: Separate Scroll-Reveal State from Hover Transform**
-  - *Chosen Approach*: Apply a dedicated `.card-reveal-item` class with `--card-stagger` delay during scroll entrance, and once revealed (`.is-card-visible`), transition smoothly to hover elevation (`translate3d(0, -5px, 0)`) with zero transition delay on hover.
-  - *Why*: If stagger `transition-delay` remains active after a card is visible, hovering the card feels sluggish and delayed. Clearing the delay once `.is-card-visible` is active ensures instant, responsive hover feedback.
-- **Decision 2: `requestAnimationFrame`-Throttled Pointer Spotlight Tracking**
-  - *Chosen Approach*: Track pointer coordinates relative to the currently hovered card inside a passive `pointermove` listener gated by `requestAnimationFrame`.
-  - *Why*: Delivers a 60fps–120Hz cursor-tracked spotlight across all card types without running `getBoundingClientRect()` on unhovered cards.
-
----
-
-## 4. Technical Architecture & Data Strategy *(Technical Reference)*
-
-- **Card Animation Pipeline Diagram**:
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│                    UNIFIED 60FPS CARD ANIMATION ENGINE                    │
-├─────────────────────────────────────┬─────────────────────────────────────┤
-│  1. Bidirectional Scroll Observer   │  2. Cursor-Tracked Card Spotlight   │
-│     (IntersectionObserver)          │     (rAF Pointer Tracker)           │
-├─────────────────────────────────────┼─────────────────────────────────────┤
-│ • Observes all portfolio cards:     │ • Tracks active hovered card only   │
-│   .cyber-card, .skill-card,         │ • Updates --mouse-x & --mouse-y     │
-│   .project-card, .sim-row,          │   via requestAnimationFrame         │
-│   .cert-card, .timeline-item,       │ • Renders radial surface spotlight  │
-│   .thm-stat-box, .thm-badge-pill,   │   + glowing HUD corner brackets     │
-│   .contact-method-item              │ • Smooth -5px floating hover lift   │
-│ • Entering viewport (down or up):   │   with zero hover delay             │
-│   Adds .is-card-visible with        │ • Disabled automatically on coarse  │
-│   column-aware --card-stagger       │   touch screens for 60fps scroll    │
-│ • Leaving viewport (down or up):    │                                     │
-│   Resets .is-card-visible so card   │                                     │
-│   replays smoothly on return        │                                     │
-└─────────────────────────────────────┴─────────────────────────────────────┘
+│                 TRUE ZERO-FLASH OVER-TOP CROSSFADE PIPELINE               │
+├───────────────────────────────────────────────────────────────────────────┤
+│ 1. Decode Bitmap in Memory:                                               │
+│    await img.decode() ensures WebP texture is ready in GPU memory.        │
+│                                                                           │
+│ 2. Stage Incoming Layer (Opacity 0, Top Z-Index):                         │
+│    Apply backgroundImage to incoming layer while opacity is 0;            │
+│    wait 2 requestAnimationFrame ticks so texture is committed.            │
+│                                                                           │
+│ 3. Over-Top Fade-In (100% Solid Backing):                                 │
+│    Incoming layer (top) fades 0 → 1 while Outgoing layer (bottom)         │
+│    STAYS at opacity: 1 underneath. Combined opacity = 100% at all times.  │
+│                                                                           │
+│ 4. Clean Reset After Transition Completes:                                │
+│    Once incoming layer reaches opacity: 1, silently reset outgoing layer. │
+└───────────────────────────────────────────────────────────────────────────┘
 ```
-- **Interactive Component & State Mapping**:
-  - **Bidirectional Card Observer (`initCardSmoothAnimations`)**: Assigns `--card-stagger` (`0` to `2` based on grid column position) and toggles `.is-card-visible` when `entry.isIntersecting` changes while scrolling down or up.
-  - **Tab & Filter Integration**: Switching tabs (`REPOSITORIES` / `SIMULATIONS_&_WORK`) or clicking category filters (`ALL_NODES`, `OFFENSIVE_SEC`, etc.) immediately marks matching cards as `.is-card-visible` with a smooth staggered entrance.
+
+- **`style.css`**:
+  - Set `html` and `.bg-crossfade-layer` base fallback `background-color` to dark obsidian (`#080b12`) so no white surface ever exists behind the wallpaper layers.
+  - Add `.bg-crossfade-layer.top-layer` (`z-index: 1`) and `.bg-crossfade-layer.base-layer` (`z-index: 0`), while elevating `#cyberCanvas` to `z-index: 2` and `main.container` / `.hud-footer` to `z-index: 3`.
+- **`script.js` (`initBackgroundRotation`)**:
+  - Pre-decode all 7 wallpapers using `img.decode()`.
+  - During `transitionToNext()`, keep the current active layer at `opacity: 1` (`base-layer`), stage the new wallpaper on the incoming layer (`top-layer`), wait two `requestAnimationFrame` cycles, and fade the incoming layer to `opacity: 1` over the solid outgoing layer before resetting the old layer after completion.

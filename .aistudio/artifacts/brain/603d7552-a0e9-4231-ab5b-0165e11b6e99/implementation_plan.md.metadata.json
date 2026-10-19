@@ -1,6 +1,6 @@
 {
-  "summary": "Implementation plan for bidirectional staggered 60fps card entrance animations, smooth floating hover lift, and cursor-tracked radial border/surface spotlight across all portfolio cards.",
-  "updatedAt": "2026-10-18T17:34:17.289068060Z",
+  "summary": "Implementation plan to eliminate the white flash during background wallpaper transitions using true over-top opacity compositing, WebP GPU bitmap decoding (img.decode()), and dark obsidian base backing.",
+  "updatedAt": "2026-10-19T09:44:59.629848992Z",
   "requestFeedback": true,
   "userFacing": true
 }

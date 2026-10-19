@@ -18,8 +18,8 @@
     /* Color 4: Core Surface Background */
     --bg-darker: #eef2f9;
     --bg-dark: #e6ebf5;
-    --bg-wash: rgba(238, 242, 249, 0.65);
-    --bg-footer: rgba(238, 242, 249, 0.95);
+    --bg-wash: rgba(238, 242, 249, 0.42);
+    --bg-footer: rgba(238, 242, 249, 0.92);
     /* Color 5: High-Contrast Primary Text & Icons */
     --text-primary: #0f172a;
     --text-muted: #334155;
@@ -28,14 +28,14 @@
     --cyber-orange: var(--cyber-cyan);
     --cyber-blue: var(--cyber-cyan);
 
-    --bg-card: #edf2fa;
+    --bg-card: rgba(237, 242, 250, 0.80);
     --bg-card-header: rgba(255, 255, 255, 0.45);
     --border-color: rgba(0, 102, 255, 0.18);
     --border-glow: rgba(0, 102, 255, 0.35);
 
     /* Universal Neumorphism (Soft UI) Tokens - Light Mode */
     --neu-bg: #eef2f9;
-    --neu-surface: #edf2fa;
+    --neu-surface: rgba(237, 242, 250, 0.80);
     --neu-flat: 8px 8px 18px #d0d7e6, -8px -8px 18px #ffffff, inset 1px 1px 1px rgba(255, 255, 255, 0.95);
     --neu-card: 10px 10px 24px #cbd3e3, -10px -10px 24px #ffffff, inset 1px 1.5px 2px rgba(255, 255, 255, 0.95);
     --neu-raised: 5px 5px 12px #d0d7e6, -5px -5px 12px #ffffff, inset 1px 1px 1px rgba(255, 255, 255, 0.9);
@@ -70,7 +70,7 @@
     --badge-bg: rgba(0, 102, 255, 0.08);
     --badge-border: rgba(0, 102, 255, 0.25);
     --scanline-color: rgba(0, 102, 255, 0.4);
-    --canvas-opacity: 0.32;
+    --canvas-opacity: 0.22;
     --tab-active-bg: rgba(0, 102, 255, 0.08);
     --tab-active-shadow: rgba(0, 102, 255, 0.35);
     --tech-tag-bg: rgba(0, 102, 255, 0.05);
@@ -101,8 +101,8 @@ body.dark-mode {
     /* Color 4: Core Obsidian Background */
     --bg-darker: #0c0e18;
     --bg-dark: #121526;
-    --bg-wash: rgba(12, 14, 24, 0.75);
-    --bg-footer: rgba(12, 14, 24, 0.95);
+    --bg-wash: rgba(8, 12, 22, 0.46);
+    --bg-footer: rgba(12, 14, 24, 0.92);
     /* Color 5: Pure White Text */
     --text-primary: #ffffff;
     --text-muted: #8c9bb0;
@@ -111,14 +111,14 @@ body.dark-mode {
     --cyber-orange: var(--cyber-cyan);
     --cyber-blue: var(--cyber-cyan);
 
-    --bg-card: #121526;
+    --bg-card: rgba(18, 21, 38, 0.78);
     --bg-card-header: rgba(255, 255, 255, 0.03);
     --border-color: rgba(0, 229, 255, 0.22);
     --border-glow: rgba(0, 229, 255, 0.45);
 
     /* Universal Cyber-Neumorphism (Soft UI) Tokens - Dark Mode */
     --neu-bg: #0c0e18;
-    --neu-surface: #121526;
+    --neu-surface: rgba(18, 21, 38, 0.78);
     --neu-flat: 8px 8px 20px #06070d, -8px -8px 20px rgba(35, 42, 70, 0.35), inset 1px 1px 1px rgba(255, 255, 255, 0.08);
     --neu-card: 10px 10px 26px #05060b, -10px -10px 26px rgba(35, 42, 70, 0.38), inset 1px 1.5px 2px rgba(255, 255, 255, 0.12);
     --neu-raised: 5px 5px 14px #06070d, -5px -5px 14px rgba(35, 42, 70, 0.32), inset 1px 1px 1px rgba(255, 255, 255, 0.08);
@@ -145,7 +145,7 @@ body.dark-mode {
     --badge-bg: rgba(0, 229, 255, 0.08);
     --badge-border: rgba(0, 229, 255, 0.25);
     --scanline-color: rgba(0, 229, 255, 0.4);
-    --canvas-opacity: 0.45;
+    --canvas-opacity: 0.26;
     --tab-active-bg: rgba(0, 229, 255, 0.12);
     --tab-active-shadow: rgba(0, 229, 255, 0.4);
     --tech-tag-bg: rgba(0, 229, 255, 0.08);
@@ -192,7 +192,7 @@ select:focus {
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--bg-darker);
+    background-color: #080b12;
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
@@ -226,7 +226,7 @@ body {
     font-family: var(--font-heading) !important;
 }
 
-/* Dual-Layer Pre-Rendered Background Crossfader */
+/* Dual-Layer Zero-Flash Over-Top Background Crossfader */
 .bg-crossfade-layer {
     position: fixed;
     top: 0;
@@ -236,17 +236,38 @@ body {
     min-width: 100%;
     min-height: 100%;
     max-width: none !important;
+    background-color: #080b12;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-    z-index: -2;
+    transform: scale(1.025);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
     pointer-events: none;
+    will-change: opacity, transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.bg-crossfade-layer.no-transition {
+    transition: none !important;
+}
+
+.bg-crossfade-layer.base-layer {
+    z-index: 0;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.bg-crossfade-layer.top-layer {
+    z-index: 1;
 }
 
 .bg-crossfade-layer.active-bg {
     opacity: 1;
+    transform: scale(1);
 }
 
 /* Background Canvas */
@@ -259,7 +280,7 @@ body {
     min-width: 100%;
     min-height: 100%;
     max-width: none !important;
-    z-index: -1;
+    z-index: 2;
     pointer-events: none;
     opacity: var(--canvas-opacity);
 }
@@ -617,7 +638,7 @@ body.light-mode .hud-bg-btn:hover {
     margin: 24px auto 128px auto;
     flex: 1;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 /* Section styling with continuous vertical scroll & cinematic IntersectionObserver entrance transitions */
@@ -2981,7 +3002,8 @@ body:not(.dark-mode) .thm-stat-box {
     .dock-icon-bg.bg-dock-ops,
     .dock-icon-bg.bg-dock-registry,
     .dock-icon-bg.bg-dock-thm,
-    .dock-icon-bg.bg-dock-contact {
+    .dock-icon-bg.bg-dock-contact,
+    .dock-icon-bg.bg-dock-wallpaper {
         color: var(--cyber-cyan) !important;
         border-color: var(--border-color) !important;
         box-shadow: var(--neu-raised) !important;
@@ -2993,10 +3015,28 @@ body:not(.dark-mode) .thm-stat-box {
     body.dark-mode .dock-icon-bg.bg-dock-ops,
     body.dark-mode .dock-icon-bg.bg-dock-registry,
     body.dark-mode .dock-icon-bg.bg-dock-thm,
-    body.dark-mode .dock-icon-bg.bg-dock-contact {
+    body.dark-mode .dock-icon-bg.bg-dock-contact,
+    body.dark-mode .dock-icon-bg.bg-dock-wallpaper {
         color: var(--cyber-cyan) !important;
         border-color: var(--border-color) !important;
         box-shadow: var(--neu-raised) !important;
+    }
+
+    .dock-divider {
+        width: 1px;
+        height: 32px;
+        background: rgba(140, 155, 176, 0.28);
+        margin: 0 2px;
+        flex-shrink: 0;
+    }
+
+    #bg-toggle-btn.is-switching-bg .dock-icon-bg i {
+        transform: rotate(180deg) scale(1.15);
+        color: var(--cyber-green) !important;
+    }
+
+    #bg-toggle-btn .dock-icon-bg i {
+        transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
     }
 
     .dock-item:hover .dock-icon-bg {
