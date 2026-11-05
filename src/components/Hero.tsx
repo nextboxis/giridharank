@@ -26,20 +26,20 @@ const portraitModes = [
   {
     id: 'noir',
     label: 'Crimson Noir',
-    src: '/giridharan-hero-noir.jpg',
+    src: '/giridharan-hero.svg',
     filterClass: 'contrast-105 brightness-95',
   },
   {
     id: 'chrome',
     label: 'Chrome Silver',
-    src: '/giridharan-hero-chrome.jpg',
-    filterClass: 'contrast-110',
+    src: '/giridharan-hero.svg',
+    filterClass: 'grayscale contrast-115 brightness-105',
   },
   {
     id: 'clean',
     label: 'Dark Studio',
-    src: '/giridharan-hero-clean.jpg',
-    filterClass: 'contrast-105',
+    src: '/giridharan-hero.svg',
+    filterClass: 'saturate-110 contrast-105 brightness-100',
   },
 ] as const
 
@@ -184,7 +184,7 @@ export function Hero() {
               {/* Portrait Image with Obsidian Vignette & Crimson/Chrome Duotone Grade */}
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-bg">
                 <motion.img
-                  key={activePortrait.src}
+                  key={activePortrait.id}
                   initial={{ opacity: 0.4, scale: 1.03 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
