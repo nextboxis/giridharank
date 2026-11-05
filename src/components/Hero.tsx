@@ -26,20 +26,17 @@ const portraitModes = [
   {
     id: 'noir',
     label: 'Crimson Noir',
-    src: '/giridharan-hero.svg',
-    filterClass: 'contrast-105 brightness-95',
+    filterClass: 'contrast-105 brightness-95 saturate-[0.82]',
   },
   {
     id: 'chrome',
     label: 'Chrome Silver',
-    src: '/giridharan-hero.svg',
-    filterClass: 'grayscale contrast-115 brightness-105',
+    filterClass: 'grayscale contrast-115 brightness-100',
   },
   {
     id: 'clean',
     label: 'Dark Studio',
-    src: '/giridharan-hero.svg',
-    filterClass: 'saturate-110 contrast-105 brightness-100',
+    filterClass: 'contrast-105 brightness-100',
   },
 ] as const
 
@@ -183,15 +180,34 @@ export function Hero() {
 
               {/* Portrait Image with Obsidian Vignette & Crimson/Chrome Duotone Grade */}
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-bg">
-                <motion.img
+                <motion.div
                   key={activePortrait.id}
                   initial={{ opacity: 0.4, scale: 1.03 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  src={activePortrait.src}
-                  alt={`${profile.name} — Red Team & Offensive Security Specialist`}
-                  className={`h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.03] ${activePortrait.filterClass}`}
-                />
+                  className={`relative h-full w-full transition duration-700 group-hover:scale-[1.03] ${activePortrait.filterClass}`}
+                >
+                  <img
+                    src="/giridharan-hero-top.svg"
+                    alt={`${profile.name} — Red Team & Offensive Security Specialist`}
+                    className="block h-[34%] w-full object-cover"
+                  />
+                  <img
+                    src="/giridharan-hero-bot.svg"
+                    alt=""
+                    aria-hidden="true"
+                    className="-mt-px block h-[66.2%] w-full object-cover"
+                  />
+                  {activePortrait.id === 'noir' && (
+                    <div
+                      className="pointer-events-none absolute inset-0 mix-blend-color"
+                      style={{
+                        background:
+                          'radial-gradient(circle at 50% 42%, transparent 35%, rgba(212, 21, 20, 0.22) 100%)',
+                      }}
+                    />
+                  )}
+                </motion.div>
 
                 {/* Subtle Psychological Color Overlay (Obsidian bottom gradient + Chrome inner ring) */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-90" />
@@ -206,7 +222,7 @@ export function Hero() {
                     <p className="font-display text-lg font-bold text-ink">{profile.name}</p>
                   </div>
                   <span className="rounded-lg border border-chrome/25 bg-bg/85 px-2.5 py-1 font-mono text-[10px] text-chrome backdrop-blur-md">
-                    Chennai · IN
+                    Erode · TN
                   </span>
                 </div>
               </div>
