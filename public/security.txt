@@ -1,0 +1,8 @@
+# RFC 9116 Security Policy — Giridharan K Portfolio
+Contact: mailto:giridharank790@gmail.com
+Contact: https://www.linkedin.com/in/giridharan-k790
+Contact: https://github.com/nextboxis
+Preferred-Languages: en
+Canonical: https://github.com/nextboxis/.well-known/security.txt
+Policy: Responsible disclosure welcomed. Please report any security findings or inquiries to giridharank790@gmail.com.
+Expires: 2027-12-31T23:59:59.000Z
