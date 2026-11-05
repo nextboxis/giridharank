@@ -1,0 +1,7 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vercel
+README.md
+giridharan_k_portfolio_profile.md
