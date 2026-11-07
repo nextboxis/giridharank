@@ -62,20 +62,20 @@ export function Hero() {
           <div className="min-w-0 lg:col-span-7">
             <motion.div
               {...fadeUp(0)}
-              className="chrome-bezel inline-flex max-w-full items-center gap-2.5 rounded-full border border-chrome/25 bg-surface px-3.5 py-1.5 text-[11px] text-chrome sm:text-xs"
+              className="chrome-bezel inline-flex max-w-full items-center gap-2 rounded-2xl border border-chrome/25 bg-surface px-3 py-1.5 text-[11px] leading-snug text-chrome sm:rounded-full sm:px-3.5 sm:text-xs"
             >
               <span className="relative flex h-2 w-2 shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-65" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
-              <span className="truncate">
+              <span className="min-w-0 break-words">
                 Open to Red Team, Penetration Testing &amp; Security Engineering roles
               </span>
             </motion.div>
 
             <motion.h1
               {...fadeUp(0.1)}
-              className="hero-fluid-title mt-6 font-display font-bold tracking-tight text-ink sm:mt-7"
+              className="hero-fluid-title mt-5 font-display font-bold tracking-tight text-ink sm:mt-7"
             >
               {profile.name}
               <span className="hero-fluid-subtitle text-metallic-chrome mt-2 block font-semibold">
@@ -85,26 +85,26 @@ export function Hero() {
 
             <motion.p
               {...fadeUp(0.2)}
-              className="mt-7 flex h-8 items-center gap-2 font-mono text-base text-ink sm:text-lg md:text-xl"
+              className="mt-6 flex min-h-7 items-center gap-2 font-mono text-sm text-ink sm:mt-7 sm:h-8 sm:text-lg md:text-xl"
             >
-              <Terminal className="h-5 w-5 shrink-0 text-accent" />
+              <Terminal className="h-4 w-4 shrink-0 text-accent sm:h-5 sm:w-5" />
               <span className="truncate text-chrome">{typed}</span>
-              <span className="caret inline-block h-5 w-[2px] shrink-0 bg-accent" />
+              <span className="caret inline-block h-4 w-[2px] shrink-0 bg-accent sm:h-5" />
             </motion.p>
 
             <motion.p
               {...fadeUp(0.3)}
-              className="mt-5 max-w-2xl text-base leading-relaxed text-chrome/85 md:text-lg"
+              className="mt-4 max-w-2xl text-sm leading-relaxed text-chrome/85 sm:mt-5 sm:text-base md:text-lg"
             >
               {profile.intro}
             </motion.p>
 
-            <motion.div {...fadeUp(0.4)} className="mt-9 flex flex-wrap items-center gap-3.5">
+            <motion.div {...fadeUp(0.4)} className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5">
               <motion.a
                 whileHover={{ y: -2, scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
                 href="#projects"
-                className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition hover:bg-accent/90"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition hover:bg-accent/90 sm:w-auto"
               >
                 Explore Security Tools
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
@@ -114,7 +114,7 @@ export function Hero() {
                 whileTap={{ scale: 0.98 }}
                 href={profile.resume}
                 download
-                className="chrome-bezel inline-flex items-center gap-2 rounded-full border border-chrome/35 bg-surface px-6 py-3 text-sm font-medium text-chrome transition hover:border-chrome hover:text-ink"
+                className="chrome-bezel inline-flex w-full items-center justify-center gap-2 rounded-full border border-chrome/35 bg-surface px-6 py-3 text-sm font-medium text-chrome transition hover:border-chrome hover:text-ink sm:w-auto"
               >
                 <Download className="h-4 w-4 text-accent" />
                 Download Resume
@@ -122,7 +122,7 @@ export function Hero() {
             </motion.div>
 
             {/* Social Pills with Smooth Spring Hover */}
-            <motion.div {...fadeUp(0.48)} className="mt-8 flex flex-wrap items-center gap-2.5">
+            <motion.div {...fadeUp(0.48)} className="mt-7 flex flex-wrap items-center gap-2 sm:mt-8 sm:gap-2.5">
               {profile.socials.map((s) => (
                 <motion.a
                   whileHover={{ y: -2 }}
@@ -131,14 +131,14 @@ export function Hero() {
                   href={s.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs text-chrome transition hover:border-chrome/60 hover:text-ink"
+                  className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-xs text-chrome transition hover:border-chrome/60 hover:text-ink sm:gap-2 sm:px-3.5"
                 >
                   <SocialIcon
                     label={s.label}
-                    className="h-3.5 w-3.5 text-chrome transition group-hover:text-accent"
+                    className="h-3.5 w-3.5 shrink-0 text-chrome transition group-hover:text-accent"
                   />
                   <span className="font-medium text-ink">{s.label}</span>
-                  <span className="font-mono text-[11px] text-faint">/{s.handle}</span>
+                  <span className="hidden font-mono text-[11px] text-faint min-[380px]:inline">/{s.handle}</span>
                 </motion.a>
               ))}
             </motion.div>
@@ -147,7 +147,7 @@ export function Hero() {
           {/* Right Column: Aesthetic Psychological-Color Portrait Frame */}
           <motion.div
             {...fadeUp(0.22)}
-            className="relative mx-auto w-full max-w-xs sm:max-w-sm lg:col-span-5 lg:max-w-none"
+            className="relative mx-auto w-full max-w-xs min-w-0 sm:max-w-sm lg:col-span-5 lg:max-w-none"
           >
             {/* Tight Precision Chrome + Crimson Specular Rim */}
             <div
@@ -161,7 +161,7 @@ export function Hero() {
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-              className="chrome-bezel group relative overflow-hidden rounded-3xl border border-chrome/25 bg-surface p-2.5"
+              className="chrome-bezel group relative overflow-hidden rounded-3xl border border-chrome/25 bg-surface p-2 sm:p-2.5"
             >
               {/* Top Specular Laser Line on Portrait Card */}
               <div className="laser-top-line pointer-events-none absolute inset-x-6 top-0 z-20 h-[1.5px]" />
@@ -173,7 +173,7 @@ export function Hero() {
               <span className="pointer-events-none absolute bottom-16 right-4 z-20 h-4 w-4 border-b-2 border-r-2 border-accent" />
 
               {/* Top Operator Status Pill */}
-              <div className="absolute left-6 top-6 z-20 inline-flex items-center gap-1.5 rounded-full border border-chrome/25 bg-bg/85 px-3 py-1 font-mono text-[10px] tracking-widest text-chrome backdrop-blur-md">
+              <div className="absolute left-5 top-5 z-20 inline-flex items-center gap-1.5 rounded-full border border-chrome/25 bg-bg/85 px-2.5 py-1 font-mono text-[10px] tracking-widest text-chrome backdrop-blur-md sm:left-6 sm:top-6 sm:px-3">
                 <ShieldCheck className="h-3 w-3 text-accent" />
                 <span>OPERATOR // GK-01</span>
               </div>
@@ -214,26 +214,26 @@ export function Hero() {
                 <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-chrome/15" />
 
                 {/* Bottom Caption Inside Portrait */}
-                <div className="absolute inset-x-4 bottom-4 z-20 flex items-end justify-between gap-2">
-                  <div>
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-accent">
+                <div className="absolute inset-x-3.5 bottom-3.5 z-20 flex items-end justify-between gap-2 sm:inset-x-4 sm:bottom-4">
+                  <div className="min-w-0">
+                    <p className="truncate font-mono text-[10px] uppercase tracking-widest text-accent">
                       Red Team &amp; Offensive Security
                     </p>
-                    <p className="font-display text-lg font-bold text-ink">{profile.name}</p>
+                    <p className="font-display text-base font-bold text-ink sm:text-lg">{profile.name}</p>
                   </div>
-                  <span className="rounded-lg border border-chrome/25 bg-bg/85 px-2.5 py-1 font-mono text-[10px] text-chrome backdrop-blur-md">
+                  <span className="shrink-0 rounded-lg border border-chrome/25 bg-bg/85 px-2 py-1 font-mono text-[10px] text-chrome backdrop-blur-md sm:px-2.5">
                     Erode · TN
                   </span>
                 </div>
               </div>
 
               {/* Psychological Color Grade Switcher Bar */}
-              <div className="mt-2.5 flex items-center justify-between gap-2 rounded-xl border border-line bg-bg px-3 py-2">
-                <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-faint">
+              <div className="mt-2.5 flex flex-wrap items-center justify-between gap-1.5 rounded-xl border border-line bg-bg px-2.5 py-2 sm:px-3">
+                <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider text-faint">
                   <Sparkles className="h-3 w-3 text-accent" />
-                  <span>Photo Grade</span>
+                  <span className="hidden min-[380px]:inline">Grade</span>
                 </span>
-                <div className="flex items-center gap-1">
+                <div className="flex flex-1 flex-wrap items-center justify-end gap-1">
                   {portraitModes.map((m) => {
                     const active = m.id === modeId
                     return (
@@ -241,7 +241,7 @@ export function Hero() {
                         key={m.id}
                         type="button"
                         onClick={() => setModeId(m.id)}
-                        className={`rounded-lg px-2.5 py-1 font-mono text-[10px] font-medium transition ${
+                        className={`rounded-lg px-2 py-1 font-mono text-[10px] font-medium transition sm:px-2.5 ${
                           active
                             ? 'bg-accent text-white shadow-sm shadow-accent/30'
                             : 'text-chrome hover:bg-surface hover:text-ink'
@@ -260,25 +260,25 @@ export function Hero() {
         {/* 4-Column Stat Strip with Smooth Stagger & Specular Bezel */}
         <motion.dl
           {...fadeUp(0.55)}
-          className="chrome-bezel mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-chrome/25 bg-line sm:mt-16 md:grid-cols-4"
+          className="chrome-bezel mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-chrome/25 bg-line sm:mt-16 md:grid-cols-4"
         >
           {stats.map((s, idx) => {
             const Icon = statIcons[idx % statIcons.length]
             return (
               <div
                 key={s.label}
-                className="group bg-surface p-5 transition duration-300 hover:bg-elevated sm:p-6"
+                className="group min-w-0 bg-surface p-4 transition duration-300 hover:bg-elevated sm:p-6"
               >
-                <div className="flex items-center justify-between">
-                  <dt className="text-xs font-medium uppercase tracking-wider text-faint">
+                <div className="flex items-start justify-between gap-1.5">
+                  <dt className="text-[10px] font-medium uppercase leading-snug tracking-wider text-faint sm:text-xs">
                     {s.label}
                   </dt>
-                  <Icon className="h-4 w-4 text-accent transition-transform duration-300 group-hover:scale-110" />
+                  <Icon className="h-3.5 w-3.5 shrink-0 text-accent transition-transform duration-300 group-hover:scale-110 sm:h-4 sm:w-4" />
                 </div>
-                <dd className="mt-3 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl md:text-4xl">
+                <dd className="mt-2 font-display text-2xl font-bold tracking-tight text-ink sm:mt-3 sm:text-3xl md:text-4xl">
                   {s.value}
                 </dd>
-                <p className="mt-1 font-mono text-[11px] text-chrome">{s.sub}</p>
+                <p className="mt-1 font-mono text-[10px] leading-snug text-chrome sm:text-[11px]">{s.sub}</p>
               </div>
             )
           })}
