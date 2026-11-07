@@ -70,13 +70,13 @@ export function Skills() {
 
       <div className="grid gap-px overflow-hidden rounded-2xl border border-chrome/20 bg-line sm:grid-cols-2">
         {filtered.map((g, i) => (
-          <Reveal key={g.title} delay={(i % 2) * 0.06} className="group bg-bg p-7 transition-colors hover:bg-surface md:p-8">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <span className="grid h-8 w-8 place-items-center rounded-lg border border-chrome/25 bg-surface">
+          <Reveal key={g.title} delay={(i % 2) * 0.06} className="group min-w-0 bg-bg p-5 transition-colors hover:bg-surface sm:p-7 md:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-2.5">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-chrome/25 bg-surface">
                   <GroupIcon icon={g.icon} />
                 </span>
-                <h3 className="font-display text-lg font-semibold text-ink">{g.title}</h3>
+                <h3 className="font-display text-base font-semibold text-ink sm:text-lg">{g.title}</h3>
               </div>
               <span
                 className={`rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
@@ -89,11 +89,11 @@ export function Skills() {
               </span>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
               {g.items.map((s) => (
                 <span
                   key={s}
-                  className="rounded-lg border border-line bg-surface px-3 py-1 text-xs font-medium text-chrome transition group-hover:border-chrome/40 group-hover:text-ink"
+                  className="rounded-lg border border-line bg-surface px-2.5 py-1 text-xs font-medium text-chrome transition group-hover:border-chrome/40 group-hover:text-ink sm:px-3"
                 >
                   {s}
                 </span>
