@@ -12,9 +12,9 @@ export function Reveal({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.12, margin: '-40px' }}
+      viewport={{ once: true, amount: 0.05, margin: '-20px' }}
       transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={`will-change-transform ${className}`}
+      className={`min-w-0 will-change-transform ${className}`}
       {...rest}
     >
       {children}
