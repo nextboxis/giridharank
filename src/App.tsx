@@ -33,11 +33,11 @@ export default function App() {
         <Contact />
       </main>
       <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-sm text-faint sm:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-8 text-center text-xs text-faint sm:flex-row sm:px-6 sm:text-left sm:text-sm">
           <p>
             © {new Date().getFullYear()} {profile.name} · Red Team &amp; Offensive Security
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
             <button
               onClick={() => setCmdOpen(true)}
               className="font-mono text-xs text-faint transition hover:text-accent"
