@@ -233,46 +233,46 @@ export function Walkthroughs() {
       title="Step-by-step offensive chains, live browser tools & pentest deliverables."
     >
       {/* Top 3-Mode Interactive Workbench Switcher */}
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-surface p-2">
-        <div className="flex flex-wrap gap-1.5">
+      <div className="mb-8 flex flex-col gap-3 rounded-2xl border border-line bg-surface p-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-1.5 sm:flex-row sm:flex-wrap">
           <button
             onClick={() => setActiveTab('walkthroughs')}
-            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition ${
+            className={`inline-flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-left text-xs font-semibold transition sm:w-auto sm:justify-center ${
               activeTab === 'walkthroughs'
                 ? 'bg-accent text-white shadow-sm shadow-accent/30'
                 : 'text-chrome hover:bg-bg hover:text-ink'
             }`}
           >
-            <Terminal className="h-3.5 w-3.5" />
+            <Terminal className="h-3.5 w-3.5 shrink-0" />
             <span>1. CTF &amp; Lab Walkthroughs (4)</span>
           </button>
 
           <button
             onClick={() => setActiveTab('sandbox')}
-            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition ${
+            className={`inline-flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-left text-xs font-semibold transition sm:w-auto sm:justify-center ${
               activeTab === 'sandbox'
                 ? 'bg-accent text-white shadow-sm shadow-accent/30'
                 : 'text-chrome hover:bg-bg hover:text-ink'
             }`}
           >
-            <Cpu className="h-3.5 w-3.5" />
+            <Cpu className="h-3.5 w-3.5 shrink-0" />
             <span>2. Live Cyber Sandbox (Interactive)</span>
           </button>
 
           <button
             onClick={() => setActiveTab('vapt-report')}
-            className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition ${
+            className={`inline-flex w-full items-center gap-2 rounded-xl px-4 py-2.5 text-left text-xs font-semibold transition sm:w-auto sm:justify-center ${
               activeTab === 'vapt-report'
                 ? 'bg-accent text-white shadow-sm shadow-accent/30'
                 : 'text-chrome hover:bg-bg hover:text-ink'
             }`}
           >
-            <FileSpreadsheet className="h-3.5 w-3.5" />
+            <FileSpreadsheet className="h-3.5 w-3.5 shrink-0" />
             <span>3. Sample VAPT Executive Report (CVSS 3.1)</span>
           </button>
         </div>
 
-        <span className="px-3 font-mono text-[11px] text-faint">
+        <span className="px-3 pb-1 font-mono text-[11px] text-faint sm:pb-0">
           {activeTab === 'walkthroughs' && 'MITRE ATT&CK Mapped'}
           {activeTab === 'sandbox' && 'Client-Side Zero-Latency Engine'}
           {activeTab === 'vapt-report' && `Report ID: ${samplePentestReport.reportId}`}
@@ -290,7 +290,7 @@ export function Walkthroughs() {
                   <button
                     key={cat}
                     onClick={() => setFilter(cat)}
-                    className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
+                    className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition sm:px-4 ${
                       active
                         ? 'bg-accent text-white shadow-sm shadow-accent/30'
                         : 'border border-line bg-surface text-chrome hover:border-chrome/50 hover:text-ink'
@@ -307,41 +307,41 @@ export function Walkthroughs() {
             </span>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
             {filtered.map((item, i) => (
               <Reveal
                 key={item.id}
                 delay={i * 0.06}
-                className="group flex flex-col justify-between rounded-2xl border border-line bg-surface p-7 transition duration-300 hover:-translate-y-0.5 hover:border-accent/60"
+                className="group flex min-w-0 flex-col justify-between rounded-2xl border border-line bg-surface p-5 transition duration-300 hover:-translate-y-0.5 hover:border-accent/60 sm:p-7"
               >
-                <div>
+                <div className="min-w-0">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-0.5 font-mono text-[11px] font-medium text-accent">
-                        <Crosshair className="h-3 w-3" />
-                        {item.category}
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-2.5 py-0.5 font-mono text-[10px] font-medium text-accent sm:px-3 sm:text-[11px]">
+                        <Crosshair className="h-3 w-3 shrink-0" />
+                        <span>{item.category}</span>
                       </span>
-                      <span className="rounded-full border border-chrome/25 bg-bg px-2.5 py-0.5 font-mono text-[11px] text-chrome">
+                      <span className="rounded-full border border-chrome/25 bg-bg px-2.5 py-0.5 font-mono text-[10px] text-chrome sm:text-[11px]">
                         {item.platform}
                       </span>
                     </div>
-                    <span className="font-mono text-xs text-faint">
+                    <span className="font-mono text-[11px] text-faint sm:text-xs">
                       {item.difficulty} · {item.mitre}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-ink transition group-hover:text-accent">
+                  <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink transition group-hover:text-accent sm:text-xl">
                     {item.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-chrome/90">{item.summary}</p>
+                  <p className="mt-2.5 text-xs leading-relaxed text-chrome/90 sm:text-sm">{item.summary}</p>
 
-                  <div className="mt-5 rounded-xl border border-line bg-bg p-4">
+                  <div className="mt-5 rounded-xl border border-line bg-bg p-3.5 sm:p-4">
                     <p className="font-mono text-[11px] uppercase tracking-widest text-faint">
                       Attack &amp; Analysis Chain ({item.steps.length} Stages)
                     </p>
                     <div className="mt-3 space-y-2.5">
                       {item.steps.slice(0, 2).map((s) => (
-                        <div key={s.stage} className="text-xs">
+                        <div key={s.stage} className="min-w-0 text-xs">
                           <p className="font-mono font-semibold text-accent">{s.stage}</p>
                           <code className="mt-1 block truncate font-mono text-[11px] text-chrome/80">
                             {s.cmd.split('\n')[0]}
@@ -365,14 +365,14 @@ export function Walkthroughs() {
                     ))}
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between">
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
                     <button
                       onClick={() => setSelected(item)}
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent transition hover:text-accent-soft"
                     >
-                      <Terminal className="h-3.5 w-3.5" />
-                      Inspect Full Attack Chain &amp; Fix
-                      <ChevronRight className="h-3.5 w-3.5" />
+                      <Terminal className="h-3.5 w-3.5 shrink-0" />
+                      <span>Inspect Full Attack Chain &amp; Fix</span>
+                      <ChevronRight className="h-3.5 w-3.5 shrink-0" />
                     </button>
                     <span className="font-mono text-[11px] text-faint">MITRE {item.mitre}</span>
                   </div>
@@ -385,12 +385,12 @@ export function Walkthroughs() {
 
       {/* MODE 2: INTERACTIVE LIVE CYBER SANDBOX */}
       {activeTab === 'sandbox' && (
-        <div className="grid gap-6 lg:grid-cols-12">
+        <div className="grid gap-5 sm:gap-6 lg:grid-cols-12">
           {/* Sandbox Tool 1: Live DGA Shannon Entropy Scanner */}
-          <div className="rounded-2xl border border-line bg-surface p-7 lg:col-span-6">
-            <div className="flex items-center justify-between gap-2">
+          <div className="min-w-0 rounded-2xl border border-line bg-surface p-5 sm:p-7 lg:col-span-6">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent">
-                <Activity className="h-4 w-4" />
+                <Activity className="h-4 w-4 shrink-0" />
                 <span>DNS-Sinkhole Engine · Live DGA Entropy Scanner</span>
               </span>
               <span className="rounded-full border border-chrome/25 bg-bg px-2.5 py-0.5 font-mono text-[10px] text-chrome">
@@ -411,7 +411,7 @@ export function Walkthroughs() {
                 value={domainInput}
                 onChange={(e) => setDomainInput(e.target.value)}
                 placeholder="e.g. x9k2m8a1p0z9q4v.ru"
-                className="mt-1.5 w-full rounded-xl border border-line bg-bg px-4 py-2.5 font-mono text-sm text-ink focus:border-accent focus:outline-none"
+                className="mt-1.5 w-full rounded-xl border border-line bg-bg px-3.5 py-2.5 font-mono text-xs text-ink focus:border-accent focus:outline-none sm:px-4 sm:text-sm"
               />
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {[
@@ -422,7 +422,7 @@ export function Walkthroughs() {
                   <button
                     key={preset.label}
                     onClick={() => setDomainInput(preset.val)}
-                    className="rounded-lg border border-line bg-bg px-2.5 py-1 font-mono text-[11px] text-chrome transition hover:border-accent hover:text-ink"
+                    className="rounded-lg border border-line bg-bg px-2.5 py-1 text-left font-mono text-[10px] text-chrome transition hover:border-accent hover:text-ink sm:text-[11px]"
                   >
                     {preset.label}: {preset.val}
                   </button>
@@ -430,17 +430,17 @@ export function Walkthroughs() {
               </div>
             </div>
 
-            <div className="mt-5 rounded-xl border border-line bg-bg p-4">
+            <div className="mt-5 rounded-xl border border-line bg-bg p-3.5 sm:p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <p className="font-mono text-[11px] text-faint">SHANNON ENTROPY SCORE</p>
-                  <p className="mt-0.5 font-display text-3xl font-bold text-ink">
+                  <p className="font-mono text-[10px] text-faint sm:text-[11px]">SHANNON ENTROPY SCORE</p>
+                  <p className="mt-0.5 font-display text-2xl font-bold text-ink sm:text-3xl">
                     {domainStats.entropy} <span className="font-mono text-xs text-faint">bits/char</span>
                   </p>
                 </div>
 
                 <span
-                  className={`rounded-full px-3 py-1 font-mono text-xs font-semibold ${
+                  className={`rounded-full px-3 py-1 font-mono text-[11px] font-semibold sm:text-xs ${
                     domainStats.verdict === 'SINKHOLE_BLOCK'
                       ? 'border border-accent bg-accent/15 text-accent'
                       : domainStats.verdict === 'SUSPICIOUS'
@@ -457,16 +457,16 @@ export function Walkthroughs() {
               </div>
 
               <div className="mt-4 grid grid-cols-3 gap-2 border-t border-line pt-3 font-mono text-xs">
-                <div>
-                  <span className="text-[10px] text-faint">LABEL LENGTH</span>
+                <div className="min-w-0">
+                  <span className="block truncate text-[10px] text-faint">LABEL LEN</span>
                   <p className="text-ink">{domainStats.length} chars</p>
                 </div>
-                <div>
-                  <span className="text-[10px] text-faint">NUMERIC RATIO</span>
+                <div className="min-w-0">
+                  <span className="block truncate text-[10px] text-faint">DIGITS</span>
                   <p className="text-ink">{domainStats.digitRatio}%</p>
                 </div>
-                <div>
-                  <span className="text-[10px] text-faint">THRESHOLD</span>
+                <div className="min-w-0">
+                  <span className="block truncate text-[10px] text-faint">THRESHOLD</span>
                   <p className="text-accent">H &ge; 3.75</p>
                 </div>
               </div>
@@ -476,10 +476,10 @@ export function Walkthroughs() {
           </div>
 
           {/* Sandbox Tool 2: JWT Token Security Auditor */}
-          <div className="rounded-2xl border border-line bg-surface p-7 lg:col-span-6">
-            <div className="flex items-center justify-between gap-2">
+          <div className="min-w-0 rounded-2xl border border-line bg-surface p-5 sm:p-7 lg:col-span-6">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent">
-                <KeyRound className="h-4 w-4" />
+                <KeyRound className="h-4 w-4 shrink-0" />
                 <span>AppSec Lab · JWT Token Decoder &amp; Auditor</span>
               </span>
               <span className="rounded-full border border-chrome/25 bg-bg px-2.5 py-0.5 font-mono text-[10px] text-chrome">
@@ -499,19 +499,19 @@ export function Walkthroughs() {
             />
 
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-line bg-bg p-3">
+              <div className="min-w-0 rounded-xl border border-line bg-bg p-3">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-faint">
                   Decoded Header
                 </p>
-                <pre className="mt-1.5 overflow-x-auto font-mono text-[11px] text-chrome">
+                <pre className="mt-1.5 overflow-x-auto whitespace-pre-wrap break-all font-mono text-[11px] text-chrome">
                   {jwtAudit.header ? JSON.stringify(jwtAudit.header, null, 2) : 'Invalid Header'}
                 </pre>
               </div>
-              <div className="rounded-xl border border-line bg-bg p-3">
+              <div className="min-w-0 rounded-xl border border-line bg-bg p-3">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-faint">
                   Decoded Claims Payload
                 </p>
-                <pre className="mt-1.5 overflow-x-auto font-mono text-[11px] text-chrome">
+                <pre className="mt-1.5 overflow-x-auto whitespace-pre-wrap break-all font-mono text-[11px] text-chrome">
                   {jwtAudit.payload ? JSON.stringify(jwtAudit.payload, null, 2) : 'Invalid Payload'}
                 </pre>
               </div>
@@ -531,10 +531,10 @@ export function Walkthroughs() {
           </div>
 
           {/* Sandbox Tool 3: Hash Classifier & Payload Encoder */}
-          <div className="rounded-2xl border border-line bg-surface p-7 lg:col-span-12">
+          <div className="min-w-0 rounded-2xl border border-line bg-surface p-5 sm:p-7 lg:col-span-12">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-accent">
-                <Hash className="h-4 w-4" />
+                <Hash className="h-4 w-4 shrink-0" />
                 <span>Red Team Utility · Hash Classifier &amp; Payload Encoder</span>
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -555,7 +555,7 @@ export function Walkthroughs() {
             </div>
 
             <div className="mt-4 grid gap-4 lg:grid-cols-3">
-              <div className="lg:col-span-1">
+              <div className="min-w-0 lg:col-span-1">
                 <label className="block font-mono text-[11px] uppercase tracking-wider text-faint">
                   Input Hash or Payload
                 </label>
@@ -563,7 +563,7 @@ export function Walkthroughs() {
                   type="text"
                   value={payloadInput}
                   onChange={(e) => setPayloadInput(e.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-line bg-bg px-4 py-2.5 font-mono text-xs text-ink focus:border-accent focus:outline-none"
+                  className="mt-1.5 w-full rounded-xl border border-line bg-bg px-3.5 py-2.5 font-mono text-xs text-ink focus:border-accent focus:outline-none sm:px-4"
                 />
                 <div className="mt-3 rounded-xl border border-line bg-bg p-3.5">
                   <p className="font-mono text-[10px] uppercase tracking-widest text-faint">
@@ -583,7 +583,7 @@ export function Walkthroughs() {
                 ].map((enc) => (
                   <div
                     key={enc.label}
-                    className="flex flex-col justify-between rounded-xl border border-line bg-bg p-3.5"
+                    className="flex min-w-0 flex-col justify-between rounded-xl border border-line bg-bg p-3.5"
                   >
                     <div>
                       <div className="flex items-center justify-between">
@@ -609,22 +609,22 @@ export function Walkthroughs() {
 
       {/* MODE 3: SAMPLE PENTEST / VAPT EXECUTIVE REPORT VIEWER */}
       {activeTab === 'vapt-report' && (
-        <div className="rounded-2xl border border-line bg-surface p-7 md:p-9">
+        <div className="rounded-2xl border border-line bg-surface p-5 sm:p-7 md:p-9">
           {/* Report Header */}
           <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line pb-6">
-            <div>
+            <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-accent/40 bg-accent/15 px-3 py-0.5 font-mono text-xs font-semibold text-accent">
+                <span className="rounded-full border border-accent/40 bg-accent/15 px-3 py-0.5 font-mono text-[11px] font-semibold text-accent sm:text-xs">
                   SAMPLE RED TEAM DELIVERABLE
                 </span>
-                <span className="rounded-full border border-chrome/25 bg-bg px-3 py-0.5 font-mono text-xs text-chrome">
+                <span className="rounded-full border border-chrome/25 bg-bg px-3 py-0.5 font-mono text-[11px] text-chrome sm:text-xs">
                   {samplePentestReport.reportId}
                 </span>
               </div>
-              <h3 className="mt-3 font-display text-2xl font-bold text-ink md:text-3xl">
+              <h3 className="mt-3 font-display text-xl font-bold text-ink sm:text-2xl md:text-3xl">
                 {samplePentestReport.title}
               </h3>
-              <p className="mt-1 font-mono text-xs text-chrome/80">
+              <p className="mt-1 font-mono text-xs leading-relaxed text-chrome/80">
                 Lead Auditor: {samplePentestReport.leadAuditor} · Methodology:{' '}
                 {samplePentestReport.methodology}
               </p>
@@ -632,7 +632,7 @@ export function Walkthroughs() {
 
             <button
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 rounded-full border border-chrome/30 bg-bg px-4 py-2 text-xs font-semibold text-chrome transition hover:border-accent hover:text-ink"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-chrome/30 bg-bg px-4 py-2.5 text-xs font-semibold text-chrome transition hover:border-accent hover:text-ink sm:w-auto"
             >
               <FileSpreadsheet className="h-3.5 w-3.5 text-accent" />
               Print / Save VAPT Report
@@ -641,11 +641,11 @@ export function Walkthroughs() {
 
           {/* Executive Summary + Severity Counters */}
           <div className="mt-6 grid gap-6 lg:grid-cols-12">
-            <div className="lg:col-span-7">
+            <div className="min-w-0 lg:col-span-7">
               <p className="font-mono text-xs uppercase tracking-widest text-accent">
                 01 / Executive Summary
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-chrome/90">
+              <p className="mt-2 text-xs leading-relaxed text-chrome/90 sm:text-sm">
                 {samplePentestReport.executiveSummary}
               </p>
             </div>
@@ -654,9 +654,9 @@ export function Walkthroughs() {
               {samplePentestReport.metrics.map((m) => (
                 <div
                   key={m.label}
-                  className="rounded-xl border border-line bg-bg p-3.5 text-center"
+                  className="rounded-xl border border-line bg-bg p-3 text-center sm:p-3.5"
                 >
-                  <p className="font-display text-2xl font-bold text-accent">{m.count}</p>
+                  <p className="font-display text-xl font-bold text-accent sm:text-2xl">{m.count}</p>
                   <p className="mt-1 font-mono text-[10px] text-chrome/80">{m.label}</p>
                 </div>
               ))}
@@ -665,7 +665,7 @@ export function Walkthroughs() {
 
           {/* Interactive Finding Selector + Detailed CVSS 3.1 Finding View */}
           <div className="mt-8 grid gap-6 lg:grid-cols-12">
-            <div className="space-y-2.5 lg:col-span-5">
+            <div className="min-w-0 space-y-2.5 lg:col-span-5">
               <p className="font-mono text-xs uppercase tracking-widest text-faint">
                 02 / Technical Findings (Select to Inspect)
               </p>
@@ -675,13 +675,13 @@ export function Walkthroughs() {
                   <button
                     key={f.id}
                     onClick={() => setSelectedFinding(f)}
-                    className={`w-full rounded-xl border p-4 text-left transition ${
+                    className={`w-full rounded-xl border p-3.5 text-left transition sm:p-4 ${
                       active
                         ? 'border-accent bg-bg shadow-sm shadow-accent/20'
                         : 'border-line bg-bg/60 hover:border-chrome/40'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <span className="font-mono text-xs font-bold text-accent">
                         {f.id} · CVSS {f.cvss} ({f.severity})
                       </span>
@@ -696,17 +696,17 @@ export function Walkthroughs() {
               })}
             </div>
 
-            <div className="rounded-2xl border border-line bg-bg p-6 lg:col-span-7">
+            <div className="min-w-0 rounded-2xl border border-line bg-bg p-4 sm:p-6 lg:col-span-7">
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-4">
-                <div>
+                <div className="min-w-0">
                   <span className="font-mono text-xs font-semibold text-accent">
                     {selectedFinding.id} · {selectedFinding.cwe}
                   </span>
-                  <h4 className="mt-1 font-display text-xl font-bold text-ink">
+                  <h4 className="mt-1 font-display text-lg font-bold text-ink sm:text-xl">
                     {selectedFinding.title}
                   </h4>
                 </div>
-                <span className="rounded-full border border-accent bg-accent/15 px-3.5 py-1 font-mono text-xs font-bold text-accent">
+                <span className="rounded-full border border-accent bg-accent/15 px-3 py-1 font-mono text-xs font-bold text-accent">
                   CVSS v3.1: {selectedFinding.cvss} ({selectedFinding.severity})
                 </span>
               </div>
@@ -716,7 +716,7 @@ export function Walkthroughs() {
                   <span className="font-mono text-[10px] uppercase tracking-widest text-faint">
                     Affected Asset &amp; CVSS Vector
                   </span>
-                  <p className="mt-1 font-mono text-chrome">
+                  <p className="mt-1 break-all font-mono text-chrome sm:break-words">
                     {selectedFinding.endpoint} · <span className="text-faint">{selectedFinding.vector}</span>
                   </p>
                 </div>
@@ -740,14 +740,14 @@ export function Walkthroughs() {
                       {copiedCmd === selectedFinding.poc ? '✓ Copied' : 'Copy PoC'}
                     </button>
                   </div>
-                  <pre className="mt-1.5 overflow-x-auto rounded-xl border border-line bg-surface p-3.5 font-mono text-[11px] leading-relaxed text-chrome">
+                  <pre className="mt-1.5 overflow-x-auto whitespace-pre-wrap break-words rounded-xl border border-line bg-surface p-3 font-mono text-[10px] leading-relaxed text-chrome sm:p-3.5 sm:text-[11px]">
                     <code>{selectedFinding.poc}</code>
                   </pre>
                 </div>
 
-                <div className="rounded-xl border border-accent/40 bg-accent/10 p-4">
+                <div className="rounded-xl border border-accent/40 bg-accent/10 p-3.5 sm:p-4">
                   <div className="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-accent">
-                    <CheckCircle2 className="h-4 w-4" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
                     <span>Recommended Remediation</span>
                   </div>
                   <p className="mt-1.5 leading-relaxed text-ink">{selectedFinding.remediation}</p>
@@ -761,8 +761,8 @@ export function Walkthroughs() {
       {/* Interactive Step-by-Step Walkthrough Modal */}
       <Modal open={!!selected} onClose={() => setSelected(null)} wide>
         {selected && (
-          <div className="space-y-6 p-7 md:p-8">
-            <div>
+          <div className="space-y-6 p-5 sm:p-7 md:p-8">
+            <div className="pr-8">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full border border-accent/40 bg-accent/10 px-3 py-0.5 font-mono text-xs text-accent">
                   {selected.category}
@@ -775,8 +775,8 @@ export function Walkthroughs() {
                 </span>
               </div>
 
-              <h3 className="mt-4 font-display text-2xl font-bold text-ink">{selected.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-chrome">{selected.summary}</p>
+              <h3 className="mt-4 font-display text-xl font-bold text-ink sm:text-2xl">{selected.title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-chrome sm:text-sm">{selected.summary}</p>
             </div>
 
             <div className="space-y-4">
@@ -786,8 +786,8 @@ export function Walkthroughs() {
               </h4>
 
               {selected.steps.map((step) => (
-                <div key={step.stage} className="rounded-xl border border-line bg-bg p-4">
-                  <div className="flex items-center justify-between gap-2">
+                <div key={step.stage} className="rounded-xl border border-line bg-bg p-3.5 sm:p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <p className="font-display text-sm font-semibold text-ink">{step.stage}</p>
                     <button
                       onClick={() => copyCommand(step.cmd)}
@@ -805,7 +805,7 @@ export function Walkthroughs() {
                     </button>
                   </div>
 
-                  <pre className="mt-2.5 overflow-x-auto rounded-lg border border-line bg-surface p-3 font-mono text-xs text-chrome">
+                  <pre className="mt-2.5 overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-line bg-surface p-3 font-mono text-[11px] text-chrome sm:text-xs">
                     <code>{step.cmd}</code>
                   </pre>
 
