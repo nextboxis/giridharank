@@ -167,7 +167,7 @@ export function CommandPalette({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black/75 p-4 pt-20 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-start justify-center bg-black/75 p-3 pt-14 backdrop-blur-sm sm:p-4 sm:pt-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.99 }}
           exit={{ opacity: 0 }}
