@@ -55,7 +55,7 @@ export function Certifications() {
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.25 }}
               onClick={() => setActive(c)}
-              className="group flex flex-col justify-between rounded-2xl border border-line bg-surface p-5 text-left transition hover:-translate-y-0.5 hover:border-accent/60"
+              className="group flex min-w-0 flex-col justify-between rounded-2xl border border-line bg-surface p-5 text-left transition hover:-translate-y-0.5 hover:border-accent/60"
             >
               <div>
                 <div className="flex items-center justify-between">
@@ -87,21 +87,21 @@ export function Certifications() {
       <Modal open={!!active} onClose={() => setActive(null)} wide>
         {active && (
           <div>
-            <div className="border-b border-line p-6 pr-16">
+            <div className="border-b border-line p-4 pr-14 sm:p-6 sm:pr-16">
               <p className="inline-flex items-center gap-1.5 text-xs text-accent">
                 <Award className="h-3.5 w-3.5" />
                 {active.category} · {active.issuer}
               </p>
-              <h3 className="mt-1 font-display text-xl font-bold tracking-tight">{active.title}</h3>
+              <h3 className="mt-1 font-display text-lg font-bold tracking-tight sm:text-xl">{active.title}</h3>
             </div>
             <div className="bg-black">
               {isImage(active.file) ? (
-                <img src={path(active.file)} alt={active.title} className="mx-auto max-h-[65vh] w-auto object-contain" />
+                <img src={path(active.file)} alt={active.title} className="mx-auto max-h-[55vh] w-auto object-contain sm:max-h-[65vh]" />
               ) : (
-                <iframe src={`${path(active.file)}#view=FitH`} title={active.title} className="h-[65vh] w-full" />
+                <iframe src={`${path(active.file)}#view=FitH`} title={active.title} className="h-[52vh] w-full sm:h-[65vh]" />
               )}
             </div>
-            <div className="flex flex-wrap gap-3 p-6">
+            <div className="flex flex-wrap gap-3 p-4 sm:p-6">
               <a
                 href={path(active.file)}
                 target="_blank"
