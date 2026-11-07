@@ -28,7 +28,7 @@ export function Modal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-2.5 backdrop-blur-sm sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -37,7 +37,7 @@ export function Modal({
           <motion.div
             role="dialog"
             aria-modal="true"
-            className={`relative max-h-[90vh] w-full overflow-y-auto rounded-2xl border border-line bg-surface shadow-2xl ${
+            className={`relative max-h-[88dvh] w-full overflow-y-auto rounded-2xl border border-line bg-surface shadow-2xl sm:max-h-[90vh] ${
               wide ? 'max-w-5xl' : 'max-w-2xl'
             }`}
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
