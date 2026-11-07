@@ -1,6 +1,6 @@
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { FileDown, Menu, X } from 'lucide-react'
+import { FileDown, Menu, Search, X } from 'lucide-react'
 import { profile } from '../data/profile'
 
 const links = [
@@ -38,7 +38,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
         scrolled || open
-          ? 'bg-gradient-to-b from-bg/95 via-bg/80 to-transparent backdrop-blur-md'
+          ? 'bg-gradient-to-b from-bg/95 via-bg/85 to-transparent backdrop-blur-md'
           : 'bg-transparent'
       }`}
     >
@@ -63,7 +63,15 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
           ))}
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onOpenCommand}
+            aria-label="Open command menu"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-surface text-chrome transition hover:border-accent hover:text-ink lg:hidden"
+          >
+            <Search className="h-4 w-4" />
+          </button>
+
           <motion.a
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.97 }}
@@ -79,7 +87,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
           <button
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
-            className="grid h-9 w-9 place-items-center rounded-lg border border-line lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-surface lg:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -91,26 +99,39 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
-          className="bg-bg/95 px-6 py-4 backdrop-blur-md lg:hidden"
+          className="border-b border-line bg-bg/98 px-5 py-4 shadow-2xl backdrop-blur-md lg:hidden"
         >
-          {links.map((l) => (
+          <div className="grid grid-cols-2 gap-1">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2.5 text-sm text-muted transition hover:bg-surface hover:text-ink"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+          <div className="mt-3 flex items-center justify-between border-t border-line pt-3">
             <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="block py-2.5 text-muted hover:text-ink"
+              href={profile.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent"
             >
-              {l.label}
+              <FileDown className="h-4 w-4" /> Download Resume PDF
             </a>
-          ))}
-          <a
-            href={profile.resume}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-2 inline-flex items-center gap-1.5 py-2.5 text-accent"
-          >
-            <FileDown className="h-4 w-4" /> Resume PDF
-          </a>
+            <button
+              onClick={() => {
+                setOpen(false)
+                onOpenCommand()
+              }}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-3 py-1.5 font-mono text-xs text-chrome"
+            >
+              <Search className="h-3.5 w-3.5 text-accent" /> Quick Search
+            </button>
+          </div>
         </motion.div>
       )}
     </motion.header>
