@@ -79,9 +79,9 @@ export function Contact() {
 
   return (
     <Section id="contact" index="08" label="Contact" title="Let's talk security.">
-      <div className="grid gap-10 lg:grid-cols-12">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-12">
         {/* Left Column: Direct Channels, PGP & Social Cards */}
-        <Reveal className="space-y-6 lg:col-span-5">
+        <Reveal className="min-w-0 space-y-6 lg:col-span-5">
           <p className="text-base leading-relaxed text-chrome/90">
             Hiring for a Red Team, Penetration Testing, SOC Threat Hunting, or Security Engineering role — or want to collaborate on offensive/defensive tooling? Reach out via any channel below.
           </p>
@@ -115,58 +115,58 @@ export function Contact() {
           <div className="space-y-2.5 pt-1">
             <a
               href={`mailto:${profile.email}`}
-              className="group flex items-center justify-between rounded-xl border border-line bg-surface p-4 transition hover:border-accent/50"
+              className="group flex items-center justify-between gap-2 rounded-xl border border-line bg-surface p-3.5 transition hover:border-accent/50 sm:p-4"
             >
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-lg bg-bg text-accent">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-bg text-accent">
                   <Mail className="h-4 w-4" />
                 </span>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-faint">Email</p>
-                  <p className="text-sm font-medium text-ink">{profile.email}</p>
+                  <p className="truncate text-sm font-medium text-ink">{profile.email}</p>
                 </div>
               </div>
-              <ArrowUpRight className="h-4 w-4 text-faint transition group-hover:text-accent" />
+              <ArrowUpRight className="h-4 w-4 shrink-0 text-faint transition group-hover:text-accent" />
             </a>
 
             <a
               href="https://wa.me/919597356485"
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center justify-between rounded-xl border border-line bg-surface p-4 transition hover:border-accent/50"
+              className="group flex items-center justify-between gap-2 rounded-xl border border-line bg-surface p-3.5 transition hover:border-accent/50 sm:p-4"
             >
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-lg bg-bg text-accent">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-bg text-accent">
                   <Phone className="h-4 w-4" />
                 </span>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-faint">Phone &amp; WhatsApp Direct</p>
-                  <p className="text-sm font-medium text-ink">{profile.phone}</p>
+                  <p className="truncate text-sm font-medium text-ink">{profile.phone}</p>
                 </div>
               </div>
-              <ArrowUpRight className="h-4 w-4 text-faint transition group-hover:text-accent" />
+              <ArrowUpRight className="h-4 w-4 shrink-0 text-faint transition group-hover:text-accent" />
             </a>
 
             <a
               href={profile.mapUrl}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center justify-between rounded-xl border border-line bg-surface p-4 transition hover:border-accent/50"
+              className="group flex items-center justify-between gap-2 rounded-xl border border-line bg-surface p-3.5 transition hover:border-accent/50 sm:p-4"
             >
-              <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-lg bg-bg text-accent">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-bg text-accent">
                   <MapPin className="h-4 w-4" />
                 </span>
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-faint">Location</p>
-                  <p className="text-sm font-medium text-ink">{profile.location}</p>
+                  <p className="truncate text-sm font-medium text-ink">{profile.location}</p>
                 </div>
               </div>
-              <ArrowUpRight className="h-4 w-4 text-faint transition group-hover:text-accent" />
+              <ArrowUpRight className="h-4 w-4 shrink-0 text-faint transition group-hover:text-accent" />
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 gap-2.5 min-[380px]:grid-cols-2">
             {profile.socials.map((s) => (
               <a
                 key={s.label}
@@ -189,7 +189,7 @@ export function Contact() {
 
           {/* PGP Fingerprint & RFC 9116 security.txt Card */}
           <div className="rounded-xl border border-line bg-surface p-4">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-accent">
                 <KeyRound className="h-3.5 w-3.5" />
                 <span>PGP &amp; Disclosure Policy</span>
@@ -218,10 +218,10 @@ export function Contact() {
         </Reveal>
 
         {/* Right Column: Multi-Channel Interactive Contact Form */}
-        <Reveal delay={0.1} className="lg:col-span-7">
+        <Reveal delay={0.1} className="min-w-0 lg:col-span-7">
           <form
             onSubmit={handleSubmit}
-            className="rounded-2xl border border-line bg-surface p-7 md:p-8"
+            className="rounded-2xl border border-line bg-surface p-5 sm:p-7 md:p-8"
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
@@ -322,10 +322,10 @@ export function Contact() {
               />
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition hover:bg-accent/90"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition hover:bg-accent/90 sm:w-auto"
               >
                 <Send className="h-4 w-4" />
                 Send via Email App
@@ -334,7 +334,7 @@ export function Contact() {
               <button
                 type="button"
                 onClick={openGmailCompose}
-                className="inline-flex items-center gap-2 rounded-full border border-chrome/30 bg-bg px-5 py-3 text-xs font-semibold text-chrome transition hover:border-accent hover:text-ink"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-chrome/30 bg-bg px-5 py-3 text-xs font-semibold text-chrome transition hover:border-accent hover:text-ink sm:w-auto"
               >
                 <Mail className="h-3.5 w-3.5 text-accent" />
                 Open in Gmail Web ↗
@@ -343,7 +343,7 @@ export function Contact() {
               <button
                 type="button"
                 onClick={openWhatsAppDirect}
-                className="inline-flex items-center gap-2 rounded-full border border-chrome/30 bg-bg px-5 py-3 text-xs font-semibold text-chrome transition hover:border-accent hover:text-ink"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-chrome/30 bg-bg px-5 py-3 text-xs font-semibold text-chrome transition hover:border-accent hover:text-ink sm:w-auto"
               >
                 <MessageSquare className="h-3.5 w-3.5 text-accent" />
                 Send via WhatsApp ↗
