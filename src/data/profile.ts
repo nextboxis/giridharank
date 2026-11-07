@@ -132,13 +132,24 @@ export const skills: SkillGroup[] = [
 
 export type ProjectCategory = 'AI & Threat Intel' | 'Offense & Linux' | 'Network & Forensics'
 
+export type ProjectUseCase = {
+  role: string
+  scenario: string
+}
+
 export type Project = {
   id: string
   name: string
   tag: string
+  projectType: string
+  period: string
   category: ProjectCategory
   summary: string
   description: string
+  problem: string
+  solution: string
+  useCases: ProjectUseCase[]
+  metrics: string[]
   highlights: string[]
   tech: string[]
   repo: string
@@ -153,121 +164,160 @@ export const projects: Project[] = [
     id: 'nexshield',
     name: 'NexShield',
     tag: 'DLP & Threat Intel',
+    projectType: '9-Engine AI Threat Intelligence, Recon & DLP Platform',
+    period: 'Oct 2025 – Feb 2026',
     category: 'AI & Threat Intel',
     featured: true,
-    summary: 'Enterprise Data Loss Prevention (DLP), behavioral security & AI threat intelligence platform.',
+    summary:
+      'Automates Nmap reconnaissance across 28+ service signatures and runs a 9-engine ML & DLP analysis pipeline mapped to MITRE ATT&CK.',
     description:
-      'NexShield combines behavioral Data Loss Prevention (DLP) policies with machine-learning threat profiling to intercept data exfiltration, malicious URLs, payloads, and IOCs before they compromise enterprise assets.',
-    highlights: [
-      'Real-time DLP policy enforcement & FastAPI microservices for URL/payload/IOC scoring',
-      'Random Forest / XGBoost classifiers combined with NVD CVE feed ingestion',
-      'Hardened API: JWT auth, rate limiting, strict CORS and CSP headers',
+      'NexShield is a full-stack AI threat intelligence and Data Loss Prevention (DLP) platform built to unify automated network reconnaissance, vulnerability matching, and behavioral payload inspection into a single workflow.',
+    problem:
+      'Security analysts and developers often rely on fragmented Nmap scans, manually cross-reference CVEs one by one on NVD, and lack inline DLP checks to stop sensitive data leaks or malicious URLs before they leave the perimeter.',
+    solution:
+      'Automates Nmap reconnaissance across 28+ sensitive service signatures and feeds results into a 9-engine pipeline covering port risk scoring, version vulnerability matching (Log4Shell, Heartbleed, SambaCry), default credential checks, and Random Forest / XGBoost severity classification—caching NVD CVE responses in MongoDB to cut external lookups by 80%.',
+    useCases: [
+      {
+        role: 'SOC Analysts & Threat Hunters',
+        scenario: 'Automatically map exposed services and open ports to MITRE ATT&CK techniques with ML severity scoring instead of manual CVE triage.',
+      },
+      {
+        role: 'Enterprise DLP & AppSec Teams',
+        scenario: 'Inspect outbound payloads, URLs, and IOCs in real time via JWT-hardened FastAPI microservices to block sensitive data exfiltration.',
+      },
+      {
+        role: 'Vulnerability Assessors',
+        scenario: 'Run repeatable 9-engine perimeter assessments with cached NVD intelligence that responds 80% faster during large subnet scans.',
+      },
     ],
-    tech: ['Python', 'FastAPI', 'Machine Learning', 'Threat Intel'],
+    metrics: ['9 Analysis Engines', '28+ Service Signatures', '80% Fewer CVE Lookups', 'MITRE ATT&CK Mapped'],
+    highlights: [
+      '9-engine analysis pipeline: port risk scoring, version CVE matching (Log4Shell, Heartbleed, SambaCry), and default credential detection',
+      'Trained Random Forest & XGBoost classifiers for threat severity and cached NVD CVE feeds in MongoDB (cutting lookups by 80%)',
+      'Real-time DLP policy enforcement & hardened FastAPI backend with JWT auth, rate limiting, strict CORS, and CSP headers',
+    ],
+    tech: ['Python', 'FastAPI', 'MongoDB', 'scikit-learn', 'XGBoost', 'MITRE ATT&CK'],
     repo: 'https://github.com/nextboxis/NexShield',
-    snippet: '$ nexshield scan --policy dlp-strict --ioc "https://auth-verify-node.ru"\n[ML_ENGINE] Entropy: 4.82 | DLP_Policy: BLOCK -> VERDICT: MALICIOUS_QUARANTINE',
+    snippet: '$ nexshield scan --target 10.10.14.0/24 --engines all --mitre-map\n[9-ENGINE] 28 sigs checked | CVE cache hit: 80% | RF Severity: CRITICAL (T1190)',
   },
   {
-    id: 'blackarch',
-    name: 'BlackArch',
-    tag: 'Red Team Tooling',
-    category: 'Offense & Linux',
+    id: 'matazero',
+    name: 'MataZero',
+    tag: 'Forensics & OSINT',
+    projectType: '21-Subcommand Offline Image Forensics & Anti-Tracking CLI',
+    period: '2026',
+    category: 'Network & Forensics',
     featured: true,
-    summary: 'Shell orchestration and toolchain configs for BlackArch Linux attack boxes.',
+    summary:
+      'Fully offline 21-subcommand forensics CLI that extracts 7-tier metadata, attributes stripped images to camera hardware, and detects tampering.',
     description:
-      'A set of shell orchestration scripts and package configurations that turn a fresh BlackArch install into a ready-to-go red team operator machine.',
-    highlights: [
-      'Reproducible provisioning of AD, web, OSINT and wireless toolchains',
-      'Custom recon aliases, hardened terminal setup and isolated lab routing',
-      'Fast setup of C2 labs, BloodHound ingestion and packet-crafting environments',
+      'MataZero is an offline digital forensics, OSINT, and privacy sanitization toolkit designed to inspect, attribute, verify, and scrub image and document evidence without ever touching cloud APIs.',
+    problem:
+      'Uploading sensitive evidence to online metadata viewers violates operational security, while adversaries routinely strip EXIF headers or use spliced and AI-generated images to hide camera origin and manipulate evidence.',
+    solution:
+      'Executes a 100% offline 7-tier extraction pipeline across JPEG, PNG, TIFF/RAW, WebP, HEIC, and PDF files. Even after metadata is wiped, it attributes images to source hardware by matching quantization tables, Huffman tables, and chroma subsampling against a 22+ device corpus, and flags manipulation via 3 independent forensic signals.',
+    useCases: [
+      {
+        role: 'DFIR & OSINT Investigators',
+        scenario: 'Attribute metadata-stripped evidence photos back to specific camera/phone models and maintain courtroom-ready SHA-256 hash-chained audit logs.',
+      },
+      {
+        role: 'Media Authenticity & Threat Analysts',
+        scenario: 'Detect image splicing and AI-generated media using JPEG ghost double-compression, CFA Bayer demosaicing periodicity, and copy-move clone detection.',
+      },
+      {
+        role: 'Privacy-Conscious Researchers & Red Teamers',
+        scenario: 'Sanitize PDFs and images by rebuilding clean file containers stripped of hidden EXIF, XMP, GPS, and serial tracking artifacts.',
+      },
     ],
-    tech: ['Linux', 'Bash', 'Pentest Toolchains'],
-    repo: 'https://github.com/nextboxis/blackarch',
-    snippet: '$ sudo ./deploy-blackarch.sh --profile redteam-ad\n[OK] Provisioned: bloodhound, impacket, responder, ghidra, burpsuite',
-  },
-  {
-    id: 'pishentry',
-    name: 'Pishentry',
-    tag: 'Phishing Defense',
-    category: 'AI & Threat Intel',
-    summary: 'Phishing intelligence and credential-harvesting interception suite.',
-    description:
-      'Pishentry detects, analyses and neutralises phishing vectors — fake login pages, credential harvesting payloads and deceptive domains.',
+    metrics: ['21 CLI Subcommands', '7-Tier Extraction Pipeline', '22+ Device Signatures', 'SHA-256 Chain of Custody'],
     highlights: [
-      'DOM heuristics, TLS fingerprinting and visual similarity (ResNet-50)',
-      'Detects homograph domains, rogue credential POST endpoints and JS keyloggers',
-      'REST API built for SOC playbook enrichment',
+      '21-subcommand offline CLI running a 7-tier forensic pipeline across JPEG, PNG, TIFF/RAW, WebP, HEIC, and PDF evidence',
+      'Hardware camera attribution after metadata stripping via quantization tables, Huffman tables, and chroma subsampling (22+ device corpus)',
+      'Tamper & AI detection via JPEG ghost double-compression, CFA Bayer demosaicing periodicity, and copy-move clone detection',
+      'Enforces forensic chain of custody with SHA-256 hash-chained audit logs, HMAC-signed authorization scopes, and sandboxing',
     ],
-    tech: ['Python', 'FastAPI', 'CNN', 'Threat Intel'],
-    repo: 'https://github.com/nextboxis/Pishentry',
-    snippet: '$ pishentry inspect --target "https://micros0ft-login.com"\n[ALERT] Punycode homograph + rogue credential POST detected (99.1%)',
+    tech: ['Python', 'JPEG/EXIF Internals', 'Ollama', 'SQLite', 'Digital Forensics'],
+    repo: 'https://github.com/nextboxis/matazero',
+    snippet: '$ matazero analyze evidence.jpg --attribute-device --detect-tamper --audit-log\n[FORENSICS] Quantization match: iPhone 15 Pro (98.4%) | CFA/Ghost: CLEAN | SHA-256 logged',
   },
   {
     id: 'dns-sinkhole',
     name: 'DNS Sinkhole',
     tag: 'Network Security',
+    projectType: 'Dual-Engine DNS Interception & Botnet DGA Surveillance Platform',
+    period: 'Dec 2025 – Mar 2026',
     category: 'Network & Forensics',
-    summary: 'High-performance DNS sinkhole with a live surveillance dashboard.',
+    featured: true,
+    summary:
+      'Real-time Scapy/TShark DNS interception platform that catches algorithmically generated (DGA) botnet domains using Shannon entropy and inline quarantine.',
     description:
-      'Intercepts DNS queries and quarantines malicious domains, using Shannon entropy analysis to catch algorithmically generated (DGA) domains.',
-    highlights: [
-      'Socket-level DNS interception to block C2 beacons and trackers',
-      'Real-time Shannon entropy scoring to detect DGA domains',
-      'Live dashboard with query telemetry and block ratios',
+      'DNS Sinkhole is a live network threat surveillance and DNS interception system built to detect and sever command-and-control (C2) beacons, DGA domains, and DNS tunneling across modern transport protocols.',
+    problem:
+      'Modern malware and botnets bypass static domain blocklists by using Domain Generation Algorithms (DGA) to rotate through thousands of random domains daily and hide C2 traffic inside encrypted DNS transports (DoT, DoH, DoQ).',
+    solution:
+      'Combines a dual-engine Scapy/TShark packet capture pipeline with real-time Shannon entropy scoring, DNS tunneling heuristics, and suspicious TLD detection to quarantine malicious queries inline (0.0.0.0) across 4 transport protocols, complete with drag-and-drop PCAP forensic replay.',
+    useCases: [
+      {
+        role: 'Blue Teams & Network Defenders',
+        scenario: 'Block zero-day botnet C2 check-ins and high-entropy DGA domains at the DNS resolver layer before static threat feeds even list them.',
+      },
+      {
+        role: 'Incident Responders & Forensic Analysts',
+        scenario: 'Drag and drop historical PCAP captures into the dashboard to replay DNS traffic timelines and isolate compromised internal endpoints.',
+      },
+      {
+        role: 'Enterprise & Home-Lab Security Admins',
+        scenario: 'Monitor encrypted DNS visibility across DNS-over-TCP, DoT, DoH, and DoQ with live block-ratio telemetry.',
+      },
     ],
-    tech: ['Python', 'DNS', 'Shannon Entropy', 'React UI'],
+    metrics: ['Scapy + TShark Dual Engine', '4 Protocols (TCP/DoT/DoH/DoQ)', 'Live Shannon Entropy', 'PCAP Forensic Replay'],
+    highlights: [
+      'Real-time DNS interception with Scapy/TShark dual-engine capture and inline domain quarantine (0.0.0.0)',
+      'Detects Domain Generation Algorithm (DGA) botnets via live Shannon entropy scoring, DNS tunneling patterns, and TLD heuristics',
+      'Covers 4 transport protocols (DNS-over-TCP, DoT, DoH, DoQ) and features drag-and-drop PCAP forensic replay',
+    ],
+    tech: ['Python', 'Scapy', 'TShark', 'MongoDB', 'Shannon Entropy', 'React UI'],
     repo: 'https://github.com/nextboxis/DNS-Sinkhole',
-    snippet: '$ sudo python3 sinkhole.py --port 53 --entropy 4.1\n[SINKHOLE] Blocked DGA query "x9k2m8a1p0z.ru" (H=4.49) -> 0.0.0.0',
-  },
-  {
-    id: 'xping',
-    name: 'xPing',
-    tag: 'Linux Security',
-    category: 'Offense & Linux',
-    summary: 'All-in-one Linux security, hardening and recon toolkit — zero dependencies.',
-    description:
-      'A production-grade, modular auditing and reconnaissance tool for Linux built entirely on the standard library, so it runs anywhere.',
-    highlights: [
-      'Zero external dependencies — drop it on any Linux box',
-      'Audits sysctl, PAM, SSH, SUID binaries and open ports',
-      'Generates hardening scores and remediation reports',
-    ],
-    tech: ['Python', 'Linux', 'System Auditing', 'Hardening'],
-    repo: 'https://github.com/nextboxis/xping',
-    snippet: '$ ./xping --audit-all --cis-level 2\n[PASS] Kernel sysctl (18/18) | SSH PermitRootLogin=no | 0 rogue SUIDs',
-  },
-  {
-    id: 'matazero',
-    name: 'MataZero',
-    tag: 'Forensics & Privacy',
-    category: 'Network & Forensics',
-    summary: 'Zero-trust metadata extraction and sanitisation engine.',
-    description:
-      'Identifies, inspects and scrubs sensitive document metadata, EXIF profiles and forensic tracking artifacts with high precision.',
-    highlights: [
-      'Extracts metadata across PDF, Office, PNG/JPEG EXIF and binary headers',
-      'Rebuilds clean file containers stripped of tracking data',
-      'Binary entropy inspection and PE/ELF anomaly reporting',
-    ],
-    tech: ['Python', 'Forensics', 'Zero Trust', 'Privacy'],
-    repo: 'https://github.com/nextboxis/matazero',
-    snippet: '$ matazero scrub --in dossier.pdf --verify-sha256\n[SCRUBBED] Removed 9 EXIF/XMP tracking fields -> 0 residual artifacts',
+    snippet: '$ sudo python3 sinkhole.py --engine scapy-tshark --protocols tcp,dot,doh,doq --entropy 4.1\n[SINKHOLE] Quarantined DGA "x9k2m8a1p0z.ru" (H=4.49) -> 0.0.0.0 | PCAP logged',
   },
   {
     id: 'zeno-mcp',
     name: 'Zeno-MCP',
-    tag: 'AI Agents',
+    tag: 'AI Security & MCP',
+    projectType: 'Security-Scoped Model Context Protocol (MCP) Server',
+    period: '2026',
     category: 'AI & Threat Intel',
     featured: true,
-    summary: 'MCP server exposing local tools and workflows to AI agents — with strict security boundaries.',
+    summary:
+      'Capability-sandboxed MCP server exposing local security, recon, and filesystem tools to AI agents behind strict path and schema guards.',
     description:
-      'A Model Context Protocol server that lets autonomous AI agents use local tools, file systems and automation workflows safely.',
-    highlights: [
-      'JSON-RPC / MCP bridge for LLM tool-calling',
-      'Path-traversal sandboxing and schema validation on every tool call',
-      'Security recon and file-system telemetry workflows',
+      'Zeno-MCP is a security-first Model Context Protocol server that bridges autonomous LLM agents to local system tools, reconnaissance utilities, and file workflows without sacrificing host isolation.',
+    problem:
+      'Granting AI agents direct shell or filesystem access creates severe security risks—a single prompt injection or hallucinated parameter can trigger path traversal, unauthorized file reads, or destructive command execution.',
+    solution:
+      'Wraps 100+ local capabilities behind a strict JSON-RPC / MCP boundary that enforces deterministic JSON schema validation, canonical path-traversal sandboxing, and scoped execution policies on every single tool invocation.',
+    useCases: [
+      {
+        role: 'AI & Autonomous Agent Developers',
+        scenario: 'Connect Claude, Cursor, or custom LLM orchestrators to local developer and security tools with guaranteed sandbox boundaries.',
+      },
+      {
+        role: 'AI-Assisted Penetration Testers',
+        scenario: 'Let AI copilots invoke scoped recon and workspace inspection tools safely during authorized security assessments.',
+      },
+      {
+        role: 'DevSecOps Engineers',
+        scenario: 'Standardize and audit every tool call made by internal AI automation pipelines using structured JSON-RPC logs.',
+      },
     ],
-    tech: ['Python', 'Rust', 'TypeScript', 'MCP'],
+    metrics: ['100+ Scoped Capabilities', 'Path-Traversal Sandbox', 'JSON-RPC / MCP Standard', 'Strict Schema Guard'],
+    highlights: [
+      'JSON-RPC / Model Context Protocol bridge for safe, deterministic LLM tool-calling',
+      'Enforces canonical path-traversal sandboxing and strict schema validation on every tool invocation',
+      'Exposes modular security reconnaissance, workspace analysis, and file-system telemetry workflows',
+    ],
+    tech: ['Python', 'Rust', 'TypeScript', 'MCP', 'JSON-RPC'],
     repo: 'https://github.com/nextboxis/zeno-mcp',
     snippet: '$ zeno-mcp serve --transport stdio --sandbox strict\n[MCP_READY] 100 capability-scoped tools registered with path guard',
   },
@@ -275,19 +325,154 @@ export const projects: Project[] = [
     id: 'library-skill-agents',
     name: 'Library Skill Agents',
     tag: 'Rust Agent Suite',
+    projectType: 'Native Rust Autonomous Multi-Agent Security & Systems Dispatcher',
+    period: 'Oct 2025 – Feb 2026',
     category: 'AI & Threat Intel',
     featured: true,
-    summary: 'Pure native Rust autonomous multi-agent security & systems engineering dispatcher.',
+    summary:
+      'High-speed native Rust multi-agent router dispatching offensive recon, code auditing, and systems engineering agents in under a millisecond.',
     description:
-      'A high-speed native Rust multi-agent skill ecosystem orchestrating specialized Cyber Warfare, Systems Engineering, and Security Auditing agents with zero runtime overhead.',
-    highlights: [
-      'Native Rust multi-agent router for offensive recon, code auditing, and automation',
-      'Deterministic capability sandboxing and sub-millisecond skill dispatch',
-      'Built for AI-assisted Red Team workflows and automated vulnerability triage',
+      'Library Skill Agents is a pure native Rust multi-agent skill ecosystem that orchestrates specialized Cyber Warfare, Systems Engineering, and Security Auditing agents with zero runtime overhead.',
+    problem:
+      'Python- and Node-based multi-agent frameworks suffer from heavy memory consumption, slow cold starts, and runtime overhead when dispatching high-frequency security auditing and systems engineering workflows.',
+    solution:
+      'Built in native Rust on the Tokio async runtime with zero-copy JSON-RPC parsing, routing tasks to specialized domain agents in sub-millisecond latency while reducing memory footprint by 65% compared to interpreted runtimes.',
+    useCases: [
+      {
+        role: 'Red Teamers & Security Auditors',
+        scenario: 'Dispatch dedicated offensive recon and static code-auditing agents concurrently at native binary speed.',
+      },
+      {
+        role: 'Rust & Systems Engineers',
+        scenario: 'Automate Cargo workspace checks, architecture validation, and documentation indexing with minimal CPU/RAM overhead.',
+      },
+      {
+        role: 'CI/CD Security Pipelines',
+        scenario: 'Embed a single self-contained Rust binary into build pipelines for automated pre-merge security verification.',
+      },
     ],
-    tech: ['Rust', 'MCP', 'AI Agents', 'Linux'],
+    metrics: ['<1ms Dispatch Latency', '65% Lower Memory', '100% Native Rust', 'Tokio Async Runtime'],
+    highlights: [
+      'Native Rust multi-agent router for offensive recon, code auditing, and systems automation',
+      'Deterministic capability sandboxing and sub-millisecond skill dispatch on the Tokio runtime',
+      'Cuts memory footprint by 65% compared to Python agent runners while maintaining full MCP compatibility',
+    ],
+    tech: ['Rust', 'Tokio', 'MCP', 'AI Agents', 'Linux'],
     repo: 'https://github.com/nextboxis/library-skill-agents',
     snippet: '$ cargo run --release -- dispatch --agent cyber-operator --target api.corp.local\n[AGENT_OK] Dispatched Rust Cyber Operator (0.4ms) -> 4 findings triaged',
+  },
+  {
+    id: 'pishentry',
+    name: 'Pishentry',
+    tag: 'Phishing Defense',
+    projectType: 'Multi-Modal Anti-Phishing & Credential-Harvesting Interception Suite',
+    period: '2025 – 2026',
+    category: 'AI & Threat Intel',
+    summary:
+      'Detects cloned login portals, Punycode homograph domains, and rogue credential POST endpoints using DOM heuristics, TLS fingerprinting, and ResNet-50.',
+    description:
+      'Pishentry is an automated phishing intelligence and interception engine that analyzes suspicious URLs across visual, structural, and cryptographic layers to stop credential harvesting.',
+    problem:
+      'Signature-based URL blocklists consistently miss zero-hour phishing kits deployed on fresh domains using Punycode homographs, automated Let’s Encrypt TLS certificates, and pixel-perfect clones of corporate SSO portals.',
+    solution:
+      'Combines DOM form/script heuristics, TLS certificate fingerprinting, and ResNet-50 CNN visual similarity scoring to catch deceptive login pages, cross-origin credential POST actions, and JavaScript keyloggers in real time.',
+    useCases: [
+      {
+        role: 'SOC Teams & Incident Responders',
+        scenario: 'Automatically enrich user-reported phishing URLs via REST API with visual clone scores and DOM indicator breakdowns.',
+      },
+      {
+        role: 'Brand & Corporate Security Teams',
+        scenario: 'Spot Punycode homograph domains and lookalike Microsoft 365 / Google Workspace login portals before employees get tricked.',
+      },
+      {
+        role: 'Email & Web Gateway Integrations',
+        scenario: 'Pre-screen suspicious links in inbound emails to block credential-harvesting forms at click time.',
+      },
+    ],
+    metrics: ['ResNet-50 Visual Match', 'Punycode Homograph Detection', 'DOM + TLS Fingerprinting', 'SOC Enrichment API'],
+    highlights: [
+      'Combines DOM heuristics, TLS fingerprinting, and ResNet-50 visual similarity to detect cloned login pages',
+      'Flags Punycode homograph domains, rogue credential POST endpoints, and obfuscated JS keyloggers',
+      'Exposes a FastAPI REST interface tailored for automated SOC playbook enrichment',
+    ],
+    tech: ['Python', 'FastAPI', 'ResNet-50 CNN', 'Threat Intel'],
+    repo: 'https://github.com/nextboxis/Pishentry',
+    snippet: '$ pishentry inspect --target "https://micros0ft-login.com"\n[ALERT] Punycode homograph + rogue credential POST detected (99.1%)',
+  },
+  {
+    id: 'xping',
+    name: 'xPing',
+    tag: 'Linux Security',
+    projectType: 'Zero-Dependency Linux Security Auditing & CIS Hardening CLI',
+    period: '2025 – 2026',
+    category: 'Offense & Linux',
+    summary:
+      'Portable Linux security auditing and CIS hardening toolkit built 100% on the Python standard library—runs on any box with zero pip dependencies.',
+    description:
+      'xPing is a modular Linux security auditing, hardening verification, and host reconnaissance CLI engineered exclusively with the Python standard library for instant deployment on restricted systems.',
+    problem:
+      'During live incident response, air-gapped server audits, or post-exploitation assessments, production Linux machines rarely have internet access or permission to install external Python packages and heavy compliance agents.',
+    solution:
+      'Written entirely using Python’s built-in standard library (zero external dependencies) so a single script can be dropped onto any Linux distribution to audit kernel sysctl flags, SSH/PAM hardening, rogue SUID/SGID binaries, and open ports against CIS benchmarks.',
+    useCases: [
+      {
+        role: 'Linux Sysadmins & Infrastructure Engineers',
+        scenario: 'Audit air-gapped or minimal production servers against CIS Level 1/2 hardening baselines without installing third-party agents.',
+      },
+      {
+        role: 'Penetration Testers & Red Teamers',
+        scenario: 'Quickly enumerate local privilege escalation vectors including misconfigured SUID binaries, weak PAM rules, and exposed internal sockets.',
+      },
+      {
+        role: 'DFIR & Blue Team Responders',
+        scenario: 'Generate instant host security posture scores and actionable remediation reports during live triage.',
+      },
+    ],
+    metrics: ['0 External Dependencies', 'CIS Benchmark Auditing', 'SUID / PAM / SSH Checks', 'Air-Gap Ready'],
+    highlights: [
+      'Zero external dependencies—built strictly on the Python standard library so it runs on any air-gapped Linux host',
+      'Audits kernel sysctl parameters, PAM/SSH configurations, rogue SUID/SGID binaries, and listening network sockets',
+      'Outputs structured CIS hardening scores with copy-paste remediation commands',
+    ],
+    tech: ['Python Stdlib', 'Linux Kernel', 'CIS Benchmarks', 'Hardening'],
+    repo: 'https://github.com/nextboxis/xping',
+    snippet: '$ ./xping --audit-all --cis-level 2\n[PASS] Kernel sysctl (18/18) | SSH PermitRootLogin=no | 0 rogue SUIDs',
+  },
+  {
+    id: 'blackarch',
+    name: 'BlackArch',
+    tag: 'Red Team Tooling',
+    projectType: 'Automated Red Team Attack Box & Lab Provisioning Suite',
+    period: '2025 – 2026',
+    category: 'Offense & Linux',
+    summary:
+      'Reproducible Bash orchestration suite that turns a fresh Linux install into a pre-configured Red Team operator box for AD, Web, and OSINT engagements.',
+    description:
+      'BlackArch is an automated provisioning and environment orchestration suite designed to build standardized, OPSEC-ready Red Team and penetration testing workstations in minutes.',
+    problem:
+      'Manually provisioning a new disposable attack VM or C2 operator workstation before every engagement wastes hours fixing broken tool dependencies, BloodHound/Neo4j configs, and network routing rules.',
+    solution:
+      'Automates end-to-end installation and configuration of modular offensive profiles (Active Directory, Web/API, OSINT, Wireless), setting up BloodHound, Impacket, Responder, Ghidra, custom recon aliases, and isolated lab routing in one reproducible run.',
+    useCases: [
+      {
+        role: 'Red Team Operators & Pentesters',
+        scenario: 'Spin up a clean, engagement-specific attack box with pre-verified AD and web exploitation toolchains in minutes.',
+      },
+      {
+        role: 'CTF Players & Security Lab Builders',
+        scenario: 'Keep a version-controlled, reproducible offensive Linux setup across laptops, cloud VMs, and local lab environments.',
+      },
+    ],
+    metrics: ['One-Command Provisioning', 'AD + Web + OSINT Profiles', 'Isolated Lab Routing', 'Reproducible Setup'],
+    highlights: [
+      'Reproducible one-command provisioning of Active Directory, Web/API, OSINT, and wireless pentest toolchains',
+      'Pre-configures BloodHound ingestion, Impacket, Responder, custom recon aliases, and hardened terminal workflows',
+      'Sets up isolated lab routing and packet-crafting environments for safe C2 and exploit testing',
+    ],
+    tech: ['BlackArch Linux', 'Bash', 'Active Directory Tools', 'OPSEC Routing'],
+    repo: 'https://github.com/nextboxis/blackarch',
+    snippet: '$ sudo ./deploy-blackarch.sh --profile redteam-ad\n[OK] Provisioned: bloodhound, impacket, responder, ghidra, burpsuite',
   },
 ]
 
